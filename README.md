@@ -8,5 +8,5 @@ Curtis Berry
 Abdullah Mohammed
 Diya Soneji
 Lori Yaniro
-Nicolas Gugliemo 
+Nicolas Gugliemo
 
