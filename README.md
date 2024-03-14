@@ -6,3 +6,4 @@ Saboor Malik
 Curtis Berry
 Abdullah Mohammed
 Diya Soneji
+Lori Yaniro
