@@ -3,8 +3,10 @@ The senior project undertaken by our Team CtrlAltElite focuses on developing a c
 Team Members: 
 Shonali Kumar 
 Saboor Malik
+Lori Yaniro
 Curtis Berry
 Abdullah Mohammed
 Diya Soneji
 Lori Yaniro
 Nicolas Gugliemo 
+
