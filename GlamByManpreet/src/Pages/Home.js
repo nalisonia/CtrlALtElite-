@@ -1,8 +1,10 @@
 // home.js
 import catImage from '../assets/images/catSideEye.jpeg';
-
+import supabase from '../config/supabaseClient';
 
 function HomePage() {
+    console.log(supabase);
+
     return (
         <div>
             <h1>Welcome to the Home Page!</h1>
@@ -14,6 +16,8 @@ function HomePage() {
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank" rel="noopener noreferrer">
           Watch the video
         </a>
+
+        <p>{supabase.supabaseUrl ? "Supabase Connected: " + supabase.supabaseUrl : "Supabase is not connected"}</p>
       </div>
         </div>
         
