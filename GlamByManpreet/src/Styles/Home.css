@@ -1,0 +1,11 @@
+/* HomePage.css */
+.home-container {
+    max-width: 480px; /* Set maximum width for the content */
+    margin: 0 auto; /* Center align content */
+    padding: 20px; /* Add some padding */
+}
+
+.cat-image {
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+    height: auto; /* Maintain aspect ratio */
+}
