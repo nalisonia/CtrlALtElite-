@@ -14,7 +14,7 @@ function HomePage() {
 
             <div>
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank" rel="noopener noreferrer">
-          Watch the video
+          Watch the video 
         </a>
 
         <p>{supabase.supabaseUrl ? "Supabase Connected: " + supabase.supabaseUrl : "Supabase is not connected"}</p>
