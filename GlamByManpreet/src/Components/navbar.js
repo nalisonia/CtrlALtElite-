@@ -11,22 +11,43 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link,useLocation } from "react-router-dom"; // Import Link from react-router-dom
 import '../Styles/NavBar.css'; // Import CSS file for styling 
 
 
 
 
 export default function Header() {
+	const location = useLocation();
+	const currentPath = location.pathname;
+  
+	const AboutText = currentPath === "/AboutMe" ? "Home" : "About";
+	const AboutLink = currentPath === "/AboutMe" ? "/" : "/AboutMe";
+
+	const ServicesText = currentPath === "/Services" ? "Home" : "Services";
+	const ServicesLink = currentPath === "/Services" ? "/" : "/Services";
+  
+
+	const BookingInquryText = currentPath === "/BookingInqury" ? "Home" : "Booking Inqury";
+	const BookingInquryLink = currentPath === "/BookingInqury" ? "/" : "/BookingInqury";
+
+	const ContactMeText = currentPath === "/ContactMe" ? "Home" : "Contact Me";
+	const ContactMeLink = currentPath === "/ContactMe" ? "/" : "/ContactMe";
+
+	const GalleryText = currentPath === "/Gallery" ? "Home" : "Gallery";
+	const GalleryLink = currentPath === "/Gallery" ? "/" : "/Gallery";
+
+
+
 	return (
 		<div className="header-container">
-<AppBar position="static" sx={{ backgroundColor: 'white' }}>
+<AppBar position="fixed" sx={{ backgroundColor: 'white' }}>
 	
     <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px' }}>
         {/* Container for IconButton components */}
 
 		<Typography variant="h6" component="div" sx={{ color: 'black', fontWeight: 'bold', marginRight: 'auto', marginLeft: 'auto' }}>
-    		<Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>GlamByManpreet</Link>
+    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>GlamByManpreet</Link>
 		</Typography>
 	
 
@@ -48,11 +69,12 @@ export default function Header() {
 
     </Toolbar>
 	<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '10px' }}>
-    <Link to="/AboutMe" style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>About</Link>
-    <Link to="/Services" style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>Services</Link>
-	<Link to="/BookingInqury" style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>BookingInqury</Link>
-	<Link to="ContactMe" style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>ContactMe</Link>
-	<Link to="/Gallery" style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>Gallery</Link>
+	<Link to={AboutLink} style={{ textDecoration: 'none', color: 'black' }}>
+	{AboutText}</Link>    
+	<Link to={ServicesLink} style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>{ServicesText}</Link>
+	<Link to={BookingInquryLink} style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>{BookingInquryText}</Link>
+	<Link to={ContactMeLink} style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>{ContactMeText}</Link>
+	<Link to={GalleryLink} style={{ textDecoration: 'none', color: 'black', marginRight: '10px' }}>{GalleryText}</Link>
 	
 
 </div>
