@@ -1,0 +1,33 @@
+.home-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cat-image {
+    width: 100%; /* Fill out the entire width of the card */
+    height: 100%; /* Fill out the entire height of the card */
+    object-fit: cover; /* Maintain aspect ratio and cover entire space */
+    display: block;
+}
+
+.picture-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column; /* Set flex direction to column */
+}
+
+.card {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card p {
+    text-align: center; /* Center-align the text */
+}
