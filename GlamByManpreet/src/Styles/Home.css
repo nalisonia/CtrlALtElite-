@@ -15,7 +15,10 @@
     width: 50%; /* Each image takes up half of the container width */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
+    margin-top: 0.9cm; /* Adds space above the images */
 }
+
+
 
 .card {
     width: 100%;
