@@ -8,14 +8,17 @@
     display: flex;
     justify-content: flex-start; /* Aligns children (images) to the left */
     width: 50%; /* Take the full width of its parent */
-    margin-top: 1in; /* Adds space above the picture container */
+    margin-top: .5in; /* Adds space above the picture container */
 }
   
 .model-image {
     width: 50%; /* Each image takes up half of the container width */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
+    margin-top: 0.4cm; /* Adds space above the images */
 }
+
+
 
 .card {
     width: 100%;
