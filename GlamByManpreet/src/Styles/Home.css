@@ -1,0 +1,30 @@
+.home-container {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.picture-container {
+    display: flex;
+    justify-content: flex-start; /* Aligns children (images) to the left */
+    width: 50%; /* Take the full width of its parent */
+    margin-top: .5in; /* Adds space above the picture container */
+}
+  
+.model-image {
+    width: 50%; /* Each image takes up half of the container width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
+    margin-top: 0.4cm; /* Adds space above the images */
+}
+
+
+
+.card {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}

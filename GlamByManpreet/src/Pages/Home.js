@@ -1,26 +1,22 @@
-// home.js
-import catImage from '../assets/images/catSideEye.jpeg';
-import supabase from '../config/supabaseClient';
+import React from 'react';
+import model1 from '../assets/images/homepage_image1.png';
+import model2 from '../assets/images/homepage_image2.png';
+import model3 from '../assets/images/homepage_image3.png';
+import model4 from '../assets/images/homepage_image4.png';
+
+import '../Styles/Home.css'; // Import CSS file for styling
 
 function HomePage() {
-    console.log(supabase);
-
     return (
-        <div>
-            <h1>Welcome to the Home Page!</h1>
-            <p>This is the content of the home page. Congratulations you have your environment set up</p>
-            <p>Ruben LOVES the 49ers!!!</p>
-            <img src={catImage} alt="Logo" />
+        <div className="home-container">            
+            <div className='picture-container'>
+                <img src={model1} alt="model1" className="model-image" />
+                <img src={model2} alt="model2" className="model-image" />
+                <img src={model3} alt="model3" className="model-image" />
+                <img src={model4} alt="model4" className="model-image" />
 
-            <div>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank" rel="noopener noreferrer">
-          Watch the video 
-        </a>
-
-        <p>{supabase.supabaseUrl ? "Supabase Connected: " + supabase.supabaseUrl : "Supabase is not connected"}</p>
-      </div>
+            </div>
         </div>
-        
     );
 }
 
