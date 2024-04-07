@@ -3,7 +3,7 @@ import HomePage from './Pages/Home.js';
 import Header from './Components/navbar.js';
 import AboutMe from './Pages/AboutMe.js'; // Import the AboutMe component
 import Services from './Pages/Services.js';
-import BookingInqury from './Pages/BookingInqury.js';
+import BookingInqury from './Pages/BookingInquiry.js';
 import ContactMe from './Pages/ContactMe.js';
 import Gallery from './Pages/Gallery.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and BrowserRouter
