@@ -1,6 +1,7 @@
 import React from 'react';
 import HomePage from './Pages/Home.js';
 import Header from './Components/navbar.js';
+import Footer from './Components/Footer.js';
 import AboutMe from './Pages/AboutMe.js'; // Import the AboutMe component
 import Services from './Pages/Services.js';
 import BookingInqury from './Pages/BookingInqury.js';
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/ContactMe" element={<ContactMe/>} /> {/* Use element prop */}
                     <Route path="/Gallery" element={<Gallery/>} /> {/* Use element prop */}
                 </Routes>
+                <Footer />
             </div>
         </Router>
     );
