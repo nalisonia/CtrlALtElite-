@@ -40,7 +40,7 @@ export default function Header() {
 
 
 	return (
-		<div className="header-container">
+		<div className="header-container" style={{height: "5em"}}>
 <AppBar position="fixed" sx={{ backgroundColor: 'white' }}>
 	
     <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px' }}>
