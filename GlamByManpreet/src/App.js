@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 
 function App() {
     return (
-        <Router> {/* Wrap everything with Router */}
+        <Router> 
             <div className="App">
                 <Header />
                 <Routes> {/* Wrap your routes with Routes */}

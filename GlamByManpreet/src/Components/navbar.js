@@ -41,7 +41,7 @@ export default function Header() {
 
 	return (
 		<div className="header-container">
-<AppBar position="fixed" sx={{ backgroundColor: 'white' }}>
+<	AppBar position="fixed" sx={{ backgroundColor: 'white' }}>
 	
     <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px' }}>
         {/* Container for IconButton components */}

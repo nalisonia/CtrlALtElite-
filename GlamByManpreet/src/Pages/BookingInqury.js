@@ -6,7 +6,7 @@ function BookingInqury() {
     <div className='bookinginqury-container'>
       <h2>BookingInqury Page</h2>
       <p>I am a passionate developer who loves coding and building awesome projects.</p>
-      <p>This is just a simple example of an About Me page.</p>
+      <p>This is just a simple example of an BookingInqury Me page.</p>
     </div>
   );
 }
