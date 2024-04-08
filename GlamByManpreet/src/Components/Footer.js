@@ -1,16 +1,18 @@
 import React from 'react';
-import { Box, Container, Typography, Link, IconButton} from '@mui/material';
+import { Box, Container, Typography, Link, IconButton } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import { FaTiktok } from "react-icons/fa";
-
+import { FaTiktok } from 'react-icons/fa';
 
 const Footer = () => {
   return (
     <>
-      {/* Black banner above the footer */}
-      <Box sx={{ bgcolor: 'black', height: '50px' }} />
+      <Box component="footer" sx={{ bgcolor: 'white', color: 'black', p: 3, position: 'fixed', bottom: 0, width: '100%' }}>
+        {/* Black banner */}
+        <Box sx={{ backgroundColor: 'black', height: '1vh' }} />
 
-      <Box component="footer" sx={{ bgcolor: 'white', color: 'black', p: 3 }}>
+        {/* Spacing between banner and text */}
+        <Box sx={{ height: '2vh' }} /> {/* You can adjust the value as needed */}
+
         <Container maxWidth="lg">
           <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
             <Box sx={{ width: '100%' }}>
