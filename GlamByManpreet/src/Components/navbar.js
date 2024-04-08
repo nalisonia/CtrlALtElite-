@@ -73,16 +73,16 @@ function DrawerAppBar(props) {
 			
             sx={{flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}
           >
-            <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GlamByManpreet111</Link>
+            <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
 
 
-			<a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
+			    <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
         		<img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto',paddingBottom: '10px' }} />
       		</a>
 
-			<a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
+			    <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
         		<img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
       		</a>
             
@@ -129,10 +129,6 @@ function DrawerAppBar(props) {
 }
 
 DrawerAppBar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
