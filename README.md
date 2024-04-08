@@ -7,7 +7,6 @@ Lori Yaniro
 Curtis Berry
 Abdullah Mohammed
 Diya Soneji
-Lori Yaniro
 Nicolas Gugliemo
 Ruben Ortega
 
