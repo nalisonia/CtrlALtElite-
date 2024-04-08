@@ -53,11 +53,12 @@ function DrawerAppBar(props) {
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
-  return (
-    <Box sx={{ display: 'flex' }}>
+  return ( 
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}> {/* Centering the content */}
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: 'white' }}>
-        <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',textAlign:'center'}}>
+      <AppBar component="nav" sx={{ backgroundColor: 'white', width: '100%', maxWidth: '100vw' }}> {/* Ensuring full width */}
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', textAlign: 'center', width: '100%' }}>
+          <div></div> {/* Empty div for spacing */}
           <IconButton
             color="black"
             aria-label="open drawer"
@@ -67,27 +68,21 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-			
-            sx={{flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}
-          >
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}> {/*To center title*/}
             <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-
-
-			    <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
-        		<img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto',paddingBottom: '10px' }} />
-      		</a>
-
-			    <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
-        		<img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
-      		</a>
-            
-
-        </div>
+          <div style={{ display: 'flex',flexDirection: 'column', alignItems: 'center' }}>
+            <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
+            <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
+                  <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
+                <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
+              </a>
+                  <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
+                <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
+              </a>
+            </div>
           
         </Toolbar>
         <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center'}}>
@@ -122,7 +117,6 @@ function DrawerAppBar(props) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        
       </Box>
     </Box>
   );
