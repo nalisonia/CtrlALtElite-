@@ -7,7 +7,10 @@ import Services from './Pages/Services.js';
 import BookingInqury from './Pages/BookingInquiry.js';
 import ContactMe from './Pages/ContactMe.js';
 import Gallery from './Pages/Gallery.js';
+import LogIn from './Pages/LogIn.js';
+import Register from './Pages/Register.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and BrowserRouter
+
 
 function App() {
     return (
@@ -21,6 +24,8 @@ function App() {
                     <Route path="/BookingInqury" element={<BookingInqury/>} /> {/* Use element prop */}
                     <Route path="/ContactMe" element={<ContactMe/>} /> {/* Use element prop */}
                     <Route path="/Gallery" element={<Gallery/>} /> {/* Use element prop */}
+                    <Route path="/LogIn" element={<LogIn/>} />
+                    <Route path="/Register" element={<Register/>} />
                 </Routes>
                 <Footer />
             </div>
