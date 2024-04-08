@@ -48,6 +48,11 @@ function DrawerAppBar(props) {
           </ListItem>
         ))}
       </List>
+      <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
+      {/* Move Login and Register buttons here, inside the drawer */}
+      <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
+      <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ width: '80%' }}>Register</Button>
+    </Box>
     </Box>
   );
 
@@ -71,10 +76,10 @@ function DrawerAppBar(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}> {/*To center title*/}
             <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
-          <div style={{ display: 'flex',flexDirection: 'column', alignItems: 'center' }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center' }}>
             <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
             <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
-            </div>
+            </Box>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
                   <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
