@@ -48,6 +48,11 @@ function DrawerAppBar(props) {
           </ListItem>
         ))}
       </List>
+      <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
+      {/* Move Login and Register buttons here, inside the drawer */}
+      <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
+      <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ width: '80%' }}>Register</Button>
+    </Box>
     </Box>
   );
 
@@ -59,21 +64,31 @@ function DrawerAppBar(props) {
       <AppBar component="nav" sx={{ backgroundColor: 'white', width: '100%', maxWidth: '100vw' }}> {/* Ensuring full width */}
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', textAlign: 'center', width: '100%' }}>
           <div></div> {/* Empty div for spacing */}
-          <Typography variant="h6" component="div" sx={{ marginLeft: '250px' }}> {/*To center title*/}
-            <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GlamByManpreet111</Link>
+          <IconButton
+            color="black"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}> {/*To center title*/}
+            <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center' }}>
             <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
             <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
+            </Box>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
-              <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
               </a>
-              <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
                 <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
               </a>
             </div>
-          </div>
+          
         </Toolbar>
         <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center'}}>
             {navItems.map((item) => (
@@ -113,10 +128,6 @@ function DrawerAppBar(props) {
 }
 
 DrawerAppBar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 

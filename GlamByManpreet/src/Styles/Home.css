@@ -4,6 +4,15 @@
     padding: 0;
 }
 
+.header-text {
+    display: inline-block;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  }
+  
 .picture-container {
     display: flex;
     justify-content: flex-start; /* Aligns children (images) to the left */
@@ -17,8 +26,6 @@
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
     margin-top: 0.4cm; /* Adds space above the images */
 }
-
-
 
 .card {
     width: 100%;
