@@ -26,21 +26,39 @@ const navItems = ['About Me', 'Services', 'Booking Inqury', 'Contact Me', 'Galle
 
 function DrawerAppBar(props) {
   const { window } = props;
+  //variable intialized name mobile open the usestate
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  //set mobile open chagnes the state of the variable named mobile open
+  //handleDrawerToggle is called when you 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  //this code deals with the hamburger button, whhen you cick outside of the dropdown button
+  //handDrawerToggle is called and sets the state of mobileopen to the oppisiote state
+  //closing or opeing the menu 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+
+      
+      {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Home</Link>
+      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Homes</Link>
       </Typography> 
-      <Divider /> 
+
+      <Divider />{/*Draws a line under the title of drop down menu*/}
+
+      {/*List Componenet used to list stuff*/}
       <List>
+
+        {/*Itterates over the array which holds the names of the pages*/}
         {navItems.map((item) => (
+          
+          //creates the list of About Me, Services, Booking Inqury ...etc
           <ListItem key={item} disablePadding>
+
+            
             <ListItemButton sx={{ textAlign: 'center' }}>
               {/*<ListItemText primary={item} />*/}
              <Link to={`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -48,11 +66,12 @@ function DrawerAppBar(props) {
             </Link>
             </ListItemButton>
           </ListItem>
+          
         ))}
       </List>
+
+
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
-
-
       {/* Move Login and Register buttons here, inside the drawer */}
       <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
       <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ width: '80%' }}>Register</Button>
