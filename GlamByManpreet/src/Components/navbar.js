@@ -19,8 +19,10 @@ import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
 
 
-const drawerWidth = 240;
-const navItems = ['About', 'Services', 'Booking Inquiry', 'Contact', 'Gallery'];
+const drawerWidth = 300;
+//array of text that corresponds to the routes in the App.js page, will be used for the buttons
+//in deskotp and mobile modes
+const navItems = ['About Me', 'Services', 'Booking Inqury', 'Contact Me', 'Gallery'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -41,7 +43,7 @@ function DrawerAppBar(props) {
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               {/*<ListItemText primary={item} />*/}
-             <Link to={`/${item.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+             <Link to={`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <ListItemText primary={item} />
             </Link>
             </ListItemButton>
@@ -49,6 +51,8 @@ function DrawerAppBar(props) {
         ))}
       </List>
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
+
+
       {/* Move Login and Register buttons here, inside the drawer */}
       <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
       <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ width: '80%' }}>Register</Button>
@@ -73,13 +77,21 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
+
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}> {/*To center title*/}
             <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
+
+
           <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center' }}>
             <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
             <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
             </Box>
+
+
+
+
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
                   <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
@@ -88,20 +100,25 @@ function DrawerAppBar(props) {
                 <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
               </a>
             </div>
-          
         </Toolbar>
+
+
+
         <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center'}}>
             {navItems.map((item) => (
               <Button
               key={item}
               component={Link}
-              to={`/${item.toLowerCase().replace(/\s+/g, '-')}`} // Replace spaces with hyphens for URLs
+              to={`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with hyphens for URLs
               sx={{ color: 'black', textTransform: 'none' }} // You can adjust the style as needed
             >
               {item}
             </Button>
             ))}
           </Box>
+
+
+
       </AppBar>
       <nav>
         <Drawer
