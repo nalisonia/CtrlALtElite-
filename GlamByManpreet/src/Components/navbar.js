@@ -127,7 +127,7 @@ function DrawerAppBar(props) {
 
             {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
-                  <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.tiktok.com/@glambymanpreet?_t=8lKt0ltppzX&_r=1" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
               </a>
 
