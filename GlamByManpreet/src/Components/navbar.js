@@ -17,6 +17,8 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
+import supabase from '../config/supabaseClient';
+import { useState, useEffect } from 'react';
 
 /*
 'xs': Extra small devices (phones) - width less than 600px
@@ -32,13 +34,45 @@ const drawerWidth = 300;
 const navItems = ['About Me', 'Services', 'Booking Inqury', 'Contact Me', 'Gallery'];
 
 function DrawerAppBar(props) {
+  const [session, setSession] = useState(null)
+
   const { window } = props;
+
+  //console.log(props.session) retrieved session form App.js
+  useEffect(() => {
+    if (props?.session) {
+      setSession(props.session);
+    }
+  }, [props.session]);
+   // Sets session state to null or metadata (valid data = true)
+  //console.log(props.session)
+
   //variable intialized named mobileopen using usestate. This var will be used if the website is not in desktop mode
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   //set mobile open chagnes the state of the variable named setmobileopen
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  async function handleSignIn() { // A user clicking on Login button calls this function to handle OAuth Sign In
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    })
+
+    console.log(data, error);
+  }
+
+  const handleSignOut = async () => { // A user clicking on Logout button calls this function to handle Sign Out
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Sign out error:', error.message);
+    } else {
+      console.log('User signed out successfully');
+      // Reload the current page
+      //window.location.reload(false); // Reloads the page for user data security
+      // Optionally, redirect or update state after sign out
+    }
   };
 
   //this code deals with the hamburger button, whhen you cick outside of the dropdown button
@@ -84,8 +118,22 @@ function DrawerAppBar(props) {
 
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
       {/* Move Login and Register buttons here, inside the drawer */}
-      <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
+
+      {/*
+            <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
       <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ width: '80%' }}>Register</Button>
+      */}
+      { // Login or Logout button renders whether user is signed in or not.
+            session ? (
+              <Button component={Link} variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }} onClick={() => handleSignOut()}>
+                Log out
+              </Button>
+            ) : (
+              <Button component={Link} variant="contained" color="secondary" sx={{ width: '80%' }} onClick={() => handleSignIn()}>
+                Log In
+              </Button>
+            )
+          }
     </Box>
     </Box>
   );
@@ -119,8 +167,23 @@ function DrawerAppBar(props) {
 
           {/* Buttons to login and register for the desktop version*/}
           <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center' }}>
-            <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
-            <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
+          {
+            session ? (
+              <Button component={Link} variant="contained" color="secondary" style={{ margin: '5px' }} onClick={() => handleSignOut()}>
+                Log out
+              </Button>
+            ) : (
+              <Button component={Link} variant="contained" color="primary" style={{ margin: '5px' }} onClick={() => handleSignIn()}>
+                Log In
+              </Button>
+            )
+          }
+          {/*
+                    <Button component={Link} variant="contained" color="primary" style={{ margin: '5px' }} onClick={() => handleSignIn()}>Login</Button>
+                    <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Registffer</Button>
+          */}
+
+
             </Box>
 
 
