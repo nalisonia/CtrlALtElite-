@@ -131,7 +131,6 @@ function DrawerAppBar(props) {
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
               </a>
 
-
                   <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
                 <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
               </a>
