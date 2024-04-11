@@ -76,7 +76,7 @@ function DrawerAppBar(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}> {/*To center title*/}
             <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center' }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'right' }}>
             <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
             <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
             </Box>
