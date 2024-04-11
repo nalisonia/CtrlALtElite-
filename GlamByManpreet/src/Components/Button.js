@@ -12,17 +12,17 @@ import Register from './Pages/Register.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and BrowserRouter
 
 
-function App() {
+function Button() {
     return (
-        <Router> 
+        <Router> {/* Wrap everything with Router */}
             <div className="App">
                 <Header />
                 <Routes> {/* Wrap your routes with Routes */}
                     <Route path="/" element={<HomePage />} /> {/* Use element prop */}
-                    <Route path="/About_Me" element={<AboutMe />} /> {/* Use element prop */}
+                    <Route path="/AboutMe" element={<AboutMe />} /> {/* Use element prop */}
                     <Route path="/Services" element={<Services/>} /> {/* Use element prop */}
-                    <Route path="/Booking_Inqury" element={<BookingInqury/>} /> {/* Use element prop */}
-                    <Route path="/Contact_Me" element={<ContactMe/>} /> {/* Use element prop */}
+                    <Route path="/BookingInqury" element={<BookingInqury/>} /> {/* Use element prop */}
+                    <Route path="/ContactMe" element={<ContactMe/>} /> {/* Use element prop */}
                     <Route path="/Gallery" element={<Gallery/>} /> {/* Use element prop */}
                     <Route path="/LogIn" element={<LogIn/>} />
                     <Route path="/Register" element={<Register/>} />
@@ -33,4 +33,4 @@ function App() {
     );
 }
 
-export default App;
+export default Button;
