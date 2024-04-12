@@ -29,7 +29,7 @@ import IGlogo from '../assets/images/Instagram_icon.png';
 const drawerWidth = 300;
 //array of text that corresponds to the routes in the App.js page, will be used for the buttons
 //in deskotp and mobile modes
-const navItems = ['About Me', 'Services', 'Booking Inqury', 'Contact Me', 'Gallery'];
+const navItems = ['Home','About Me', 'Services', 'Booking Inqury', 'Contact Me', 'Gallery'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -50,7 +50,7 @@ function DrawerAppBar(props) {
       
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Home</Link>
+      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM</Link>
       </Typography> 
 
       <Divider />{/*Draws a line under the title of drop down menu*/}
@@ -149,7 +149,7 @@ function DrawerAppBar(props) {
 
 
               component={Link}
-              to={`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
+              to={item === 'Home' ? "/" :`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
               sx={{ color: 'black', textTransform: 'none' }} // You can adjust the style as needed
             >
               {item}
