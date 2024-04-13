@@ -1,10 +1,84 @@
-/* just in case we dont want to do inline styling
-.title {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  font-family: 'Great Vibes';
-  letter-spacing: 2px; /* Make sure to include units for letter-spacing 
-  font-size: 34px;
+.Mobile_Login_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: rgb(0, 0, 0);
+
+  width: 80%;
+
 }
-*/
+
+
+.Mobile_Register_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: black;
+
+  width: 80%;
+}
+
+
+/* Desktop Login Button */
+.Desktop_Login_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: black;
+
+  width: 80%;
+
+}
+
+
+/* Desktop Register Button */
+.Desktop_Reigster_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: black;
+
+  width: 80%;
+
+}
+.Nav_Bar_Title {
+  /* Align items in a column */
+  flex-direction: column;
+
+  /* Align items in the center horizontally */
+  align-items: center;
+
+  /* Push content to the center by setting left and right margins to auto */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Specify the font family */
+  font-family: 'Playfair Display', serif;
+
+  /* Set the font size to 30 pixels */
+  font-size: 30px;
+}
+
+.Desktop_NavBar_Buttons {
+  color: black;
+  text-transform: none; /* Set text to display in default case (not uppercase or lowercase) */
+  font-size: 15px; /* Responsive fontSize for different breakpoints */
+  flex-grow: 1; /* Ensure equal spacing between links */
+  min-width: 10vw; /* Set minimum width for each link */
+}

@@ -53,7 +53,7 @@ function DrawerAppBar(props) {
       
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM</Link>
+      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Home</Link>
       </Typography> 
 
       <Divider />{/*Draws a line under the title of drop down menu*/}
@@ -84,8 +84,8 @@ function DrawerAppBar(props) {
       {/*Box used to hold the buttons in the drawer*/}
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
       {/* Move Login and Register buttons here, inside the drawer */}
-      <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ margin: '1vh', backgroundColor: "#FDF7F8",color: "black",width: '80%' }}>Login</Button>
-      <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ margin: '1vh', backgroundColor: "#FDF7F8",color: "black",width: '80%' }}>Register</Button>
+      <Button className= 'Mobile_Login_Button' component={Link} to="/LogIn" variant="contained">Login</Button>
+      <Button className= 'Mobile_Register_Button' component={Link} to="/Register" variant="contained">Register</Button>
     </Box>
     </Box>
   );
@@ -113,24 +113,15 @@ function DrawerAppBar(props) {
           </IconButton>
 
           {/*title of the web page and links to / which correpsonds to home in app.js . So when you click the title it takes you home*/}
-          <Typography variant="h6" component="div" 
-           sx={{ 
-            display: { xs: 'flex', sm: 'flex' },
-            flexDirection: 'column', 
-            alignItems: 'center', // Center items horizontally
-            marginLeft: 'auto',   // Pushes content to the center
-            marginRight: 'auto',  // Pushes content to the center
-            fontFamily: 'Playfair Display, serif',
-            fontSize:30
-          }}>
+          <Typography className='Nav_Bar_Title' variant="h6" component="div">
               {/*To center title*/}
             <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
 
           {/* Buttons to login and register for the desktop version*/}
           <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center'}}>
-          <Button component={Link} to="/LogIn" variant="contained" style={{ margin: '.5vh', backgroundColor: "#FDF7F8",color: "black"}}>Login</Button>
-          <Button component={Link} to="/Register" variant="contained" color="primary" style={{ margin: ".5vh",backgroundColor: "#FDF7F8",color: "black"}}>Register</Button>
+          <Button className='Desktop_Login_Button' component={Link} to="/LogIn" variant="contained">Login</Button>
+          <Button className='Mobile_Register_Button' component={Link} to="/Register" variant="contained">Register</Button>
           </Box>
 
              {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
@@ -150,8 +141,7 @@ function DrawerAppBar(props) {
         <Box sx={{ backgroundColor: 'black', height: '1.5vh' }} /> 
 
 
-        {/*this handlse the links in the app bar under the title of the webpage and when the screen is extra small
-        it wont display it*/}
+
         <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center',backgroundColor: '#FDF7F8'}}>
             {/*itterates throug the array nav items and stored in items*/} 
 
@@ -161,14 +151,9 @@ function DrawerAppBar(props) {
               key={item}
 
               component={Link}
-              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
-              sx={{
-                color: 'black',
-                textTransform: 'none',
-                fontSize: 15, // Responsive fontSize for different breakpoints
-                flexGrow: 1, // Ensure equal spacing between links
-                minWidth: '10vw', // Set minimum width for each link
-              }}>
+              // Replace spaces with underscore to match the routes in app.js
+              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} 
+              className='Desktop_NavBar_Buttons'>
               {item}
             </Button>
             ))}
