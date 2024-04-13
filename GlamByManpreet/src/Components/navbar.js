@@ -18,6 +18,9 @@ import { Link } from 'react-router-dom';
 import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
 
+import '../Styles/NavBar.css'; // Import CSS file for styling 
+
+
 /*
 'xs': Extra small devices (phones) - width less than 600px
 'sm': Small devices (tablets) - width equal to or greater than 600px
@@ -29,7 +32,7 @@ import IGlogo from '../assets/images/Instagram_icon.png';
 const drawerWidth = 300;
 //array of text that corresponds to the routes in the App.js page, will be used for the buttons
 //in deskotp and mobile modes
-const navItems = ['Home','About Me', 'Services', 'Booking Inqury', 'Contact Me', 'Gallery'];
+const navItems = ["Home",'About Me', 'Services', 'Booking Inquiry', 'Contact Me', 'Gallery'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -50,7 +53,7 @@ function DrawerAppBar(props) {
       
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM</Link>
+      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Home</Link>
       </Typography> 
 
       <Divider />{/*Draws a line under the title of drop down menu*/}
@@ -64,28 +67,25 @@ function DrawerAppBar(props) {
           //creates the list of About Me, Services, Booking Inqury ...etc
           <ListItem key={item} disablePadding>
 
-            {/*styling for each button*/}
+            {/*styling for each button inside the list*/}
             <ListItemButton sx={{ textAlign: 'center' }}>
 
             {/*Goes through item which holds the array of names that correspond to the javascript pages and
             replaces an empty space with a _ so they match the routes defined in app.js so they can be linked 
             properly*/}
-             <Link to={`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+             <Link to={`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <ListItemText primary={item} />
             </Link>
-
-
             </ListItemButton>
-          </ListItem>
-          
+          </ListItem> 
         ))}
       </List>
 
-
+      {/*Box used to hold the buttons in the drawer*/}
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
       {/* Move Login and Register buttons here, inside the drawer */}
-      <Button component={Link} to="/LogIn" variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }}>Login</Button>
-      <Button component={Link} to="/Register" variant="contained" color="secondary" sx={{ width: '80%' }}>Register</Button>
+      <Button className= 'Mobile_Login_Button' component={Link} to="/LogIn" variant="contained">Login</Button>
+      <Button className= 'Mobile_Register_Button' component={Link} to="/Register" variant="contained">Register</Button>
     </Box>
     </Box>
   );
@@ -107,26 +107,25 @@ function DrawerAppBar(props) {
             edge="start"
             onClick={handleDrawerToggle}
             // makes the button hidden when the button is in sm or bigger refer to top of page
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
+            sx={{ ml: 1, display: { xs: 'block', sm: 'none' } }} // Updated styling for the hamburger button
+            >
             <MenuIcon />
           </IconButton>
 
           {/*title of the web page and links to / which correpsonds to home in app.js . So when you click the title it takes you home*/}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}> {/*To center title*/}
+          <Typography className='Nav_Bar_Title' variant="h6" component="div">
+              {/*To center title*/}
             <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
           </Typography>
 
           {/* Buttons to login and register for the desktop version*/}
-          <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center' }}>
-            <Button component={Link} to="/LogIn" variant="contained" color="primary" style={{ margin: '5px' }}>Login</Button>
-            <Button component={Link} to="/Register" variant="contained" color="secondary" style={{ margin: '5px' }}>Register</Button>
-            </Box>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center'}}>
+          <Button className='Desktop_Login_Button' component={Link} to="/LogIn" variant="contained">Login</Button>
+          <Button className='Mobile_Register_Button' component={Link} to="/Register" variant="contained">Register</Button>
+          </Box>
 
-
-
-            {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
+             {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
+             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
                   <a href="https://www.tiktok.com/@glambymanpreet?_t=8lKt0ltppzX&_r=1" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
               </a>
@@ -135,33 +134,32 @@ function DrawerAppBar(props) {
                 <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
               </a>
             </div>
+
         </Toolbar>
 
+        {/*draws a line under the tile to look fancy*/}
+        <Box sx={{ backgroundColor: 'black', height: '1.5vh' }} /> 
 
-        {/*this handlse the links in the app bar under the title of the webpage and when the screen is extra small
-        it wont display it*/}
-        <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center'}}>
+
+
+        <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center',backgroundColor: '#FDF7F8'}}>
             {/*itterates throug the array nav items and stored in items*/} 
+
             {navItems.map((item) => (
               //makes a button for each item in navitems
               <Button
               key={item}
 
-
               component={Link}
-              to={item === 'Home' ? "/" :`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
-              sx={{ color: 'black', textTransform: 'none' }} // You can adjust the style as needed
-            >
+              // Replace spaces with underscore to match the routes in app.js
+              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} 
+              className='Desktop_NavBar_Buttons'>
               {item}
             </Button>
             ))}
-
           </Box>
       </AppBar>
-
-
       <nav>
-        
         <Drawer //handles the drawer that comes in from the side when the hamburger button is pressed
           container={container}
           variant="temporary"
@@ -177,6 +175,7 @@ function DrawerAppBar(props) {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
+          {/*Renders the drawer componet from const drawer function */}
           {drawer}
         </Drawer>
       </nav>

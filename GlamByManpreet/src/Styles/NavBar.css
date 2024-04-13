@@ -1,29 +1,85 @@
-.homeLink {
-    text-decoration: none;
-    height: 15em;
-    width: 15em;
-    margin: 0.5em;
-    padding: 0.5em;
-    border: 1px solid black;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-    color: black;
-    font-size: 1.5em;
-    font-weight: bold;
-}
+.Mobile_Login_Button {
+  /* Margin around the button */
+  margin: .5vh;
 
-.header-text {
-    display: inline-block;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-    border-color: black;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-  }
+  /* Background color of the button */
+  background-color: #FDF7F8;
 
+  /* Text color of the button */
+  color: rgb(0, 0, 0);
 
-/*Mobile styling goes below*/
-@media only screen and (max-width: 600px){
+  width: 80%;
 
 }
+
+
+.Mobile_Register_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: black;
+
+  width: 80%;
+}
+
+
+/* Desktop Login Button */
+.Desktop_Login_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: black;
+
+  width: 80%;
+
+}
+
+
+/* Desktop Register Button */
+.Desktop_Reigster_Button {
+  /* Margin around the button */
+  margin: .5vh;
+
+  /* Background color of the button */
+  background-color: #FDF7F8;
+
+  /* Text color of the button */
+  color: black;
+
+  width: 80%;
+
+}
+.Nav_Bar_Title {
+  /* Align items in a column */
+  flex-direction: column;
+
+  /* Align items in the center horizontally */
+  align-items: center;
+
+  /* Push content to the center by setting left and right margins to auto */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Specify the font family */
+  font-family: 'Playfair Display', serif;
+
+  /* Set the font size to 30 pixels */
+  font-size: 30px;
+}
+
+.Desktop_NavBar_Buttons {
+  color: black;
+  text-transform: none; /* Set text to display in default case (not uppercase or lowercase) */
+  font-size: 15px; /* Responsive fontSize for different breakpoints */
+  flex-grow: 1; /* Ensure equal spacing between links */
+  min-width: 10vw; /* Set minimum width for each link */
+}
+  
