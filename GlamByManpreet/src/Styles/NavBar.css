@@ -82,4 +82,9 @@
   flex-grow: 1; /* Ensure equal spacing between links */
   min-width: 10vw; /* Set minimum width for each link */
 }
+
+/*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
+
+}
   
