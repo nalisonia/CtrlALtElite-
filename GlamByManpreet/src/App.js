@@ -4,7 +4,7 @@ import Header from './Components/navbar.js';
 import Footer from './Components/Footer.js';
 import AboutMe from './Pages/AboutMe.js'; // Import the AboutMe component
 import Services from './Pages/Services.js';
-import BookingInqury from './Pages/BookingInquiry.js';
+import BookingInquiry from './Pages/BookingInquiry.js';
 import ContactMe from './Pages/ContactMe.js';
 import Gallery from './Pages/Gallery.js';
 import LogIn from './Pages/LogIn.js';
@@ -21,7 +21,7 @@ function App() {
                     <Route path="/" element={<HomePage />} /> {/* Use element prop */}
                     <Route path="/About_Me" element={<AboutMe />} /> {/* Use element prop */}
                     <Route path="/Services" element={<Services/>} /> {/* Use element prop */}
-                    <Route path="/Booking_Inqury" element={<BookingInqury/>} /> {/* Use element prop */}
+                    <Route path="/Booking_Inquiry" element={<BookingInquiry/>} /> {/* Use element prop */}
                     <Route path="/Contact_Me" element={<ContactMe/>} /> {/* Use element prop */}
                     <Route path="/Gallery" element={<Gallery/>} /> {/* Use element prop */}
                     <Route path="/LogIn" element={<LogIn/>} />
