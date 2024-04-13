@@ -19,6 +19,8 @@ import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
 
 import '../Styles/NavBar.css'; // Import CSS file for styling 
+import '../Styles/App.css'; // Import CSS file for styling
+import '../Styles/Home.css'; // Import CSS file for styling
 
 
 /*
@@ -156,10 +158,9 @@ function DrawerAppBar(props) {
             {/*itterates throug the array nav items and stored in items*/} 
 
             {navItems.map((item) => (
-              //makes a button for each item in navitems
+              //makes a button for each item in navitems 
               <Button
               key={item}
-
               component={Link}
               to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
               sx={{
@@ -168,8 +169,16 @@ function DrawerAppBar(props) {
                 fontSize: 15, // Responsive fontSize for different breakpoints
                 flexGrow: 1, // Ensure equal spacing between links
                 minWidth: '10vw', // Set minimum width for each link
+                border: '2px solid #E8E8E8', // Add border styling
+                borderRadius: '5px', // Add border radius for rounded corners
+                padding: '8px 16px', // Add padding for spacing inside the button
+                margin: '0 8px', // Add margin for spacing between buttons
+                backgroundColor: '#FDF7F8', // Set background color of the button
+                '&:hover': {
+                  backgroundColor: '#E8E8E8',
+                },
               }}>
-              {item}
+              {item } 
             </Button>
             ))}
           </Box>
