@@ -174,8 +174,15 @@ function DrawerAppBar(props) {
                 padding: '8px 16px', // Add padding for spacing inside the button
                 margin: '0 8px', // Add margin for spacing between buttons
                 backgroundColor: '#FDF7F8', // Set background color of the button
-                '&:hover': {
-                  backgroundColor: '#E8E8E8',
+                '&:hover': { // Hover effect
+                  color: 'black', // Change text color on hover
+                  border: '2px solid #E8E8E8', // Add border
+                  backgroundColor: '#FDF7F8', //
+                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+               },
+                '&:focus': { // Focus effect
+                  backgroundColor: '#E8E8E8', // Light gray background color on hover
+                  color: 'black', // Change text color on hover
                 },
               }}>
               {item } 
