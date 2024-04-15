@@ -4,3 +4,7 @@
     padding: 20px; /* Add some padding */
 }
 
+/*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
+
+}
