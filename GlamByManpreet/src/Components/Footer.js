@@ -6,7 +6,7 @@ import { FaTiktok } from 'react-icons/fa';
 const Footer = () => {
   return (
     <>
-      <Box component="footer" sx={{ bgcolor: 'white', color: 'black', p: 3, position: 'fixed', bottom: 0, width: '100%' }}>
+      <Box component="footer" sx={{ bgcolor: 'white', color: 'black', p: 3, position: 'relative', bottom: 0, width: '100%' }}>
         {/* Black banner */}
         <Box sx={{ backgroundColor: 'black', height: '1vh' }} />
 

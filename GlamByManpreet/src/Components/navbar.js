@@ -17,7 +17,6 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
-
 import '../Styles/NavBar.css'; // Import CSS file for styling 
 
 
@@ -84,8 +83,8 @@ function DrawerAppBar(props) {
       {/*Box used to hold the buttons in the drawer*/}
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
       {/* Move Login and Register buttons here, inside the drawer */}
-      <Button className= 'Mobile_Login_Button' component={Link} to="/LogIn" variant="contained">Login</Button>
-      <Button className= 'Mobile_Register_Button' component={Link} to="/Register" variant="contained">Register</Button>
+      <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/LogIn" variant="contained">Login</Button>
+      <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/Register" variant="contained">Register</Button>
     </Box>
     </Box>
   );
@@ -94,9 +93,9 @@ function DrawerAppBar(props) {
 
   //handles the nav bar
   return ( 
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}> {/* Centering the content */}
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative'}}> {/* Centering the content */}
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: 'white', width: '100%', maxWidth: '100vw' }}> {/* Ensuring full width */}
+      <AppBar component="nav" sx={{ backgroundColor: 'white', width: '100%', maxWidth: '100vw', position: 'relative' }}> {/* Ensuring full width */}
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', textAlign: 'center', width: '100%' }}>
           <div></div> {/* Empty div for spacing */}
 
@@ -113,15 +112,16 @@ function DrawerAppBar(props) {
           </IconButton>
 
           {/*title of the web page and links to / which correpsonds to home in app.js . So when you click the title it takes you home*/}
-          <Typography className='Nav_Bar_Title' variant="h6" component="div">
+          <Typography  variant="h6" component="div"
+          sx={{flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center'}}>
               {/*To center title*/}
-            <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
+            <Link to="/" className='Nav_Bar_Title' >GLAM<br></br>By Manpreet</Link>
           </Typography>
 
           {/* Buttons to login and register for the desktop version*/}
           <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center'}}>
-          <Button className='Desktop_Login_Button' component={Link} to="/LogIn" variant="contained">Login</Button>
-          <Button className='Mobile_Register_Button' component={Link} to="/Register" variant="contained">Register</Button>
+          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/LogIn" variant="contained">Login</Button>
+          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/Register" variant="contained">Register</Button>
           </Box>
 
              {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}

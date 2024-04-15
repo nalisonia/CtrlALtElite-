@@ -1,5 +1,5 @@
 .services-container {
-    max-width: 480px; /* Set maximum width for the content */
+    max-width: 80%; /* Set maximum width for the content */
     margin: 0 auto; /* Center align content */
     padding: 20px; /* Add some padding */
     display: flex;
@@ -18,5 +18,13 @@
   
   /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
+  .services-container {
+    max-width: 480px; /* Set maximum width for the content */
+    margin: 0 auto; /* Center align content */
+    padding: 20px; /* Add some padding */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+} 
 
 }
