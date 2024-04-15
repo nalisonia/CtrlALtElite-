@@ -120,12 +120,12 @@ function DrawerAppBar(props) {
 
           {/* Buttons to login and register for the desktop version*/}
           <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center'}}>
-          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/LogIn" variant="contained">Login</Button>
-          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/Register" variant="contained">Register</Button>
+          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px'}} component={Link} to="/LogIn" variant="contained">Login</Button>
+          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px'}} component={Link} to="/Register" variant="contained">Register</Button>
           </Box>
 
              {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
-             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '10px' }}>
+             <div class='Social_Media_Icons' >
                   <a href="https://www.tiktok.com/@glambymanpreet?_t=8lKt0ltppzX&_r=1" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
               </a>
@@ -149,11 +149,11 @@ function DrawerAppBar(props) {
               //makes a button for each item in navitems
               <Button
               key={item}
-
+              sx={{color: 'black', fontSize:'15px', textTransform:'none', minWidth:'10vw', flexGrow:'1'}}
               component={Link}
               // Replace spaces with underscore to match the routes in app.js
-              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} 
-              className='Desktop_NavBar_Buttons'>
+              to={item==='Home'?'/':`/${item.toLowerCase().replace(/\s+/g, '_')}`} 
+              /*className='Desktop_NavBar_Buttons'*/>
               {item}
             </Button>
             ))}

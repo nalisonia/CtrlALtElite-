@@ -27,35 +27,13 @@
 }
 
 
-/* Desktop Login Button */
-.Desktop_Login_Button {
-  /* Margin around the button */
-  margin: .5vh;
-
-  /* Background color of the button */
-  background-color: #FDF7F8;
-
-  /* Text color of the button */
-  color: black;
-
-  width: 80%;
+.Social_Media_Icons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
 
 }
-
-
-/* Desktop Register Button 
-.Desktop_Reigster_Button {
-
-  margin: .5vh;
-
-  background-color: #FDF7F8;
-
-  color: black;
-
-  width: 80%;
-
-}*/
-
 
 .Nav_Bar_Title {
   /* Align items in a column */
@@ -79,17 +57,17 @@
   padding-left: 2px;
 }
 
-.Desktop_NavBar_Buttons {
-  color: black;
-  background-color: black;
-  text-transform: none; /* Set text to display in default case (not uppercase or lowercase) */
-  font-size: 15px; /* Responsive fontSize for different breakpoints */
-  flex-grow: 1; /* Ensure equal spacing between links */
-  min-width: 10vw; /* Set minimum width for each link */
-}
+
 
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
+    .Social_Media_Icons{
+        display: none;
+    }
+
+    .Nav_Bar_Title{
+        font-size: 20px;
+    }
 
 }
   
