@@ -1,7 +1,9 @@
-* LogIn.css */
+/* LogIn.css */
 .LogIn-container {
     margin: 0 auto; /* Center align content */
     padding: 20px; /* Add some padding */
+    align-self: center;
+    
 }
 
 .LogIn-title {
@@ -45,6 +47,21 @@
 
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
+    .LogIn-container{
+        display: inline-block;
+        justify-content: center;
+        padding-top: 0px;
+        
+        
+    }
+   .LogIn-title, .LogIn-form{
+        width: 80vw;
+
+   }
+   
+   .LogIn-form button{
+        width: auto;
+   }
    
 
 }
