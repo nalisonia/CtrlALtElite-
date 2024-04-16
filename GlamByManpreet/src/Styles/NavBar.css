@@ -35,6 +35,13 @@
 
 }
 
+
+#TikTokIcon, #InstagramIcon{
+    width: 30px;
+    height: auto;
+    padding-bottom: 10px;
+}
+
 .Nav_Bar_Title {
   /* Align items in a column */
   flex-direction: column;

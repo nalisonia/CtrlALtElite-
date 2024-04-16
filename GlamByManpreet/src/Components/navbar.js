@@ -52,7 +52,7 @@ function DrawerAppBar(props) {
       
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Home</Link>
+      <Link class='Nav_Bar_Title' to="/">Home</Link>
       </Typography> 
 
       <Divider />{/*Draws a line under the title of drop down menu*/}
@@ -127,11 +127,11 @@ function DrawerAppBar(props) {
              {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
              <div class='Social_Media_Icons' >
                   <a href="https://www.tiktok.com/@glambymanpreet?_t=8lKt0ltppzX&_r=1" target="_blank" rel="noopener noreferrer">
-                <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
+                <img id='TikTokIcon' src={ticktokLogo} alt="TikTok" />
               </a>
 
                   <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
-                <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
+                <img id='InstagramIcon' src={IGlogo} alt="Instagram" />
               </a>
             </div>
 

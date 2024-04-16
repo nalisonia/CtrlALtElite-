@@ -3,6 +3,7 @@ import { Box, Container, Typography, Link, IconButton } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { FaTiktok } from 'react-icons/fa';
 
+
 const Footer = () => {
   return (
     <>
