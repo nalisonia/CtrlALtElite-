@@ -18,7 +18,8 @@ import { Link } from 'react-router-dom';
 import ticktokLogo from '../assets/images/tictokicon.png';
 import IGlogo from '../assets/images/Instagram_icon.png';
 import '../Styles/NavBar.css'; // Import CSS file for styling 
-
+import '../Styles/App.css'; // Import CSS file for styling
+import '../Styles/Home.css'; // Import CSS file for styling
 
 /*
 'xs': Extra small devices (phones) - width less than 600px
@@ -43,27 +44,24 @@ function DrawerAppBar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  //this code deals with the hamburger button, whhen you cick outside of the dropdown button
+  //this code deals with the hamburger button, when you cick outside of the dropdown button
   //handDrawerToggle is called and sets the state of mobileopen to the oppisiote state
   //closing or opeing the menu 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
 
-      
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
       <Link to="/" style={{ textDecoration: 'none', color: 'black'}}>Home</Link>
       </Typography> 
-
       <Divider />{/*Draws a line under the title of drop down menu*/}
-
       {/*List Componenet used to list stuff*/}
       <List>
 
         {/*Itterates over the array which holds the names of the pages*/}
         {navItems.map((item) => (
           
-          //creates the list of About Me, Services, Booking Inqury ...etc
+          //creates the list of About Me, Services, Booking Inquiry ...etc
           <ListItem key={item} disablePadding>
 
             {/*styling for each button inside the list*/}
@@ -90,7 +88,6 @@ function DrawerAppBar(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
   //handles the nav bar
   return ( 
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative'}}> {/* Centering the content */}
@@ -129,32 +126,49 @@ function DrawerAppBar(props) {
                   <a href="https://www.tiktok.com/@glambymanpreet?_t=8lKt0ltppzX&_r=1" target="_blank" rel="noopener noreferrer">
                 <img src={ticktokLogo} alt="TikTok" style={{ width: '30px', height: 'auto', paddingBottom: '10px' }} />
               </a>
-
                   <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
                 <img src={IGlogo} alt="Instagram" style={{ width: '30px', height: 'auto' }} />
               </a>
             </div>
-
         </Toolbar>
 
         {/*draws a line under the tile to look fancy*/}
         <Box sx={{ backgroundColor: 'black', height: '1.5vh' }} /> 
 
-
-
+        {/*this handlse the links in the app bar under the title of the webpage and when the screen is extra small
+        it wont display it*/}
         <Box sx={{flexGrow: 1, display: { xs: 'none', sm: 'flex' }, justifyContent: 'center',backgroundColor: '#FDF7F8'}}>
             {/*itterates throug the array nav items and stored in items*/} 
 
             {navItems.map((item) => (
-              //makes a button for each item in navitems
+              //makes a button for each item in navitems 
               <Button
               key={item}
-              sx={{color: 'black', fontSize:'15px', textTransform:'none', minWidth:'10vw', flexGrow:'1'}}
               component={Link}
-              // Replace spaces with underscore to match the routes in app.js
-              to={item==='Home'?'/':`/${item.toLowerCase().replace(/\s+/g, '_')}`} 
-              /*className='Desktop_NavBar_Buttons'*/>
-              {item}
+              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
+              sx={{
+                color: 'black',
+                textTransform: 'none',
+                fontSize: 15, // Responsive fontSize for different breakpoints
+                flexGrow: 1, // Ensure equal spacing between links
+                minWidth: 'auto', // Set minimum width for each link
+                border: '2px solid #E8E8E8', // Add border styling
+                borderRadius: '5px', // Add border radius for rounded corners
+                padding: '6px 12px', // Add padding for spacing inside the button
+                margin: '0 4px', // Add margin for spacing between buttons
+                backgroundColor: '#FDF7F8', // Set background color of the button
+                '&:hover': { // Hover effect
+                  color: 'black', // Change text color on hover
+                  border: '2px solid #E8E8E8', // Add border
+                  backgroundColor: '#FDF7F8', //
+                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+               },
+                '&:focus': { // Focus effect
+                  backgroundColor: '#E8E8E8', // Light gray background color on hover
+                  color: 'black', // Change text color on hover
+                },
+              }}>
+              {item } 
             </Button>
             ))}
           </Box>
@@ -180,7 +194,6 @@ function DrawerAppBar(props) {
         </Drawer>
       </nav>
 
-      
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
       </Box>
