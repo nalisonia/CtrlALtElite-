@@ -1,10 +1,43 @@
+/* Register.css */
 .Register-container {
-    max-width: 480px; /* Set maximum width for the content */
     margin: 0 auto; /* Center align content */
     padding: 20px; /* Add some padding */
 }
 
-/*Put all mobile styling here*/
-@media only screen and (max-width: 600px){
-
+.Register-title {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 90vw; /* Set width to 90% of viewport width */
 }
+.Register-form {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 90vw; /* Set width to 90% of viewport width */
+}
+
+.Register-form input {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 50vw; /* Set width to 90% of viewport width */
+}
+.Register-form button {
+    width: 100%; /* Make button fill its container */
+    padding: 10px; /* Add padding */
+    background-color: #007bff; /* Set background color */
+    color: 'primary'; /* Set text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Add border radius for rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    width: 10vw;
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+  
