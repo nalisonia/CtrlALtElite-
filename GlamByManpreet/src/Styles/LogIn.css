@@ -42,3 +42,9 @@
     display: flex;
     align-items: center;
 }
+
+/*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
+   
+
+}
