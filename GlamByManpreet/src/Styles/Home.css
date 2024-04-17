@@ -39,12 +39,5 @@
 
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
-    .picture-container{
-        margin-top: 5px;
-    }
-
-    .model-image{
-        margin-top: 0;
-    }
 
 }

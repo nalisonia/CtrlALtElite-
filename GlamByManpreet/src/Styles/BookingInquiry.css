@@ -2,13 +2,56 @@
     max-width: 480px; /* Set maximum width for the content */
     margin: 0 auto; /* Center align content */
     padding: 20px; /* Add some padding */
-}
-
-.header-text {
-    display: inline-block;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
+    background-color: #f0f0f0; /* Background color for the container */
+    border-radius: 5px; /* Rounded corners */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  }
+  
+  .bookinginquiry-header {
+    font-size: 24px; /* Adjust font size for the header */
+    margin-bottom: 20px; /* Add space below the header */
+  }
+  
+  .booking-form {
+    margin-top: 20px; /* Add space above the form */
+    margin-bottom: 20px; /* Add space below the form */
+    padding: 20px; /* Add some padding */
+    background-color: white; /* Background color for the form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  }
+  
+  .booking-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  button[type="submit"] {
+    background-color: #e60db3;
+    color: #0e0101;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #00050b;
+    color: #fff;
+  }
+  
+  .booking-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff; /* Background color */
+    color: #555; /* Text color */
+  }
+  
+  .booking-form select:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: black; /* Change border color on focus */
   }
   

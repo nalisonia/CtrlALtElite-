@@ -32,7 +32,7 @@ import '../Styles/Home.css'; // Import CSS file for styling
 const drawerWidth = 300;
 //array of text that corresponds to the routes in the App.js page, will be used for the buttons
 //in deskotp and mobile modes
-const navItems = ["Home",'About Me', 'Services', 'Booking Inquiry', 'Contact Me', 'Gallery'];
+const navItems = ["HOME",'ABOUT ME', 'SERVICES', 'BOOKING INQUIRY', 'CONTACT ME', 'GALLERY'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -160,8 +160,13 @@ function DrawerAppBar(props) {
                 '&:hover': { // Hover effect
                   color: 'black', // Change text color on hover
                   border: '2px solid #E8E8E8', // Add border
-                  backgroundColor: '#FDF7F8', //
+                  backgroundColor: '#e60db3', //
                   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+                
+
+                   },
+                '&:active': { // Active effect
+
                },
                 '&:focus': { // Focus effect
                   backgroundColor: '#E8E8E8', // Light gray background color on hover
