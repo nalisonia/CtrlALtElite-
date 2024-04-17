@@ -21,16 +21,23 @@ function BookingInquiry() {
     e.preventDefault();
     // Handle form submission here, e.g., send data to server
     console.log(formData);
+    // Reset form fields if needed
+    setFormData({
+      clientsHairAndMakeup: '',
+      clientsHairOnly: '',
+      clientsMakeupOnly: '',
+      locationAddress: ''
+    });
   };
 
   return (
-    <div className='bookinginquiry-container' style={{ backgroundColor: '#FDF7F8' }}>
+    <div className='bookinginquiry-container'>
       <h2 className='bookinginquiry-header'>BOOKING INQUIRY</h2>
       <div className='booking-form'>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="clientsHairAndMakeup">Number of clients requiring both hair and makeup:</label>
-            <input type="text" id="clientsHairAndMakeup" name="clientsHairAndMakeup" value={formData.clientsHairAndMakeup} onChange={handleChange} />
+            <input type="number" id="clientsHairAndMakeup" name="clientsHairAndMakeup" value={formData.clientsHairAndMakeup} onChange={handleChange} />
           </div>
           <div>
             <label htmlFor="clientsHairOnly">Number of clients requiring only hair:</label>
@@ -44,7 +51,9 @@ function BookingInquiry() {
             <label htmlFor="locationAddress">Location/Address you'd like me to commute to:</label>
             <input type="text" id="locationAddress" name="locationAddress" value={formData.locationAddress} onChange={handleChange} />
           </div>
-          <button type="submit">SUBMIT</button>
+          <div style={{ marginTop: '10px' }}>
+            <button type="submit">Submit</button>
+          </div>
         </form>
       </div>
     </div>
