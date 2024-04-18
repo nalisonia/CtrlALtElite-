@@ -9,7 +9,8 @@ import ContactMe from './Pages/ContactMe.js';
 import Gallery from './Pages/Gallery.js';
 import LogIn from './Pages/LogIn.js';
 import Register from './Pages/Register.js';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and BrowserRouter
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
+ 
 
 //app.js serves as the main entry point and central configuration file for the application. 
 //It is where you define the overall structure of our application, including routing, layout, and any global state management.
@@ -28,25 +29,28 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 //we would notice that the website would not have the nav bar or header
 
 
+
 function App() {
     return (
         <Router> 
             <div className="App">
                 <NavBar />
-                <Routes> 
-                <Route path="/Home" element={<HomePage />} />
-                    <Route path="/About_Me" element={<AboutMe />} /> 
-                    <Route path="/Services" element={<Services/>} /> 
-                    <Route path="/Booking_Inquiry" element={<BookingInquiry/>} /> 
-                    <Route path="/Contact_Me" element={<ContactMe/>} /> 
-                    <Route path="/Gallery" element={<Gallery/>} /> 
-                    <Route path="/LogIn" element={<LogIn/>} />
-                    <Route path="/Register" element={<Register/>} />
+                <Routes>
+                    <Route path="/" element={<Navigate to="/home" replace />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/about_me" element={<AboutMe />} /> 
+                    <Route path="/services" element={<Services/>} /> 
+                    <Route path="/booking_inquiry" element={<BookingInquiry/>} /> 
+                    <Route path="/contact_me" element={<ContactMe/>} /> 
+                    <Route path="/gallery" element={<Gallery/>} /> 
+                    <Route path="/login" element={<LogIn/>} />
+                    <Route path="/register" element={<Register/>} />
                 </Routes>
                 <Footer />
             </div>
         </Router>
     );
 }
+
 
 export default App;
