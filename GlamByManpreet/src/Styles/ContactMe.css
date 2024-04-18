@@ -1,7 +1,9 @@
 .contactme-container {
     max-width: 75%; /* Set maximum width for the content */
-    margin: 0 auto; /* Center align content */
+    margin: auto; /* Center align content */
     padding: 20px; /* Add some padding */
+    margin-top: 2.5%;
+    border: 1px solid black;
 }
 
 .header-text {

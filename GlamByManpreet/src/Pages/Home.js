@@ -25,11 +25,27 @@ function HomePage() {
                     Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
                     et magnis dis parturient montes, nascetur ridiculus mus. In rutrum ac purus sit amet tempus.</p>
             </div>
-            <div className='InquireBox'> <h2>Inquire Now!</h2>
-                <Button 
-                sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px'}} 
-                component={Link} to="/Booking_Inquiry">Inquire</Button>
+            <div className='info-boxes-container'>
+                <div className='info-box'>
+                    <h2>Services</h2>
+                    <p>eget facilisis quam felis id mauris. Ut convallis libero in urna ultrices accumsan. 
+                    Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
+                    et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
+                <div className='info-box'> 
+                    <h2>Inquire Now!</h2>
+                    <Button 
+                    sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px', border:'1px solid black'}} 
+                    component={Link} to="/Booking_Inquiry">Inquire</Button>
+                </div>
+                <div className='info-box'>
+                    <h2>Testimonials</h2>
+                    <p>eget facilisis quam felis id mauris. Ut convallis libero in urna ultrices accumsan. 
+                    Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
+                    et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
             </div>
+            
 
         </div>
         

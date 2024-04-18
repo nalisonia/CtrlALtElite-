@@ -43,11 +43,27 @@
 
 .some-content{
     width: 60vw;
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 5%;
 }
 
 .some-content > p{
     text-align: left;
     line-height: 1.6em;
+}
+
+.info-boxes-container{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+}
+
+.info-box{
+    width: 25%;
+    border: 1px solid black;
+    margin: 2.5%;
+    padding: 10px;
 }
 
 
@@ -97,6 +113,20 @@
 
     .model-image{
         width: 50%;
+    }
+
+    .info-boxes-container{
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1.5%;
+    }
+
+    .info-box{
+        width: 80vw;
+        margin-top: 1.5%;
+        margin-bottom: 1.5%;
+        padding: 10px;
+        background-color: #FDF7F8;
     }
 
 }
