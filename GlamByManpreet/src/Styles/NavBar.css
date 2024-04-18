@@ -57,11 +57,17 @@
   font-family: 'Playfair Display', serif;
 
   /* Set the font size to 30 pixels */
-  font-size: 30px;
+  font-size: 60px;
 
   text-decoration: none;
   color: black;
   padding-left: 2px;
+  line-height: 0.1;
+  text-shadow: 1px 1px 8px rgb(253, 239, 255);
+}
+
+.Nav_Bar_Title > text{
+  font-size: 0.5em;
 }
 
 
@@ -73,7 +79,10 @@
     }
 
     .Nav_Bar_Title{
-        font-size: 20px;
+        font-size: 40px;
+        line-height: 0.5;
+        padding-bottom: 10px;
+        padding-right: 15%;
     }
     
 

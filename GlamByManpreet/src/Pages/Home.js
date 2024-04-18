@@ -5,6 +5,8 @@ import model3 from '../assets/images/homepage_image3.png';
 import model4 from '../assets/images/homepage_image4.png';
 
 import '../Styles/Home.css'; // Import CSS file for styling
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
     return (
@@ -18,7 +20,15 @@ function HomePage() {
             </div>
             <div className='some-content'>
                 <h1>Welcome to GLAM by Manpreet, Sacramento's Premier Destination for Modern South Asian Glamour</h1>
-                <p>Discover the essence of contemporary South Asian beauty with us. Our Sacramento-based studio specializes in exquisite makeup and styling services that blend traditional charm with modern elegance. Whether you're preparing for a wedding, a festive celebration, or just want to feel stunning, our expert team is dedicated to transforming your vision into reality. Experience the art of modern glam with a local touch.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pretium, nisi ut volutpat mollis, 
+                    leo risus interdum arcu, eget facilisis quam felis id mauris. Ut convallis libero in urna ultrices accumsan. 
+                    Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
+                    et magnis dis parturient montes, nascetur ridiculus mus. In rutrum ac purus sit amet tempus.</p>
+            </div>
+            <div className='InquireBox'> <h2>Inquire Now!</h2>
+                <Button 
+                sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px'}} 
+                component={Link} to="/Booking_Inquiry">Inquire</Button>
             </div>
 
         </div>
