@@ -2,6 +2,11 @@
     max-width: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
 }
 
 .header-text {
@@ -15,7 +20,7 @@
   
 .picture-container {
     display: flex;
-    justify-content: flex-start; /* Aligns children (images) to the left */
+    justify-content: center; /* Aligns children (images) to the left */
     width: 50%; /* Take the full width of its parent */
     margin-top: .5in; /* Adds space above the picture container */
 }
@@ -36,15 +41,51 @@
     margin-bottom: 20px;
 }
 
+.some-content{
+    width: 60vw;
+}
+
 
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
     .picture-container{
         margin-top: 5px;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .home-container{
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
     }
 
     .model-image{
         margin-top: 0;
+    }
+
+    .some-content{
+        height: auto;
+        width: 80vw;
+        border: 1px solid black;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #FDF7F8;
+        box-shadow: 10px 10px 20px rgba(0,0,0,0.2), 
+        -10px -10px 20px rgba(256,256,256,0.1);
+    }
+
+    .some-content > h1{
+        font-size: 3vh;
+    }
+
+    .some-content > p{
+        margin: 20px auto;
+        padding: 5px;
+        text-align: left;
     }
 
 }

@@ -16,7 +16,13 @@ function HomePage() {
                 <img src={model4} alt="model4" className="model-image" />
 
             </div>
+            <div className='some-content'>
+                <h1>Welcome to GLAM by Manpreet, Sacramento's Premier Destination for Modern South Asian Glamour</h1>
+                <p>Discover the essence of contemporary South Asian beauty with us. Our Sacramento-based studio specializes in exquisite makeup and styling services that blend traditional charm with modern elegance. Whether you're preparing for a wedding, a festive celebration, or just want to feel stunning, our expert team is dedicated to transforming your vision into reality. Experience the art of modern glam with a local touch.</p>
+            </div>
+
         </div>
+        
     );
 }
 
