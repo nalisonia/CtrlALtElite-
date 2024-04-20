@@ -54,10 +54,19 @@
   margin-right: auto;
 
   /* Specify the font family */
-  font-family: 'Playfair Display', serif;
+   font-family: 'Bebas Neue', sans-serif; 
+  
+   /* 
+   Another Font option, not sure which ones is better
+   font-family: 'Daxline', sans-serif;
+   */
+
 
   /* Set the font size to 30 pixels */
   font-size: 60px;
+
+  /* Make the font slightly thicker */
+  font-weight: 750;
 
   text-decoration: none;
   color: black;
@@ -67,7 +76,7 @@
 }
 
 .Nav_Bar_Title > text{
-  font-size: 0.5em;
+  font-size: 0.35em;
 }
 
 
