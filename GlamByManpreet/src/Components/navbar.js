@@ -20,6 +20,8 @@ import IGlogo from '../assets/images/Instagram_icon.png';
 import '../Styles/NavBar.css'; // Import CSS file for styling 
 import '../Styles/App.css'; // Import CSS file for styling
 import '../Styles/Home.css'; // Import CSS file for styling
+import supabase from '../config/supabaseClient';
+import { useState, useEffect } from 'react';
 
 /*
 'xs': Extra small devices (phones) - width less than 600px
@@ -36,6 +38,32 @@ const navItems = ["HOME", 'ABOUT ME', 'SERVICES', 'BOOKING INQUIRY', 'CONTACT ME
 
 function DrawerAppBar(props) {
   const { window } = props;
+
+  const [session, setSession] = useState();
+
+  useEffect(() => {
+      if (props?.session) {
+        setSession(props.session);
+      }
+    }, [props.session]);
+
+  async function handleSignIn(){
+      const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google'
+      })
+
+      console.log(data, error);
+  }
+
+  async function handleSignOut(){
+      const { error } = await supabase.auth.signOut()
+
+      console.log(error);
+
+      if (!error){
+        setSession(null);
+      }
+  }
   //variable intialized named mobileopen using usestate. This var will be used if the website is not in desktop mode
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -81,8 +109,17 @@ function DrawerAppBar(props) {
       {/*Box used to hold the buttons in the drawer*/}
       <Box sx={{ padding: '10px' }}> {/* Adjust padding as needed */}
       {/* Move Login and Register buttons here, inside the drawer */}
-      <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/LogIn" variant="contained">Login</Button>
-      <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh'}} component={Link} to="/Register" variant="contained">Register</Button>
+      { // Login or Logout button renders whether user is signed in or not.
+            session ? (
+              <Button variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }} onClick={() => handleSignOut()}>
+                Log out
+              </Button>
+            ) : (
+              <Button variant="contained" color="secondary" sx={{ width: '80%' }} onClick={() => handleSignIn()}>
+                Log In
+              </Button>
+            )
+          }
     </Box>
     </Box>
   );
@@ -117,8 +154,18 @@ function DrawerAppBar(props) {
 
           {/* Buttons to login and register for the desktop version*/}
           <Box sx={{ display: { xs: 'none', sm: 'flex' },flexDirection: 'column', alignItems: 'center'}}>
-          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px'}} component={Link} to="/LogIn" variant="contained">Login</Button>
-          <Button sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px'}} component={Link} to="/Register" variant="contained">Register</Button>
+
+          { // Login or Logout button renders whether user is signed in or not.
+            session ? (
+              <Button variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }} onClick={() => handleSignOut()}>
+                Log out
+              </Button>
+            ) : (
+              <Button variant="contained" color="secondary" sx={{ width: '80%' }} onClick={() => handleSignIn()}>
+                Log In
+              </Button>
+            )
+          }
           </Box>
 
              {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}

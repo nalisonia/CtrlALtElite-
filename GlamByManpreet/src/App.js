@@ -10,6 +10,8 @@ import Gallery from './Pages/Gallery.js';
 import LogIn from './Pages/LogIn.js';
 import Register from './Pages/Register.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
+import {useState, useEffect} from 'react';
+import supabase from './config/supabaseClient.js';
  
 
 //app.js serves as the main entry point and central configuration file for the application. 
@@ -30,14 +32,32 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 
 
+
 function App() {
+    const [session, setSession] = useState(null)
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+          setSession(session);
+          console.log(session);
+        });
+    
+        supabase.auth.onAuthStateChange((_event, session) => {
+          setSession(session);
+        });      
+    }, []);
+
     return (
         <Router> 
             <div className="App">
-                <NavBar />
+                <NavBar session={session}/>
+
                 <Routes>
-                    <Route path="/" element={<Navigate to="/home" replace />} />
-                    <Route path="/home" element={<HomePage />} />
+                    {/*
+                                        <Route path="/" element={<Navigate to="/home" replace />} />
+                                        <Route path="/home" element={<HomePage />} />
+                    */}
+                    <Route path="/" element={<HomePage/>} />
                     <Route path="/about_me" element={<AboutMe />} /> 
                     <Route path="/services" element={<Services/>} /> 
                     <Route path="/booking_inquiry" element={<BookingInquiry/>} /> 
