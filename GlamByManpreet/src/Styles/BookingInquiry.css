@@ -3,41 +3,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
-
 .booking-inquiry {
     max-width: 480px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white; /* Removed single quotes */
+    background-color: #f9e4f7;
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-color: #00050b;
     font-family: 'Bebas Neue', sans-serif;
-
-}
-
-
-
-.form-container {
+  }
+  
+  .form-container {
     display: flex;
-    flex-direction: column;  /* children are stacked vertically */
+    flex-direction: column;
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #242323; /* Fixed border value */
+    border: 1px solid #242323;
     font-family: 'Playfair Display', sans-serif;
-
-}
-
-.form-group {
+  }
+  
+  .form-group {
     margin-bottom: 20px;
-    margin-bottom: 20px;  /* Adjust as needed for spacing between form fields */
-    width: 100%;  /*  each group takes full width of the container */
+    width: 100%;
     font-family: 'Playfair Display', sans-serif;
-}
-
-button[type="submit"] {
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+    /* Input field enhancements */
+  input[type="text"], input[type="number"], input[type="tel"], input[type="email"], input[type="date"], input[type="time"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+   /* background-color: #f9e4f7; */
+    color: #555;
+  }
+  
+    /* Slight focus styling */
+  input[type="text"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: black;
+  }
+  
+  textarea {
+    height: 150px; /* Adjust based on desired height */
+    margin-bottom: 20px; /* Adds space below the textarea */
+    font-size: 16px; /* Adjust font size as needed */
+    font-family: 'Playfair Display', sans-serif;
+  }
+  
+  button[type="submit"] {
     background-color: #ffc2f9;
     color: #0e0101;
     padding: 10px 20px;
@@ -69,38 +92,20 @@ button[type="submit"]:hover {
     background-color: #f9e4f7; 
     color: #555;
 }
-
-.booking-form select:focus,
-.booking-form input[type="text"]:focus,
-.booking-form input[type="number"]:focus {
-    outline: none;
-    border-color: black;
-}
-
-label {
-    display: block;  /* Makes the label take the full width, pushing input below */
-    margin-bottom: 5px;  /* Space between label and input */
-}
-
-.booking-form textarea {
-    width: 200%; 
-    padding: 30px;
-    height: 300px; /* Adjust based on desired height */
-    margin-bottom: 1000px; /* Ensures space below the textarea */
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    background-color: #fff;
-    color: #555;
-    font-size: 16px; /* Adjust font size as needed */
-    font-family: 'Economica', sans-serif;
-  }
   
-
-.response-time {
+  .response-time {
     text-align: center;
-    color: #ffc2f9;
+    color: black;
     font-size: 16px;
-    margin-top: 20px; /* Adds space above the button */
+    margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Playfair Display', sans-serif;
-}
+  }
+
+  /* Required field asterisk */
+  .required {
+    color: red;
+    font-size: 1.2em;
+    vertical-align: top;
+    margin-left: 2px;
+  }
