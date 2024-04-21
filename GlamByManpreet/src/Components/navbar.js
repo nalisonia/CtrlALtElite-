@@ -133,7 +133,7 @@ function DrawerAppBar(props) {
         </Toolbar>
 
         {/*draws a line under the tile to look fancy*/}
-        <Box sx={{ backgroundColor: 'black', height: '1.0vh' }} /> 
+        <Box sx={{ backgroundColor: 'white', height: '1.0vh' }} />  
 
         {/*this handlse the links in the app bar under the title of the webpage and when the screen is extra small
         it wont display it*/}
