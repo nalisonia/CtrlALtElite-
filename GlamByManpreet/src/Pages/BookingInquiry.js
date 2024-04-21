@@ -7,7 +7,8 @@ function BookingInquiry() {
     clientsHairAndMakeup: '',
     clientsHairOnly: '',
     clientsMakeupOnly: '',
-    locationAddress: ''
+    locationAddress: '',
+    additionalNotes: ''
   });
 
   const handleSubmit = (e) => {
@@ -18,7 +19,8 @@ function BookingInquiry() {
       clientsHairAndMakeup: '',
       clientsHairOnly: '',
       clientsMakeupOnly: '',
-      locationAddress: ''
+      locationAddress: '',
+      additionalNotes: ''
     });
   };
 
@@ -33,6 +35,14 @@ function BookingInquiry() {
   return (
     <div className="booking-inquiry">
       <h1>BOOKING INQUIRY</h1>
+      <p className="response-time"> 
+Thank you for inquiring with Glam By Manpreet for your hair and makeup services! 
+
+Non-Bridal and Bridal bookings are open for 2024/2025.  
+
+To inquire about availability please complete the form below and I will reach out within 3-5 days regarding availability. 
+
+All inquiries will be responded to via text or email. </p>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -62,6 +72,15 @@ function BookingInquiry() {
             <label htmlFor="locationAddress">Location/Address you’d like me to commute to:</label>
             <input type="text" id="locationAddress" name="locationAddress" value={formData.locationAddress} onChange={handleChange} />
           </div>
+          <label htmlFor="additionalNotes">Additional Notes:</label>
+            <textarea
+              id="additionalNotes"
+              name="additionalNotes"
+              value={formData.additionalNotes}
+              onChange={handleChange}
+              rows="4"
+              placeholder="Please add any additional information Manpreet should know..."
+            />
           <button type="submit">Submit</button>
         </form>
       </div>
