@@ -102,7 +102,8 @@
 
     .some-content > h1{
         font-size: 3vh;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Bebas Neue', sans-serif; 
+
     }
 
     .some-content > p{
