@@ -109,3 +109,10 @@ button[type="submit"]:hover {
     vertical-align: top;
     margin-left: 2px;
   }
+
+  /*Put all mobile styling here*/
+  @media only screen and (max-width: 600px){
+    .booking-inquiry{
+      max-width: 90%;
+    }
+  }
