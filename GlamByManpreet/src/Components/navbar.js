@@ -80,7 +80,7 @@ function DrawerAppBar(props) {
 
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link class='Nav_Bar_Title' to='/'>Home</Link>
+      <Link class='Drawer_Nav_Bar_Title' to='/'>GLAM</Link>
       </Typography> 
       <Divider />{/*Draws a line under the title of drop down menu*/}
       {/*List Componenet used to list stuff*/}

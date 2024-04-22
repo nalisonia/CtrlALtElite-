@@ -100,6 +100,14 @@
         margin-left: 30%;
     }
     
+    .Drawer_Nav_Bar_Title{
+      font-size: 40px;
+      text-decoration: none;
+      text-transform: none;
+      color: black;
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 700;
+    }
 
 }
   
