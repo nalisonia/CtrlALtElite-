@@ -51,11 +51,10 @@ function App() {
         <Router> 
             <div className="App">
                 <NavBar session={session}/>
-
                 <Routes>
                     {/*
-                                        <Route path="/" element={<Navigate to="/home" replace />} />
-                                        <Route path="/home" element={<HomePage />} />
+                    <Route path="/" element={<Navigate to="/home" replace />} />
+                    <Route path="/home" element={<HomePage />} />
                     */}
                     <Route path="/" element={<HomePage/>} />
                     <Route path="/about_me" element={<AboutMe />} /> 
