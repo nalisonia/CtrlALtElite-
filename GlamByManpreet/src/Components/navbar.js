@@ -80,7 +80,7 @@ function DrawerAppBar(props) {
 
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link class='Nav_Bar_Title' to='/Home'>Home</Link>
+      <Link class='Nav_Bar_Title' to='/'>Home</Link>
       </Typography> 
       <Divider />{/*Draws a line under the title of drop down menu*/}
       {/*List Componenet used to list stuff*/}
@@ -149,7 +149,7 @@ function DrawerAppBar(props) {
           <Typography  variant="h6" component="div"
           sx={{flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center', paddingTop:'15px'}}>
               {/*To center title*/}
-            <Link to="/Home" className='Nav_Bar_Title' >GLAM <br></br><text>by manpreet</text></Link>
+            <Link to="/" className='Nav_Bar_Title' >GLAM <br></br><text>by manpreet</text></Link>
           </Typography>
 
           {/* Buttons to login and register for the desktop version*/}
@@ -192,7 +192,7 @@ function DrawerAppBar(props) {
               <Button
               key={item}
               component={Link}
-              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
+              to={item==='HOME'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
               sx={{
                 color: 'black',
                 textTransform: 'none',
