@@ -98,7 +98,7 @@ function DrawerAppBar(props) {
             {/*Goes through item which holds the array of names that correspond to the javascript pages and
             replaces an empty space with a _ so they match the routes defined in app.js so they can be linked 
             properly*/}
-             <Link to={item==='Home'?'/':`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'black' }}>
+             <Link to={item==='HOME'?'/':`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <ListItemText primary={item} />
             </Link>
             </ListItemButton>
