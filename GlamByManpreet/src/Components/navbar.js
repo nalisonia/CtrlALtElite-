@@ -80,7 +80,7 @@ function DrawerAppBar(props) {
 
       {/*This handles the title of the drop down menu*/}
       <Typography variant="h6" sx={{ my: 2, justifyContent:'center' }}>
-      <Link class='Nav_Bar_Title' to='/Home'>Home</Link>
+      <Link class='Nav_Bar_Title' to='/'>Home</Link>
       </Typography> 
       <Divider />{/*Draws a line under the title of drop down menu*/}
       {/*List Componenet used to list stuff*/}
@@ -98,7 +98,7 @@ function DrawerAppBar(props) {
             {/*Goes through item which holds the array of names that correspond to the javascript pages and
             replaces an empty space with a _ so they match the routes defined in app.js so they can be linked 
             properly*/}
-             <Link to={item==='Home'?'/':`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'black' }}>
+             <Link to={item==='HOME'?'/':`/${item.toLowerCase().replace(/\s+/g, '_')}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <ListItemText primary={item} />
             </Link>
             </ListItemButton>
@@ -111,16 +111,34 @@ function DrawerAppBar(props) {
       {/* Move Login and Register buttons here, inside the drawer */}
       { // Login or Logout button renders whether user is signed in or not.
             session ? (
-              <Button variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }} onClick={() => handleSignOut()}>
+              <Button variant="contained"  sx={{color:'black', backgroundColor:'#FDF7F8',marginBottom: '10px',width: '80%','&:hover': { // Hover effect
+                color: 'black', // Change text color on hover
+                border: '2px solid #E8E8E8', // Add border
+                backgroundColor: '#ec98e8', //
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+              }, }} onClick={() => handleSignOut()}>
                 Log out
               </Button>
             ) : (
-              <Button variant="contained" color="secondary" sx={{ width: '80%' }} onClick={() => handleSignIn()}>
+              <Button variant="contained" sx={{color:'black', backgroundColor:'#FDF7F8',marginBottom: '10px',width: '80%','&:hover': { // Hover effect
+                color: 'black', // Change text color on hover
+                border: '2px solid #E8E8E8', // Add border
+                backgroundColor: '#ec98e8', //
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+              }, }} onClick={() => handleSignIn()}>
                 Log In
               </Button>
             )
           }
     </Box>
+
+    <Button sx={{color:'black', backgroundColor:'#FDF7F8',marginBottom: '10px',width: '75%','&:hover': { // Hover effect
+                color: 'black', // Change text color on hover
+                border: '2px solid #E8E8E8', // Add border
+                backgroundColor: '#ec98e8', //
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+              }, }}  component={Link} to="/Register" variant="contained">Register</Button>
+
     </Box>
   );
 
@@ -145,11 +163,14 @@ function DrawerAppBar(props) {
             <MenuIcon />
           </IconButton>
 
+
+
+
           {/*title of the web page and links to / which correpsonds to home in app.js . So when you click the title it takes you home*/}
           <Typography  variant="h6" component="div"
           sx={{flexGrow: 1, display: { xs: 'flex', sm: 'block'}, justifyContent: 'center', paddingTop:'15px'}}>
               {/*To center title*/}
-            <Link to="/Home" className='Nav_Bar_Title' >GLAM <br></br><text>by manpreet</text></Link>
+            <Link to="/" className='Nav_Bar_Title' >GLAM <br></br><text>by manpreet</text></Link>
           </Typography>
 
           {/* Buttons to login and register for the desktop version*/}
@@ -157,15 +178,34 @@ function DrawerAppBar(props) {
 
           { // Login or Logout button renders whether user is signed in or not.
             session ? (
-              <Button variant="contained" color="primary" sx={{ marginBottom: '10px', width: '80%' }} onClick={() => handleSignOut()}>
+              <Button variant="contained" sx={{ color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh',width: '100%',marginBottom:'10px' ,'&:hover': { // Hover effect
+                color: 'black', // Change text color on hover
+                border: '2px solid #E8E8E8', // Add border
+                backgroundColor: '#ec98e8', //
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+              },}} onClick={() => handleSignOut()}>
                 Log out
               </Button>
             ) : (
-              <Button variant="contained" color="secondary" sx={{ width: '80%' }} onClick={() => handleSignIn()}>
+              <Button variant="contained"  sx={{ color:'black', backgroundColor:'#FDF7F8',marginBottom: '10px',width: '100%','&:hover': { // Hover effect
+                color: 'black', // Change text color on hover
+                border: '2px solid #E8E8E8', // Add border
+                backgroundColor: '#ec98e8', //
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+              }, }} onClick={() => handleSignIn()}>
                 Log In
               </Button>
             )
+
+            
           }
+          <Button sx={{color:'black', backgroundColor:'#FDF7F8', '&:hover': { // Hover effect
+                  color: 'black', // Change text color on hover
+                  border: '2px solid #E8E8E8', // Add border
+                  backgroundColor: '#ec98e8', //
+                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
+                },}} component={Link} to="/Register" variant="contained">Register</Button>
+
           </Box>
 
              {/*Buttons for the tiktok and IG, they link you to the website using href and the link*/}
@@ -192,7 +232,7 @@ function DrawerAppBar(props) {
               <Button
               key={item}
               component={Link}
-              to={item==='Home'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
+              to={item==='HOME'?"/":`/${item.toLowerCase().replace(/\s+/g, '_')}`} // Replace spaces with underscore to match the routes in app.js
               sx={{
                 color: 'black',
                 textTransform: 'none',
