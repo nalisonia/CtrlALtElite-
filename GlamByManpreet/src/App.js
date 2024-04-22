@@ -9,6 +9,11 @@ import ContactMe from './Pages/ContactMe.js';
 import Gallery from './Pages/Gallery.js';
 import LogIn from './Pages/LogIn.js';
 import Register from './Pages/Register.js';
+import TermsOfService from './Pages/TermsOfService.js';
+import PrivacyPolicy from './Pages/PrivacyPolicy.js';
+import CopyRightPolicy from './Pages/CopyRightPolicy.js';
+import CookiePolicy from './Pages/CookiePolicy.js';
+import DoNotSell from './Pages/DoNotSell.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import {useState, useEffect} from 'react';
 import supabase from './config/supabaseClient.js';
@@ -64,6 +69,16 @@ function App() {
                     <Route path="/gallery" element={<Gallery/>} /> 
                     <Route path="/login" element={<LogIn/>} />
                     <Route path="/register" element={<Register/>} />
+                    <Route path="/terms_of_service" element={<TermsOfService/>} />
+                    <Route path="/privacy_policy" element={<PrivacyPolicy/>} />
+                    <Route path="/copy_right_policy" element={<CopyRightPolicy/>} />
+                    <Route path="/cookie_policy" element={<CookiePolicy/>} />
+                    <Route path="/do_not_sell" element={<DoNotSell/>} />
+
+
+
+                    
+
                 </Routes>
                 <Footer />
             </div>

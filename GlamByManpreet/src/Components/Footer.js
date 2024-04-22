@@ -23,19 +23,19 @@ const Footer = () => {
             </Box>
             <Box sx={{ width: '100%' }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Link href="/" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
+                <Link href="/terms_of_service" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
                   Terms of Service
                 </Link>
-                <Link href="/about" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
+                <Link href="/privacy_policy" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
                   Privacy Policy
                 </Link>
-                <Link href="/contact" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
+                <Link href="/copy_right_policy" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
                   Copyright Policy
                 </Link>
-                <Link href="/privacy" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
+                <Link href="/cookie_policy" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
                   Cookie Policy
                 </Link>
-                <Link href="/privacy" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
+                <Link href="/do_not_sell" sx={{ color: 'inherit', mr: 3, mb: 1.5 }}>
                   Do not sell or share my personal information
                 </Link>
               </Box>
