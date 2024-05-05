@@ -35,7 +35,7 @@ By prioritizing user experience and personalized interactions, we aim to elevate
 
 This project was built using React and all dependencies are located in [package.json](../CtrlALtElite-/GlamByManpreet/package.json). 
 
-We recommend using npm to install this project. You can do so from a command-line interface by executing the following command:
+We recommend using the npm tool to install this project. You can do so from a command-line interface by executing the following command:
 
 ```
 npm install
