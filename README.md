@@ -1,7 +1,7 @@
 
 # Glam by Manpreet
 <p align="center">
-  <img src="../CtrlALtElite-/GlamByManpreet/src/assets/readme_md_images/banner copy.jpg">
+  <img src="https://raw.githubusercontent.com/nalisonia/CtrlALtElite-/main/GlamByManpreet/src/assets/readme_md_images/banner%20copy.jpg">
 </p>
 
 ## Table of Contents
@@ -26,10 +26,10 @@ By prioritizing user experience and personalized interactions, we aim to elevate
 ## Images
 
 ### Entity Relationship Diagram (ERD)
-![](../CtrlALtElite-/GlamByManpreet/src/assets/readme_md_images/erd.JPG)
+![](https://raw.githubusercontent.com/nalisonia/CtrlALtElite-/main/GlamByManpreet/src/assets/readme_md_images/erd.JPG)
 
 ### Homepage
-![](../CtrlALtElite-/GlamByManpreet/src/assets/readme_md_images/homepage.JPG)
+![](https://raw.githubusercontent.com/nalisonia/CtrlALtElite-/main/GlamByManpreet/src/assets/readme_md_images/homepage.JPG)
 
 ## Install
 
