@@ -1,18 +1,39 @@
+.about-container {
+    display: flex; /* Use Flexbox to align children side by side */
+    align-items: center; /* Vertically center align items */
+    gap: 20px; /* Add space between the text and image */
+    padding: 20px; /* Add padding around the container */
+}
 
-.header-text {
-    display: inline-block;
-    padding: 10px;
+/* Styling for the text box */
+.text-box {
+    flex: 1; /* Allow text box to take available space */
+    padding: 20px; /* Add padding inside the text box */
     background-color: white;
     border-radius: 5px;
+    border: 1px solid black;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-  }
-  
-  /*Put all mobile styling here*/
-@media only screen and (max-width: 600px){
+}
+
+/* Styling for the image */
+.model-image {
+    width: 40%; /* Adjust the image width as needed */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
+}
+
+/* Media queries for responsive design */
+@media only screen and (max-width: 600px) {
     .about-container {
-        max-width: 480px; /* Set maximum width for the content */
-        margin: 0 auto; /* Center align content */
-        padding: 20px; /* Add some padding */
+        flex-direction: column; /* Stack text and image vertically on small screens */
+        align-items: center; /* Center align items */
     }
 
+    .model-image {
+        width: 80%; /* Adjust image width for small screens */
+    }
+
+    .text-box {
+        width: 100%; /* Ensure text box takes full width on small screens */
+    }
 }
