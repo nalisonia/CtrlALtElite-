@@ -74,11 +74,6 @@ function App() {
                     <Route path="/copy_right_policy" element={<CopyRightPolicy/>} />
                     <Route path="/cookie_policy" element={<CookiePolicy/>} />
                     <Route path="/do_not_sell" element={<DoNotSell/>} />
-
-
-
-                    
-
                 </Routes>
                 <Footer />
             </div>
