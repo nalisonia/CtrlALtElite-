@@ -37,6 +37,9 @@ function HomePage() {
                     <Button 
                     sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px', border:'1px solid black'}} 
                     component={Link} to="/Booking_Inquiry">Inquire</Button>
+                    <Button 
+                    sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px', border:'1px solid black'}} 
+                    component={Link} to="/dashboard">DashBoard</Button>
                 </div>
                 <div className='info-box'>
                     <h2>Testimonials</h2>
@@ -45,6 +48,8 @@ function HomePage() {
                     et magnis dis parturient montes, nascetur ridiculus mus.</p>
                 </div>
             </div>
+
+            
             
 
         </div>
