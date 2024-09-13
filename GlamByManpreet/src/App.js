@@ -14,6 +14,7 @@ import PrivacyPolicy from './Pages/PrivacyPolicy.js';
 import CopyRightPolicy from './Pages/CopyRightPolicy.js';
 import CookiePolicy from './Pages/CookiePolicy.js';
 import DoNotSell from './Pages/DoNotSell.js';
+import DashBoard from './Pages/DashBoard.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import {useState, useEffect} from 'react';
 import supabase from './config/supabaseClient.js';
@@ -74,6 +75,8 @@ function App() {
                     <Route path="/copy_right_policy" element={<CopyRightPolicy/>} />
                     <Route path="/cookie_policy" element={<CookiePolicy/>} />
                     <Route path="/do_not_sell" element={<DoNotSell/>} />
+                    <Route path="/dashboard" element={<DashBoard/>} />
+
 
 
 
