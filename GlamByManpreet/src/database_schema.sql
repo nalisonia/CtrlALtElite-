@@ -25,7 +25,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.users (
-    id integer NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     firstnameandlastname character varying(100) NOT NULL,
     phonenumber character varying(15),
     emailaddress character varying(100) NOT NULL,
@@ -47,13 +47,7 @@ ALTER TABLE public.users OWNER TO postgres;
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.users_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+CREATE SEQUENCE public.users_id_seq START 1;
 
 
 ALTER SEQUENCE public.users_id_seq OWNER TO postgres;

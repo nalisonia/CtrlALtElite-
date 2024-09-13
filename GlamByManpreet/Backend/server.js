@@ -9,8 +9,8 @@ const port = 3000;
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'glam_by_manpreet',
-  password: 'Rubeno24',
+  database: 'postgres',
+  password: 'password',
   port: 5432,
 });
 
