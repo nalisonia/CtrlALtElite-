@@ -1,14 +1,30 @@
 import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component"; 
+import differenceBy from "lodash/differenceBy";
 import "../Styles/DashBoard.css";
 
-function DashBoard() {
-  //state variable named users which holds the users fetched from the db and setUsers which sets the users
-  const [users, setUsers] = useState([]);
-  //sstate variable that holds the users that have been slected and setSelectedUsers sets the selected users
-  const [selectedUsers, setSelectedUsers] = useState([]);
+const columns = [
+  { name: 'First Name and Last Name', selector: row => row.firstnameandlastname, sortable: true },
+  { name: 'Phone Number', selector: row => row.phonenumber, sortable: true },
+  { name: 'Email Address', selector: row => row.emailaddress, sortable: true },
+  { name: 'Event Date', selector: row => row.eventdate, sortable: true },
+  { name: 'Event Time', selector: row => row.eventtime, sortable: true },
+  { name: 'Event Type', selector: row => row.eventtype, sortable: true },
+  { name: 'Event Name', selector: row => row.eventname, sortable: true },
+  { name: 'Clients Hair and Makeup', selector: row => row.clientshairandmakeup, sortable: true },
+  { name: 'Clients Hair Only', selector: row => row.clientshaironly, sortable: true },
+  { name: 'Clients Makeup Only', selector: row => row.clientsmakeuponly, sortable: true },
+  { name: 'Location Address', selector: row => row.locationaddress, sortable: true },
+  { name: 'Additional Notes', selector: row => row.additionalnotes, sortable: true, wrap: true },
+];
 
-  //used to populate the users state var
-  useEffect(() => {
+function DashBoard() {
+  const [users, setUsers] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [toggleCleared, setToggleCleared] = useState(false);
+
+   //used to populate the users state var
+   useEffect(() => {
     const fetchUsers = async () => {
       try {
         //sends a get request to the route we defined in the backend
@@ -25,108 +41,63 @@ function DashBoard() {
     fetchUsers();
   }, []);
 
-  //when a checkbox is checked it calls this fucntion which is passes the userID of the db entry
-  const handleCheckboxChange = (userId) => {
-    setSelectedUsers((prevSelected) => {
-      // Create a new array based on the current state
-      const newSelected = [...prevSelected];
+  // Handle row selection
+  const handleRowSelected = React.useCallback(state => {
+    setSelectedRows(state.selectedRows);
+  }, []);
+  
+   //used to delete db entries based on their ID
+   const handleDeleteSelected = React.useCallback(async () => {
+      if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.firstnameandlastname)}?`)) {
+      try {
+        //sends a delte request to ther server
+        const response = await fetch("http://localhost:3000/users", {
+          //its going to be a delete request
+          method: "DELETE",
+          //of type json
+          headers: {
+            "Content-Type": "application/json",
+          },
+          //the body of the request will be the selected users state variable
+          body: JSON.stringify({ ids: selectedRows.map(row => row.id) }),
+        });
 
-      // Check if the userId is already in the selectedUsers array
-      if (newSelected.includes(userId)) {
-        // If userId is already selected, remove it
-        const index = newSelected.indexOf(userId);
-        if (index > -1) {
-          newSelected.splice(index, 1); // Remove userId from the array
+        if (response.ok) {
+          setUsers(differenceBy(users, selectedRows, 'id'));
+          setToggleCleared(!toggleCleared);
+        } else {
+          console.error("Failed to delete users");
         }
-      } else {
-        // If userId is not selected, add it
-        newSelected.push(userId); // Add userId to the array
+      } catch (error) {
+        console.error("Error deleting users:", error);
       }
-
-      // Return the updated array
-      return newSelected;
-    });
-  };
-
-  //used to delete db entries based on their ID
-  const handleDeleteSelected = async () => {
-    try {
-      //sends a delte request to ther server
-      const response = await fetch("http://localhost:3000/users", {
-        //its going to be a delete request
-        method: "DELETE",
-        //of type json
-        headers: {
-          "Content-Type": "application/json",
-        },
-        //the body of the request will be the selected users state variable
-        body: JSON.stringify({ ids: selectedUsers }),
-      });
-
-      if (response.ok) {
-        setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
-        setSelectedUsers([]); // Clear selected users
-      } else {
-        console.error("Failed to delete users");
-      }
-    } catch (error) {
-      console.error("Error deleting users:", error);
     }
-  };
+  }, [selectedRows, users, toggleCleared]);
+
+  const contextActions = React.useMemo(() => {
+    return (
+      <button 
+        key="delete" 
+        onClick={handleDeleteSelected} 
+        style={{ backgroundColor: 'red', color: 'white', padding: '5px 10px', border: 'none', cursor: 'pointer' }}>
+        Delete Selected
+      </button>
+    );
+  }, [handleDeleteSelected]);
 
   return (
     <div>
-      <h2>Users Dashboard</h2>
-      <button
-        onClick={handleDeleteSelected}
-        disabled={selectedUsers.length === 0}
-      >
-        Delete Selected
-      </button>
-      <table>
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th>First Name and Last Name</th>
-            <th>Phone Number</th>
-            <th>Email Address</th>
-            <th>Event Date</th>
-            <th>Event Time</th>
-            <th>Event Type</th>
-            <th>Event Name</th>
-            <th>Clients Hair and Makeup</th>
-            <th>Clients Hair Only</th>
-            <th>Clients Makeup Only</th>
-            <th>Location Address</th>
-            <th>Additional Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedUsers.includes(user.id)}
-                  onChange={() => handleCheckboxChange(user.id)}
-                />
-              </td>
-              <td>{user.firstnameandlastname}</td>
-              <td>{user.phonenumber}</td>
-              <td>{user.emailaddress}</td>
-              <td>{user.eventdate}</td>
-              <td>{user.eventtime}</td>
-              <td>{user.eventtype}</td>
-              <td>{user.eventname}</td>
-              <td>{user.clientshairandmakeup}</td>
-              <td>{user.clientshaironly}</td>
-              <td>{user.clientsmakeuponly}</td>
-              <td>{user.locationaddress}</td>
-              <td>{user.additionalnotes}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h2>Inquiries Dashboard</h2>
+      <DataTable
+        title="Users"
+        columns={columns}
+        data={users}
+        selectableRows
+        onSelectedRowsChange={handleRowSelected}
+        clearSelectedRows={toggleCleared}
+        contextActions={contextActions}
+        pagination
+      />
     </div>
   );
 }
