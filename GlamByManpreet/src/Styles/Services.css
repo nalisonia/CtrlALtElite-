@@ -1,88 +1,33 @@
 .services-container {
-  max-width: 75%; 
-  margin: 0 auto; 
-  margin-top: .5%; 
-  padding: 20px; 
-  display: flex;
-  flex-direction: row; 
-  justify-content: space-around; 
-  align-items: stretch; /* Stretch all service-boxes to the same height */
-  flex-wrap: wrap; 
-  line-height: 1.6;
-}
+    max-width: 75%; /* Set maximum width for the content */
+    margin:auto; /* Center align content */
+    margin-top: 2.5%;
+    padding: 20px; /* Add some padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid black;
+    line-height: 1.6;
+} 
 
 .header-text {
-  text-align: center; 
-  font-size: 32px; 
-  margin-bottom: 0px; 
-  font-family: 'Italiana', serif; /* Italiana applied */
-  width: 100%;
-}
-
-.service-box {
-  width: 30%; 
-  padding: 20px;
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(8, 7, 7, 0.1); 
-  background-color: white;
-  font-family: 'Italiana', serif; /* Italiana applied */
-  margin: 10px; 
-  display: flex;              
-  flex-direction: column;      
-  justify-content: space-between; 
-  align-items: center;        
-}
-
-.service-box img {
-  width: 100px; 
-  margin-bottom: 20px; 
-}
-
-.service-box h3 {
-  font-size: 22px;
-  margin-bottom: 15px;
-  font-family: 'Italiana', serif; /* Italiana applied */
-  font-weight: bold; 
-}
-
-.service-box p {
-  font-size: 18px;
-  margin-bottom: 30px; 
-  font-family: 'Italiana', serif; /* Italiana applied */
-  flex-grow: 1; /* Make the content grow to push the button down */
-}
-
-.button {
-  display: inline-block;
-  padding: 15px 30px; 
-  background-color: #000000; 
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 18px; 
-  font-family: 'Italiana', serif; /* Italiana applied */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
-  border: none;
-  transition: background-color 0.3s ease; 
-  margin-top: auto; /* Push the button to the bottom */
-  align-self: center; /* Ensure the button is centered horizontally */
-}
-
-.button:hover {
-  background-color: #de85cc; 
-}
-
-/* Mobile styling */
-@media only screen and (max-width: 600px) {
+    display: inline-block;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  }
+  
+  /*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
   .services-container {
-    flex-direction: column; 
-    max-width: 100%; /* Full width for mobile */
-  }
+    max-width: 480px; /* Set maximum width for the content */
+    margin: 0 auto; /* Center align content */
+    padding: 20px; /* Add some padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+} 
 
-  .service-box {
-    width: 100%; /* Full width on mobile */
-    margin-bottom: 20px;
-  }
 }
