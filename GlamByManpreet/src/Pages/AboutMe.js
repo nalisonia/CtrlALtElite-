@@ -1,5 +1,5 @@
 import React from 'react';
-import pic1 from '../assets/images/about_me.png';
+import pic1 from '../assets/images/actual_about_me.png';
 import '../Styles/AboutMe.css'; // Import CSS file for styling 
 
 function AboutMe() {

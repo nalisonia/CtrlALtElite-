@@ -1,8 +1,8 @@
 import React from 'react';
-import model1 from '../assets/images/homepage_image1.png';
-import model2 from '../assets/images/homepage_image2.png';
-import model3 from '../assets/images/homepage_image3.png';
-import model4 from '../assets/images/homepage_image4.png';
+import model1 from '../assets/images/actual_homepage_image2.png';
+import model2 from '../assets/images/actual_homepage_image4.png';
+import model3 from '../assets/images/actual_homepage_image3.png';
+import model4 from '../assets/images/actual_homepage_image1.png';
 
 import '../Styles/Home.css'; // Import CSS file for styling
 import { Button } from '@mui/material';

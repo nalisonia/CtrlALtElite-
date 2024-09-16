@@ -17,7 +17,7 @@
 
 /* Styling for the image */
 .model-image {
-    width: 40%; /* Adjust the image width as needed */
+    width: 65%; /* Adjust the image width as needed */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
 }
