@@ -123,7 +123,7 @@ function DrawerAppBar(props) {
               <Button variant="contained" sx={{color:'black', backgroundColor:'#FDF7F8',marginBottom: '10px',width: '80%','&:hover': { // Hover effect
                 color: 'black', // Change text color on hover
                 border: '2px solid #E8E8E8', // Add border
-                backgroundColor: '#ec98e8', //
+                backgroundColor: '#ec98e8', // 
                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Adding a shadow effect
               }, }} onClick={() => handleSignIn()}>
                 Log In

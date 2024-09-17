@@ -79,15 +79,15 @@ function DashBoard() {
       <button 
         key="delete" 
         onClick={handleDeleteSelected} 
-        style={{ backgroundColor: 'red', color: 'white', padding: '5px 10px', border: 'none', cursor: 'pointer' }}>
+        className="delete-button"> {/* Use CSS class */}
         Delete Selected
       </button>
     );
   }, [handleDeleteSelected]);
 
   return (
-    <div>
-      <h2>Inquiries Dashboard</h2>
+    <div className="dashboard-container"> {/* Use CSS class */}
+      <h2 className="dashboard-header">Inquiry Dashboard</h2> {/* Apply header styles and update text */}
       <DataTable
         title="Users"
         columns={columns}
