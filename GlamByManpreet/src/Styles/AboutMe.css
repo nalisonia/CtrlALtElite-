@@ -22,6 +22,11 @@
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
 }
 
+.model-image1 {
+    width: 73%; /* Adjust the image width as needed */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
+}
 /* Media queries for responsive design */
 @media only screen and (max-width: 600px) {
     .about-container {

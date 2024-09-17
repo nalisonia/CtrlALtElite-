@@ -17,7 +17,7 @@ function AboutMe() {
             -Manpreet Chahal.</p> 
       </div>
       <div className='picture-container'>
-        <img src={pic1} alt="pic1" className="model-image" />
+        <img src={pic1} alt="pic1" className="model-image1" />
       </div>
     </div>
   );
