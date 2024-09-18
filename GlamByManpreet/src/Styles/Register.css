@@ -1,4 +1,4 @@
-/* Added a higher specificity selector on the parent element due to conflict with BookingInquiry.css */
+/* Added a higher specificity selector on the parent elements due to conflict with BookingInquiry.css */
 .register .textField:focus,
 .register input[type="number"]:focus,
 .register input[type="tel"]:focus,

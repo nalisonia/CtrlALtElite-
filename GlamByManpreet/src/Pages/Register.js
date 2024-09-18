@@ -9,7 +9,7 @@ const Register = () => {
   // Hide email form on load
   const [showEmailForm, setShowEmailForm] = useState(false);
 
-  // Click handler to toggle the email signup button
+  // Click handler to toggle the email signup fields
   const handleEmailSignupClick = () => {
     setShowEmailForm(!showEmailForm);
   };
