@@ -1,67 +1,61 @@
-/* Register.css */
-.Register-container {
-    margin: auto; /* Center align content */
-    margin-top: 2.5%;
-    padding: 20px; /* Add some padding */
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
+/* Added a higher specificity selector on the parent element due to conflict with BookingInquiry.css */
+.register .textField:focus,
+.register input[type="number"]:focus,
+.register input[type="tel"]:focus,
+.register input[type="email"]:focus,
+.register input[type="date"]:focus,
+.register input[type="time"]:focus,
+.register select:focus,
+.register textarea:focus {
+  outline: none;
+  border-color: transparent; 
 }
 
-.Register-title {
-    border: 2px solid black;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    width: 90%; /* Set width to 90% of viewport width */
-}
-.Register-form {
-    border: 2px solid black;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    width: 90%; /* Set width to 90% of viewport width */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.register input[type="text"],
+.register input[type="number"],
+.register input[type="tel"],
+.register input[type="email"],
+.register input[type="date"],
+.register input[type="time"],
+.register select,
+.register textarea {
+  border: none;
+  border-radius: 0;
+  margin-bottom: 18px;
 }
 
-.Register-form input {
-    border: 2px solid black;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    width: 80%; /* Set width to 90% of viewport width */
-}
-.Register-form button {
-    width: 100%; /* Make button fill its container */
-    padding: 10px; /* Add padding */
-    background-color: #ec98e8; /* Set background color */
-    color: 'primary'; /* Set text color */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Add border radius for rounded corners */
-    cursor: pointer; /* Change cursor on hover */
-    width: 10vw;
-}
-.checkbox-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 2.5%;
+.signUpButton {
+  border-radius: 0;
 }
 
-/*Put all mobile styling here*/
-@media only screen and (max-width: 600px){
-    .Register-container{
-        width: 95%;
-    }
-
-    .Register-form button{
-        width:auto
-    }
-   
-
+/* Instagram button styling */
+.instagramButton {
+  background-color: #e4405f; /* Instagram brand color */
+  color: white; 
+  border-radius: 0; 
 }
+
+.instagramButton:hover {
+  background-color: #c32f4a; /* Darker shade for hover effect */
+}
+
+/* Google button styling */
+.googleButton {
+  background-color: #4285F4; /* Google blue color */
+  color: white;
+  border-radius: 0; 
+}
+
+.googleButton:hover {
+  background-color: #3367D6; /* Darker shade for hover effect */
+}
+
+.emailButton {
+    background-color: #007bff; /* Example blue color - customize as needed */
+    color: white;
+    border-radius: 0; 
+  }
+  
+  .emailButton:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+  }
