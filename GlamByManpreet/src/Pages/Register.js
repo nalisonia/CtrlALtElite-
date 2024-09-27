@@ -23,12 +23,13 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/register', {
+      const response = await axios.post('http://localhost:3000/register', {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
       });
+      
 
       if (response.status === 201) {
         console.log('Registration successful');

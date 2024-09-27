@@ -1,6 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
+const bcrypt = require('bcrypt')
 
 const app = express();
 const port = 3000;
@@ -13,7 +14,13 @@ const pool = new Pool({
   password: 'password',
   port: 5432,
 });
-
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+  } else {
+    console.log('Database connection successful, current time:', res.rows[0].now);
+  }
+});
 // Use CORS middleware to allow the frontend to communicate with the backend since they are using different ports
 app.use(cors());
 
@@ -103,6 +110,64 @@ app.delete('/users', async (req, res) => {
     res.status(500).send('Error deleting users');
   }
 });
+//Nick testing new account table
+app.post('/register', async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  if (!firstName || !lastName || !email || !password) {
+    return res.status(400).send('All fields are required');
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const query = `
+      INSERT INTO accounts (firstname, lastname, email, password)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id;
+    `;
+    const values = [firstName, lastName, email, hashedPassword];
+
+    const result = await pool.query(query, values);
+
+    res.status(201).json({ message: 'User registered successfully', accountId: result.rows[0].id });
+  } catch (err) {
+    console.error('Error during registration:', err);  // Log the actual error
+    if (err.code === '23505') {
+      return res.status(409).send('Email already registered');
+    }
+    res.status(500).send('Error registering user');
+  }
+});
+
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Fetch user by email
+    const query = 'SELECT * FROM accounts WHERE email = $1';
+    const result = await pool.query(query, [email]);
+
+    if (result.rows.length === 0) {
+      return res.status(401).send('Invalid email or password');
+    }
+
+    const user = result.rows[0];
+
+    // Compare the entered password with the hashed password in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).send('Invalid email or password');
+    }
+
+    // Login successful
+    res.status(200).json({ message: 'Login successful', userId: user.id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error during login');
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {
