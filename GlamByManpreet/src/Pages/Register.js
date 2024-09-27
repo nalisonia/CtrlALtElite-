@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import '../Styles/Register.css';
 import axios from '../config/axiosConfig';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Route
+
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -11,7 +13,7 @@ function Register() {
     password: '',
     agreeTerms: false,
   });
-
+  const navigate = useNavigate(); // Initialize the useNavigate hook
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -33,7 +35,8 @@ function Register() {
 
       if (response.status === 201) {
         console.log('Registration successful');
-        // Redirect or show success message
+        navigate('/');
+     
       }
     } catch (error) {
       if (error.response) {

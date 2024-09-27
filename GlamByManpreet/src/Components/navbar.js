@@ -41,14 +41,14 @@ function DrawerAppBar(props) {
   const navigate = useNavigate(); 
   const [session, setSession] = useState();
 
-  useEffect(() => {
-      if (props?.session) {
-        setSession(props.session);
-      }
-    }, [props.session]);
     const handleSignIn = () => {
       navigate('/LogIn'); 
   }
+  /*const handleSignOut = () => {
+    localStorage.removeItem('user'); // Clear user data from local storage
+    setSession(null); // Update session state
+  } */
+  
   /*async function handleSignIn(){ //Supabase log in
       const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google'
