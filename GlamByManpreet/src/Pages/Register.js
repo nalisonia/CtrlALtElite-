@@ -4,6 +4,7 @@ import '../Styles/Register.css';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Route
 import axios from '../config/axiosConfig';  // Import axios for registration logic
 
 const Register = () => {
@@ -18,7 +19,7 @@ const Register = () => {
     password: '',
     agreeTerms: false,
   });
-
+  const navigate = useNavigate(); // Initialize the useNavigate hook
   // Toggle the email form fields
   const handleEmailSignupClick = () => {
     setShowEmailForm(!showEmailForm);
@@ -46,7 +47,8 @@ const Register = () => {
 
       if (response.status === 201) {
         console.log('Registration successful');
-        // Redirect or show success message
+        navigate('/');
+     
       }
     } catch (error) {
       if (error.response) {

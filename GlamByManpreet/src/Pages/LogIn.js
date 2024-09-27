@@ -28,6 +28,7 @@ function LogIn() {
       if (response.status === 200) {
         console.log('Login successful');
         navigate('/'); // Redirect to the home page after successful login
+        
       } else {
         console.log('Login failed');
       }
