@@ -22,7 +22,7 @@ import '../Styles/App.css'; // Import CSS file for styling
 import '../Styles/Home.css'; // Import CSS file for styling
 import supabase from '../config/supabaseClient';
 import { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 /*
 'xs': Extra small devices (phones) - width less than 600px
 'sm': Small devices (tablets) - width equal to or greater than 600px
@@ -38,7 +38,7 @@ const navItems = ["HOME", 'ABOUT ME', 'SERVICES', 'BOOKING INQUIRY', 'CONTACT ME
 
 function DrawerAppBar(props) {
   const { window } = props;
-
+  const navigate = useNavigate(); 
   const [session, setSession] = useState();
 
   useEffect(() => {
@@ -46,16 +46,18 @@ function DrawerAppBar(props) {
         setSession(props.session);
       }
     }, [props.session]);
-
-  async function handleSignIn(){
+    const handleSignIn = () => {
+      navigate('/LogIn'); 
+  }
+  /*async function handleSignIn(){ //Supabase log in
       const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google'
       })
 
       console.log(data, error);
   }
-
-  async function handleSignOut(){
+*/
+  async function handleSignOut(){ //TO DO: Change to work with new log in/out
       const { error } = await supabase.auth.signOut()
 
       console.log(error);
@@ -64,6 +66,7 @@ function DrawerAppBar(props) {
         setSession(null);
       }
   }
+      
   //variable intialized named mobileopen using usestate. This var will be used if the website is not in desktop mode
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
