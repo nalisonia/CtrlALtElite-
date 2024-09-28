@@ -4,8 +4,7 @@ import '../Styles/Register.css';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Route
-import axios from '../config/axiosConfig';  // Import axios for registration logic
+import { useNavigate } from 'react-router-dom';import axios from '../config/axiosConfig';  // Import axios for registration logic
 
 const Register = () => {
   // State for toggling email form visibility
@@ -19,7 +18,9 @@ const Register = () => {
     password: '',
     agreeTerms: false,
   });
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   // Toggle the email form fields
   const handleEmailSignupClick = () => {
     setShowEmailForm(!showEmailForm);
@@ -37,6 +38,7 @@ const Register = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading state
     try {
       const response = await axios.post('http://localhost:3000/register', {
         firstName: formData.firstName,
@@ -48,7 +50,6 @@ const Register = () => {
       if (response.status === 201) {
         console.log('Registration successful');
         navigate('/');
-     
       }
     } catch (error) {
       if (error.response) {
@@ -56,6 +57,8 @@ const Register = () => {
       } else {
         console.error('Error:', error.message);
       }
+    } finally {
+      setLoading(false); // End loading state
     }
   };
 

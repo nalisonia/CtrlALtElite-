@@ -24,6 +24,9 @@
     margin: 10px;
     text-align: center;
     width: 90%; /* Set width to 90% of viewport width */
+    flex-direction: column;   /* Stack elements vertically */
+    align-items: center;      /* Center elements */
+    gap: 15px;                /* Add space between elements */
 }
 
 .LogIn-form input {
@@ -34,21 +37,45 @@
     width: 50%; /* Set width to 90% of viewport width */
 }
 .LogIn-form button {
+    display: block; /* Ensure buttons are stacked */
     width: 100%; /* Make button fill its container */
     padding: 10px; /* Add padding */
     background-color: #ec98e8; /* Set background color */
-    color: 'primary'; /* Set text color */
+    color: rgb(12, 11, 11); /* Set text color */
     border: none; /* Remove border */
     border-radius: 4px; /* Add border radius for rounded corners */
     cursor: pointer; /* Change cursor on hover */
     width: 30%;
     margin-top: 3vh;
+    font-family: 'Playfair Display', sans-serif;
+
 
 }
-.checkbox-container {
+
+
+.forgot-password {
+    margin-top: 10px;
+}
+
+.remember-me {
+    margin-top: 10px;
+}   
+
+/* Style for the checkbox */
+/* .checkbox-container {
     display: flex;
     align-items: center;
+} */
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center buttons */
+    width: 100%;
 }
+
+
+
 
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
