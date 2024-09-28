@@ -1,9 +1,7 @@
-// Register.js
 import React, { useState } from 'react';
 import '../Styles/Register.css';
 import axios from '../config/axiosConfig';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Route
-
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -13,7 +11,9 @@ function Register() {
     password: '',
     agreeTerms: false,
   });
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -24,6 +24,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading state
     try {
       const response = await axios.post('http://localhost:3000/register', {
         firstName: formData.firstName,
@@ -31,12 +32,10 @@ function Register() {
         email: formData.email,
         password: formData.password,
       });
-      
 
       if (response.status === 201) {
         console.log('Registration successful');
         navigate('/');
-     
       }
     } catch (error) {
       if (error.response) {
@@ -44,6 +43,8 @@ function Register() {
       } else {
         console.error('Error:', error.message);
       }
+    } finally {
+      setLoading(false); // End loading state
     }
   };
 
@@ -70,11 +71,15 @@ function Register() {
             <label htmlFor='password'>Password:*</label>
             <input type='password' id='password' name='password' value={formData.password} onChange={handleChange} required />
           </div>
-          <div className="checkbox-container">
-            <input type='checkbox' id='agreeTerms' name='agreeTerms' checked={formData.agreeTerms} onChange={handleChange} required />
-            <label htmlFor='agreeTerms'>I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</label>
+          <div>
+            <label>
+              <input type='checkbox' name='agreeTerms' checked={formData.agreeTerms} onChange={handleChange} required />
+              I agree to the terms and conditions
+            </label>
           </div>
-          <button type='submit'>Register</button>
+          <button type='submit' disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
         </form>
       </div>
     </div>
