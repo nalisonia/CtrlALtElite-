@@ -15,6 +15,10 @@ import CopyRightPolicy from './Pages/CopyRightPolicy.js';
 import CookiePolicy from './Pages/CookiePolicy.js';
 import DoNotSell from './Pages/DoNotSell.js';
 import DashBoard from './Pages/DashBoard.js';
+import UserView from './Pages/UserView.js';
+import UserFeed from './Pages/UserFeed.js';
+import ProfileEdit from './Pages/ProfileEdit.js';
+import InquiryHistory from './Pages/InquiryHistory.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import {useState, useEffect} from 'react';
 import supabase from './config/supabaseClient.js';
@@ -76,7 +80,10 @@ function App() {
                     <Route path="/cookie_policy" element={<CookiePolicy/>} />
                     <Route path="/do_not_sell" element={<DoNotSell/>} />
                     <Route path="/dashboard" element={<DashBoard/>} />
-
+                    <Route path="/userview" element={<UserView/>} />
+                    <Route path="/userfeed" element={<UserFeed/>} />
+                    <Route path="/profileedit" element={<ProfileEdit/>} />
+                    <Route path="/inquiryhistory" element={<InquiryHistory/>} />
 
 
 

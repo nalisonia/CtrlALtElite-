@@ -1,0 +1,66 @@
+.userview-content-container {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+}
+
+.welcome-text{
+    text-align: center; 
+    font-size: 32px; 
+    margin-bottom: 0px; 
+    font-family: 'Italiana', serif; /* Italiana applied */
+    width: 92%;
+    display: inline-block;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-box{
+        width: 30%; 
+        height: 400px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(8, 7, 7, 0.1); 
+        background-color: white;
+        margin: 10px; 
+        display: flex;              
+        flex-direction: column;      
+        align-items: center;        
+      }
+
+
+/*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
+
+    .userview-container{
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .userview-content-container {
+        width: 80vw;
+        margin-top: 1.5%;
+        margin-bottom: 1.5%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;  /* Ensure elements inside stack vertically */
+        align-items: center;
+    }
+    
+    .content-box{
+        width: 110%; /* Full width on mobile */
+        margin-bottom: 20px;
+    }
+
+}
