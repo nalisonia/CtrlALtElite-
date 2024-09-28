@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component"; 
 import differenceBy from "lodash/differenceBy";
+import Modal from 'react-modal';
 import "../Styles/DashBoard.css";
 
 const columns = [
-  { name: 'First Name and Last Name', selector: row => row.firstnameandlastname, sortable: true },
-  { name: 'Phone Number', selector: row => row.phonenumber, sortable: true },
-  { name: 'Email Address', selector: row => row.emailaddress, sortable: true },
+  { name: 'Name', selector: row => row.firstnameandlastname, sortable: true },
+  { name: 'Phone#', selector: row => row.phonenumber, sortable: true },
+  //{ name: 'Email Address', selector: row => row.emailaddress, sortable: true },
   { name: 'Event Date', selector: row => row.eventdate, sortable: true },
-  { name: 'Event Time', selector: row => row.eventtime, sortable: true },
+  //{ name: 'Event Time', selector: row => row.eventtime, sortable: true },
   { name: 'Event Type', selector: row => row.eventtype, sortable: true },
-  { name: 'Event Name', selector: row => row.eventname, sortable: true },
-  { name: 'Clients Hair and Makeup', selector: row => row.clientshairandmakeup, sortable: true },
-  { name: 'Clients Hair Only', selector: row => row.clientshaironly, sortable: true },
-  { name: 'Clients Makeup Only', selector: row => row.clientsmakeuponly, sortable: true },
-  { name: 'Location Address', selector: row => row.locationaddress, sortable: true },
-  { name: 'Additional Notes', selector: row => row.additionalnotes, sortable: true, wrap: true },
+  //{ name: 'Event Name', selector: row => row.eventname, sortable: true },
+  //{ name: 'Clients Hair and Makeup', selector: row => row.clientshairandmakeup, sortable: true },
+  //{ name: 'Clients Hair Only', selector: row => row.clientshaironly, sortable: true },
+  //{ name: 'Clients Makeup Only', selector: row => row.clientsmakeuponly, sortable: true },
+  //{ name: 'Location Address', selector: row => row.locationaddress, sortable: true },
+  //{ name: 'Additional Notes', selector: row => row.additionalnotes, sortable: true, wrap: true },
 ];
+
+Modal.setAppElement('#root');
 
 function DashBoard() {
   const [users, setUsers] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [toggleCleared, setToggleCleared] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
    //used to populate the users state var
    useEffect(() => {
@@ -45,6 +50,17 @@ function DashBoard() {
   const handleRowSelected = React.useCallback(state => {
     setSelectedRows(state.selectedRows);
   }, []);
+
+  const handleRowClicked = (row) => {
+    setSelectedUser(row); // Set the clicked row's data to the state
+    setIsModalOpen(true); // Open the modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedUser(null); // Clear the selected user on modal close
+  };
+
   
    //used to delete db entries based on their ID
    const handleDeleteSelected = React.useCallback(async () => {
@@ -79,15 +95,15 @@ function DashBoard() {
       <button 
         key="delete" 
         onClick={handleDeleteSelected} 
-        className="delete-button"> {/* Use CSS class */}
+        className="delete-button"> 
         Delete Selected
       </button>
     );
   }, [handleDeleteSelected]);
 
   return (
-    <div className="dashboard-container"> {/* Use CSS class */}
-      <h2 className="dashboard-header">Inquiry Dashboard</h2> {/* Apply header styles and update text */}
+    <div className="dashboard-container">
+      <h2 className="dashboard-header">Inquiry Dashboard</h2>
       <DataTable
         title="Users"
         columns={columns}
@@ -95,9 +111,39 @@ function DashBoard() {
         selectableRows
         onSelectedRowsChange={handleRowSelected}
         clearSelectedRows={toggleCleared}
+        onRowClicked={handleRowClicked} 
         contextActions={contextActions}
         pagination
       />
+
+      {/* This modal shows extended customer inquiry information */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="User Information"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        {selectedUser && (
+          <div>
+            <h2>{selectedUser.firstnameandlastname}'s Info</h2>
+            <p><strong>Phone Number:</strong> {selectedUser.phonenumber}</p>
+            <p><strong>Email Address:</strong> {selectedUser.emailaddress}</p>
+            <p><strong>Event Date:</strong> {selectedUser.eventdate}</p>
+            <p><strong>Event Type:</strong> {selectedUser.eventtype}</p>
+            <p><strong>Event Time:</strong> {selectedUser.eventtime}</p>
+            <p><strong>Event Name:</strong> {selectedUser.eventname}</p>
+            <p><strong>Clients Hair and Makeup:</strong> {selectedUser.clientshairandmakeup}</p>
+            <p><strong>Clients Hair Only:</strong> {selectedUser.clientshaironly}</p>
+            <p><strong>Clients Makeup Only:</strong> {selectedUser.clientsmakeuponly}</p>
+            <p><strong>Location Address:</strong> {selectedUser.locationaddress}</p>
+            <p><strong>Additional Notes:</strong> {selectedUser.additionalnotes}</p>
+            <button onClick={closeModal} className="modal-close-button">
+              Close
+            </button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

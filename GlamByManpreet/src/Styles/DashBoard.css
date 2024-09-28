@@ -90,6 +90,60 @@
   font-family: 'Roboto', sans-serif; /* Modern font family */
 }
 
+/*Modal styling*/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; 
+}
+
+/* Modal content styling */
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1200px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  position: relative;
+}
+
+/* Modal close button styling */
+.modal-close-button {
+  background-color: #de85cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.modal-close-button:hover {
+  background-color: #f54ad3;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.modal p {
+  margin: 10px 0;
+}
+
+
+
 
 /* Media queries for responsive design */
 @media (max-width: 768px) {
@@ -129,5 +183,15 @@
   
   .react-data-table-component .rdt_TableHeader {
     border-bottom: 2px solid #007bff;
+  }
+
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    position: relative;
   }
   
