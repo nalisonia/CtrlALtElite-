@@ -1,6 +1,12 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
+const twilio = require('twilio'); 
+
+
+const accountSid = 'ACb8d0a7506b082cc14d5a44626529e90f'; 
+const authToken = '269657f1d2e1585fe7c8632bfa4ee18d'; 
+const client = new twilio(accountSid, authToken);
 
 const app = express();
 const port = 3000;
@@ -19,6 +25,18 @@ app.use(cors());
 
 // Middleware to parse JSON
 app.use(express.json());
+
+// Function to send SMS
+function sendSMS(phoneNumber, message) {
+  client.messages.create({
+    body: message,
+    from: '+19162327485',
+    to: phoneNumber
+  })
+  .then(message => console.log(`SMS sent: ${message.sid}`))
+  .catch(err => console.error(`Error sending SMS: ${err}`));
+}
+
 
 // Route that listens for get requests from the front end
 app.get('/users', async (req, res) => {
@@ -74,12 +92,59 @@ app.post('/submit', async (req, res) => {
 
     //inserts the data into the dbs
     await pool.query(query, values);
+
+    sendSMS(phoneNumber, 'Your request has been submitted successfully!');
+
     res.status(201).send('Data inserted successfully');
   } catch (err) {
     console.error(err);
     res.status(500).send('Error inserting data');
   }
 });
+
+app.post('/submit', async (req, res) => {
+  const firstNameAndLastName = req.body.firstNameAndLastName;
+  const phoneNumber = req.body.phoneNumber;
+  const emailAddress = req.body.emailAddress;
+  const eventDate = req.body.eventDate;
+  const eventTime = req.body.eventTime;
+  const eventType = req.body.eventType;
+  const eventName = req.body.eventName;
+
+  // If the fields are empty or not provided, set them to null instead of empty strings
+  const clientsHairAndMakeup = req.body.clientsHairAndMakeup || null;
+  const clientsHairOnly = req.body.clientsHairOnly || null;
+  const clientsMakeupOnly = req.body.clientsMakeupOnly || null;
+
+  const locationAddress = req.body.locationAddress;
+  const additionalNotes = req.body.additionalNotes;
+
+  try {
+      const query = `
+          INSERT INTO users (
+            firstnameandlastname, phonenumber, emailaddress, eventdate, eventtime, eventtype, eventname,
+            clientshairandmakeup, clientshaironly, clientsmakeuponly, locationaddress, additionalnotes
+          ) VALUES (
+            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+          )
+      `;
+      
+      const values = [
+          firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName,
+          clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes
+      ];
+
+      await pool.query(query, values);
+      
+      // Send SMS notification after successful submission
+      sendSMS(phoneNumber, 'Your request has been submitted successfully!');
+      res.status(201).send('Data inserted successfully');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Error inserting data');
+  }
+});
+
 
 // Route to delete users
 app.delete('/users', async (req, res) => {

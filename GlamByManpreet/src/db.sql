@@ -60,6 +60,11 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 -- Set default for id column
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
+-- Add columns for notification preferences
+ALTER TABLE public.users ADD COLUMN notify_via_sms boolean DEFAULT true;
+ALTER TABLE public.users ADD COLUMN notify_via_email boolean DEFAULT true;
+
+
 -- Data for the table users
 COPY public.users (id, firstnameandlastname, phonenumber, emailaddress, eventtime, eventtype, eventname, clientshairandmakeup, clientshaironly, clientsmakeuponly, locationaddress, additionalnotes, eventdate) FROM stdin;
 \.
