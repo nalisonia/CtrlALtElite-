@@ -30,7 +30,7 @@ function LogIn() {
       return;
     }
     try {
-      const response = await axios.post('/login', {
+      const response = await axios.post('http://localhost:3000/login', {
         email: formData.email,
         password: formData.password,
       });
