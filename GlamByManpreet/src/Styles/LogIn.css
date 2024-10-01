@@ -37,12 +37,13 @@
     width: 100%; /* Make button fill its container */
     padding: 10px; /* Add padding */
     background-color: #ec98e8; /* Set background color */
-    color: 'primary'; /* Set text color */
+    color: black; /* Set text color */
     border: none; /* Remove border */
     border-radius: 4px; /* Add border radius for rounded corners */
     cursor: pointer; /* Change cursor on hover */
     width: 30%;
     margin-top: 3vh;
+    
 
 }
 .checkbox-container {
