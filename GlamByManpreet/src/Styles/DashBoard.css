@@ -237,3 +237,9 @@ h2 {
   outline: 2px solid #ddd; /* Focus outline for accessibility */
   outline-offset: 2px;
 }
+
+/* Pagination controls */
+.center-pagination .MuiDataGrid-footerContainer {
+  display: flex;
+  justify-content: center;
+}

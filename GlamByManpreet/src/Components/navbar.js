@@ -147,7 +147,7 @@ function DrawerAppBar(props) {
   return ( 
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative'}}> {/* Centering the content */}
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: 'white', width: '100%', maxWidth: '100vw', position: 'relative' }}> {/* Ensuring full width */}
+      <AppBar component="nav" sx={{ backgroundColor: 'white', width: '100%', maxWidth: '100vw', position: 'relative', zIndex: (theme) => theme.zIndex.drawer + 1 }}> {/* Ensuring full width */}
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', textAlign: 'center', width: '100%' }}>
           <div></div> {/* Empty div for spacing */}
 
