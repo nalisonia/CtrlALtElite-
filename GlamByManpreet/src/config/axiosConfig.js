@@ -1,20 +1,37 @@
-// src/config/axiosConfig.js
+// // src/config/axiosConfig.js
+// import axios from 'axios';
+
+// const axiosInstance = axios.create({
+//     baseURL: 'http://localhost:3000', // Update this to your backend API URL
+//     timeout: 1000, // Timeout in milliseconds
+//     headers: {
+//         'Content-Type': 'application/json', // Set the default content type
+//     },
+// });
+
+// export default axiosInstance;
+
 import axios from 'axios';
 
-// Create an instance of axios
+// Determine baseURL from environment variables
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3000'; // Use environment variable or default to localhost
+
 const axiosInstance = axios.create({
-    baseURL: 'https://your-api-url.com', // Replace with your actual API base URL
-    timeout: 10000, // Optional: Set a timeout for requests
+    baseURL: baseURL, // Set base URL from environment
+    timeout: 5000, // Set a more generous timeout in milliseconds
     headers: {
-        'Content-Type': 'application/json',
-        // You can add other headers here, e.g., authorization headers
+        'Content-Type': 'application/json', // Set the default content type
     },
 });
 
-// Optional: Add interceptors for request/response handling
+// Add a request interceptor to include auth tokens or other headers
 axiosInstance.interceptors.request.use(
     (config) => {
-        // You can add auth token or other configurations here
+        // Example: Add an Authorization token if it exists in localStorage or state
+        const token = localStorage.getItem('authToken'); // Adjust based on your auth logic
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
         return config;
     },
     (error) => {
@@ -22,13 +39,19 @@ axiosInstance.interceptors.request.use(
     }
 );
 
+// Add a response interceptor to handle responses globally
 axiosInstance.interceptors.response.use(
     (response) => {
+        // Handle successful responses globally if needed
         return response;
     },
     (error) => {
-        // Handle errors globally
-        return Promise.reject(error);
+        if (error.response && error.response.status === 401) {
+            // Example: Handle unauthorized errors globally
+            console.error('Unauthorized access - possibly redirect to login');
+            // Optionally, you can redirect to login or show a message here
+        }
+        return Promise.reject(error); // Forward the error to be handled locally in the component
     }
 );
 
