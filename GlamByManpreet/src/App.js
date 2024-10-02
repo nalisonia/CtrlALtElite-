@@ -43,10 +43,25 @@ function App() {
 
     useEffect(() => {
         // Get the current session
+        // Get the current session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             console.log(session);
+            setSession(session);
+            console.log(session);
         });
+
+        // Subscribe to auth state changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session);
+        });
+
+        // Cleanup subscription on unmount
+        return () => {
+            if (subscription) {
+                subscription.unsubscribe();
+            }
+        };
 
         // Subscribe to auth state changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -66,6 +81,7 @@ function App() {
             <div className="App">
                 <NavBar session={session}/>
                 <Routes>
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about_me" element={<AboutMe />} /> 
                     <Route path="/services" element={<Services />} /> 
