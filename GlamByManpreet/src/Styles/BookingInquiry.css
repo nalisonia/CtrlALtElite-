@@ -37,21 +37,21 @@
   }
   
     /* Input field enhancements */
-  input[type="text"], input[type="number"], input[type="tel"], input[type="email"], input[type="date"], input[type="time"], select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-   /* background-color: #f9e4f7; */
-    color: #555;
-  }
-  
-    /* Slight focus styling */
-  input[type="text"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: black;
-  }
+    .booking-inquiry input[type="text"], .booking-inquiry input[type="number"], .booking-inquiry input[type="tel"], .booking-inquiry input[type="email"], .booking-inquiry input[type="date"], .booking-inquiry input[type="time"], .booking-inquiry select, .booking-inquiry textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+     /* background-color: #f9e4f7; */
+      color: #555;
+    }
+    
+      /* Slight focus styling */
+      .booking-inquiry input[type="text"]:focus, .booking-inquiry input[type="number"]:focus, .booking-inquiry input[type="tel"]:focus, .booking-inquiry input[type="email"]:focus, .booking-inquiry input[type="date"]:focus, .booking-inquiry input[type="time"]:focus, .booking-inquiry select:focus, .booking-inquiry textarea:focus {
+      outline: none;
+      border-color: black;
+    }
   
   textarea {
     height: 150px; /* Adjust based on desired height */

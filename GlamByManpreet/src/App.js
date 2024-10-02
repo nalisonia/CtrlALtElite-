@@ -22,6 +22,7 @@ import InquiryHistory from './Pages/InquiryHistory.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import {useState, useEffect} from 'react';
 import supabase from './config/supabaseClient.js';
+import AdminDashboard from './Pages/AdminDashboard.js';
  
 
 //app.js serves as the main entry point and central configuration file for the application. 
@@ -84,7 +85,7 @@ function App() {
                     <Route path="/userfeed" element={<UserFeed/>} />
                     <Route path="/profileedit" element={<ProfileEdit/>} />
                     <Route path="/inquiryhistory" element={<InquiryHistory/>} />
-
+                    <Route path="/admin" element={<AdminDashboard/>} />
 
 
                     

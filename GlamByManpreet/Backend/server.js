@@ -28,7 +28,10 @@ const pool = new Pool({
 });
 
 // Use CORS middleware to allow the frontend to communicate with the backend since they are using different ports
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3001' 
+}));
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -176,6 +179,297 @@ app.delete('/users', async (req, res) => {
     res.status(500).send('Error deleting users');
   }
 });
+
+// ****************************************************************************
+// Route - Add clients into the Clients table after Booking Inquiry submission
+// ****************************************************************************
+app.post('/addClient', async (req, res) => {
+  const { name, email, phone } = req.body;
+
+  try {
+    const query = `
+      INSERT INTO clients (name, email, phone)
+      VALUES ($1, $2, $3)
+      RETURNING id;
+    `;
+
+    const values = [name, email, phone];
+
+    const result = await pool.query(query, values);
+    const clientId = result.rows[0].id;
+
+    res.status(201).json({ clientId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error inserting client data');
+  }
+});
+
+// ********************************************
+// Route - Read clients from the Clients Table
+// ********************************************
+app.get('/clients', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM clients');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving clients');
+  }
+});
+
+// *************************************************
+// Route - Edit/Update clients in the Clients Table
+// *************************************************
+app.put('/clients/:id', async (req, res) => {
+  const clientId = req.params.id;
+  const { name, email, phone } = req.body;
+
+  try {
+    const query = `
+      UPDATE clients 
+      SET name = $1, email = $2, phone = $3 
+      WHERE id = $4;
+    `;
+    const values = [name, email, phone, clientId];
+    await pool.query(query, values);
+    res.status(200).send('Client updated successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error updating client');
+  }
+});
+
+// ***********************************************
+// Route - Delete clients from the Clients Table
+// ***********************************************
+app.delete('/clients/:id', async (req, res) => {
+  const clientId = req.params.id;
+
+  try {
+    const query = 'DELETE FROM clients WHERE id = $1';
+    await pool.query(query, [clientId]);
+    res.status(200).send('Client deleted successfully');
+  } catch (err) {
+    console.error('Error deleting client:', err);
+    res.status(500).send('Error deleting client');
+  }
+});
+
+// **********************************************************************************
+// Route - Add booking info into the Bookings table after Booking Inquiry submission
+// **********************************************************************************
+app.post('/addBooking', async (req, res) => {
+  const { 
+    clientId, 
+    eventDate, 
+    eventTime, 
+    eventType, 
+    eventName, 
+    clientsHairAndMakeup, 
+    clientsHairOnly, 
+    clientsMakeupOnly, 
+    locationAddress, 
+    additionalNotes 
+  } = req.body;
+
+  try {
+    const query = `
+      INSERT INTO bookings (
+        client_id, event_date, event_time, event_type, event_name, 
+        hair_and_makeup, hair_only, makeup_only, location, additional_notes
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
+      )
+      RETURNING id;
+    `;
+
+    const values = [
+      clientId, eventDate, eventTime, eventType, eventName, 
+      clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes
+    ];
+
+    const result = await pool.query(query, values);
+    const bookingId = result.rows[0].id;
+
+    res.status(201).json({ bookingId });
+  } catch (err) {
+    console.error("Error inserting booking data: ", err);
+    res.status(500).send('Error inserting booking data');
+  }
+});
+
+// **************************************************
+// Route - Read booking info from the Bookings Table
+// **************************************************
+app.get('/bookings', async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        b.id, 
+        b.client_id,
+        c.name AS client_name, 
+        TO_CHAR(b.event_date, 'MM/DD/YYYY') AS event_date, 
+        b.event_time, 
+        b.event_type, 
+        b.event_name, 
+        b.hair_and_makeup, 
+        b.hair_only, 
+        b.makeup_only, 
+        b.location, 
+        b.additional_notes
+      FROM 
+        bookings b
+      JOIN 
+        clients c ON b.client_id = c.id;
+    `);
+    res.json(result.rows);
+    console.log(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving bookings');
+  }
+});
+
+// ***************************************************
+// Route - Edit/Update bookings in the Bookings Table
+// ***************************************************
+app.put('/bookings/:id', async (req, res) => {
+  const bookingId = req.params.id;
+  const {
+    clientId,
+    eventDate,
+    eventTime,
+    eventType,
+    eventName,
+    clientsHairAndMakeup,
+    clientsHairOnly,
+    clientsMakeupOnly,
+    locationAddress,
+    additionalNotes,
+  } = req.body;
+
+  try {
+    const query = `
+      UPDATE bookings
+      SET 
+        client_id = $1,
+        event_date = $2,
+        event_time = $3,
+        event_type = $4,
+        event_name = $5,
+        hair_and_makeup = $6,
+        hair_only = $7,
+        makeup_only = $8,
+        location = $9,
+        additional_notes = $10
+      WHERE id = $11;
+    `;
+
+    const values = [
+      clientId,
+      eventDate,
+      eventTime,
+      eventType,
+      eventName,
+      clientsHairAndMakeup,
+      clientsHairOnly,
+      clientsMakeupOnly,
+      locationAddress,
+      additionalNotes,
+      bookingId,
+    ];
+
+    await pool.query(query, values);
+    res.status(200).send('Booking updated successfully');
+  } catch (err) {
+    console.error('Error updating booking:', err);
+    res.status(500).send('Error updating booking');
+  }
+});
+
+// *************************************************
+// Route - Delete bookings from the Bookings Table
+// *************************************************
+app.delete('/bookings/:id', async (req, res) => {
+  const bookingId = req.params.id;
+
+  try {
+    const query = 'DELETE FROM bookings WHERE id = $1';
+    await pool.query(query, [bookingId]);
+    res.status(200).send('Booking deleted successfully');
+  } catch (err) {
+    console.error('Error deleting booking:', err);
+    res.status(500).send('Error deleting booking');
+  }
+});
+
+// **********************************
+// Route - Get upcoming appointments 
+// **********************************
+app.get('/upcomingAppointments', async (req, res) => {
+  try {
+    const today = new Date();
+    const nextFewDays = new Date();
+    nextFewDays.setDate(today.getDate() + 3); // Fetch appointments for the next 3 days (you can adjust this)
+
+    const query = `
+      SELECT 
+        b.id, 
+        b.client_id,
+        c.name AS client_name, 
+        TO_CHAR(b.event_date, 'MM/DD/YYYY') AS event_date, 
+        b.event_time, 
+        b.event_type, 
+        b.event_name
+      FROM 
+        bookings b
+      JOIN 
+        clients c ON b.client_id = c.id
+      WHERE 
+        b.event_date >= $1 AND b.event_date <= $2;
+    `;
+
+    const values = [format(today, 'yyyy-MM-dd'), format(nextFewDays, 'yyyy-MM-dd')];
+
+    const result = await pool.query(query, values);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching upcoming appointments:', err);
+    res.status(500).send('Error retrieving upcoming appointments');
+  }
+});
+
+// ********************************
+// Route - Insert feed submissions 
+// ********************************
+
+app.post('/feed', async (req, res) => {
+  const { content } = req.body;
+
+  try {
+    const query = 'INSERT INTO feed (content) VALUES ($1)';
+    await pool.query(query, [content]);
+    res.status(201).send('Feed item added successfully');
+  } catch (error) {
+    console.error('Error adding feed item:', error);
+    res.status(500).send('Error adding feed item');
+  }
+});
+
+// *****************************
+// Route - Get feed submissions 
+// *****************************
+app.get('/feed', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM feed ORDER BY created_at DESC'); // Assuming you have a created_at column
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching feed data:', error);
+    res.status(500).send('Error fetching feed data');
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {
