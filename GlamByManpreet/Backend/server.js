@@ -47,13 +47,18 @@ const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
+  password: process.env.DB_PASS, 
   port: process.env.DB_PORT,
 });
-
+//Test to see if .env loads(remove later)
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PASS:', process.env.DB_PASS);
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_NAME:', process.env.DB_NAME);
+console.log('DB_PORT:', process.env.DB_PORT);
 // CORS middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000', 
+  origin: process.env.FRONTEND_URL || 'http://localhost:3001', 
   credentials: true,
 }));
 app.use(express.json());
