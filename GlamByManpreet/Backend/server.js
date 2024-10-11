@@ -1,4 +1,6 @@
 // server.js
+//gets and loads the env variables 
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');

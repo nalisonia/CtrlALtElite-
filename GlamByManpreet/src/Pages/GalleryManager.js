@@ -6,6 +6,7 @@ import { Dialog, DialogActions, DialogContent, Button } from '@mui/material'; //
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import EditIcon from '@mui/icons-material/Edit'; // Import the Edit icon
 
+
 // Function to get the cropped image using pixel coordinates
 const getCroppedImg = (imageSrc, pixelCrop) => {
   const image = new Image();
@@ -53,10 +54,9 @@ function GalleryManager() {
   const fileInputRef = React.createRef(); // Reference for file input
 
   AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: 'us-east-2',
-    
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    region: process.env.REACT_APP_AWS_REGION,
   });
   const s3 = new AWS.S3({
     params: { Bucket: 'manpreetgallery' },
@@ -84,13 +84,13 @@ function GalleryManager() {
   // Function that triggers when an image is selected for upload
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    if (!selectedFile) return; // End if no file is selected
-    setFile(selectedFile); // Save the selected file
+    if (!selectedFile) return; 
+    setFile(selectedFile); 
 
     const reader = new FileReader();
     reader.onload = () => {
-      setImageSrc(reader.result); // Save the image source
-      setOpen(true); // Open the image cropper dialog
+      setImageSrc(reader.result); 
+      setOpen(true); 
     };
     reader.readAsDataURL(selectedFile);
   };
@@ -102,8 +102,7 @@ function GalleryManager() {
 
   // Function to upload the cropped image to S3
   const handleUpload = async () => {
-    if (!file) return alert('Please choose a file to upload!'); // Show an alert if no file is selected
-
+    if (!file) return alert('Please choose a file to upload!'); 
     try {
       // Get the cropped image and convert it to a blob
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
@@ -144,7 +143,7 @@ function GalleryManager() {
 
   // Function to delete an image from S3
   const handleDelete = (signedUrl) => {
-    const fileKey = decodeURIComponent(signedUrl.split('?')[0].split('/').pop()); // Extract file key from the signed URL
+    const fileKey = decodeURIComponent(signedUrl.split('?')[0].split('/').pop()); 
     const params = { Bucket: 'manpreetgallery', Key: fileKey };
 
     // Attempt to delete the object
@@ -241,9 +240,6 @@ function GalleryManager() {
     </Button>
   </div>
 </div>
-
-
-      
       <div className="gallery">
         {images.length > 0 ? (
           images.map((url, index) => (

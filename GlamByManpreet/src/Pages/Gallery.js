@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import AWS from 'aws-sdk';
 import '../Styles/Gallery.css'; // Import CSS file for styling
 
+// Configure AWS with environment variables
 AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: 'us-east-2',
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  region: process.env.REACT_APP_AWS_REGION,
 });
 const s3 = new AWS.S3();
-const bucketName = 'manpreetgallery'; // Replace with your bucket name
+const bucketName = 'manpreetgallery';
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -25,10 +26,12 @@ function Gallery() {
         const imageUrls = data.Contents.map((item) => {
           return `https://${bucketName}.s3.${AWS.config.region}.amazonaws.com/${item.Key}`;
         });
+        console.log(imageUrls);  // Log image URLs
         setImages(imageUrls);
       } catch (err) {
         console.error('Error fetching images from S3:', err);
       }
+      
     };
 
     fetchImages();
