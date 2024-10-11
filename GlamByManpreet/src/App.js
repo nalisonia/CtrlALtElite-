@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import React from 'react';
+//import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import supabase from './config/supabaseClient.js';
 import NavBar from './Components/navbar.js';
@@ -66,17 +66,6 @@ function App() {
             }
         };
 
-        // Subscribe to auth state changes
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
-        });
-
-        // Cleanup subscription on unmount
-        return () => {
-            if (subscription) {
-                subscription.unsubscribe();
-            }
-        };
     }, []);
 
     return (

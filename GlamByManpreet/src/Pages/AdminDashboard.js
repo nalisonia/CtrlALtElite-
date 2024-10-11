@@ -8,6 +8,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import Bookings from './Bookings'; // Import the Bookings component
 import Clients from './Clients'; // Import the Clients component
 import Feed from './Feed'; // Import the Feed component
+import GalleryManager from './GalleryManager';
 import { Card, CardContent, CardHeader, Avatar, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
@@ -28,8 +29,7 @@ function AdminDashboard() {
       const response = await axios.get('http://localhost:3000/feed');
       setFeedData(response.data);
     } catch (error) {
-      console.error('Error fetching feed data:', error);
-    }
+      console.error('Error fetching feed data:', error.response ? error.response.data : error.message);    }
   };
 
   fetchFeedData();
@@ -52,7 +52,7 @@ function AdminDashboard() {
       >
         <Toolbar />
         <List sx={{mt: 14}}>
-          {['Overview', 'Bookings', 'Clients', 'Store', 'Feed' ].map((text, index) => (
+          {['Overview', 'Bookings', 'Clients', 'Store', 'Feed','Gallery Manager', ].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton selected={selectedItem === text} onClick={() => handleListItemClick(text)}> 
                 <ListItemIcon>
@@ -106,6 +106,10 @@ function AdminDashboard() {
         )}
         {selectedItem === 'Bookings' && <Bookings />} 
         {selectedItem === 'Clients' && <Clients />} 
+        {selectedItem === 'Gallery Manager' && <GalleryManager />}  
+
+        
+
 
       </Box>
     </Box>
