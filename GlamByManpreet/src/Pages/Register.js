@@ -49,7 +49,7 @@ const Register = () => {
 
       if (response.status === 201) {
         console.log('Registration successful');
-        navigate('/');
+        navigate('/userview');
       }
     } catch (error) {
       if (error.response) {

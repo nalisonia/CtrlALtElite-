@@ -36,7 +36,7 @@ function LogIn() {
       });
       if (response.status === 200) {
         console.log('Login successful');
-        navigate('/'); // Redirect to the home page after successful login
+        navigate('/userview'); // Redirect to the userview page after successful login
       } else {
         setError('Login failed. Please check your credentials.');
       }
