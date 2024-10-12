@@ -42,7 +42,7 @@ function LogIn() {
       }
     } catch (error) {
       console.error('Login failed:', error.response ? error.response.data : error.message);
-      setError('Login failed. Please try again.');
+      setError('Login failed. Please try again.\n Please Note: Case Sensitive');
     }
   };
   
