@@ -1,0 +1,118 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas Neue+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+.booking-inquiry {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9e4f7;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #00050b;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #242323;
+    font-family: 'Playfair Display', sans-serif;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    font-family: 'Playfair Display', sans-serif;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+    /* Input field enhancements */
+    .booking-inquiry input[type="text"], .booking-inquiry input[type="number"], .booking-inquiry input[type="tel"], .booking-inquiry input[type="email"], .booking-inquiry input[type="date"], .booking-inquiry input[type="time"], .booking-inquiry select, .booking-inquiry textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+     /* background-color: #f9e4f7; */
+      color: #555;
+    }
+    
+      /* Slight focus styling */
+      .booking-inquiry input[type="text"]:focus, .booking-inquiry input[type="number"]:focus, .booking-inquiry input[type="tel"]:focus, .booking-inquiry input[type="email"]:focus, .booking-inquiry input[type="date"]:focus, .booking-inquiry input[type="time"]:focus, .booking-inquiry select:focus, .booking-inquiry textarea:focus {
+      outline: none;
+      border-color: black;
+    }
+  
+  textarea {
+    height: 150px; /* Adjust based on desired height */
+    margin-bottom: 20px; /* Adds space below the textarea */
+    font-size: 16px; /* Adjust font size as needed */
+    font-family: 'Playfair Display', sans-serif;
+  }
+  
+  button[type="submit"] {
+    background-color: #ffc2f9;
+    color: #0e0101;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; 
+    font-family: 'Playfair Display', sans-serif;
+    
+    /*  space above button
+}
+
+button[type="submit"]:hover {
+    background-color: #00050b;
+    color: #fff;
+}
+
+.booking-form select,
+.booking-form input[type="text"],
+.booking-form input[type="number"] {
+    width: 100%;  /* Takes the full width of the .form-group container */
+    width: 100%;
+    padding: 10px;
+   
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9e4f7; 
+    color: #555;
+}
+  
+  .response-time {
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', sans-serif;
+  }
+
+  /* Required field asterisk */
+  .required {
+    color: red;
+    font-size: 1.2em;
+    vertical-align: top;
+    margin-left: 2px;
+  }
+
+  /*Put all mobile styling here*/
+  @media only screen and (max-width: 600px){
+    .booking-inquiry{
+      max-width: 90%;
+    }
+  }

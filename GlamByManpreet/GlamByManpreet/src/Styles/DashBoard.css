@@ -1,0 +1,245 @@
+/* DashBoard.css */
+
+/* Style for the container */
+.dashboard-container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Center align the container */
+    max-width: 1200px; /* Limit maximum width */
+  }
+  
+  
+  /* Style for the DataTable */
+  .react-data-table-component {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #ddd; /* Gray border */
+  }
+  
+  /* Button style */
+  .delete-button {
+    background-color: #de85cc; /* Pink color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-weight: bold;  /* Bold text */
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #442d36; /* Darker pink on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .delete-button:focus {
+    outline: 2px solid #ddcadd; /* Focus outline for accessibility */
+    outline-offset: 2px;
+  }
+  
+  /* Header style */
+  .dashboard-header {
+    font-size: 28px; /* Increase font size */
+    font-weight: 700; /* Bold text */
+    color: #333; /* Darker color for text */
+    text-transform: uppercase; /* Uppercase text */
+    margin-bottom: 20px; /* Spacing below header */
+    text-align: center; /* Center align */
+    background-color: #f2f2f2; /* Light grey background */
+    border-bottom: 2px solid #ddd; /* Bottom border */
+    padding: 10px; /* Padding around the text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  }
+
+  /* Enhance DataTable row styling */
+.react-data-table-component .rdt_TableRow:nth-child(even) {
+    background-color: #f4f4f4; /* Light grey for even rows */
+  }
+  
+  .react-data-table-component .rdt_TableRow:hover {
+    background-color: #e0e0e0; /* Slightly darker grey for hover effect */
+  }
+  
+  /* Style table headers */
+  .react-data-table-component .rdt_TableHeader {
+    background-color: #e2a0e8; /* Bootstrap blue or any preferred color */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Adjust column styles */
+  .react-data-table-component .rdt_TableCell {
+    padding: 12px;
+  }
+
+
+  
+  /* Import Google Fonts (add this to the top of the CSS file) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Apply font family to the container */
+.dashboard-container {
+  font-family: 'Roboto', sans-serif; /* Modern font family */
+}
+
+/*Modal styling*/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; 
+}
+
+/* Modal content styling */
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1200px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  position: relative;
+}
+
+/* Modal close button styling */
+.modal-close-button {
+  background-color: #de85cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.modal-close-button:hover {
+  background-color: #f54ad3;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.modal p {
+  margin: 10px 0;
+}
+
+
+
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .dashboard-header {
+      font-size: 22px;
+    }
+  
+    .delete-button {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  
+    .dashboard-container {
+      padding: 15px;
+      margin: 10px;
+    }
+  }
+  
+/* Enhance DataTable styling */
+  .react-data-table-component {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .react-data-table-component .rdt_Table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .react-data-table-component .rdt_TableRow {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .react-data-table-component .rdt_TableRow:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .react-data-table-component .rdt_TableHeader {
+    border-bottom: 2px solid #007bff;
+  }
+
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    position: relative;
+  }
+  
+/* Buttons for approval and decline */
+.inquiry-buttons {
+  margin-top: 10px;
+}
+
+.approve-button, .decline-button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Approve button style */
+.approve-button {
+  background-color: #28a745; /* Green for approval */
+  color: white;
+}
+
+.approve-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Decline button style */
+.decline-button {
+  background-color: #dc3545; /* Red for decline */
+  color: white;
+}
+
+.decline-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.approve-button:focus,
+.decline-button:focus {
+  outline: 2px solid #ddd; /* Focus outline for accessibility */
+  outline-offset: 2px;
+}
+
+/* Pagination controls */
+.center-pagination .MuiDataGrid-footerContainer {
+  display: flex;
+  justify-content: center;
+}

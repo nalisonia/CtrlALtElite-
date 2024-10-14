@@ -1,0 +1,102 @@
+/* LogIn.css */
+.LogIn-container {
+    width: 75%;
+    margin: auto; /* Center align content */
+    margin-top: 2.5%;
+    padding: 20px; /* Add some padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    
+}
+
+.LogIn-title {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 90%; /* Set width to 90% of viewport width */
+}
+.LogIn-form {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 90%; /* Set width to 90% of viewport width */
+    flex-direction: column;   /* Stack elements vertically */
+    align-items: center;      /* Center elements */
+    gap: 15px;                /* Add space between elements */
+}
+
+.LogIn-form input {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 50%; /* Set width to 90% of viewport width */
+}
+.LogIn-form button {
+    display: block; /* Ensure buttons are stacked */
+    width: 100%; /* Make button fill its container */
+    padding: 10px; /* Add padding */
+    background-color: #ec98e8; /* Set background color */
+    color: rgb(12, 11, 11); /* Set text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Add border radius for rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    width: 30%;
+    margin-top: 3vh;
+    font-family: 'Playfair Display', sans-serif;
+
+
+}
+
+
+.forgot-password {
+    margin-top: 10px;
+}
+
+.remember-me {
+    margin-top: 10px;
+}   
+
+/* Style for the checkbox */
+/* .checkbox-container {
+    display: flex;
+    align-items: center;
+} */
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center buttons */
+    width: 100%;
+}
+
+
+
+
+/*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
+    .LogIn-container{
+        width: 95%;
+        
+        
+    }
+   .LogIn-title, .LogIn-form{
+        width: 90%;
+
+   }
+   
+   .LogIn-form button{
+        width: 50%;
+   }
+
+   .LogIn-form input{
+    width: 80%;
+   }
+
+   
+
+}

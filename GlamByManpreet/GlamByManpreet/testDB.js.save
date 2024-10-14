@@ -1,0 +1,26 @@
+const { Pool } = require('pg');
+
+// Set up your connection pool
+const pool = new Pool({
+  user: 'your_username', // replace with your PostgreSQL username
+  host: 'localhost',      // or your database host
+  database: 'your_database', // replace with your database name
+  password: 'your_password', // replace with your database password
+  port: 5432,             // default PostgreSQL port
+});
+
+// Function to test the database connection
+async function testConnection() {
+  try {
+    const res = await pool.query('SELECT NOW()');
+    console.log('Database connected:', res.rows);
+  } catch (err) {
+    console.error('Database connection error:', err);
+  }
+}
+
+// Call the function
+testConnection();
+
+
+

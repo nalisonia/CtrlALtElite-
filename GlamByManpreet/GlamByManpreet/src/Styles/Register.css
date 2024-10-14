@@ -1,0 +1,61 @@
+/* Added a higher specificity selector on the parent elements due to conflict with BookingInquiry.css */
+.register .textField:focus,
+.register input[type="number"]:focus,
+.register input[type="tel"]:focus,
+.register input[type="email"]:focus,
+.register input[type="date"]:focus,
+.register input[type="time"]:focus,
+.register select:focus,
+.register textarea:focus {
+  outline: none;
+  border-color: transparent; 
+}
+
+.register input[type="text"],
+.register input[type="number"],
+.register input[type="tel"],
+.register input[type="email"],
+.register input[type="date"],
+.register input[type="time"],
+.register select,
+.register textarea {
+  border: none;
+  border-radius: 0;
+  margin-bottom: 18px;
+}
+
+.signUpButton {
+  border-radius: 0;
+}
+
+/* Instagram button styling */
+.instagramButton {
+  background-color: #e4405f; /* Instagram brand color */
+  color: white; 
+  border-radius: 0; 
+}
+
+.instagramButton:hover {
+  background-color: #c32f4a; /* Darker shade for hover effect */
+}
+
+/* Google button styling */
+.googleButton {
+  background-color: #4285F4; /* Google blue color */
+  color: white;
+  border-radius: 0; 
+}
+
+.googleButton:hover {
+  background-color: #3367D6; /* Darker shade for hover effect */
+}
+
+.emailButton {
+    background-color: #007bff; /* Example blue color - customize as needed */
+    color: white;
+    border-radius: 0; 
+  }
+  
+  .emailButton:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+  }
