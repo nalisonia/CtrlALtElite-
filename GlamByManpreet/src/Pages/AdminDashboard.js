@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
@@ -35,6 +34,28 @@ function AdminDashboard() {
   fetchFeedData();
 
   }, []);
+
+ /*// Handle approve client
+ const handleApprove = async (clientId) => {
+  try {
+    await axios.put(`http://localhost:3000/clients/approve/${clientId}`);
+    // Update UI after approving
+    setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'approved' } : client));
+  } catch (error) {
+    console.error('Error approving client:', error);
+  }
+};
+
+// Handle decline client
+const handleDecline = async (clientId) => {
+  try {
+    await axios.put(`http://localhost:3000/clients/decline/${clientId}`);
+    // Update UI after declining
+    setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'declined' } : client));
+  } catch (error) {
+    console.error('Error declining client:', error);
+  }
+};*/
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -107,10 +128,6 @@ function AdminDashboard() {
         {selectedItem === 'Bookings' && <Bookings />} 
         {selectedItem === 'Clients' && <Clients />} 
         {selectedItem === 'Gallery Manager' && <GalleryManager />}  
-
-        
-
-
       </Box>
     </Box>
   );

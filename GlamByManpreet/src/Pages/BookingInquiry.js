@@ -20,6 +20,8 @@ import "../Styles/BookingInquiry.css";
 
 //state vraible named formDara that holds the feilds listed below
 //setFormData is used to assign values to the feilds listed below
+
+
 function BookingInquiry() {
   const [formData, setFormData] = useState({
     firstNameAndLastName: "",
@@ -92,6 +94,7 @@ function BookingInquiry() {
     }));
   };
 
+  
   return (
     <div className="booking-inquiry">
       <h1>BOOKING INQUIRY</h1>

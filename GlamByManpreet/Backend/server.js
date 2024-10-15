@@ -4,13 +4,15 @@ require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
-//const twilio = require('twilio');
+const twilio = require('twilio');
 const mailgun = require('mailgun-js');
+const helmet = require('helmet')
 
 // Twilio configuration
-const accountSid = 'ACb8d0a7506b082cc14d5a44626529e90f';
-const authToken = '269657f1d2e1585fe7c8632bfa4ee18d';
-//const client = new twilio(accountSid, authToken);
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = new twilio(accountSid, authToken);
+
 
 // Mailgun configuration
 const mg = mailgun({
@@ -58,13 +60,31 @@ console.log('DB_PASS:', process.env.DB_PASSWORD);
 console.log('DB_HOST:', process.env.DB_HOST);
 console.log('DB_NAME:', process.env.DB_NAME);
 console.log('DB_PORT:', process.env.DB_PORT);
-// CORS middleware
+
+// CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3001', 
-  credentials: true,
+  origin: '*', // Allow access from all origins
+  credentials: true, // Allow cookies, auth headers
 }));
+
 app.use(express.json());
 
+// Set Content Security Policy
+app.use(
+  helmet.contentSecurityPolicy({
+      directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-eval'"],
+      },
+  })
+);
+
+// Your other middleware and route handlers go here...
+
+//const PORT = process.env.PORT || 3000;
+//app.listen(PORT, () => {
+  //console.log(`Server is running on port ${PORT}`);
+//});
 // Route to handle password reset
 app.post('/api/reset-password', async (req, res) => {
   const { token, newPassword } = req.body;
@@ -93,8 +113,6 @@ app.post('/api/reset-password', async (req, res) => {
 });
 
 
-
-
 // Test the database connection
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
@@ -109,7 +127,7 @@ pool.query('SELECT NOW()', (err, res) => {
 function sendSMS(phoneNumber, message) {
   client.messages.create({
     body: message,
-    from: '+19162327485',
+    from: '+19165709722',
     to: phoneNumber
   })
   .then(message => console.log(`SMS sent: ${message.sid}`))
@@ -216,13 +234,54 @@ app.post('/inquiry-status', async (req, res) => {
     // Send email to notify the user of the status
     const subject = `Inquiry ${status === 'approved' ? 'Approved' : 'Declined'}`;
     const message = `Dear ${user.firstnameandlastname}, your inquiry has been ${status}.`;
+    sendSMS(user.phonenumber, message);
 
     await sendEmail(user.emailaddress, subject, message);
 
-    res.status(200).send(`Inquiry ${status} notification sent successfully`);
+    res.status(200).send(`Inquiry ${status} SMS notification sent successfully`);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error updating inquiry status');
+  }
+});
+
+app.put('/clients/approve/:id', async (req, res) => {
+  const clientId = req.params.id;
+  try {
+    // Update client status in the database
+    await pool.query('UPDATE clients SET status = $1 WHERE id = $2', ['approved', clientId]); // Change db to pool
+
+    // Get client information for SMS
+    const clientInfo = await pool.query('SELECT phone_number FROM clients WHERE id = $1', [clientId]);
+    const phoneNumber = clientInfo.rows[0].phone_number;
+
+    // Send approval SMS
+    await sendSMS(phoneNumber, 'Your inquiry has been approved.');
+    
+    res.status(200).send('Client approved and SMS sent.');
+  } catch (error) {
+    console.error('Error approving client:', error);
+    res.status(500).send('Error approving client');
+  }
+});
+
+app.put('/clients/decline/:id', async (req, res) => {
+  const clientId = req.params.id;
+  try {
+    // Update client status in the database
+    await pool.query('UPDATE clients SET status = $1 WHERE id = $2', ['declined', clientId]); // Change db to pool
+
+    // Get client information for SMS
+    const clientInfo = await pool.query('SELECT phone_number FROM clients WHERE id = $1', [clientId]);
+    const phoneNumber = clientInfo.rows[0].phone_number;
+
+    // Send decline SMS
+    await sendSMS(phoneNumber, 'Your inquiry has been declined.');
+    
+    res.status(200).send('Client declined and SMS sent.');
+  } catch (error) {
+    console.error('Error declining client:', error);
+    res.status(500).send('Error declining client');
   }
 });
 
@@ -720,10 +779,12 @@ app.post('/forgot-password', async (req, res) => {
 
 
 // Start the server
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-  });
-}
+//app.listen(port, () => {
+//  console.log(`Server is running on http://localhost:${port}`);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports = app;

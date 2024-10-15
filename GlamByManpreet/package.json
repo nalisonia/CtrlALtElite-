@@ -27,6 +27,7 @@
     "express": "^4.20.0",
     "express-session": "^1.18.0",
     "gh-pages": "^6.1.1",
+    "helmet": "^8.0.0",
     "iconv-lite": "^0.6.3",
     "lodash": "^4.17.21",
     "mailgun-js": "^0.22.0",
