@@ -4,13 +4,13 @@ require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
-const twilio = require('twilio');
+//const twilio = require('twilio');
 const mailgun = require('mailgun-js');
 
 // Twilio configuration
 const accountSid = 'ACb8d0a7506b082cc14d5a44626529e90f';
 const authToken = '269657f1d2e1585fe7c8632bfa4ee18d';
-const client = new twilio(accountSid, authToken);
+//const client = new twilio(accountSid, authToken);
 
 // Mailgun configuration
 const mg = mailgun({
@@ -23,7 +23,7 @@ const crypto = require('crypto'); // Import crypto module
 const nodemailer = require('nodemailer');
 require('dotenv').config(); // Load environment variables from .env file
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 
 // /  / PostgreSQL connection configuration using environment variables from .env file and .env.example file
@@ -49,12 +49,12 @@ const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
-  password: process.env.DB_PASS, 
+  password: process.env.DB_PASSWORD, 
   port: process.env.DB_PORT,
 });
 //Test to see if .env loads(remove later)
 console.log('DB_USER:', process.env.DB_USER);
-console.log('DB_PASS:', process.env.DB_PASS);
+console.log('DB_PASS:', process.env.DB_PASSWORD);
 console.log('DB_HOST:', process.env.DB_HOST);
 console.log('DB_NAME:', process.env.DB_NAME);
 console.log('DB_PORT:', process.env.DB_PORT);
@@ -720,6 +720,10 @@ app.post('/forgot-password', async (req, res) => {
 
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
