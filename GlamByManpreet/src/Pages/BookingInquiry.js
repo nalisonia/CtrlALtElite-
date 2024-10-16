@@ -204,9 +204,10 @@ function BookingInquiry() {
               <option value="">Select an event</option>
               <option value="Wedding Engagement">Wedding Engagement</option>
               <option value="Rokha">Rokha</option>
-              <option value="Laggo">Laggo</option>
+              <option value="Laggo">Jaggo</option>
               <option value="Mehndi">Mehndi</option>
               <option value="Photoshoot">Photoshoot</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div className="form-group">
