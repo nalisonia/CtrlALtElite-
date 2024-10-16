@@ -121,6 +121,28 @@ function Clients() {
     }
   };
 
+    // Handle approve client
+  const handleApprove = async (clientId) => {
+    try {
+      await axios.put(`http://localhost:3000/clients/approve/${clientId}`);
+      // Optionally refresh client list or update the client's status in the UI
+      setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'approved' } : client));
+    } catch (error) {
+      console.error('Error approving client:', error);
+    }
+  };
+
+  // Handle decline client
+  const handleDecline = async (clientId) => {
+    try {
+      await axios.put(`http://localhost:3000/clients/decline/${clientId}`);
+      // Optionally refresh client list or update the client's status in the UI
+      setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'declined' } : client));
+    } catch (error) {
+      console.error('Error declining client:', error);
+    }
+  };
+  
   // Define the columns for the DataGrid
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -136,6 +158,8 @@ function Clients() {
         // Define functions to handle the actions for each row
         const handleEdit = () => handleEditClient(params.row);
         const handleDelete = () => handleDeleteClient(params.row.id);
+        const handleApproveClick = () => handleApprove(params.row.id);
+        const handleDeclineClick = () => handleDecline(params.row.id);
 
         return (
           <>
@@ -145,6 +169,13 @@ function Clients() {
             <IconButton onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
+            {/* Approve and Decline buttons */}
+            <Button onClick={handleApproveClick} color="success" variant="contained" size="small">
+              Approve
+            </Button>
+            <Button onClick={handleDeclineClick} color="error" variant="contained" size="small" sx={{ ml: 1 }}>
+              Decline
+            </Button>
           </>
         );
       },

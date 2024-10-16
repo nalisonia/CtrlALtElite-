@@ -20,6 +20,8 @@ import "../Styles/BookingInquiry.css";
 
 //state vraible named formDara that holds the feilds listed below
 //setFormData is used to assign values to the feilds listed below
+
+
 function BookingInquiry() {
   const [formData, setFormData] = useState({
     firstNameAndLastName: "",
@@ -92,6 +94,7 @@ function BookingInquiry() {
     }));
   };
 
+  
   return (
     <div className="booking-inquiry">
       <h1>BOOKING INQUIRY</h1>
@@ -201,9 +204,10 @@ function BookingInquiry() {
               <option value="">Select an event</option>
               <option value="Wedding Engagement">Wedding Engagement</option>
               <option value="Rokha">Rokha</option>
-              <option value="Laggo">Laggo</option>
+              <option value="Laggo">Jaggo</option>
               <option value="Mehndi">Mehndi</option>
               <option value="Photoshoot">Photoshoot</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div className="form-group">

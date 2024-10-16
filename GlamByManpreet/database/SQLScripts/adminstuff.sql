@@ -73,11 +73,14 @@ CREATE TABLE public.clients (
     name character varying(255) NOT NULL,
     email character varying(255),
     phone character varying(20),
+    status character varying(20) DEFAULT 'pending', -- New column for status
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
 ALTER TABLE public.clients OWNER TO postgres;
+
+ALTER TABLE clients ADD COLUMN status VARCHAR(20) DEFAULT 'pending';
 
 --
 -- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly with a label 1`] = `
+<button>
+  Click Me
+</button>
+`;
