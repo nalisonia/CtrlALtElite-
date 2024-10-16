@@ -14,11 +14,10 @@ const Register = () => {
   // State for toggling email form visibility
   const [showEmailForm, setShowEmailForm] = useState(false);
 
-
   // Form data state
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    first_Name: '',
+    last_Name: '',
     email: '',
     password: '',
     reenterpassword: '',  // Add reenterpassword to formData state
@@ -78,8 +77,8 @@ const Register = () => {
 
     try {
       const response = await axios.post('http://localhost:3000/register', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        first_Name: formData.first_Name,
+        last_Name: formData.last_Name,
         email: formData.email,
         password: formData.password,
       });
