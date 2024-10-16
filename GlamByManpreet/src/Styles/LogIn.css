@@ -74,68 +74,8 @@
     width: 100%;
 }
 
-/* Added a higher specificity selector on the parent elements due to conflict with BookingInquiry.css */
-.login .textField:focus,
-.login input[type="number"]:focus,
-.login input[type="tel"]:focus,
-.login input[type="email"]:focus,
-.login input[type="date"]:focus,
-.login input[type="time"]:focus,
-.login select:focus,
-.login textarea:focus {
-  outline: none;
-  border-color: transparent; 
-}
-
-.login input[type="text"],
-.login input[type="number"],
-.login input[type="tel"],
-.login input[type="email"],
-.login input[type="date"],
-.login input[type="time"],
-.login select,
-.login textarea {
-  border: none;
-  border-radius: 0;
-  margin-bottom: 18px;
-}
-
-.logInButton {
-  border-radius: 0;
-}
 
 
-/* Instagram button styling */
-.instagramButton {
-    background-color: #e4405f; /* Instagram brand color */
-    color: white; 
-    border-radius: 0; 
-}
-  
-  .instagramButton:hover {
-    background-color: #c32f4a; /* Darker shade for hover effect */
-}
-  
-  /* Google button styling */
-  .googleButton {
-    background-color: #4285F4; /* Google blue color */
-    color: white;
-    border-radius: 0; 
-}
-  
-  .googleButton:hover {
-    background-color: #3367D6; /* Darker shade for hover effect */
-}
-  
-  .emailButton {
-      background-color: #007bff; /* Example blue color - customize as needed */
-      color: white;
-      border-radius: 0; 
-}
-    
-    .emailButton:hover {
-      background-color: #0056b3; /* Darker shade for hover effect */
-}
 
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
