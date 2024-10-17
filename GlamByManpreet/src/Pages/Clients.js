@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
+import supabase from '../config/supabaseClient.js'; // Import your Supabase client
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -34,21 +35,20 @@ function Clients() {
   // State to store the ID of the client to be deleted
   const [clientIdToDelete, setClientIdToDelete] = useState(null);
 
-  // useEffect hook to fetch client data when the component mounts
-  useEffect(() => {
-    // Async function to fetch client data from the server
-    const fetchClients = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/clients');
-        setClients(response.data); // Update the clients state with the fetched data
-      } catch (error) {
-        console.error('Error fetching clients:', error); // Log any errors to the console
-      }
-    };
+ // Fetch clients from Supabase on component mount
+ useEffect(() => {
+  const fetchClients = async () => {
+    try {
+      const { data, error } = await supabase.from('clients_dev').select('*');
+      if (error) throw error;
+      setClients(data);
+    } catch (error) {
+      console.error('Error fetching clients:', error.message);
+    }
+  };
 
-    // Call the fetchClients function to fetch data on component mount
-    fetchClients();
-  }, []); // The empty dependency array ensures this effect runs only once on mount
+  fetchClients(); // Fetch clients when component mounts
+}, []);
 
   // Function to handle editing a client
   const handleEditClient = (client) => {
@@ -81,45 +81,68 @@ function Clients() {
     setClientIdToDelete(null);
   };
 
-  // Function to handle saving the edited client data
-  const handleSaveEdit = async () => {
-    try {
-      // Send a PUT request to the server to update the client with the edited values
-      await axios.put(`http://localhost:3000/clients/${selectedClient.id}`, {
+// Function to handle saving the edited client data
+const handleSaveEdit = async () => {
+  try {
+    // Use Supabase to update the client with the edited values
+    const { error } = await supabase
+      .from('clients_dev') // Target the 'clients_dev' table
+      .update({
         name: editName,
         email: editEmail,
         phone: editPhone,
-      });
-      // Update the clients state after successful edit
-      setClients((prevClients) =>
-        prevClients.map((client) =>
-          // If the client ID matches the selected client ID, update the client with the edited values
-          client.id === selectedClient.id
-            ? { ...client, name: editName, email: editEmail, phone: editPhone }
-            : client
-        )
-      );
-      handleCloseEditDialog();
-    } catch (error) {
-      console.error('Error updating client:', error);
-    }
-  };
+      })
+      .eq('id', selectedClient.id); // Update the client where 'id' matches
 
-  // Function to handle confirming the deletion of a client
-  const handleConfirmDelete = async () => {
-    try {
-      // Send a DELETE request to the server to delete the client with the given ID
-      await axios.delete(`http://localhost:3000/clients/${clientIdToDelete}`);
-      // Update the clients state after successful delete
-      setClients((prevClients) =>
-        // Filter the clients array to remove the client with the deleted ID
-        prevClients.filter((client) => client.id !== clientIdToDelete)
-      );
-      handleCloseDeleteDialog();
-    } catch (error) {
-      console.error('Error deleting client:', error);
-    }
-  };
+    if (error) throw error; // Handle any errors
+
+    // Update the clients state after successful edit
+    setClients((prevClients) =>
+      prevClients.map((client) =>
+        client.id === selectedClient.id
+          ? { ...client, name: editName, email: editEmail, phone: editPhone }
+          : client
+      )
+    );
+
+    handleCloseEditDialog(); // Close the edit dialog
+  } catch (error) {
+    console.error('Error updating client:', error.message);
+  }
+};
+
+// Function to handle confirming the deletion of a client
+const handleConfirmDelete = async () => {
+  try {
+    // Step 1: Delete all bookings associated with the client
+    const { error: bookingsError } = await supabase
+      .from('bookings_dev') // Target the 'bookings_dev' table
+      .delete()
+      .eq('client_id', clientIdToDelete); // Delete bookings where 'client_id' matches
+
+    if (bookingsError) throw bookingsError; // Handle any errors from bookings deletion
+
+    // Step 2: Delete the client from the 'clients_dev' table
+    const { error: clientError } = await supabase
+      .from('clients_dev') // Target the 'clients_dev' table
+      .delete()
+      .eq('id', clientIdToDelete); // Delete the client where 'id' matches
+
+    if (clientError) throw clientError; // Handle any errors from client deletion
+
+    // Step 3: Update the clients state after successful delete
+    setClients((prevClients) =>
+      prevClients.filter((client) => client.id !== clientIdToDelete)
+    );
+
+    handleCloseDeleteDialog(); // Close the delete dialog
+
+    alert('Client and associated bookings deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting client and bookings:', error.message);
+  }
+};
+
 
     // Handle approve client
   const handleApprove = async (clientId) => {

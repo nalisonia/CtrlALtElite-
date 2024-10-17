@@ -4,11 +4,12 @@ import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BookIcon from '@mui/icons-material/Book';
 import PeopleIcon from '@mui/icons-material/People';
-import Bookings from './Bookings';
 import Clients from './Clients';
 import Feed from './Feed';
 import GalleryManager from './GalleryManager';
+import DashBoard from './DashBoard';
 import { Card, CardContent, CardHeader, Avatar, IconButton, Button } from '@mui/material';
+
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const drawerWidth = 240;
@@ -139,7 +140,7 @@ function AdminDashboard() {
             </Box>
           </div>
         )}
-        {selectedItem === 'Bookings' && <Bookings />}
+        {selectedItem === 'Bookings' && <DashBoard />}
         {selectedItem === 'Clients' && <Clients />}
         {selectedItem === 'Gallery Manager' && <GalleryManager />}
       </Box>

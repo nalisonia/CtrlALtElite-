@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import DataTable from "react-data-table-component"; 
+import DataTable from "react-data-table-component";
 import differenceBy from "lodash/differenceBy";
 import Modal from 'react-modal';
 import "../Styles/DashBoard.css";
+import supabase from '../config/supabaseClient.js'; // Import your Supabase client
 
 // Define columns for the DataTable
 const columns = [
-  { name: 'Name', selector: row => row.firstnameandlastname, sortable: true },
-  { name: 'Phone#', selector: row => row.phonenumber, sortable: true },
-  { name: 'Event Date', selector: row => row.eventdate, sortable: true },
-  { name: 'Event Type', selector: row => row.eventtype, sortable: true },
+  { name: 'Name', selector: row => row.name, sortable: true },
+  { name: 'Phone#', selector: row => row.phone, sortable: true },
+  { name: 'Event Date', selector: row => row.bookings[0]?.event_date || 'N/A', sortable: true },
+  { name: 'Event Type', selector: row => row.bookings[0]?.event_type || 'N/A', sortable: true },
 ];
 
 // Set the root element for modal accessibility
@@ -21,127 +22,162 @@ function DashBoard() {
   const [toggleCleared, setToggleCleared] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
-    //used to populate the users state var
+  // Fetch clients and their bookings from Supabase
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-         //sends a get request to the route we defined in the backend
-        const response = await fetch("http://localhost:3000/users");
-          //parse the json file the backend returned
-        const result = await response.json();
-         //use the fucntion to setUsers to fill the users state variable with all the users from the db
-        setUsers(result);
-      } catch (error) {
-        console.error("Error fetching users:", error);
+        const { data, error } = await supabase
+          .from('clients_dev')
+          .select(`
+            *,
+            bookings_dev (
+              id, event_date, event_time, event_type, event_name,
+              hair_and_makeup, hair_only, makeup_only, location, additional_notes, status
+            )
+          `);
+
+        if (error) throw error;
+
+        const transformedData = data.map(client => ({
+          id: client.id,
+          name: client.name,
+          email: client.email,
+          phone: client.phone,
+          bookings: client.bookings_dev || [],
+        }));
+
+        setUsers(transformedData);
+      } catch (err) {
+        console.error('Error fetching users:', err.message);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUsers();
   }, []);
 
-  // Handle row selection 
   const handleRowSelected = React.useCallback(state => {
     setSelectedRows(state.selectedRows);
   }, []);
 
   const handleRowClicked = (row) => {
-    setSelectedUser(row); // Set the clicked row's data to the state
-    setIsModalOpen(true); // Open the modal
+    setSelectedUser(row);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedUser(null); // Clear the selected user on modal close
+    setSelectedUser(null);
   };
 
-
- //used to delete db entries based on their ID
   const handleDeleteSelected = React.useCallback(async () => {
-    if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.firstnameandlastname)}?`)) {
+    if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.name)}?`)) {
       try {
-        //sends a delte request to ther server
-        const response = await fetch("http://localhost:3000/users", {
-             //its going to be a delete request
-          method: "DELETE",
-           //of type json
-          headers: {
-            "Content-Type": "application/json",
-          },
-          //the body of the request will be the selected users state variable
-          body: JSON.stringify({ ids: selectedRows.map(row => row.id) }),
-        });
+        const clientIds = selectedRows.map((row) => row.id);
 
-        if (response.ok) {
-          setUsers(differenceBy(users, selectedRows, 'id'));
-          setToggleCleared(!toggleCleared);
-        } else {
-          console.error("Failed to delete users");
-        }
+        const { error: bookingError } = await supabase
+          .from('bookings_dev')
+          .delete()
+          .in('client_id', clientIds);
+
+        if (bookingError) throw bookingError;
+
+        const { error: clientError } = await supabase
+          .from('clients_dev')
+          .delete()
+          .in('id', clientIds);
+
+        if (clientError) throw clientError;
+
+        alert('Clients and their bookings deleted successfully!');
+
+        const { data: updatedUsers, error: fetchError } = await supabase
+          .from('clients_dev')
+          .select(`
+            *,
+            bookings_dev (
+              id, event_date, event_time, event_type, event_name,
+              hair_and_makeup, hair_only, makeup_only, location, additional_notes, status
+            )
+          `);
+
+        if (fetchError) throw fetchError;
+
+        setUsers(updatedUsers);
+        setToggleCleared((prev) => !prev);
       } catch (error) {
-        console.error("Error deleting users:", error);
+        console.error('Error deleting clients and bookings:', error.message);
       }
     }
-  }, [selectedRows, users, toggleCleared]);
+  }, [selectedRows, toggleCleared]);
 
-  const contextActions = React.useMemo(() => {
-    return (
-      <button 
-        key="delete" 
-        onClick={handleDeleteSelected} 
-        className="delete-button"> 
-        Delete Selected
-      </button>
-    );
-  }, [handleDeleteSelected]);
+  const contextActions = React.useMemo(() => (
+    <button key="delete" onClick={handleDeleteSelected} className="delete-button">
+      Delete Selected
+    </button>
+  ), [handleDeleteSelected]);
 
-  // Handle approve button click
-  const handleApprove = async (id) => {
+  const handleApprove = async (clientId) => {
     try {
-      const response = await fetch(`http://localhost:3000/inquiry-status`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId: id, status: 'approved' }),
-      });
-
-      if (response.ok) {
-        alert('Inquiry approved successfully!');
-        // Optionally update the UI after approval
-        setUsers(prevUsers => prevUsers.map(user => 
-          user.id === id ? { ...user, status: 'approved' } : user
-        ));
-      } else {
-        console.error('Failed to approve the inquiry');
-      }
+      const { error } = await supabase
+        .from('bookings_dev') 
+        .update({ status: 'approved' }) 
+        .eq('client_id', clientId); 
+      if (error) throw error;
+  
+      alert('Inquiry approved successfully!');
+  
+      // Update the state to reflect the approved status for the related bookings
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === clientId
+            ? {
+                ...user,
+                bookings: user.bookings.map((booking) => ({
+                  ...booking,
+                  status: 'approved',
+                })),
+              }
+            : user
+        )
+      );
     } catch (error) {
-      console.error('Error approving inquiry:', error);
+      console.error('Error approving inquiry:', error.message);
     }
   };
-
-  // Handle decline button click
-  const handleDecline = async (id) => {
+  
+  const handleDecline = async (clientId) => {
     try {
-      const response = await fetch(`http://localhost:3000/inquiry-status`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId: id, status: 'declined' }),
-      });
-
-      if (response.ok) {
-        alert('Inquiry declined successfully!');
-        // Optionally update the UI after decline
-        setUsers(prevUsers => prevUsers.map(user => 
-          user.id === id ? { ...user, status: 'declined' } : user
-        ));
-      } else {
-        console.error('Failed to decline the inquiry');
-      }
+      const { error } = await supabase
+        .from('bookings_dev') 
+        .update({ status: 'declined' }) 
+        .eq('client_id', clientId); 
+  
+      if (error) throw error;
+  
+      alert('Inquiry declined successfully!');
+  
+      // Update the state to reflect the declined status for the related bookings
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === clientId
+            ? {
+                ...user,
+                bookings: user.bookings.map((booking) => ({
+                  ...booking,
+                  status: 'declined',
+                })),
+              }
+            : user
+        )
+      );
     } catch (error) {
-      console.error('Error declining inquiry:', error);
+      console.error('Error declining inquiry:', error.message);
     }
   };
 
@@ -155,12 +191,11 @@ function DashBoard() {
         selectableRows
         onSelectedRowsChange={handleRowSelected}
         clearSelectedRows={toggleCleared}
-        onRowClicked={handleRowClicked} 
+        onRowClicked={handleRowClicked}
         contextActions={contextActions}
         pagination
       />
 
-      {/* This modal shows extended customer inquiry information */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -170,32 +205,29 @@ function DashBoard() {
       >
         {selectedUser && (
           <div>
-            <h2>{selectedUser.firstnameandlastname}'s Info</h2>
-            <p><strong>Phone Number:</strong> {selectedUser.phonenumber}</p>
-            <p><strong>Email Address:</strong> {selectedUser.emailaddress}</p>
-            <p><strong>Event Date:</strong> {selectedUser.eventdate}</p>
-            <p><strong>Event Type:</strong> {selectedUser.eventtype}</p>
-            <p><strong>Event Time:</strong> {selectedUser.eventtime}</p>
-            <p><strong>Event Name:</strong> {selectedUser.eventname}</p>
-            <p><strong>Clients Hair and Makeup:</strong> {selectedUser.clientshairandmakeup}</p>
-            <p><strong>Clients Hair Only:</strong> {selectedUser.clientshaironly}</p>
-            <p><strong>Clients Makeup Only:</strong> {selectedUser.clientsmakeuponly}</p>
-            <p><strong>Location Address:</strong> {selectedUser.locationaddress}</p>
-            <p><strong>Additional Notes:</strong> {selectedUser.additionalnotes}</p>
-
-            {/* Approve and Decline buttons */}
+            <h2>{selectedUser.name}'s Info</h2>
+            <p><strong>Phone Number:</strong> {selectedUser.phone}</p>
+            <p><strong>Email Address:</strong> {selectedUser.email}</p>
+            {selectedUser.bookings.length > 0 ? (
+              selectedUser.bookings.map(booking => (
+                <div key={booking.id}>
+                  <p><strong>Event Date:</strong> {booking.event_date}</p>
+                  <p><strong>Event Type:</strong> {booking.event_type}</p>
+                  <p><strong>Event Time:</strong> {booking.event_time}</p>
+                  <p><strong>Event Name:</strong> {booking.event_name}</p>
+                  <p><strong>Hair and Makeup:</strong> {booking.hair_and_makeup}</p>
+                  <p><strong>Hair Only:</strong> {booking.hair_only}</p>
+                  <p><strong>Makeup Only:</strong> {booking.makeup_only}</p>
+                  <p><strong>Location:</strong> {booking.location}</p>
+                  <p><strong>Additional Notes:</strong> {booking.additional_notes}</p>
+                </div>
+              ))
+            ) : <p>No bookings available</p>}
             <div className="inquiry-buttons">
-              <button onClick={() => handleApprove(selectedUser.id)} className="approve-button">
-                Approve
-              </button>
-              <button onClick={() => handleDecline(selectedUser.id)} className="decline-button">
-                Decline
-              </button>
+              <button onClick={() => handleApprove(selectedUser.id)} className="approve-button">Approve</button>
+              <button onClick={() => handleDecline(selectedUser.id)} className="decline-button">Decline</button>
             </div>
-
-            <button onClick={closeModal} className="modal-close-button">
-              Close
-            </button>
+            <button onClick={closeModal} className="modal-close-button">Close</button>
           </div>
         )}
       </Modal>

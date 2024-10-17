@@ -21,6 +21,3 @@ async function testConnection() {
 
 // Call the function
 testConnection();
-
-
-

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/BookingInquiry.css";
+import supabase from '../config/supabaseClient.js'; 
 
 //psql -U postgres -d glam_by_manpreet -p 5432
 
@@ -38,47 +39,67 @@ function BookingInquiry() {
     additionalNotes: "",
   });
 
-  //user clicks on the sumbit button this function will execute
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
+ // User clicks on the submit button, this function will execute
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent form reload
 
-    try {
-      //sends the inquiry data to the route we defined in the backend folder named server.js must be running for it to work
-      //also local db instance also has tp be running
-      const response = await fetch("http://localhost:3000/submit", {
-        //post means were sending data as a json file
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        //then sends the data as the request body or just as req as seen in the backend
-        body: JSON.stringify(formData),
-      });
-      // if everyhting was chill we clear the fields
-      if (response.ok) {
-        alert("Form submitted successfully!");
-        setFormData({
-          firstNameAndLastName: "",
-          phoneNumber: "",
-          emailAddress: "",
-          eventDate: "",
-          eventTime: "",
-          eventType: "",
-          eventName: "",
-          clientsHairAndMakeup: "",
-          clientsHairOnly: "",
-          clientsMakeupOnly: "",
-          locationAddress: "",
-          additionalNotes: "",
-        });
-      } else {
-        alert("Failed to submit form");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  try {
+    const { data: clientData, error: clientError } = await supabase
+      .from('clients_dev')
+      .insert([{
+        name: formData.firstNameAndLastName,
+        email: formData.emailAddress,
+        phone: formData.phoneNumber
+      }])
+      .select(); // Get inserted client data
+
+    if (clientError) throw clientError;
+
+    const clientId = clientData[0].id; // Retrieve the inserted client's ID
+
+    // Insert booking details 
+    const { error: bookingError } = await supabase
+      .from('bookings_dev')
+      .insert([{
+        client_id: clientId,
+        event_date: formData.eventDate,
+        event_time: formData.eventTime,
+        event_type: formData.eventType,
+        event_name: formData.eventName,
+        hair_and_makeup: formData.clientsHairAndMakeup,
+        hair_only: formData.clientsHairOnly,
+        makeup_only: formData.clientsMakeupOnly,
+        location: formData.location,  
+        additional_notes: formData.additionalNotes,
+        status: 'pending'  
+      }]);
+
+    if (bookingError) throw bookingError;
+
+    alert('Booking inquiry submitted successfully!');
+
+    // Clear the form fields
+    setFormData({
+      firstNameAndLastName: "",
+      phoneNumber: "",
+      emailAddress: "",
+      eventDate: "",
+      eventTime: "",
+      eventType: "",
+      eventName: "",
+      clientsHairAndMakeup: "",
+      clientsHairOnly: "",
+      clientsMakeupOnly: "",
+      location: "",
+      additionalNotes: ""
+    });
+  } catch (error) {
+    console.error('Error submitting inquiry:', error.message);
+    alert('Failed to submit inquiry. Please try again.');
+  }
+};
+
+  
 
   // Function to handle changes in form input fields
   const handleChange = (e) => {

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Box, Card, CardContent, CardHeader, Avatar, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../Styles/UserFeed.css'; // Import CSS file for styling 
+import supabase from '../config/supabaseClient.js'; // Import your Supabase client
+
 
 function UserFeed() {
   const [feedData, setFeedData] = useState([]); // State to store feed data
@@ -10,14 +12,25 @@ function UserFeed() {
   useEffect(() => {
     const fetchFeedData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/feed');
-        setFeedData(response.data);
+        // Fetch all rows from the 'feed_dev' table
+        const { data, error } = await supabase
+          .from('feed_dev')
+          .select('*'); // Select all columns
+
+        if (error) {
+          throw error; // Handle any errors from Supabase
+        }
+
+        setFeedData(data); // Store the fetched data in state
       } catch (error) {
-        console.error('Error fetching feed data:', error.response ? error.response.data : error.message);    
+        console.error(
+          'Error fetching feed data:',
+          error.message || error
+        );
       }
     };
-  
-    fetchFeedData();
+
+    fetchFeedData(); // Fetch data when the component mounts
   }, []); // Empty dependency array to fetch data once when the component mounts
 
   return (
