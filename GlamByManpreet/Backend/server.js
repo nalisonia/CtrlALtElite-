@@ -112,7 +112,6 @@ app.post('/api/reset-password', async (req, res) => {
   }
 });
 
-
 // Test the database connection
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
@@ -121,7 +120,6 @@ pool.query('SELECT NOW()', (err, res) => {
     console.log('Database connection successful, current time:', res.rows[0].now);
   }
 });
-
 
 // Function to send SMS
 function sendSMS(phoneNumber, message) {
@@ -195,8 +193,7 @@ app.post('/submit', async (req, res) => {
       firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName,
       clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes
     ];
-
-  
+    
     await pool.query(query, values);
 
      // Send SMS notification after successful submission
