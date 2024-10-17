@@ -12,6 +12,7 @@ import '../Styles/Register.css';
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   // Form data state
   const [formData, setFormData] = useState({
@@ -24,6 +25,11 @@ const Register = () => {
     firstName: '',
     lastName: '',
 >>>>>>> 23fad84 (ffished login/reg and database issues)
+=======
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+>>>>>>> 3841b2d (ffished login/reg and database issues)
     email: '',
     password: '',
     reenterpassword: '',
@@ -65,6 +71,7 @@ const Register = () => {
     try {
       const response = await axios.post('http://localhost:3000/register', {
 <<<<<<< HEAD
+<<<<<<< HEAD
         first_Name: formData.first_Name,
         last_Name: formData.last_Name,
 =======
@@ -73,6 +80,10 @@ const Register = () => {
         firstName: formData.firstName,
         lastName: formData.lastName,
 >>>>>>> 23fad84 (ffished login/reg and database issues)
+=======
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+>>>>>>> 3841b2d (ffished login/reg and database issues)
         email: formData.email,
         password: formData.password,
       });
