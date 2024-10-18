@@ -1,35 +1,49 @@
 // server.js
-require('dotenv').config({ path: '../.env' }); // Load environment variables
+//gets and loads the env variables 
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
+const { Pool } = require('pg');
 const cors = require('cors');
-const helmet = require('helmet');
-const session = require('express-session');
-const pool = require('./db'); // Import your database connection pool
+const twilio = require('twilio');
+const mailgun = require('mailgun-js');
+const helmet = require('helmet')
 
+// Twilio configuration
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = new twilio(accountSid, authToken);
+
+
+// Mailgun configuration
+const mg = mailgun({
+  apiKey: 'a7a6805240942f8ece3c39ca4d0aef00-3724298e-3111ceaa',
+  domain: 'sandbox58b702121f8041d0a7569abb241c2572.mailgun.org'
+});
+const bcrypt = require('bcrypt');
+const session = require('express-session'); // Import session middleware
+const crypto = require('crypto'); // Import crypto module
+const nodemailer = require('nodemailer');
+require('dotenv').config(); // Load environment variables from .env file
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors({
-  origin: '*', // Adjust CORS settings as needed
-  credentials: true,
-}));
-app.use(express.json());
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-eval'"], // Adjust CSP as needed
-    },
-  })
-);
+
+// /  / PostgreSQL connection configuration using environment variables from .env file and .env.example file
+// const pool = new Pool({
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database: process.env.DB_NAME,
+//   password: process.env.DB_PASSWORD,
+//   port: process.env.DB_PORT,
+// });
 
 // Session middleware setup
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-default-secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: process.env.NODE_ENV === 'production' ? true : false },
+  //cookie: { secure: process.env.NODE_ENV === 'production' ? true : false },
+  cookie: { secure: false }, // Ensure secure is false during development
 }));
 
 // PostgreSQL connection configuration
@@ -98,6 +112,7 @@ app.post('/api/reset-password', async (req, res) => {
   }
 });
 
+
 // Test the database connection
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
@@ -106,6 +121,7 @@ pool.query('SELECT NOW()', (err, res) => {
     console.log('Database connection successful, current time:', res.rows[0].now);
   }
 });
+
 
 // Function to send SMS
 function sendSMS(phoneNumber, message) {
@@ -149,6 +165,7 @@ app.get('/users', async (req, res) => {
 
 // Route to handle inquiry submission
 app.post('/submit', async (req, res) => {
+  /*
   const firstNameAndLastName = req.body.firstNameAndLastName;
   const phoneNumber = req.body.phoneNumber;
   const emailAddress = req.body.emailAddress;
@@ -179,8 +196,49 @@ app.post('/submit', async (req, res) => {
       firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName,
       clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes
     ];
-    
+
+  
     await pool.query(query, values);
+    */
+
+    const { 
+      firstNameAndLastName, 
+      phoneNumber, 
+      emailAddress, 
+      eventDate,
+      eventTime,
+      eventType,
+      eventName,
+      clientsHairAndMakeup,
+      clientsHairOnly,
+      clientsMakeupOnly,
+      locationAddress,
+      additionalNotes,
+    } = req.body;
+  
+    try {
+      // 1. Insert into Users table
+      const userResult = await pool.query(
+        'INSERT INTO Users (firstnameandlastname, phonenumber, emailaddress, eventdate, eventtime, eventtype, eventname, clientshairandmakeup, clientshaironly, clientsmakeuponly, locationaddress, additionalnotes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id',
+        [firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName, clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes]
+      );
+  
+      const userId = userResult.rows[0].id;
+  
+      // 2. Insert into Clients table
+      const clientResult = await pool.query(
+        'INSERT INTO Clients (name, email, phone) VALUES ($1, $2, $3) RETURNING id',
+        [firstNameAndLastName, emailAddress, phoneNumber] 
+      );
+  
+      const clientId = clientResult.rows[0].id;
+  
+      // 3. Insert into Bookings table
+      await pool.query(
+        'INSERT INTO Bookings (client_id, event_date, event_time, event_type, event_name, hair_and_makeup, hair_only, makeup_only, location, additional_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+        [clientId, eventDate, eventTime, eventType, eventName, clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes]
+      );
+  
 
      // Send SMS notification after successful submission
     sendSMS(phoneNumber, 'Your request has been submitted successfully!');
@@ -290,31 +348,6 @@ app.delete('/users', async (req, res) => {
   }
 });
 
-// ****************************************************************************
-// Route - Add clients into the Clients table after Booking Inquiry submission
-// ****************************************************************************
-app.post('/addClient', async (req, res) => {
-  const { name, email, phone } = req.body;
-
-  try {
-    const query = `
-      INSERT INTO clients (name, email, phone)
-      VALUES ($1, $2, $3)
-      RETURNING id;
-    `;
-
-    const values = [name, email, phone];
-
-    const result = await pool.query(query, values);
-    const clientId = result.rows[0].id;
-
-    res.status(201).json({ clientId });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error inserting client data');
-  }
-});
-
 // ********************************************
 // Route - Read clients from the Clients Table
 // ********************************************
@@ -363,49 +396,6 @@ app.delete('/clients/:id', async (req, res) => {
   } catch (err) {
     console.error('Error deleting client:', err);
     res.status(500).send('Error deleting client');
-  }
-});
-
-// **********************************************************************************
-// Route - Add booking info into the Bookings table after Booking Inquiry submission
-// **********************************************************************************
-app.post('/addBooking', async (req, res) => {
-  const { 
-    clientId, 
-    eventDate, 
-    eventTime, 
-    eventType, 
-    eventName, 
-    clientsHairAndMakeup, 
-    clientsHairOnly, 
-    clientsMakeupOnly, 
-    locationAddress, 
-    additionalNotes 
-  } = req.body;
-
-  try {
-    const query = `
-      INSERT INTO bookings (
-        client_id, event_date, event_time, event_type, event_name, 
-        hair_and_makeup, hair_only, makeup_only, location, additional_notes
-      ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
-      )
-      RETURNING id;
-    `;
-
-    const values = [
-      clientId, eventDate, eventTime, eventType, eventName, 
-      clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes
-    ];
-
-    const result = await pool.query(query, values);
-    const bookingId = result.rows[0].id;
-
-    res.status(201).json({ bookingId });
-  } catch (err) {
-    console.error("Error inserting booking data: ", err);
-    res.status(500).send('Error inserting booking data');
   }
 });
 
@@ -762,6 +752,12 @@ app.post('/forgot-password', async (req, res) => {
 
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+//app.listen(port, () => {
+//  console.log(`Server is running on http://localhost:${port}`);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app;
