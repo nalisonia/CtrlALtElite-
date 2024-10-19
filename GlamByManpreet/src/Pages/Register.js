@@ -11,6 +11,12 @@ import '../Styles/Register.css';
 
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
+<<<<<<< HEAD
+=======
+
+
+  // Form data state
+>>>>>>> origin/main
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
