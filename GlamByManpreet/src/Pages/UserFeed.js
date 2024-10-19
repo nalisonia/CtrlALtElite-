@@ -10,7 +10,7 @@ function UserFeed() {
   useEffect(() => {
     const fetchFeedData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/feed');
+        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed');
         setFeedData(response.data);
       } catch (error) {
         console.error('Error fetching feed data:', error.response ? error.response.data : error.message);    

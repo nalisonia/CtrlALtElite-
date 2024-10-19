@@ -34,7 +34,8 @@ function AdminDashboard() {
 
     const fetchInquiries = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/inquiries');
+        
+        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients');
         setInquiries(response.data);
       } catch (error) {
         console.error('Error fetching inquiries:', error);
@@ -45,25 +46,37 @@ function AdminDashboard() {
     fetchInquiries();
   }, []);
 
-  // Handle approve inquiry
-  const handleApproveInquiry = async (inquiryId) => {
+  const handleApproveInquiry = async (clientId) => {
+    console.log('Approving inquiry with clientId:', clientId); // Log clientId
     try {
-      await axios.put(`http://localhost:3000/inquiries/approve/${inquiryId}`);
-      setInquiries(prevInquiries => prevInquiries.map(inquiry =>
-        inquiry.id === inquiryId ? { ...inquiry, status: 'approved' } : inquiry
-      ));
+      await axios.post(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`, {
+        clientId,
+        status: 'approved',
+      });
+  
+      setInquiries((prevInquiries) =>
+        prevInquiries.map((inquiry) =>
+          inquiry.id === clientId ? { ...inquiry, booking_status: 'approved' } : inquiry
+        )
+      );
     } catch (error) {
       console.error('Error approving inquiry:', error);
     }
   };
-
-  // Handle decline inquiry
-  const handleDeclineInquiry = async (inquiryId) => {
+  
+  const handleDeclineInquiry = async (clientId) => {
+    console.log('Declining inquiry with clientId:', clientId); // Log clientId
     try {
-      await axios.put(`http://localhost:3000/inquiries/decline/${inquiryId}`);
-      setInquiries(prevInquiries => prevInquiries.map(inquiry =>
-        inquiry.id === inquiryId ? { ...inquiry, status: 'declined' } : inquiry
-      ));
+      await axios.post(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`, {
+        clientId,
+        status: 'declined',
+      });
+  
+      setInquiries((prevInquiries) =>
+        prevInquiries.map((inquiry) =>
+          inquiry.id === clientId ? { ...inquiry, booking_status: 'declined' } : inquiry
+        )
+      );
     } catch (error) {
       console.error('Error declining inquiry:', error);
     }

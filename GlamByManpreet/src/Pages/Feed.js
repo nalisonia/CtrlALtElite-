@@ -8,7 +8,7 @@ function Feed() {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:3000/feed', { content: feedContent });
+      await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed', { content: feedContent });
       // Clear the input field after successful submission
       setFeedContent('');
       // We should consider fetching the feed data here or updating the state in AdminDashboard.js
