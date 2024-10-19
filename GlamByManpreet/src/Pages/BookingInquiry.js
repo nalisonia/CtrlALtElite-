@@ -46,7 +46,7 @@ function BookingInquiry() {
     try {
       //sends the inquiry data to the route we defined in the backend folder named server.js must be running for it to work
       //also local db instance also has tp be running
-      const response = await fetch("http://localhost:3000/submit", {
+      const response = await fetch("http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/submit", {
         //post means were sending data as a json file
         method: "POST",
         headers: {
@@ -187,8 +187,8 @@ function BookingInquiry() {
               onChange={handleChange}
             >
               <option value="">Select a service</option>
-              <option value="bridal">Bridal</option>
-              <option value="non-bridal">Non-Bridal</option>
+              <option value="Bridal">Bridal</option>
+              <option value="Non-Bridal">Non-Bridal</option>
             </select>
           </div>
           <div className="form-group">

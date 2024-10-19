@@ -11,12 +11,9 @@ import '../Styles/Register.css';
 
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
-<<<<<<< HEAD
-=======
 
 
   // Form data state
->>>>>>> origin/main
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -61,12 +58,17 @@ const Register = () => {
     setSuccessMessage(''); // Reset success message
 
     try {
-      const response = await axios.post('http://localhost:3000/register', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-      });
+      // Make POST request to register endpoint
+      const response = await axios.post(
+        'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/register',
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+  
 
       if (response.status === 201) {
         console.log('Registration successful');

@@ -31,7 +31,7 @@ function LogIn() {
       return;
     }
     try {
-      const response = await axios.post('/login', {
+      const response = await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/login', {
         email: formData.email,
         password: formData.password,
       });

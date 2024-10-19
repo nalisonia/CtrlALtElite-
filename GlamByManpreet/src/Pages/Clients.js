@@ -39,7 +39,7 @@ function Clients() {
     // Async function to fetch client data from the server
     const fetchClients = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/clients');
+        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients');
         setClients(response.data); // Update the clients state with the fetched data
       } catch (error) {
         console.error('Error fetching clients:', error); // Log any errors to the console
@@ -85,7 +85,7 @@ function Clients() {
   const handleSaveEdit = async () => {
     try {
       // Send a PUT request to the server to update the client with the edited values
-      await axios.put(`http://localhost:3000/clients/${selectedClient.id}`, {
+      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${selectedClient.id}`, {
         name: editName,
         email: editEmail,
         phone: editPhone,
@@ -109,7 +109,7 @@ function Clients() {
   const handleConfirmDelete = async () => {
     try {
       // Send a DELETE request to the server to delete the client with the given ID
-      await axios.delete(`http://localhost:3000/clients/${clientIdToDelete}`);
+      await axios.delete(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${clientIdToDelete}`);
       // Update the clients state after successful delete
       setClients((prevClients) =>
         // Filter the clients array to remove the client with the deleted ID
@@ -124,7 +124,7 @@ function Clients() {
     // Handle approve client
   const handleApprove = async (clientId) => {
     try {
-      await axios.put(`http://localhost:3000/clients/approve/${clientId}`);
+      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/approve/${clientId}`);
       // Optionally refresh client list or update the client's status in the UI
       setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'approved' } : client));
     } catch (error) {
@@ -135,7 +135,7 @@ function Clients() {
   // Handle decline client
   const handleDecline = async (clientId) => {
     try {
-      await axios.put(`http://localhost:3000/clients/decline/${clientId}`);
+      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/decline/${clientId}`);
       // Optionally refresh client list or update the client's status in the UI
       setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'declined' } : client));
     } catch (error) {
