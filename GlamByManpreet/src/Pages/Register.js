@@ -23,6 +23,7 @@ const Register = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // New success message state
   const navigate = useNavigate();
 
   const handleEmailSignupClick = () => {
@@ -51,6 +52,7 @@ const Register = () => {
 
     setLoading(true);
     setError('');
+    setSuccessMessage(''); // Reset success message
 
     try {
       const response = await axios.post('http://localhost:3000/register', {
@@ -62,7 +64,8 @@ const Register = () => {
 
       if (response.status === 201) {
         console.log('Registration successful');
-        navigate('/userview');
+        setSuccessMessage('You are registered'); // Set success message
+        setTimeout(() => navigate('/userview'), 2000); // Redirect after 2 seconds
       }
     } catch (error) {
       setError(error.response ? error.response.data : 'An error occurred. Please try again.');
@@ -100,6 +103,7 @@ const Register = () => {
               </InputAdornment>
             )}} sx={{ mt: 2, mb: 1 }} required />
             {error && <Typography color="error" variant="body2" sx={{ mt: 1 }}>{error}</Typography>}
+            {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>} {/* Display success message */}
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
               <input type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
               <label htmlFor="agreeTerms" style={{ marginLeft: '8px' }}>

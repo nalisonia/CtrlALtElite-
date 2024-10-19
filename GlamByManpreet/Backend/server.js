@@ -1,50 +1,31 @@
 // server.js
-//gets and loads the env variables 
+// Gets and loads the env variables 
 require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 const twilio = require('twilio');
 const mailgun = require('mailgun-js');
-const helmet = require('helmet')
+const helmet = require('helmet');
+const bcrypt = require('bcrypt');
+const session = require('express-session'); // Import session middleware
+const crypto = require('crypto'); // Import crypto module
+const nodemailer = require('nodemailer');
+const pgSession = require('connect-pg-simple')(session); // Connect pg-simple for session storage
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 // Twilio configuration
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
 
-
 // Mailgun configuration
 const mg = mailgun({
-  apiKey: 'a7a6805240942f8ece3c39ca4d0aef00-3724298e-3111ceaa',
-  domain: 'sandbox58b702121f8041d0a7569abb241c2572.mailgun.org'
+  apiKey: process.env.MAILGUN_API_KEY, // Store Mailgun API key in .env
+  domain: process.env.MAILGUN_DOMAIN // Store Mailgun domain in .env
 });
-const bcrypt = require('bcrypt');
-const session = require('express-session'); // Import session middleware
-const crypto = require('crypto'); // Import crypto module
-const nodemailer = require('nodemailer');
-require('dotenv').config(); // Load environment variables from .env file
-const app = express();
-const port = process.env.PORT || 3000;
-
-
-// /  / PostgreSQL connection configuration using environment variables from .env file and .env.example file
-// const pool = new Pool({
-//   user: process.env.DB_USER,
-//   host: process.env.DB_HOST,
-//   database: process.env.DB_NAME,
-//   password: process.env.DB_PASSWORD,
-//   port: process.env.DB_PORT,
-// });
-
-// Session middleware setup
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'your-default-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  //cookie: { secure: process.env.NODE_ENV === 'production' ? true : false },
-  cookie: { secure: false }, // Ensure secure is false during development
-}));
 
 // PostgreSQL connection configuration
 const pool = new Pool({
@@ -54,12 +35,34 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD, 
   port: process.env.DB_PORT,
 });
-//Test to see if .env loads(remove later)
-console.log('DB_USER:', process.env.DB_USER);
-console.log('DB_PASS:', process.env.DB_PASSWORD);
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_NAME:', process.env.DB_NAME);
-console.log('DB_PORT:', process.env.DB_PORT);
+
+// Session middleware setup
+app.use(session({
+  store: new pgSession({ // Use pg-simple for session storage
+    pool: pool, // Connection pool
+    tableName: 'sessions', // Use default sessions table or create your own
+  }),
+  secret: process.env.SESSION_SECRET || 'your-default-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: process.env.NODE_ENV === 'production' }, // Set secure based on environment
+  maxAge: 30 * 60 * 1000 // Session expiration time (30 minutes)
+}));
+
+// Route to set a session variable
+app.get('/set-session', (req, res) => {
+  req.session.userId = 'testUser'; // Set a test session variable
+  res.send('Session variable set!');
+});
+
+// Route to check the session variable
+app.get('/check-session', (req, res) => {
+  if (req.session.userId) {
+    res.send(`Session variable is: ${req.session.userId}`);
+  } else {
+    res.send('No session variable set.');
+  }
+});
 
 // CORS configuration
 app.use(cors({
@@ -67,24 +70,25 @@ app.use(cors({
   credentials: true, // Allow cookies, auth headers
 }));
 
-app.use(express.json());
+app.use(express.json()); // Middleware to Parse JSON request bodies
 
 // Set Content Security Policy
 app.use(
   helmet.contentSecurityPolicy({
-      directives: {
-          defaultSrc: ["'self'"],
-          scriptSrc: ["'self'", "'unsafe-eval'"],
-      },
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-eval'"],
+    },
   })
 );
 
-// Your other middleware and route handlers go here...
+// Test to see if .env loads (remove later)
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PASS:', process.env.DB_PASSWORD);
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_NAME:', process.env.DB_NAME);
+console.log('DB_PORT:', process.env.DB_PORT);
 
-//const PORT = process.env.PORT || 3000;
-//app.listen(PORT, () => {
-  //console.log(`Server is running on port ${PORT}`);
-//});
 // Route to handle password reset
 app.post('/api/reset-password', async (req, res) => {
   const { token, newPassword } = req.body;
@@ -163,21 +167,7 @@ app.get('/users', async (req, res) => {
 
 // Route to handle inquiry submission
 app.post('/submit', async (req, res) => {
-  const firstNameAndLastName = req.body.firstNameAndLastName;
-  const phoneNumber = req.body.phoneNumber;
-  const emailAddress = req.body.emailAddress;
-  const eventDate = req.body.eventDate;
-  const eventTime = req.body.eventTime;
-  const eventType = req.body.eventType;
-  const eventName = req.body.eventName;
-
-  // If the fields are empty or not provided, set them to null instead of empty strings
-  const clientsHairAndMakeup = req.body.clientsHairAndMakeup || null;
-  const clientsHairOnly = req.body.clientsHairOnly || null;
-  const clientsMakeupOnly = req.body.clientsMakeupOnly || null;
-
-  const locationAddress = req.body.locationAddress;
-  const additionalNotes = req.body.additionalNotes;
+  const { firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName, clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes } = req.body;
 
   try {
     const query = `
@@ -191,7 +181,7 @@ app.post('/submit', async (req, res) => {
     
     const values = [
       firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName,
-      clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes
+      clientsHairAndMakeup || null, clientsHairOnly || null, clientsMakeupOnly || null, locationAddress, additionalNotes
     ];
     
     await pool.query(query, values);
@@ -594,35 +584,6 @@ app.get('/feed', async (req, res) => {
   }
 });
 
-
-// Register route
-app.post('/register', async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-
-  if (!firstName || !lastName || !email || !password) {
-    return res.status(400).send('All fields are required');
-  }
-
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const query = `
-      INSERT INTO accounts (firstname, lastname, email, password)
-      VALUES ($1, $2, $3, $4) RETURNING id;
-    `;
-    const values = [firstName, lastName, email, hashedPassword];
-
-    const result = await pool.query(query, values);
-    res.status(201).json({ message: 'User registered successfully', accountId: result.rows[0].id });
-  } catch (err) {
-    console.error('Error during registration:', err);
-    if (err.code === '23505') {
-      return res.status(409).send('Email already registered');
-    }
-    res.status(500).send('Error registering user');
-  }
-});
-
-
 // Login route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -645,12 +606,31 @@ app.post('/login', async (req, res) => {
     // Store user ID in session
     req.session.userId = user.id;
 
-    res.status(200).json({ message: 'Login successful', userId: user.id, firstName: user.firstname });
+    // Redirect to user view page
+    return res.redirect('/user');
   } catch (err) {
     console.error(err);
     res.status(500).send('Error during login');
   }
 });
+
+// Registration route
+app.post('/register', async (req, res) => {
+  const { email, password, firstName } = req.body;
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const query = 'INSERT INTO accounts (email, password, firstname) VALUES ($1, $2, $3)';
+    await pool.query(query, [email, hashedPassword, firstName]);
+
+    // Redirect to home page with a success message
+    return res.redirect('/home?message=You have successfully registered');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error during registration');
+  }
+});
+
 
 // Load environment variables from .env file
 require('dotenv').config();
@@ -663,63 +643,30 @@ const isAuthenticated = (req, res, next) => {
   next();
 };
 
-// Middleware to check if user is admin
-const isAdmin = (req, res, next) => {
-  if (!req.session.userId) {
-    return res.status(401).send('Unauthorized');
-  }
+// Middleware to check user role
+const isRole = (role) => (req, res, next) => {
   const query = 'SELECT role FROM accounts WHERE id = $1';
-  const values = [req.session.userId];
-  pool.query(query, values, (err, result) => {
+  pool.query(query, [req.session.userId], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Error checking user role');
     }
-    if (result.rows[0].role !== 'admin') {
+    if (result.rows.length === 0 || result.rows[0].role !== role) {
       return res.status(403).send('Unauthorized');
     }
     next();
   });
-}
+};
+
+// Middleware to check if user is admin
+const isAdmin = isRole('admin');
 
 // Middleware to check if user is a manager
-const isManager = (req, res, next) => {
-  if (!req.session.userId) {
-    return res.status(401).send('Unauthorized');
-  }
-  const query = 'SELECT role FROM accounts WHERE id = $1';
-  const values = [req.session.userId];
-  pool.query(query, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error checking user role');
-    }
-    if (result.rows[0].role !== 'manager') {
-      return res.status(403).send('Unauthorized');
-    }
-    next();
-  });
-}
-
+const isManager = isRole('manager');
 
 // Middleware to check if user is a client
-const isClient = (req, res, next) => {
-  if (!req.session.userId) {
-    return res.status(401).send('Unauthorized');
-  }
-  const query = 'SELECT role FROM accounts WHERE id = $1';
-  const values = [req.session.userId];
-  pool.query(query, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error checking user role');
-    }
-    if (result.rows[0].role !== 'client') {
-      return res.status(403).send('Unauthorized');
-    }
-    next();
-  });
-}
+const isClient = isRole('client');
+
 // Middleware to check if user is logged in
 const isLoggedIn = (req, res, next) => {
   if (!req.session.userId) {
@@ -727,7 +674,6 @@ const isLoggedIn = (req, res, next) => {
   }
   next();
 };
-
 
 // Route for requesting a password reset link
 app.post('/forgot-password', async (req, res) => {
@@ -773,11 +719,6 @@ app.post('/forgot-password', async (req, res) => {
     res.status(500).send('Error sending password reset email');
   }
 });
-
-
-// Start the server
-//app.listen(port, () => {
-//  console.log(`Server is running on http://localhost:${port}`);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
