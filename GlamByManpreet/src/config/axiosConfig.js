@@ -1,16 +1,3 @@
-// // src/config/axiosConfig.js
-// import axios from 'axios';
-
-// const axiosInstance = axios.create({
-//     baseURL: 'http://localhost:3000', // Update this to your backend API URL
-//     timeout: 1000, // Timeout in milliseconds
-//     headers: {
-//         'Content-Type': 'application/json', // Set the default content type
-//     },
-// });
-
-// export default axiosInstance;
-
 import axios from 'axios';
 
 // Determine baseURL from environment variables
@@ -42,17 +29,15 @@ axiosInstance.interceptors.request.use(
 // Add a response interceptor to handle responses globally
 axiosInstance.interceptors.response.use(
     (response) => {
-        // Handle successful responses globally if needed
         return response;
     },
     (error) => {
         if (error.response && error.response.status === 401) {
-            // Example: Handle unauthorized errors globally
             console.error('Unauthorized access - possibly redirect to login');
-            // Optionally, you can redirect to login or show a message here
         }
-        return Promise.reject(error); // Forward the error to be handled locally in the component
+        return Promise.reject(error);
     }
 );
 
 export default axiosInstance;
+
