@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, IconButton, InputAdornment, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  IconButton,
+  InputAdornment,
+  CircularProgress
+} from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
@@ -11,39 +19,23 @@ import '../Styles/Register.css';
 
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-  // Form data state
-  const [formData, setFormData] = useState({
-    first_Name: '',
-    last_Name: '',
-=======
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    firstName: '',
-    lastName: '',
->>>>>>> 23fad84 (ffished login/reg and database issues)
-=======
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
->>>>>>> 3841b2d (ffished login/reg and database issues)
     email: '',
     password: '',
-    reenterpassword: '',
+    reenterPassword: '',
     showPassword: false,
     showReEnterPassword: false,
     agreeTerms: false,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState(''); // New success message state
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   const handleEmailSignupClick = () => {
-    setShowEmailForm(!showEmailForm);
+    setShowEmailForm(prev => !prev);
   };
 
   const handleShowPasswordClick = () => {
@@ -61,39 +53,26 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.reenterpassword) {
+    if (formData.password !== formData.reenterPassword) {
       setError('Passwords do not match');
       return;
     }
 
     setLoading(true);
     setError('');
-    setSuccessMessage(''); // Reset success message
+    setSuccessMessage('');
 
     try {
       const response = await axios.post('http://localhost:3000/register', {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        first_Name: formData.first_Name,
-        last_Name: formData.last_Name,
-=======
         firstName: formData.firstName,
         lastName: formData.lastName,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
->>>>>>> 23fad84 (ffished login/reg and database issues)
-=======
-        firstName: formData.firstName,
-        lastName: formData.lastName,
->>>>>>> 3841b2d (ffished login/reg and database issues)
         email: formData.email,
         password: formData.password,
       });
 
       if (response.status === 201) {
-        console.log('Registration successful');
-        setSuccessMessage('You are registered'); // Set success message
-        setTimeout(() => navigate('/userview'), 2000); // Redirect after 2 seconds
+        setSuccessMessage('You are registered');
+        setTimeout(() => navigate('/userview'), 2000);
       }
     } catch (error) {
       setError(error.response ? error.response.data : 'An error occurred. Please try again.');
@@ -106,34 +85,122 @@ const Register = () => {
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
       <Typography variant="h4" align="center" sx={{ mb: 3 }}>Sign Up</Typography>
       <Box sx={{ mt: 3 }}>
-        <Button fullWidth variant="contained" color="secondary" startIcon={<InstagramIcon />} sx={{ mt: 2 }} href="INSTAGRAM_AUTH_URL_GOES_HERE">Sign Up with Instagram</Button>
-        <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} href="GOOGLE_AUTH_URL_GOES_HERE">Sign Up with Google</Button>
-        <Button fullWidth variant="contained" color="primary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>Sign Up with Email</Button>
+        <Button
+          fullWidth
+          variant="contained"
+          color="secondary"
+          startIcon={<InstagramIcon />}
+          sx={{ mt: 2 }}
+          href="INSTAGRAM_AUTH_URL_GOES_HERE"
+        >
+          Sign Up with Instagram
+        </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          startIcon={<GoogleIcon />}
+          sx={{ mt: 2 }}
+          href="GOOGLE_AUTH_URL_GOES_HERE"
+        >
+          Sign Up with Google
+        </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          startIcon={<EmailIcon />}
+          sx={{ mt: 2 }}
+          onClick={handleEmailSignupClick}
+        >
+          Sign Up with Email
+        </Button>
 
         {showEmailForm && (
           <form onSubmit={handleSubmit}>
             {loading && <CircularProgress sx={{ mb: 2 }} />}
-            <TextField fullWidth name="firstName" label="First Name" variant="outlined" value={formData.firstName} onChange={handleChange} sx={{ mt: 2, mb: 1 }} required />
-            <TextField fullWidth name="lastName" label="Last Name" variant="outlined" value={formData.lastName} onChange={handleChange} sx={{ mt: 1, mb: 1 }} required />
-            <TextField fullWidth name="email" label="Email" type="email" variant="outlined" value={formData.email} onChange={handleChange} sx={{ mt: 1, mb: 1 }} required />
-            <TextField fullWidth name="password" label="Password" type={formData.showPassword ? "text" : "password"} variant="outlined" value={formData.password} onChange={handleChange} InputProps={{ endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleShowPasswordClick}>
-                  {formData.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            )}} sx={{ mt: 1 }} required />
-            <TextField fullWidth name="reenterpassword" label="Re-enter Password" type={formData.showReEnterPassword ? "text" : "password"} variant="outlined" value={formData.reenterpassword} onChange={handleChange} InputProps={{ endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleShowReEnterPasswordClick}>
-                  {formData.showReEnterPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            )}} sx={{ mt: 2, mb: 1 }} required />
+            <TextField
+              fullWidth
+              name="firstName"
+              label="First Name"
+              variant="outlined"
+              value={formData.firstName}
+              onChange={handleChange}
+              sx={{ mt: 2, mb: 1 }}
+              required
+            />
+            <TextField
+              fullWidth
+              name="lastName"
+              label="Last Name"
+              variant="outlined"
+              value={formData.lastName}
+              onChange={handleChange}
+              sx={{ mt: 1, mb: 1 }}
+              required
+            />
+            <TextField
+              fullWidth
+              name="email"
+              label="Email"
+              type="email"
+              variant="outlined"
+              value={formData.email}
+              onChange={handleChange}
+              sx={{ mt: 1, mb: 1 }}
+              required
+            />
+            <TextField
+              fullWidth
+              name="password"
+              label="Password"
+              type={formData.showPassword ? "text" : "password"}
+              variant="outlined"
+              value={formData.password}
+              onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPasswordClick}>
+                      {formData.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ mt: 1 }}
+              required
+            />
+            <TextField
+              fullWidth
+              name="reenterPassword"
+              label="Re-enter Password"
+              type={formData.showReEnterPassword ? "text" : "password"}
+              variant="outlined"
+              value={formData.reenterPassword}
+              onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowReEnterPasswordClick}>
+                      {formData.showReEnterPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ mt: 2, mb: 1 }}
+              required
+            />
             {error && <Typography color="error" variant="body2" sx={{ mt: 1 }}>{error}</Typography>}
-            {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>} {/* Display success message */}
+            {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>}
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
-              <input type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
+              <input
+                type="checkbox"
+                id="agreeTerms"
+                name="agreeTerms"
+                checked={formData.agreeTerms}
+                onChange={handleChange}
+                required
+              />
               <label htmlFor="agreeTerms" style={{ marginLeft: '8px' }}>
                 I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
               </label>
