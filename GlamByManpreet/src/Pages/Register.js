@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, IconButton, InputAdornment, CircularProgress } from '@mui/material';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import FaceBookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
 import Visibility from '@mui/icons-material/Visibility';
@@ -8,7 +8,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
 import '../Styles/Register.css';
-
+import supabase from '../config/supabaseClient.js'
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
 
@@ -46,6 +46,33 @@ const Register = () => {
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
+  const handleGoogleSignUpClick = async () => {
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      if (error) throw error;
+      // Redirect or handle success
+      navigate('/userview');  // Redirect after successful login
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      setLoading(false);
+    }
+  };
+  const handleFacebookSignUpClick = async () => {
+    setLoading(true)
+    try {
+      const {error} = await supabase.auth.signInWithOAuth({
+        provider: 'facebook',
+      });
+      if (error) throw error;
+      navigate('/userview');
+    } catch (error) {
+      console.error('Facebook sign-in error:', error);
+      setLoading(false);
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.reenterpassword) {
@@ -86,8 +113,8 @@ const Register = () => {
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
       <Typography variant="h4" align="center" sx={{ mb: 3 }}>Sign Up</Typography>
       <Box sx={{ mt: 3 }}>
-        <Button fullWidth variant="contained" color="secondary" startIcon={<InstagramIcon />} sx={{ mt: 2 }} href="INSTAGRAM_AUTH_URL_GOES_HERE">Sign Up with Instagram</Button>
-        <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} href="GOOGLE_AUTH_URL_GOES_HERE">Sign Up with Google</Button>
+        <Button fullWidth variant="contained" color="secondary" startIcon={<FaceBookIcon />} sx={{ mt: 2 }}onClick={handleFacebookSignUpClick}>Sign Up with Facebook</Button>
+        <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign Up with Google</Button>
         <Button fullWidth variant="contained" color="primary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>Sign Up with Email</Button>
 
         {showEmailForm && (

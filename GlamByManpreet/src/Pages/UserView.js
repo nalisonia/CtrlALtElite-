@@ -5,6 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HistoryIcon from '@mui/icons-material/History';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import { Link } from "react-router-dom";
+import supabase from '../config/supabaseClient.js'
 
 function UserView() {
     return (

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import '../Styles/LogIn.css';
 import axios from '../config/axiosConfig';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, TextField, Typography, IconButton, InputAdornment, Modal } from '@mui/material'; // Updated imports
-import InstagramIcon from '@mui/icons-material/Instagram';
+import { Box, Button, TextField, Typography, IconButton, InputAdornment, Modal, CircularProgress } from '@mui/material'; // Updated imports
+import FaceBookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
 import Visibility from '@mui/icons-material/Visibility'; // Updated import
 import VisibilityOff from '@mui/icons-material/VisibilityOff'; // Updated import
+import supabase from '../config/supabaseClient.js'
 
 function LogIn() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ function LogIn() {
     password: '',
     showPassword: false,
   });
+  const [loading, setLoading] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [forgotEmail, setForgotEmail] = useState(''); // State for forgot password email
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
@@ -28,6 +30,35 @@ function LogIn() {
       [name]: value,
     }));
   };
+
+  const handleGoogleSignUpClick = async () => {
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      if (error) throw error;
+      // Redirect or handle success
+      navigate('/userview');  // Redirect after successful login
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      setLoading(false);
+    }
+  };
+  const handleFacebookSignUpClick = async () => {
+    setLoading(true)
+    try {
+      const {error} = await supabase.auth.signInWithOAuth({
+        provider: 'facebook',
+      });
+      if (error) throw error;
+      navigate('/userview');
+    } catch (error) {
+      console.error('Facebook sign-in error:', error);
+      setLoading(false);
+    }
+  };
+
   const handleEmailLogInClick = () => {
     setShowEmailForm(!showEmailForm);
   };
@@ -41,6 +72,7 @@ function LogIn() {
     event.preventDefault();
   };
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setError(''); // Reset error message
     // Basic validation
@@ -49,7 +81,7 @@ function LogIn() {
       return;
     }
     try {
-      const response = await axios.post('/login', {
+      const response = await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/Login', {
         email: formData.email,
         password: formData.password,
       });
@@ -62,6 +94,8 @@ function LogIn() {
     } catch (error) {
       console.error('Login failed:', error.response ? error.response.data : error.message);
       setError('Login failed. Please try again.\n Please Note: Case Sensitive');
+    }finally {
+      setLoading(false);
     }
   };
   
@@ -96,29 +130,8 @@ function LogIn() {
         Log In
       </Typography>
       <Box sx={{ mt: 3 }}>
-        <Button
-          fullWidth
-          variant="contained"
-          color="secondary"
-          startIcon={<InstagramIcon />}
-          className="instagramButton"
-          sx={{ mt: 2 }}
-          href="INSTAGRAM_AUTH_URL_GOES_HERE"
-        >
-          Log In with Instagram
-        </Button>
-
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          startIcon={<GoogleIcon />}
-          className="googleButton"
-          sx={{ mt: 2 }}
-          href="GOOGLE_AUTH_URL_GOES_HERE"
-        >
-          Log In with Google
-        </Button>
+      <Button fullWidth variant="contained" color="secondary" startIcon={<FaceBookIcon />} sx={{ mt: 2 }}onClick={handleFacebookSignUpClick}>Sign Up with Facebook</Button>
+      <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign Up with Google</Button>
 
         <Button
           fullWidth
@@ -134,6 +147,7 @@ function LogIn() {
 
         {showEmailForm && (
           <form onSubmit={handleSubmit}>
+            {loading && <CircularProgress sx={{ mb: 2 }} />}
             <TextField
               fullWidth
               id="email"
@@ -172,8 +186,8 @@ function LogIn() {
             />
 {error && <p className="error-message">{error}</p>} {/* Display error messages */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-              <Button variant="contained" color="primary" type="submit">
-                Log In
+              <Button variant="contained" color="primary" type="submit" disabled={loading}>
+              {loading ? 'Signing In...' : 'Sign In'}
               </Button>
               <Button variant="text" onClick={() => setIsModalOpen(true)}>
                 Forgot Password

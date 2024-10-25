@@ -1,4 +1,3 @@
-
 const { createClient } = require('@supabase/supabase-js');
 // Load environment variables
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
