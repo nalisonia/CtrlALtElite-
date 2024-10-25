@@ -81,23 +81,22 @@ function LogIn() {
       return;
     }
     try {
-      const response = await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/Login', {
+        const { user, session, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });
-      if (response.status === 200) {
-        console.log('Login successful');
-        navigate('/userview'); // Redirect to the userview page after successful login
-      } else {
-        setError('Login failed. Please check your credentials.');
-      }
-    } catch (error) {
-      console.error('Login failed:', error.response ? error.response.data : error.message);
-      setError('Login failed. Please try again.\n Please Note: Case Sensitive');
-    }finally {
-      setLoading(false);
-    }
-  };
+      if (error) throw error; // Handle error if sign-in fails
+
+      console.log('Login successful:', user);
+      console.log('Session data:', session);
+      navigate('/userview'); // Redirect to the userview page after successful login
+  } catch (error) {
+      console.error('Login failed:', error.message);
+      setError('Login failed. Please check your credentials.');
+  } finally {
+      setLoading(false); // Reset loading state
+  }
+};
   
 
   const handleForgotPassword = async () => {

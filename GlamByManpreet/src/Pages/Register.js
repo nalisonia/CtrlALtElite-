@@ -6,12 +6,11 @@ import EmailIcon from '@mui/icons-material/Email';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import axios from '../config/axiosConfig';
 import '../Styles/Register.css';
-import supabase from '../config/supabaseClient.js'
+import supabase from '../config/supabaseClient.js';
+
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
-
 
   // Form data state
   const [formData, setFormData] = useState({
@@ -26,7 +25,7 @@ const Register = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState(''); // New success message state
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   const handleEmailSignupClick = () => {
@@ -53,17 +52,17 @@ const Register = () => {
         provider: 'google',
       });
       if (error) throw error;
-      // Redirect or handle success
-      navigate('/userview');  // Redirect after successful login
+      navigate('/userview');
     } catch (error) {
       console.error('Google sign-in error:', error);
       setLoading(false);
     }
   };
+
   const handleFacebookSignUpClick = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const {error} = await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
       });
       if (error) throw error;
@@ -73,6 +72,7 @@ const Register = () => {
       setLoading(false);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.reenterpassword) {
@@ -85,25 +85,28 @@ const Register = () => {
     setSuccessMessage(''); // Reset success message
 
     try {
-      // Make POST request to register endpoint
-      const response = await axios.post(
-        'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/register',
-        {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-        }
-      );
-  
+      // Use Supabase to sign up the user
+      const { user, error: signupError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
 
-      if (response.status === 201) {
-        console.log('Registration successful');
-        setSuccessMessage('You are registered'); // Set success message
-        setTimeout(() => navigate('/userview'), 2000); // Redirect after 2 seconds
-      }
+      if (signupError) throw signupError;
+
+      // After successful sign-up, insert user details into the accounts table
+      const { data, error: insertError } = await supabase
+        .from('accounts') // Replace with your actual table name
+        .insert([
+          { id: user.id, email: formData.email, firstName: formData.firstName, lastName: formData.lastName },
+        ]);
+
+      if (insertError) throw insertError;
+
+      console.log('Registration successful');
+      setSuccessMessage('You are registered'); // Set success message
+      setTimeout(() => navigate('/userview'), 2000); // Redirect after 2 seconds
     } catch (error) {
-      setError(error.response ? error.response.data : 'An error occurred. Please try again.');
+      setError(error.message || 'An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -113,9 +116,15 @@ const Register = () => {
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
       <Typography variant="h4" align="center" sx={{ mb: 3 }}>Sign Up</Typography>
       <Box sx={{ mt: 3 }}>
-        <Button fullWidth variant="contained" color="secondary" startIcon={<FaceBookIcon />} sx={{ mt: 2 }}onClick={handleFacebookSignUpClick}>Sign Up with Facebook</Button>
-        <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign Up with Google</Button>
-        <Button fullWidth variant="contained" color="primary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>Sign Up with Email</Button>
+        <Button fullWidth variant="contained" color="secondary" startIcon={<FaceBookIcon />} sx={{ mt: 2 }} onClick={handleFacebookSignUpClick}>
+          Sign Up with Facebook
+        </Button>
+        <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>
+          Sign Up with Google
+        </Button>
+        <Button fullWidth variant="contained" color="primary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>
+          Sign Up with Email
+        </Button>
 
         {showEmailForm && (
           <form onSubmit={handleSubmit}>
@@ -123,22 +132,34 @@ const Register = () => {
             <TextField fullWidth name="firstName" label="First Name" variant="outlined" value={formData.firstName} onChange={handleChange} sx={{ mt: 2, mb: 1 }} required />
             <TextField fullWidth name="lastName" label="Last Name" variant="outlined" value={formData.lastName} onChange={handleChange} sx={{ mt: 1, mb: 1 }} required />
             <TextField fullWidth name="email" label="Email" type="email" variant="outlined" value={formData.email} onChange={handleChange} sx={{ mt: 1, mb: 1 }} required />
-            <TextField fullWidth name="password" label="Password" type={formData.showPassword ? "text" : "password"} variant="outlined" value={formData.password} onChange={handleChange} InputProps={{ endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleShowPasswordClick}>
-                  {formData.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            )}} sx={{ mt: 1 }} required />
-            <TextField fullWidth name="reenterpassword" label="Re-enter Password" type={formData.showReEnterPassword ? "text" : "password"} variant="outlined" value={formData.reenterpassword} onChange={handleChange} InputProps={{ endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleShowReEnterPasswordClick}>
-                  {formData.showReEnterPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            )}} sx={{ mt: 2, mb: 1 }} required />
+            <TextField fullWidth name="password" label="Password" type={formData.showPassword ? "text" : "password"} variant="outlined" value={formData.password} onChange={handleChange} 
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPasswordClick}>
+                      {formData.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }} 
+              sx={{ mt: 1 }} 
+              required 
+            />
+            <TextField fullWidth name="reenterpassword" label="Re-enter Password" type={formData.showReEnterPassword ? "text" : "password"} variant="outlined" value={formData.reenterpassword} onChange={handleChange} 
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowReEnterPasswordClick}>
+                      {formData.showReEnterPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }} 
+              sx={{ mt: 2, mb: 1 }} 
+              required 
+            />
             {error && <Typography color="error" variant="body2" sx={{ mt: 1 }}>{error}</Typography>}
-            {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>} {/* Display success message */}
+            {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>}
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
               <input type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
               <label htmlFor="agreeTerms" style={{ marginLeft: '8px' }}>
@@ -156,3 +177,4 @@ const Register = () => {
 };
 
 export default Register;
+
