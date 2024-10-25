@@ -8,14 +8,19 @@ function Feed() {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed', { content: feedContent });
+      const response = await axios.post(
+        'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed',
+        { content: feedContent }
+      );
+      console.log('Feed item added:', response.data);
+  
       // Clear the input field after successful submission
       setFeedContent('');
-      // We should consider fetching the feed data here or updating the state in AdminDashboard.js
     } catch (error) {
-      console.error('Error submitting feed:', error);
+      console.error('Error submitting feed:', error.message);
     }
   };
+  
 
   return (
     <Box sx={{ height: 300, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

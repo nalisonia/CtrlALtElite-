@@ -29,15 +29,17 @@ app.use(
 
 // Session middleware setup
 app.use(session({
-  store: new pgSession({ // Use pg-simple for session storage
-    pool: pool, // Connection pool
-    tableName: 'sessions', // Use default sessions table or create your own
+  store: new pgSession({
+    pool: pool, // Database connection pool
+    tableName: 'sessions_dev', // Store sessions in the 'sessions_dev' table
   }),
-  secret: process.env.SESSION_SECRET || 'your-default-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: process.env.NODE_ENV === 'production' }, // Set secure based on environment
-  maxAge: 30 * 60 * 1000 // Session expiration time (30 minutes)
+  secret: process.env.SESSION_SECRET || 'your-default-secret-key', // Secret key for signing the session ID
+  resave: false, // Avoid resaving session if nothing has changed
+  saveUninitialized: false, // Avoid saving uninitialized sessions
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production', // Enable secure cookies in production
+    maxAge: 30 * 60 * 1000 // Expire session after 30 minutes (in milliseconds)
+  },
 }));
 
 // Routes

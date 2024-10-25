@@ -45,20 +45,23 @@ const Register = () => {
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
+  //sign up with google using supabase
   const handleGoogleSignUpClick = async () => {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: { redirectTo: 'http://localhost:3000/userview' }
       });
       if (error) throw error;
-      navigate('/userview');
     } catch (error) {
       console.error('Google sign-in error:', error);
       setLoading(false);
     }
   };
 
+
+  //sign up with facebook using supabase
   const handleFacebookSignUpClick = async () => {
     setLoading(true);
     try {
@@ -73,44 +76,64 @@ const Register = () => {
     }
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.agreeTerms) {
+      setError('You must agree to the terms and conditions.');
+      return;
+    }
+
     if (formData.password !== formData.reenterpassword) {
       setError('Passwords do not match');
       return;
     }
 
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+      return;
+    }
     setLoading(true);
     setError('');
-    setSuccessMessage(''); // Reset success message
-
+    setSuccessMessage('');
     try {
-      // Use Supabase to sign up the user
-      const { user, error: signupError } = await supabase.auth.signUp({
+      // Attempt sign-up
+      const { data, error: signupError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
       });
 
-      if (signupError) throw signupError;
+      if (signupError) {
+        console.error('Signup failed:', signupError.message);
+        setError(signupError.message);
+        return; // Stop further execution if signup fails
+      }
 
-      // After successful sign-up, insert user details into the accounts table
-      const { data, error: insertError } = await supabase
-        .from('accounts') // Replace with your actual table name
-        .insert([
-          { id: user.id, email: formData.email, firstName: formData.firstName, lastName: formData.lastName },
-        ]);
-
-      if (insertError) throw insertError;
-
+      const user = data?.user;
+      if (!user) {
+        throw new Error('User data is missing after sign-up.');
+      }
+    
       console.log('Registration successful');
-      setSuccessMessage('You are registered'); // Set success message
-      setTimeout(() => navigate('/userview'), 2000); // Redirect after 2 seconds
+
+      // Log session data to the console
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) {
+        console.error('Error fetching session:', sessionError.message);
+      } else {
+        console.log('Session Data:', sessionData);
+      }
+
+      navigate('/userview');
     } catch (error) {
+      console.error('Error during registration:', error.message);
       setError(error.message || 'An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>

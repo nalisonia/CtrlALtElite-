@@ -18,9 +18,9 @@ function LogIn() {
   });
   const [loading, setLoading] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
-  const [forgotEmail, setForgotEmail] = useState(''); // State for forgot password email
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-  const [error, setError] = useState(''); // State for error messages
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -31,20 +31,19 @@ function LogIn() {
     }));
   };
 
+  //user supabase to log in with google
   const handleGoogleSignUpClick = async () => {
-    setLoading(true);
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-      });
-      if (error) throw error;
-      // Redirect or handle success
-      navigate('/userview');  // Redirect after successful login
-    } catch (error) {
-      console.error('Google sign-in error:', error);
-      setLoading(false);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: 'http://localhost:3000/userview' }
+    });
+    
+    if (error) {
+      console.error('Error during sign-in:', error);
     }
-  };
+};
+
+  //user supabase to log in with google
   const handleFacebookSignUpClick = async () => {
     setLoading(true)
     try {
@@ -62,41 +61,48 @@ function LogIn() {
   const handleEmailLogInClick = () => {
     setShowEmailForm(!showEmailForm);
   };
+
   const handleShowPasswordClick = () => {
     setFormData((prev) => ({
       ...prev,
       showPassword: !prev.showPassword
     }));
-  }
+  };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    setError(''); // Reset error message
-    // Basic validation
-    if (!formData.email || !formData.password) {
-      setError('Please fill out all required fields.');
-      return;
-    }
-    try {
-        const { user, session, error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
-      if (error) throw error; // Handle error if sign-in fails
 
-      console.log('Login successful:', user);
-      console.log('Session data:', session);
-      navigate('/userview'); // Redirect to the userview page after successful login
-  } catch (error) {
-      console.error('Login failed:', error.message);
-      setError('Login failed. Please check your credentials.');
-  } finally {
-      setLoading(false); // Reset loading state
-  }
+  //log in with email
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+        const { user, error } = await supabase.auth.signInWithPassword({
+            email: formData.email,
+            password: formData.password,
+        });
+
+        if (error) throw error; // Handle error if sign-in fails
+
+        const { data: { session } } = await supabase.auth.getSession(); // Fetch session after login
+        console.log('Login successful:', user);
+        console.log('Current session data:', session);
+
+        if (session) {
+            navigate('/userview'); // Redirect to the userview page after successful login
+        } else {
+            setError('Session data is not available.'); // Handle unexpected case
+        }
+    } catch (error) {
+        console.error('Login failed:', error); // Log the complete error object
+        setError('Login failed. Please check your credentials.'); // Generic error message
+    } finally {
+        setLoading(false);
+    }
 };
+
   
 
   const handleForgotPassword = async () => {
@@ -111,8 +117,8 @@ function LogIn() {
       });
       if (response.status === 200) {
         alert('Password reset link sent! Check your email.');
-        setIsModalOpen(false); // Close modal
-        setForgotEmail(''); // Clear the input field
+        setIsModalOpen(false);
+        setForgotEmail('');
       } else {
         setError('Error sending reset link. Please try again.');
       }
@@ -121,7 +127,9 @@ function LogIn() {
       setError('Error sending reset link. Please try again.');
     }
   };
-  
+
+
+
 
   return (
     <Box className="login" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
@@ -183,7 +191,7 @@ function LogIn() {
               sx={{ mt: 1 }}
               required
             />
-{error && <p className="error-message">{error}</p>} {/* Display error messages */}
+            {error && <p className="error-message">{error}</p>} {/* Display error messages */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
               <Button variant="contained" color="primary" type="submit" disabled={loading}>
               {loading ? 'Signing In...' : 'Sign In'}
