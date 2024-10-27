@@ -145,15 +145,23 @@ function Feed() {
   };
 
   // Function to handle deleting an item
-  const handleDelete = async (index) => {
-    const itemToDelete = feedItems[index];
-    try {
-      await supabase.delete().from('feed').eq('id', itemToDelete.id);
-      setFeedItems(feedItems.filter((_, i) => i !== index));
-    } catch (error) {
-      console.error('Error deleting feed item:', error);
-    }
-  };
+// Function to handle deleting an item
+const handleDelete = async (index) => {
+  const itemToDelete = feedItems[index];
+  try {
+    const { error } = await supabase
+      .from('feed')
+      .delete()
+      .eq('id', itemToDelete.id);
+
+    if (error) throw error;
+
+    setFeedItems(feedItems.filter((_, i) => i !== index));
+  } catch (error) {
+    console.error('Error deleting feed item:', error);
+  }
+};
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
