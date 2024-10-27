@@ -439,10 +439,6 @@ app.post("/feed", async (req, res) => {
   const { content } = req.body;
 
   try {
-    // Step 1: Insert into local 'feed' table
-    const query = "INSERT INTO feed (content) VALUES ($1)";
-    await pool.query(query, [content]);
-
     // Step 2: Insert into Supabase 'feed_dev' table
     const { error: supabaseError } = await supabase
       .from("feed_dev")
