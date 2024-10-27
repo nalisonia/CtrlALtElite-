@@ -244,7 +244,7 @@ function GalleryManager() {
         {images.length > 0 ? (
           images.map((url, index) => (
             <div key={index} className="card">
-              <img src={url} alt={Image ${index}} className="card-img" />
+              <img src={url} alt={`Image ${index}`} className="card-img" />
               {isEditMode && (
                 <button className="delete-btn" onClick={() => handleDelete(url)}>
                   Delete
