@@ -1,11 +1,15 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { Box, Typography, TextField, Button } from '@mui/material';
 import AWS from 'aws-sdk';
+import { createClient } from '@supabase/supabase-js';
 import Cropper from 'react-easy-crop';
-import "../Styles/GalleryManager.css";
-import { Dialog, DialogActions, DialogContent, Button } from '@mui/material'; // Import Material-UI components
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import EditIcon from '@mui/icons-material/Edit'; // Import the Edit icon
+import "../Styles/GalleryManager.css"; // Ensure the styles are available
 
+// Initialize Supabase client
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL; // Add this to your .env file
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY; // Add this to your .env file
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to get the cropped image using pixel coordinates
 const getCroppedImg = (imageSrc, pixelCrop) => {
@@ -41,134 +45,208 @@ const getCroppedImg = (imageSrc, pixelCrop) => {
   });
 };
 
-function GalleryManager() {
-  // State variables
-  const [file, setFile] = useState(null); // Selected file
-  const [imageSrc, setImageSrc] = useState(null); // Image source for cropping
-  const [crop, setCrop] = useState({ x: 0, y: 0 }); // Crop coordinates
-  const [zoom, setZoom] = useState(1); // Zoom level for the cropper
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null); // Cropped area in pixels
-  const [images, setImages] = useState([]); // List of images
-  const [isEditMode, setIsEditMode] = useState(false); // Edit mode toggle
+function Feed() {
+  const [feedContent, setFeedContent] = useState('');
+  const [file, setFile] = useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [feedItems, setFeedItems] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
   const [open, setOpen] = useState(false); // Dialog state
-  const fileInputRef = React.createRef(); // Reference for file input
 
+  // AWS S3 configuration
   AWS.config.update({
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
     region: process.env.REACT_APP_AWS_REGION,
   });
+
   const s3 = new AWS.S3({
-    params: { Bucket: 'manpreetgallery' },
+    params: { Bucket: 'manpreetfeed' },
   });
 
-  // Fetch images from S3 when the component loads
+  // Fetch feed items on component mount
   useEffect(() => {
-    loadImages();
+    fetchFeedItems();
   }, []);
 
-  // Function to load all images from S3
-  const loadImages = () => {
-    const params = { Bucket: 'manpreetgallery' };
-    s3.listObjects(params, (err, data) => {
-      if (err) {
-        console.error('Error fetching images:', err);
-        return;
-      }
-      const imageKeys = data.Contents.map((item) => item.Key);
-      const imageUrls = imageKeys.map((key) => s3.getSignedUrl('getObject', { Bucket: 'manpreetgallery', Key: key }));
-      setImages(imageUrls);
-    });
+  // Function to fetch feed items from Supabase
+  const fetchFeedItems = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('feed')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      console.log('Fetched feed items:', data); // Log the fetched data
+      setFeedItems(data);
+    } catch (error) {
+      console.error('Error fetching feed items:', error);
+    }
   };
 
   // Function that triggers when an image is selected for upload
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    if (!selectedFile) return; 
-    setFile(selectedFile); 
+    if (!selectedFile) return;
+    setFile(selectedFile);
 
     const reader = new FileReader();
     reader.onload = () => {
-      setImageSrc(reader.result); 
-      setOpen(true); 
+      setImageSrc(reader.result);
+      setOpen(true);
     };
     reader.readAsDataURL(selectedFile);
   };
 
   // Function that executes once cropping is complete
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels); // Store the pixel coordinates of the cropped area
+    setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
   // Function to upload the cropped image to S3
   const handleUpload = async () => {
-    if (!file) return alert('Please choose a file to upload!'); 
+    if (!file) return alert('Please choose a file to upload!');
     try {
-      // Get the cropped image and convert it to a blob
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       const croppedBlob = await fetch(croppedImage).then((res) => res.blob());
 
       const params = {
         Body: croppedBlob,
-        Bucket: 'manpreetgallery',
+        Bucket: 'manpreetfeed',
         Key: file.name,
       };
 
-      // Upload the file to S3
-      s3.upload(params, (err, data) => {
-        if (err) {
-          console.error('Error uploading file:', err);
-          return;
-        }
-        console.log('File uploaded successfully:', data);
-        handleCancel(); // Reset after successful upload
-        loadImages(); // Reload images after upload
+      return new Promise((resolve, reject) => {
+        s3.upload(params, (err, data) => {
+          if (err) {
+            console.error('Error uploading file:', err);
+            reject(err);
+            return;
+          }
+          console.log('File uploaded successfully:', data);
+          handleCancel(); // Reset after successful upload
+          resolve(data.Location); // Return the uploaded image URL
+        });
       });
     } catch (error) {
       console.error('Error uploading cropped image:', error);
     }
   };
 
-  // Function to reset the cropper and close the dialog
+  // Function to handle form submission
+  const handleSubmit = async () => {
+    console.log('Submitting feed item...');
+    let uploadedImageUrl = await handleUpload();
+
+    if (!uploadedImageUrl && !isEditing) {
+      return alert("Image upload failed");
+    }
+
+    if (isEditing) {
+      // Handle edit submission
+      const updatedItem = {
+        content: feedContent,
+        image_url: uploadedImageUrl || feedItems[editIndex].image_url,
+      };
+
+      try {
+        await supabase
+          .from('feed')
+          .update(updatedItem)
+          .match({ id: feedItems[editIndex].id });
+
+        const updatedFeedItems = [...feedItems];
+        updatedFeedItems[editIndex] = { ...updatedFeedItems[editIndex], ...updatedItem };
+        setFeedItems(updatedFeedItems);
+        setIsEditing(false);
+        setEditIndex(null);
+      } catch (error) {
+        console.error('Error updating feed item:', error);
+      }
+    } else {
+      // Handle new submission
+      const newItem = {
+        content: feedContent,
+        image_url: uploadedImageUrl,
+      };
+
+      try {
+        const { data, error } = await supabase.from('feed').insert(newItem);
+
+        if (error) throw error;
+
+        setFeedItems([...feedItems, { ...newItem, id: data[0].id, created_at: new Date().toISOString() }]);
+      } catch (error) {
+        console.error('Error submitting feed:', error);
+      }
+    }
+
+    setFeedContent('');
+    setFile(null);
+    setImageSrc(null);
+  };
+
+  // Reset the cropper and close the dialog
   const handleCancel = () => {
     setFile(null);
     setImageSrc(null);
     setCrop({ x: 0, y: 0 });
     setZoom(1);
-    setOpen(false); // Close the dialog
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ''; // Clear the file input value
+    setOpen(false);
+  };
+
+  // Function to handle editing an item
+  const handleEdit = (index) => {
+    setFeedContent(feedItems[index].content);
+    setEditIndex(index);
+    setIsEditing(true);
+  };
+
+  // Function to handle deleting an item
+  const handleDelete = async (index) => {
+    const itemToDelete = feedItems[index];
+    try {
+      await supabase.from('feed').delete().eq('id', itemToDelete.id);
+      setFeedItems(feedItems.filter((_, i) => i !== index));
+    } catch (error) {
+      console.error('Error deleting feed item:', error);
     }
   };
 
-  // Function to delete an image from S3
-  const handleDelete = (signedUrl) => {
-    const fileKey = decodeURIComponent(signedUrl.split('?')[0].split('/').pop()); 
-    const params = { Bucket: 'manpreetgallery', Key: fileKey };
-
-    // Attempt to delete the object
-    s3.deleteObject(params, (err) => {
-      if (err) {
-        console.error('Error deleting file:', err.message);
-        return;
-      }
-      console.log('File deleted successfully');
-      loadImages(); // Reload images after deletion
-    });
-  };
-
-  // Toggle between edit and normal mode
-  const toggleEditMode = () => {
-    setIsEditMode(!isEditMode);
-  };
-
   return (
-    <div className="Gallery-Manager">
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Typography variant="h4" gutterBottom>
+        {isEditing ? "Edit Feed Item" : "Create a New Feed Item"}
+      </Typography>
+      <Box sx={{ width: '70%' }}>
+        <TextField
+          label="Type something here to share with your clients!"
+          multiline
+          rows={4}
+          fullWidth
+          value={feedContent}
+          onChange={(e) => setFeedContent(e.target.value)}
+        />
+        <input type="file" onChange={handleFileChange} accept="image/*" />
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          sx={{ mt: 2, backgroundColor: isEditing ? '#ffc5fc' : '#ffc5fc', color: 'black' }}
+        >
+          {isEditing ? "Save Changes" : "Submit"}
+        </Button>
+      </Box>
 
-      {/* Popup Dialog for cropping */}
-      <Dialog open={open} onClose={handleCancel} maxWidth="sm" fullWidth>
-        <DialogContent>
-          <div className="crop-container" style={{ width: '100%', height: '300px' }}>
+      {/* Cropping dialog */}
+      {open && (
+        <Box>
+          <div style={{ width: '100%', height: '300px' }}>
             <Cropper
               image={imageSrc}
               crop={crop}
@@ -179,85 +257,28 @@ function GalleryManager() {
               onCropComplete={onCropComplete}
             />
           </div>
-        </DialogContent>
-        <DialogActions>
+          <Button onClick={handleUpload} color="primary">Upload Cropped Image</Button>
           <Button onClick={handleCancel} color="secondary">Cancel</Button>
-          <Button onClick={handleUpload} color="primary">Upload</Button>
-        </DialogActions>
-      </Dialog>
+        </Box>
+      )}
 
-<div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}>
-  <h3 style={{ margin: 0 }}>Gallery</h3>
-
-  <div style={{ position: 'absolute', right: 0 }}>
-    <input
-      type="file"
-      accept="image/*"
-      onChange={handleFileChange}
-      ref={fileInputRef}
-      id="fileInput"
-      className="file-input"
-      style={{ display: 'none' }} // Hide the default file input
-    />
-    <Button
-      variant="contained"
-      component="span"
-      startIcon={<CloudUploadIcon />}
-      className="upload-button"
-      onClick={() => fileInputRef.current.click()} // Trigger file selection
-      sx={{
-        backgroundColor: '#ffc5fc',
-        color: 'black',
-        padding: '10px',
-        width: "170px",
-        marginRight: '20px',  // Add right margin to separate the buttons
-        borderRadius: '5px',
-        '&:hover': {
-          backgroundColor: '#eae1e3',
-        },
-      }}
-    >
-      Upload Image
-    </Button>
-
-    <Button
-      variant="contained"
-      component="span"
-      startIcon={<EditIcon />}
-      onClick={toggleEditMode} // Trigger the toggle function
-      sx={{
-        backgroundColor: '#ffc5fc',
-        color: 'black',
-        padding: '10px',
-        width: "170px",
-        borderRadius: '5px',
-        '&:hover': {
-          backgroundColor: '#eae1e3',
-        },
-      }}
-    >
-      {isEditMode ? 'Done' : 'Edit'}
-    </Button>
-  </div>
-</div>
-      <div className="gallery">
-        {images.length > 0 ? (
-          images.map((url, index) => (
-            <div key={index} className="card">
-              <img src={url} alt={`Image ${index}`} className="card-img" />
-              {isEditMode && (
-                <button className="delete-btn" onClick={() => handleDelete(url)}>
-                  Delete
-                </button>
-              )}
-            </div>
-          ))
-        ) : (
-          <p>No images found</p>
-        )}
-      </div>
-    </div>
+      <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
+        Feed Items
+      </Typography>
+      <Box sx={{ width: '70%', mt: 2 }}>
+        {feedItems.map((item, index) => (
+          <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ccc', padding: '10px 0' }}>
+            <Typography variant="body1" sx={{ flexGrow: 1 }}>
+              {item.content}
+            </Typography>
+            {item.image_url && <img src={item.image_url} alt="Feed" style={{ width: '50px', height: '50px', objectFit: 'cover', marginRight: '10px' }} />}
+            <Button onClick={() => handleEdit(index)} sx={{ marginRight: 1 }}>Edit</Button>
+            <Button onClick={() => handleDelete(index)} color="error">Delete</Button>
+          </Box>
+        ))}
+      </Box>
+    </Box>
   );
 }
 
-export default GalleryManager;
+export default Feed;

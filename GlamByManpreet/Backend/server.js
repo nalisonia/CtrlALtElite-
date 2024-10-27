@@ -1,7 +1,8 @@
 // server.js
 // Load environment variables
 require('dotenv').config({ path: '../.env' });
-
+const supabaseURL = "https://pnqnsatdkmhfxnumybf.supabase.co/"
+//const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBucW5zYXRka216aGZ4bnVteWJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE4MzQ3MDQsImV4cCI6MjAyNzQxMDcwNH0.DX3v7ZkqSmwhtpFokkhpvXB6JcarPBDaSYDDpk_vHAE
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -9,12 +10,19 @@ const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session); // Connect pg-simple for session storage
 const pool = require('./db'); // Import your database connection pool
 
+const multer = require('multer');
+const aws = require('aws-sdk');
+const multerS3 = require('multer-s3');
+const path = require('path');
+
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: '*', // Adjust CORS settings as needed
+  //origin: '*', // Adjust CORS settings as needed
+  origin: 'http://localhost:3001', 
   credentials: true,
 }));
 app.use(express.json());
@@ -165,6 +173,53 @@ async function sendEmail(email, subject, message) {
     console.error('Error sending email:', error);
   }
 }
+aws.config.update({
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  region: process.env.REACT_APP_AWS_REGION,
+});
+
+const s3 = new aws.S3();
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'manpreetfeed',
+    acl: 'public-read',
+    key: (req, file, cb) => {
+      cb(null, `feeds/${Date.now()}_${path.basename(file.originalname)}`);
+    }
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB file size limit
+});
+
+app.post('/feed/upload', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send('Image is required');
+    }
+
+    const { text } = req.body;
+    const imageUrl = req.file.location;
+
+    const query = `
+      INSERT INTO feed (text, image_url)
+      VALUES ($1, $2)
+      RETURNING *;
+    `;
+    const values = [text, imageUrl];
+    const result = await pool.query(query, values);
+
+    res.status(201).json({ feed: result.rows[0] });
+  } catch (error) {
+    console.error('Error inserting feed entry:', error);
+    if (error instanceof multer.MulterError) {
+      return res.status(500).send('Multer upload error');
+    }
+    res.status(500).send('Error inserting feed entry');
+  }
+});
+
 
 // Route to fetch all users
 app.get('/users', async (req, res) => {
