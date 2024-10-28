@@ -2,12 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import AWS from 'aws-sdk';
-import { createClient } from '@supabase/supabase-js';
+import supabase from './../config/supabaseClient.js';
 
-// Initialize Supabase client
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL; // Add this to your .env file
-const supabaseKey = process.env.REACT_APP_SUPABASE_KEY; // Add this to your .env file
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Feed() {
   const [feedContent, setFeedContent] = useState('');
@@ -35,15 +31,8 @@ function Feed() {
   // Function to fetch feed items from Supabase
   const fetchFeedItems = async () => {
     try {
-      const { data, error } = await supabase
-        .from('feed')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      console.log('Fetched Feed Items:', data); // Log the data to check if it is fetched correctly
-      setFeedItems(data);
+      const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed');
+      setFeedItems(response.data);
     } catch (error) {
       console.error('Error fetching feed items:', error);
     }
@@ -81,61 +70,37 @@ function Feed() {
 
   // Function to handle form submission
   const handleSubmit = async () => {
-    console.log('Submitting feed item...'); // Log submission start
-    console.log('Feed Content:', feedContent); // Log the content being submitted
     let uploadedImageUrl = await handleUploadImage();
 
     if (!uploadedImageUrl && !isEditing) {
-      console.log("Image upload failed"); // Log if image upload fails
-      return alert("Image upload failed"); // New uploads need an image
+      return alert('Image upload failed');
     }
 
-    if (isEditing) {
-      // Handle edit submission
-      const updatedItem = {
-        content: feedContent,
-        image_url: uploadedImageUrl || feedItems[editIndex].image_url, // Keep old image if not changed
-      };
-
-      try {
-        await supabase
-          .from('feed')
-          .update(updatedItem)
-          .match({ id: feedItems[editIndex].id });
-
-        const updatedFeedItems = [...feedItems];
-        updatedFeedItems[editIndex] = { ...updatedFeedItems[editIndex], ...updatedItem };
-        setFeedItems(updatedFeedItems);
-        console.log('Updated Feed Items:', updatedFeedItems); // Log updated items
+   // If editing, use the old image if a new one wasn't uploaded
+   const item = {
+    content: feedContent,
+    image_url: uploadedImageUrl || feedItems[editIndex]?.image_url, // Keep old image if not changed
+  };
+  
+    try {
+      if (isEditing) {
+        await axios.put( `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed/${feedItems[editIndex].id}`, item);
         setIsEditing(false);
         setEditIndex(null);
-      } catch (error) {
-        console.error('Error updating feed item:', error);
+
+      } 
+      else {
+        await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed/create', item);
       }
-    } else {
-      // Handle new submission
-      const newItem = {
-        content: feedContent,
-        image_url: uploadedImageUrl,
-      };
-
-      try {
-        const { data, error } = await supabase.from('feed').insert(newItem);
-
-        if (error) throw error;
-
-        console.log('New Feed Item:', newItem); // Log the new item to check if it's correct
-        setFeedItems([...feedItems, { ...newItem, id: data[0].id, created_at: new Date().toISOString() }]);
-        console.log('Current Feed Items:', feedItems); // Log current items after submission
-      } catch (error) {
-        console.error('Error submitting feed:', error);
-      }
+      fetchFeedItems(); // Refresh feed
+    } catch (error) {
+      console.error('Error submitting feed:', error);
     }
 
-    // Reset form
     setFeedContent('');
     setFile(null);
   };
+  
 
   // Function to handle editing an item
   const handleEdit = (index) => {
@@ -144,19 +109,11 @@ function Feed() {
     setIsEditing(true);
   };
 
-  // Function to handle deleting an item
 // Function to handle deleting an item
 const handleDelete = async (index) => {
-  const itemToDelete = feedItems[index];
   try {
-    const { error } = await supabase
-      .from('feed')
-      .delete()
-      .eq('id', itemToDelete.id);
-
-    if (error) throw error;
-
-    setFeedItems(feedItems.filter((_, i) => i !== index));
+    await axios.delete(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed/${feedItems[index].id}`);
+    fetchFeedItems();
   } catch (error) {
     console.error('Error deleting feed item:', error);
   }
@@ -217,3 +174,4 @@ const handleDelete = async (index) => {
 }
 
 export default Feed;
+
