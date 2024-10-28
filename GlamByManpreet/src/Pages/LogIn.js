@@ -103,47 +103,39 @@ function LogIn() {
     }
 };
 
-  
-
-  const handleForgotPassword = async () => {
-    setError(''); // Reset error message
-    if (!forgotEmail) {
-      setError('Please enter your email address.');
-      return;
-    }
-    try {
-      const response = await axios.post('/forgot-password', {
-        email: forgotEmail,
-      });
-      if (response.status === 200) {
-        alert('Password reset link sent! Check your email.');
-        setIsModalOpen(false);
-        setForgotEmail('');
-      } else {
-        setError('Error sending reset link. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error sending reset link:', error.response ? error.response.data : error.message);
+const handleForgotPassword = async () => {
+  setError(''); 
+  if (!forgotEmail) {
+    setError('Please enter your email address.');
+    return;
+  }
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail);
+    if (error) {
       setError('Error sending reset link. Please try again.');
+      console.error('Error sending reset link:', error.message);
+    } else {
+      alert('Password reset link sent! Check your email.');
+      setIsModalOpen(false);
+      setForgotEmail('');
     }
-  };
-
-
-
-
+  } catch (error) {
+    console.error('Unexpected error:', error.message);
+    setError('Unexpected error. Please try again.');
+  }
+};
   return (
     <Box className="login" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
       <Typography variant="h4" align="center" sx={{ mb: 3 }}>
         Log In
       </Typography>
       <Box sx={{ mt: 3 }}>
-      <Button fullWidth variant="contained" color="secondary" startIcon={<FaceBookIcon />} sx={{ mt: 2 }}onClick={handleFacebookSignUpClick}>Sign Up with Facebook</Button>
       <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign Up with Google</Button>
 
         <Button
           fullWidth
           variant="contained"
-          color="primary"
+          color="secondary"
           startIcon={<EmailIcon />}
           className="emailButton"
           sx={{ mt: 2 }}
