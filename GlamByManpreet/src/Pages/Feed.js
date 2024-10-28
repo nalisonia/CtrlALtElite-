@@ -174,3 +174,4 @@ const handleDelete = async (index) => {
 }
 
 export default Feed;
+
