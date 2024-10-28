@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Box, Card, CardContent, CardHeader, Avatar, IconButton, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Avatar, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import '../Styles/UserFeed.css'; // Import CSS file for styling 
+import { createClient } from '@supabase/supabase-js';
+import '../Styles/UserFeed.css'; // Import CSS file for styling
+
+// Initialize Supabase client
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 function UserFeed() {
   const [feedData, setFeedData] = useState([]); // State to store feed data
@@ -10,10 +15,16 @@ function UserFeed() {
   useEffect(() => {
     const fetchFeedData = async () => {
       try {
-        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed');
-        setFeedData(response.data);
+        const { data, error } = await supabase
+          .from('feed')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        
+        setFeedData(data);
       } catch (error) {
-        console.error('Error fetching feed data:', error.response ? error.response.data : error.message);    
+        console.error('Error fetching feed data:', error.message);    
       }
     };
   
@@ -28,13 +39,9 @@ function UserFeed() {
           feedData.map((item) => (
             <Card key={item.id} sx={{ mb: 2, width: '40%', border: '1px solid #ccc' }}>
               <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>A</Avatar>
-                }
+                avatar={<Avatar sx={{ bgcolor: 'primary.main' }}>A</Avatar>}
                 action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
+                  <MoreVertIcon />
                 }
                 title="Admin" // Hardcoded Admin as poster
                 subheader={new Date(item.created_at).toLocaleString()}
@@ -43,6 +50,11 @@ function UserFeed() {
                 <Typography variant="body2" color="text.secondary">
                   {item.content}
                 </Typography>
+                {item.image_url && (
+                  <Box sx={{ mt: 2, textAlign: 'center' }}>
+                    <img src={item.image_url} alt="Feed" style={{ width: '100%', borderRadius: 8 }} />
+                  </Box>
+                )}
               </CardContent>
             </Card>
           ))

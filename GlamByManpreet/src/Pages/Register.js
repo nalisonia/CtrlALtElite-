@@ -139,13 +139,10 @@ const Register = () => {
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
       <Typography variant="h4" align="center" sx={{ mb: 3 }}>Sign Up</Typography>
       <Box sx={{ mt: 3 }}>
-        <Button fullWidth variant="contained" color="secondary" startIcon={<FaceBookIcon />} sx={{ mt: 2 }} onClick={handleFacebookSignUpClick}>
-          Sign Up with Facebook
-        </Button>
         <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>
           Sign Up with Google
         </Button>
-        <Button fullWidth variant="contained" color="primary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>
+        <Button fullWidth variant="contained" color="secondary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>
           Sign Up with Email
         </Button>
 
