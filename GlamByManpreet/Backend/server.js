@@ -233,6 +233,9 @@ app.get('/users', async (req, res) => {
   }
 });
 
+app.get('/api/client/inquiries', isAuthenticated, bookingController.getClientInquiries);
+
+
 // Route to handle inquiry submission
 app.post('/submit', async (req, res) => {
   const { firstNameAndLastName, phoneNumber, emailAddress, eventDate, eventTime, eventType, eventName, clientsHairAndMakeup, clientsHairOnly, clientsMakeupOnly, locationAddress, additionalNotes } = req.body;

@@ -91,9 +91,12 @@ function App() {
                     <Route path="/userview" element={<UserView/>} />
                     <Route path="/userfeed" element={<UserFeed/>} />
                     <Route path="/profileedit" element={<ProfileEdit/>} />
-                    <Route path="/inquiryhistory" element={<InquiryHistory/>} />
                     <Route path="/admin" element={<AdminDashboard/>} />
                     <Route path="*" element={<Navigate to="/" />} />
+                    <Route path="/inquiryhistory" element={<InquiryHistory />} />
+
+
+        
                 </Routes>
                 <Footer />
             </div>
