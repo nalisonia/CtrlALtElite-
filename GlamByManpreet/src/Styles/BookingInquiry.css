@@ -116,3 +116,11 @@ button[type="submit"]:hover {
       max-width: 90%;
     }
   }
+
+  /*Booking Inquiry fields error*/
+  .error {
+    color: red;
+    font-size: small;
+    margin-top: 5px; /* Or whatever spacing you prefer */
+    display: block; /* To ensure it appears on a new line */
+  }
