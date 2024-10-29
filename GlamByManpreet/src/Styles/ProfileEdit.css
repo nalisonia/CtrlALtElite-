@@ -1,0 +1,134 @@
+/* ProfileEdit.css */
+
+/* Main Container */
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    background-color: rgb(244, 146, 228);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Italiana', serif;
+    margin-bottom: 25px;
+}
+
+/* Paragraph */
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Section Divider */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+/* Content Box Styling */
+.meme {
+    margin-top: 30px;
+    padding: 15px;
+    width: 90%;
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #d3d3e7;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.meme p {
+    color: #444;
+    font-size: 1.1rem;
+}
+
+/* Button Styling */
+.edit-profile-button {
+    margin-top: 25px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff66b2;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-button:hover {
+    background-color: #ff3399;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.edit-profile-button:active {
+    background-color: #cc0066;
+    transform: scale(0.98);
+}
+
+/* Body Text Styling */
+body {
+    color: black;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Input Field Styling */
+input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: #ff66b2;
+    outline: none;
+}
+
+/* Mobile Styling */
+@media only screen and (max-width: 600px) {
+    .gallery-container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .meme {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .edit-profile-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
