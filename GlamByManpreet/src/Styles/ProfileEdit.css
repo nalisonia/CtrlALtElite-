@@ -1,0 +1,27 @@
+/* ProfileEdit.css */
+
+/* Additional styles for form and inputs */
+.profile-edit-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Limit the width of the form */
+    margin: 0 auto; /* Center the form */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between form groups */
+}
+
+.form-input {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding for comfort */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size for inputs */
+}
+
+.form-input:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
