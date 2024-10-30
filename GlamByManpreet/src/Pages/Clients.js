@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import '../Styles/Clients.css'; // Import the CSS file
 import { DataGrid } from '@mui/x-data-grid';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,45 +15,40 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Typography,
 } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
 function Clients() {
-  // State to store client data fetched from the server
+  // State variables
   const [clients, setClients] = useState([]);
-
-  // State to control the visibility of the Edit and Delete Client dialog box
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-
-  // State to store the currently selected client for editing
   const [selectedClient, setSelectedClient] = useState(null);
-
-  // State variables to store the edited values of a client in the Edit Client Dialog
   const [editName, setEditName] = useState('');
   const [editEmail, setEditEmail] = useState('');
   const [editPhone, setEditPhone] = useState('');
-
-  // State to store the ID of the client to be deleted
   const [clientIdToDelete, setClientIdToDelete] = useState(null);
 
-  // useEffect hook to fetch client data when the component mounts
+  // Use theme and media query to detect mobile devices
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Fetch clients data
   useEffect(() => {
-    // Async function to fetch client data from the server
     const fetchClients = async () => {
       try {
-        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients');
-        setClients(response.data); // Update the clients state with the fetched data
+        const response = await axios.get(
+          'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients'
+        );
+        setClients(response.data);
       } catch (error) {
-        console.error('Error fetching clients:', error); // Log any errors to the console
+        console.error('Error fetching clients:', error);
       }
     };
-
-    // Call the fetchClients function to fetch data on component mount
     fetchClients();
-  }, []); // The empty dependency array ensures this effect runs only once on mount
+  }, []);
 
-  // Function to handle editing a client
+  // Handlers for edit and delete dialogs
   const handleEditClient = (client) => {
     setSelectedClient(client);
     setEditName(client.name);
@@ -59,41 +57,37 @@ function Clients() {
     setOpenEditDialog(true);
   };
 
-  // Function to handle deleting a client
   const handleDeleteClient = (clientId) => {
     setClientIdToDelete(clientId);
     setOpenDeleteDialog(true);
   };
 
-  // Function to handle closing the Edit Client Dialog
   const handleCloseEditDialog = () => {
     setOpenEditDialog(false);
     setSelectedClient(null);
-    // Reset the edit state variables to their default values
     setEditName('');
     setEditEmail('');
     setEditPhone('');
   };
 
-  // Function to handle closing the Delete Client Dialog
   const handleCloseDeleteDialog = () => {
     setOpenDeleteDialog(false);
     setClientIdToDelete(null);
   };
 
-  // Function to handle saving the edited client data
+  // Handlers for saving edits and confirming deletion
   const handleSaveEdit = async () => {
     try {
-      // Send a PUT request to the server to update the client with the edited values
-      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${selectedClient.id}`, {
-        name: editName,
-        email: editEmail,
-        phone: editPhone,
-      });
-      // Update the clients state after successful edit
+      await axios.put(
+        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${selectedClient.id}`,
+        {
+          name: editName,
+          email: editEmail,
+          phone: editPhone,
+        }
+      );
       setClients((prevClients) =>
         prevClients.map((client) =>
-          // If the client ID matches the selected client ID, update the client with the edited values
           client.id === selectedClient.id
             ? { ...client, name: editName, email: editEmail, phone: editPhone }
             : client
@@ -105,14 +99,12 @@ function Clients() {
     }
   };
 
-  // Function to handle confirming the deletion of a client
   const handleConfirmDelete = async () => {
     try {
-      // Send a DELETE request to the server to delete the client with the given ID
-      await axios.delete(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${clientIdToDelete}`);
-      // Update the clients state after successful delete
+      await axios.delete(
+        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${clientIdToDelete}`
+      );
       setClients((prevClients) =>
-        // Filter the clients array to remove the client with the deleted ID
         prevClients.filter((client) => client.id !== clientIdToDelete)
       );
       handleCloseDeleteDialog();
@@ -121,74 +113,102 @@ function Clients() {
     }
   };
 
-    // Handle approve client
+  // Handlers for approving and declining clients
   const handleApprove = async (clientId) => {
     try {
-      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/approve/${clientId}`);
-      // Optionally refresh client list or update the client's status in the UI
-      setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'approved' } : client));
+      await axios.put(
+        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/approve/${clientId}`
+      );
+      setClients((prevClients) =>
+        prevClients.map((client) =>
+          client.id === clientId ? { ...client, status: 'approved' } : client
+        )
+      );
     } catch (error) {
       console.error('Error approving client:', error);
     }
   };
 
-  // Handle decline client
   const handleDecline = async (clientId) => {
     try {
-      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/decline/${clientId}`);
-      // Optionally refresh client list or update the client's status in the UI
-      setClients((prevClients) => prevClients.map((client) => client.id === clientId ? { ...client, status: 'declined' } : client));
+      await axios.put(
+        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/decline/${clientId}`
+      );
+      setClients((prevClients) =>
+        prevClients.map((client) =>
+          client.id === clientId ? { ...client, status: 'declined' } : client
+        )
+      );
     } catch (error) {
       console.error('Error declining client:', error);
     }
   };
-  
-  // Define the columns for the DataGrid
+
+  // Define columns with adjustments for mobile
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'email', headerName: 'Email', width: 200 },
-    { field: 'phone', headerName: 'Phone', width: 130 },
+    { field: 'id', headerName: 'ID', width: isMobile ? 50 : 70 },
+    { field: 'name', headerName: 'Name', width: isMobile ? 150 : 150 },
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 150,
-      // Function to render the cell content for the actions column
+      width: isMobile ? 100 : 250,
       renderCell: (params) => {
-        // Define functions to handle the actions for each row
         const handleEdit = () => handleEditClient(params.row);
         const handleDelete = () => handleDeleteClient(params.row.id);
         const handleApproveClick = () => handleApprove(params.row.id);
         const handleDeclineClick = () => handleDecline(params.row.id);
 
         return (
-          <>
-            <IconButton onClick={handleEdit}>
-              <EditIcon />
+          <div className="actions-container">
+            <IconButton onClick={handleEdit} size="small">
+              <EditIcon fontSize="inherit" />
             </IconButton>
-            <IconButton onClick={handleDelete}>
-              <DeleteIcon />
+            <IconButton onClick={handleDelete} size="small">
+              <DeleteIcon fontSize="inherit" />
             </IconButton>
-            {/* Approve and Decline buttons */}
-            <Button onClick={handleApproveClick} color="success" variant="contained" size="small">
-              Approve
-            </Button>
-            <Button onClick={handleDeclineClick} color="error" variant="contained" size="small" sx={{ ml: 1 }}>
-              Decline
-            </Button>
-          </>
+            {/* Approve and Decline buttons for non-mobile devices */}
+            {!isMobile && (
+              <>
+                <Button
+                  onClick={handleApproveClick}
+                  color="success"
+                  variant="contained"
+                  size="small"
+                  sx={{ ml: 1 }}
+                >
+                  Approve
+                </Button>
+                <Button
+                  onClick={handleDeclineClick}
+                  color="error"
+                  variant="contained"
+                  size="small"
+                  sx={{ ml: 1 }}
+                >
+                  Decline
+                </Button>
+              </>
+            )}
+          </div>
         );
       },
     },
-  ];
+    // Include additional columns for non-mobile devices
+    !isMobile && { field: 'email', headerName: 'Email', width: 200 },
+    !isMobile && { field: 'phone', headerName: 'Phone', width: 130 },
+    !isMobile && { field: 'status', headerName: 'Status', width: 100 },
+  ].filter(Boolean);
 
-  // Too lazy to comment everything down below - just look at return() in Bookings.js lol
   return (
-    <div style={{ height: 600, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}> 
-      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', width: '100%' }}>  
+    <div className="clients-container">
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ textAlign: 'center', width: '100%' }}
+      >
         Clients
       </Typography>
-      <div style={{ width: '35%' }} className='center-pagination'>
+      <div className="clients-grid-container">
         <DataGrid
           rows={clients}
           columns={columns}
@@ -196,10 +216,16 @@ function Clients() {
           rowsPerPageOptions={[5]}
           checkboxSelection={false}
           disableSelectionOnClick
+          autoHeight
         />
 
         {/* Edit Client Dialog */}
-        <Dialog open={openEditDialog} onClose={handleCloseEditDialog}>
+        <Dialog
+          open={openEditDialog}
+          onClose={handleCloseEditDialog}
+          fullWidth
+          maxWidth={isMobile ? 'xs' : 'sm'}
+        >
           <DialogTitle>Edit Client</DialogTitle>
           <DialogContent>
             <TextField
@@ -232,7 +258,12 @@ function Clients() {
         </Dialog>
 
         {/* Delete Client Dialog */}
-        <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
+        <Dialog
+          open={openDeleteDialog}
+          onClose={handleCloseDeleteDialog}
+          fullWidth
+          maxWidth="xs"
+        >
           <DialogTitle>Delete Client</DialogTitle>
           <DialogContent>
             <DialogContentText>

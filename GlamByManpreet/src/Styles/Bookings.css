@@ -1,0 +1,75 @@
+.bookings-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bookings-grid-container {
+    width: 80%;
+  }
+  
+  @media (max-width: 600px) {
+    .bookings-container {
+      padding: 10px;
+    }
+
+    .bookings-grid-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .MuiDataGrid-root .MuiDataGrid-columnHeader,
+    .MuiDataGrid-root .MuiDataGrid-cell {
+      padding: 4px;
+    }
+  
+    .MuiDataGrid-root .MuiDataGrid-columnHeaderTitle,
+    .MuiDataGrid-root .MuiDataGrid-cellContent {
+      font-size: 12px;
+    }
+
+    .MuiDataGrid-root .MuiDataGrid-row {
+      max-height: none;
+      min-height: 30px;
+    }
+
+    .MuiDialog-paper {
+      margin: 10px;
+      width: 100%;
+      max-width: none;
+    }
+
+    .MuiDialogContent-root .MuiTextField-root {
+      margin-bottom: 8px;
+    }
+  
+    .MuiTextField-root {
+      font-size: 14px;
+    }
+
+    .MuiDialogActions-root .MuiButton-root {
+      font-size: 14px;
+    }
+
+    .MuiDialogTitle-root {
+      font-size: 18px;
+    }
+
+    .MuiIconButton-root {
+      padding: 8px;
+    }
+
+    .MuiSvgIcon-root {
+      font-size: 20px;
+    }
+
+    .MuiDataGrid-root .MuiDataGrid-cell {
+      font-size: 12px;
+    }
+  
+    .MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+      font-weight: 500;
+    }
+  }
+  

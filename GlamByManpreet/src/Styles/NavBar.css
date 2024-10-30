@@ -76,7 +76,7 @@
 
 }
 
-.Nav_Bar_Title > text{
+.Nav_Bar_Title > span{
   font-size: 0.35em;
   padding-left: 2.5%;
   
@@ -94,16 +94,15 @@
         font-size: 40px;
         line-height: 0.5;
         padding-bottom: 10px;
-        padding-top: 3px;
-        padding-right: 12.5%;
-        margin-left: 30%;
+        padding-top: 3px;        
+        margin-left: 20%;
     }
     
     .Drawer_Nav_Bar_Title{
       font-size: 40px;
       text-decoration: none;
       text-transform: none;
-      color: black;
+      color:white;
       font-family: 'Bebas Neue', sans-serif;
       font-weight: 700;
     }

@@ -13,8 +13,11 @@ function ContactMe() {
                         glambymanpreetk@gmail.com
                     </a>
                 </p>
-                <p>Business Phone Number: <span>(123) 456-7890</span></p>
-                <p>Instagram: <span>@glambymanpreet</span></p>
+                <p>Phone: <span>(123) 456-7890</span></p>
+                <p>Instagram: <a href="https://www.instagram.com/glambymanpreet?igsh=MzRlODBiNWFlZA==" 
+                    target="_blank" 
+                    rel="noopener noreferrer">@glambymanpreet</a>
+                </p>
             </div>
 
             <div className="disclaimer">

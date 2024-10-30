@@ -18,7 +18,7 @@ describe('PostgreSQL Pool', () => {
     });
 
     // Import the pool instance after the mock is set up
-    pool = require('../db.js'); // Update this path to the actual file
+    pool = require('../db.js');
   });
 
   it('should connect to the database and return the current time', (done) => {

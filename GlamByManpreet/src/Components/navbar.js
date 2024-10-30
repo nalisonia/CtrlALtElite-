@@ -93,6 +93,7 @@ function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+  
 
   //this code deals with the hamburger button, when you cick outside of the dropdown button
   //handDrawerToggle is called and sets the state of mobileopen to the oppisiote state
@@ -266,7 +267,7 @@ function DrawerAppBar(props) {
             {/*To center title*/}
             <Link to="/" className="Nav_Bar_Title">
               GLAM <br></br>
-              <text>by manpreet</text>
+              <span>by manpreet</span>
             </Link>
           </Typography>
           {/* Buttons to login and register for the desktop version*/}

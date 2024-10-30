@@ -50,8 +50,6 @@ function App() {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             console.log(session);
-            setSession(session);
-            console.log(session);
         });
 
         // Subscribe to auth state changes
@@ -73,7 +71,6 @@ function App() {
             <div className="App">
                 <NavBar session={session}/>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about_me" element={<AboutMe />} /> 
                     <Route path="/services" element={<Services />} /> 
