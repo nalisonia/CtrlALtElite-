@@ -43,6 +43,13 @@ const baseNavItems = [
   "GALLERY",
 ];
 
+/*************  ✨ Codeium Command 🌟  *************/
+/**
+ * The main navigation bar component.
+ * @param {Object} props - The component props.
+ * @param {Window} props.window - The window object.
+ * @returns {ReactElement} The rendered navigation bar component.
+ */
 function DrawerAppBar(props) {
   const { window } = props;
   const navigate = useNavigate();
@@ -68,6 +75,9 @@ function DrawerAppBar(props) {
     };
   }, []); // The empty dependency array means this effect runs once on mount
 
+  /**
+   * Handle sign in button click.
+   */
   const handleSignIn = () => {
     navigate("/LogIn");
   };
@@ -75,6 +85,9 @@ function DrawerAppBar(props) {
   //when a user is logged in the tab PROFILE is added to navItems
   const navItems = session ? [...baseNavItems, "PROFILE"] : baseNavItems;
 
+  /**
+   * Handle sign out button click.
+   */
   //uses supabase to sign out
   async function handleSignOut() {
     const { error } = await supabase.auth.signOut();
@@ -86,9 +99,13 @@ function DrawerAppBar(props) {
       navigate("/");
     }
   }
+
   //variable intialized named mobileopen using usestate. This var will be used if the website is not in desktop mode
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  /**
+   * Handle drawer toggle button click.
+   */
   //set mobile open chagnes the state of the variable named setmobileopen
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -123,6 +140,13 @@ function DrawerAppBar(props) {
             replaces an empty space with a _ so they match the routes defined in app.js so they can be linked 
             properly*/}
               <Link
+                to={
+                  item === "HOME"
+                    ? "/"
+                    : item === "PROFILE"
+                    ? "/userview"
+                    : `/${item.toLowerCase().replace(/\s+/g, "_")}`
+                }
               to={
                 item === "HOME"
                   ? "/"
@@ -448,6 +472,7 @@ function DrawerAppBar(props) {
     </Box>
   );
 }
+/******  4744f549-c541-4e58-b73c-67ba2e89a7b9  *******/
 
 DrawerAppBar.propTypes = {
   window: PropTypes.func,
