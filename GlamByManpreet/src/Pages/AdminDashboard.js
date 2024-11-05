@@ -81,30 +81,25 @@ function AdminDashboard() {
         )
       );
     } catch (error) {
-      console.error("Error approving inquiry:", error);
+      console.error('Error approving inquiry:', error);
     }
   };
-
+  
   const handleDeclineInquiry = async (clientId) => {
     console.log('Declining inquiry with clientId:', clientId);
     try {
-      await axios.post(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`,
-        {
-          clientId,
-          status: "declined",
-        }
-      );
-
+      await axios.post(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`, {
+        clientId,
+        status: 'declined',
+      });
+  
       setInquiries((prevInquiries) =>
         prevInquiries.map((inquiry) =>
-          inquiry.id === clientId
-            ? { ...inquiry, booking_status: "declined" }
-            : inquiry
+          inquiry.id === clientId ? { ...inquiry, booking_status: 'declined' } : inquiry
         )
       );
     } catch (error) {
-      console.error("Error declining inquiry:", error);
+      console.error('Error declining inquiry:', error);
     }
   };
 
