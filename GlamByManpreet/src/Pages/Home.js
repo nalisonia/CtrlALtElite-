@@ -34,9 +34,6 @@ function HomePage() {
                 </div>
                 <div className='info-box'> 
                     <h2>Inquire Now!</h2>
-                    <Button 
-                    sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px', border:'1px solid black'}} 
-                    component={Link} to="/Booking_Inquiry">Inquire</Button>
                 </div>
                 <div className='info-box'>
                     <h2>Testimonials</h2>

@@ -1,0 +1,117 @@
+/* clients.css */
+
+/* General container adjustments */
+.clients-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .clients-grid-container {
+    width: 80%;
+  }
+  
+  .actions-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  @media (max-width: 600px) {
+    /* Adjust the main container */
+    .clients-container {
+      padding: 10px;
+    }
+  
+    /* Adjust the DataGrid container */
+    .clients-grid-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+  
+    /* Adjust DataGrid columns */
+    .MuiDataGrid-root .MuiDataGrid-columnHeader,
+    .MuiDataGrid-root .MuiDataGrid-cell {
+      padding: 4px;
+    }
+  
+    .MuiDataGrid-root .MuiDataGrid-columnHeaderTitle,
+    .MuiDataGrid-root .MuiDataGrid-cellContent {
+      font-size: 12px;
+    }
+  
+    /* Reduce DataGrid row height */
+    .MuiDataGrid-root .MuiDataGrid-row {
+      max-height: none;
+      min-height: 30px;
+    }
+  
+    /* Adjust Dialog (Modal) */
+    .MuiDialog-paper {
+      margin: 10px;
+      width: 100%;
+      max-width: none;
+    }
+  
+    /* Adjust TextFields in Dialog */
+    .MuiDialogContent-root .MuiTextField-root {
+      margin-bottom: 8px;
+    }
+  
+    .MuiTextField-root {
+      font-size: 14px;
+    }
+  
+    /* Adjust Buttons in DialogActions */
+    .MuiDialogActions-root .MuiButton-root {
+      font-size: 14px;
+    }
+  
+    /* Adjust Typography in Dialog */
+    .MuiDialogTitle-root {
+      font-size: 18px;
+    }
+  
+    /* Adjust IconButton size */
+    .MuiIconButton-root {
+      padding: 8px;
+    }
+  
+    /* Adjust Icons size */
+    .MuiSvgIcon-root {
+      font-size: 20px;
+    }
+  
+    /* Adjust Typography in DataGrid */
+    .MuiDataGrid-root .MuiDataGrid-cell {
+      font-size: 12px;
+    }
+  
+    .MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+      font-weight: 500;
+    }
+  
+    /* Adjust action buttons */
+    .actions-container {
+      flex-wrap: wrap;
+    }
+  
+    .actions-container .MuiButton-root {
+      font-size: 10px;
+      padding: 4px 6px;
+      min-width: auto;
+      margin-left: 4px;
+    }
+  
+    /* Hide approve and decline buttons on mobile */
+    .actions-container .MuiButton-root {
+      display: none;
+    }
+  
+    /* Show a simplified approve/decline icon on mobile */
+    .actions-container::after {
+      content: '';
+      display: inline-block;
+    }
+  }
+  

@@ -1,17 +1,25 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'; // Needed for routing in the test
-import Home from '../Home';
+import { BrowserRouter } from 'react-router-dom'; 
+import 'swiper/css';
+import Home from '../Home.js';
 
 // Mock the images
+jest.mock('swiper/react', () => ({
+  Swiper: ({ children }) => <div>{children}</div>,
+  SwiperSlide: ({ children }) => <div>{children}</div>,
+}));
+
+jest.mock('swiper/css', () => {});
 jest.mock('../assets/images/actual_homepage_image2.png', () => 'model1.png');
 jest.mock('../assets/images/actual_homepage_image4.png', () => 'model2.png');
 jest.mock('../assets/images/actual_homepage_image3.png', () => 'model3.png');
 jest.mock('../assets/images/actual_homepage_image1.png', () => 'model4.png');
 
+
 describe('HomePage Component', () => {
-  test('renders homepage content', () => {
+  it('renders homepage content', () => {
     render(
       <BrowserRouter>
         <Home />

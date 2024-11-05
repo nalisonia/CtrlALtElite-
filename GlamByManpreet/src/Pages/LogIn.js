@@ -74,46 +74,45 @@ function LogIn() {
   };
 
   //log in with email
-// Log in with email
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setError('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    
+    try {
+        // Authenticate user
+        const { user, error } = await supabase.auth.signInWithPassword({
+            email: formData.email,
+            password: formData.password,
+        });
   
-  try {
-      // Authenticate user
-      const { user, error } = await supabase.auth.signInWithPassword({
-          email: formData.email,
-          password: formData.password,
-      });
-
-      if (error) throw error; // Handle error if sign-in fails
-
-      // Check if formData.email is in the admin table
-      const { data: adminData, error: adminError } = await supabase
-          .from('admin')
-          .select('email')
-          .eq('email', formData.email);
-          console.log('Admin Data:', adminData); // Debug log for admin data
-          console.log('Form Data Email:', formData.email); // Debug log for formData.email
-
-      if (adminError) {
-          console.error('Error checking admin status:', adminError.message);
-          setError('Unable to verify admin status.');
-      } else if (adminData && adminData.length > 0) {
-          // Redirect to admin page if the email is found in the admin table
-          navigate('/admin');
-      } else {
-          // Redirect to user view page if email is not found in admin table
-          navigate('/userview');
-      }
-  } catch (error) {
-      console.error('Login failed:', error); // Log the complete error object
-      setError('Login failed. Please check your credentials.'); // Generic error message
-  } finally {
-      setLoading(false);
-  }
-};
+        if (error) throw error; // Handle error if sign-in fails
+  
+        // Check if formData.email is in the admin table
+        const { data: adminData, error: adminError } = await supabase
+            .from('admin')
+            .select('email')
+            .eq('email', formData.email);
+            console.log('Admin Data:', adminData); // Debug log for admin data
+            console.log('Form Data Email:', formData.email); // Debug log for formData.email
+  
+        if (adminError) {
+            console.error('Error checking admin status:', adminError.message);
+            setError('Unable to verify admin status.');
+        } else if (adminData && adminData.length > 0) {
+            // Redirect to admin page if the email is found in the admin table
+            navigate('/admin');
+        } else {
+            // Redirect to user view page if email is not found in admin table
+            navigate('/userview');
+        }
+    } catch (error) {
+        console.error('Login failed:', error); // Log the complete error object
+        setError('Login failed. Please check your credentials.'); // Generic error message
+    } finally {
+        setLoading(false);
+    }
+  };
 
 
 const handleForgotPassword = async () => {

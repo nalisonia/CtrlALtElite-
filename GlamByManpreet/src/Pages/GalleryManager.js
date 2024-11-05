@@ -189,7 +189,7 @@ function GalleryManager() {
 <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}>
   <h3 style={{ margin: 0 }}>Gallery</h3>
 
-  <div style={{ position: 'absolute', right: 0 }}>
+  <div class="buttonContainer" style={{ position: 'absolute', right: 0 }}>
     <input
       type="file"
       accept="image/*"

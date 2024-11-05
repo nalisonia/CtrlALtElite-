@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import '../Styles/Bookings.css'; // Import the CSS file
 import { DataGrid } from '@mui/x-data-grid';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
@@ -14,8 +17,8 @@ import {
   DialogTitle,
   TextField,
   MenuItem,
+  Typography,
 } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import BookingModal from './BookingModal';
 
 function Bookings() {
@@ -55,14 +58,26 @@ function Bookings() {
 
   // Options for the "Type of Service" and "Name of the event(s)" dropdowns in the Edit Booking dialog box
   const serviceTypeOptions = ['Bridal', 'Non-Bridal'];
-  const eventNameOptions = ['Wedding Engagement', 'Rokha', 'Laggo', 'Mehndi', 'Photoshoot'];
-  
+  const eventNameOptions = [
+    'Wedding Engagement',
+    'Rokha',
+    'Laggo',
+    'Mehndi',
+    'Photoshoot',
+  ];
+
+  // Use theme and media query to detect mobile devices
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   // useEffect hook to fetch bookings and clients data when the component mounts
   useEffect(() => {
     // Async function to fetch bookings data from the server
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings');
+        const response = await axios.get(
+          'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings'
+        );
         setBookings(response.data);
       } catch (error) {
         console.error('Error fetching bookings:', error);
@@ -72,7 +87,9 @@ function Bookings() {
     // Async function to fetch clients data from the server
     const fetchClients = async () => {
       try {
-        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients');
+        const response = await axios.get(
+          'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients'
+        );
         setClients(response.data);
       } catch (error) {
         console.error('Error fetching clients:', error);
@@ -116,7 +133,7 @@ function Bookings() {
     // Find the client name from the clients array/table based on the client ID
     const client = clients.find((c) => c.id === booking.client_id);
     if (client) {
-        setClientName(client.name); // Set the client name for display in the Edit dialog
+      setClientName(client.name); // Set the client name for display in the Edit dialog
     }
     setOpenEditDialog(true); // Open the Edit Booking Dialog
   };
@@ -156,18 +173,21 @@ function Bookings() {
   const handleSaveEdit = async () => {
     try {
       // Send a PUT request to the server to update the booking with the edited values
-      await axios.put(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings/${selectedBooking.id}`, {
-        clientId: editClientId,
-        eventDate: editEventDate,
-        eventTime: editEventTime,
-        eventType: editEventType,
-        eventName: editEventName,
-        clientsHairAndMakeup: editHairAndMakeup,
-        clientsHairOnly: editHairOnly,
-        clientsMakeupOnly: editMakeupOnly,
-        locationAddress: editLocation,
-        additionalNotes: editAdditionalNotes,
-      });
+      await axios.put(
+        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings/${selectedBooking.id}`,
+        {
+          clientId: editClientId,
+          eventDate: editEventDate,
+          eventTime: editEventTime,
+          eventType: editEventType,
+          eventName: editEventName,
+          clientsHairAndMakeup: editHairAndMakeup,
+          clientsHairOnly: editHairOnly,
+          clientsMakeupOnly: editMakeupOnly,
+          locationAddress: editLocation,
+          additionalNotes: editAdditionalNotes,
+        }
+      );
 
       // Update the bookings state after successful edit
       setBookings((prevBookings) =>
@@ -200,7 +220,9 @@ function Bookings() {
   const handleConfirmDelete = async () => {
     try {
       // Send a DELETE request to the server to delete the booking with the given ID
-      await axios.delete(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings/${bookingIdToDelete}`);
+      await axios.delete(
+        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings/${bookingIdToDelete}`
+      );
       // Update the bookings state after successful delete
       setBookings((prevBookings) =>
         // Filter the bookings array to remove the booking with the deleted ID
@@ -212,24 +234,15 @@ function Bookings() {
     }
   };
 
-  // Define the columns for the DataGrid. Column names should be obvious lol
+  // Define the columns for the DataGrid
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'client_id', headerName: 'Client ID', width: 90 },
-    { field: 'client_name', headerName: 'Client Name', width: 150 },
-    { field: 'event_date', headerName: 'Event Date', width: 100 },
-    { field: 'event_time', headerName: 'Event Time', width: 100 },
-    { field: 'event_type', headerName: 'Event Type', width: 120 },
-    { field: 'event_name', headerName: 'Event Name', width: 150 },
-    { field: 'hair_and_makeup', headerName: 'Hair & Makeup', width: 120 },
-    { field: 'hair_only', headerName: 'Hair Only', width: 100 },
-    { field: 'makeup_only', headerName: 'Makeup Only', width: 100 },
-    { field: 'location', headerName: 'Location', width: 200 },
-    { field: 'additional_notes', headerName: 'Notes', width: 200 },
+    { field: 'id', headerName: 'ID', width: isMobile ? 50 : 70 },
+    { field: 'client_name', headerName: 'Client Name', width: isMobile ? 120 : 150 },
+    { field: 'event_date', headerName: 'Event Date', width: isMobile ? 90 : 100 },
     {
       field: 'actions', // Column for actions (View, Edit, Delete)
       headerName: 'Actions',
-      width: 150,
+      width: isMobile ? 100 : 150,
       // Function to render the cell content for the actions column
       renderCell: (params) => {
         // Define functions to handle the actions for each row
@@ -237,10 +250,10 @@ function Bookings() {
         const handleDelete = () => handleDeleteBooking(params.row.id); // Delete
         const handleView = () => handleViewBooking(params.row); // View
 
-        // Return the JS for the action buttons
+        // Return the JSX for the action buttons
         return (
           <>
-            <IconButton onClick={handleView}> 
+            <IconButton onClick={handleView}>
               <VisibilityIcon />
             </IconButton>
             <IconButton onClick={handleEdit}>
@@ -253,18 +266,27 @@ function Bookings() {
         );
       },
     },
-  ];
+    // Conditionally include additional columns for non-mobile devices
+    !isMobile && { field: 'client_id', headerName: 'Client ID', width: 90 },
+    !isMobile && { field: 'event_time', headerName: 'Event Time', width: 100 },
+    !isMobile && { field: 'event_type', headerName: 'Event Type', width: 120 },
+    !isMobile && { field: 'event_name', headerName: 'Event Name', width: 150 },
+    !isMobile && { field: 'hair_and_makeup', headerName: 'Hair & Makeup', width: 120 },
+    !isMobile && { field: 'hair_only', headerName: 'Hair Only', width: 100 },
+    !isMobile && { field: 'makeup_only', headerName: 'Makeup Only', width: 100 },
+    !isMobile && { field: 'location', headerName: 'Location', width: 200 },
+    !isMobile && { field: 'additional_notes', headerName: 'Notes', width: 200 },
+  ].filter(Boolean); // Remove any false entries from the array
 
   return (
-    // Main container for the Bookings component, using flexbox for layout
-    <div style={{ height: 800, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    // Main container for the Bookings component
+    <div className="bookings-container">
       {/* Header for the Bookings section */}
       <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', width: '100%' }}>
         Bookings
       </Typography>
-      {/* Container for the DataGrid and dialogs, centered and with a width of 80% */}
-      <div style={{ width: '80%' }} className='center-pagination'>
-
+      {/* Container for the DataGrid and dialogs */}
+      <div className="bookings-grid-container">
         {/* DataGrid to display booking data */}
         <DataGrid
           rows={bookings} // Data to be displayed in the grid
@@ -272,7 +294,8 @@ function Bookings() {
           pageSize={5} // Number of rows to display per page
           rowsPerPageOptions={[5]} // Options for rows per page selection
           checkboxSelection={false}
-          disableSelectionOnClick 
+          disableSelectionOnClick
+          autoHeight // Automatically adjust height to fit content
           onRowClick={(params) => handleViewBooking(params.row)} // Handle row click to view booking details
         />
 
@@ -284,7 +307,12 @@ function Bookings() {
         />
 
         {/* Edit Booking Dialog */}
-        <Dialog open={openEditDialog} onClose={handleCloseEditDialog}> {/* Control dialog visibility */}
+        <Dialog
+          open={openEditDialog}
+          onClose={handleCloseEditDialog}
+          fullWidth
+          maxWidth={isMobile ? 'xs' : 'sm'} // Adjust dialog width based on screen size
+        >
           <DialogTitle>Edit Booking</DialogTitle>
           <DialogContent>
             <TextField
@@ -398,7 +426,12 @@ function Bookings() {
         </Dialog>
 
         {/* Delete Booking Dialog */}
-        <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
+        <Dialog
+          open={openDeleteDialog}
+          onClose={handleCloseDeleteDialog}
+          fullWidth
+          maxWidth="xs"
+        >
           <DialogTitle>Delete Booking</DialogTitle>
           <DialogContent>
             <DialogContentText>

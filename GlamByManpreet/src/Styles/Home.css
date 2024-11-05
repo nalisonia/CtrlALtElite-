@@ -71,21 +71,24 @@
 @media only screen and (max-width: 600px){
     .picture-container{
         margin-top: 5px;
-        display: flex;
+        width: 100vw;
         justify-content: center;
+        gap: 0;
 
     }
 
     .home-container{
-        width: 100vw;
+        width: 90vw;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        padding-left: 10%;
     }
 
     .model-image{
-        margin-top: 0;
+        width: 100%;
+        margin-top: 0.5em;
     }
 
     .some-content{
@@ -94,7 +97,7 @@
         border: 0.5px solid black;
         border-radius: 1%;
         padding: 10px;
-        margin-top: 10px;
+        margin-top: 1px;
         background-color: #FDF7F8;
         box-shadow: 10px 10px 20px rgba(0,0,0,0.2), 
         -10px -10px 20px rgba(256,256,256,0.1);
