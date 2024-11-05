@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import supabase from '../config/supabaseClient.js';
 import '../Styles/ProfileEdit.css';
 import Snackbar from '@mui/material/Snackbar';
+import '../Styles/ProfileEdit.css';
+
 
 function ProfileEdit() {
   const [password, setPassword] = useState('');

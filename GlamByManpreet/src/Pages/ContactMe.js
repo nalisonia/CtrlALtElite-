@@ -4,7 +4,7 @@ import '../Styles/ContactMe.css';  // Adjust the path based on your file structu
 function ContactMe() {
     return (
         <div className='contactme-container'>
-            <h2>Contact Me Page</h2>
+            <h2>CONTACT ME</h2> {/* Updated heading */}
             <p>Hello! I'd love to hear from you—get in touch with me.</p>
 
             <div className="contact-details">

@@ -1,8 +1,11 @@
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Keep default font for body */
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 .contactme-container {
@@ -10,20 +13,24 @@ body {
     margin: auto;
     padding: 20px;
     margin-top: 2.5%;
-    border: 1px solid black;
-    background-color: #fff;  /* White background for main container */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-
+/* Apply Bebas Neue to headings */
 h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5em;
+    color: #333;
     text-align: center;
-    font-size: 36px;
     margin-bottom: 20px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #ff99cc;
     padding-bottom: 10px;
 }
 
+/* Contact details box styling */
 .contact-details {
     background-color: #ffccff;  /* Light pink background */
     border: 2px solid #ff99cc;  /* Slightly darker pink border */
@@ -31,45 +38,26 @@ h2 {
     padding: 20px;              /* Padding inside the box */
     margin-top: 20px;           /* Spacing above the box */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+    font-weight: 400 !important; /* Set to normal weight */
 }
 
 .contact-details p {
     font-size: 18px;
     margin-bottom: 10px;
+    font-weight: 400 !important; /* Ensure paragraph text is also normal weight */
 }
-
-.contact-details a {
-    text-decoration: none;
-}
-
-/* a:visited {
-    color: inherit;
-} */
 
 .contact-details span {
-    font-weight: bold;
+    font-weight: 400 !important; /* Changed from 600 to 400 for lighter text */
 }
 
-.disclaimer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #777;
-    text-align: center;
+/* Link and hover effects */
+.contact-details a {
+    color: #d926a9;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-/* Mobile responsive styling */
-@media only screen and (max-width: 600px) {
-    .contactme-container {
-        max-width: 480px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 0px; 
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0px;
-    }
+.contact-details a:hover {
+    color: #a6007e;
 }
