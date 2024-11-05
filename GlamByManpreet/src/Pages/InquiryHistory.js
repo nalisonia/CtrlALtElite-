@@ -114,7 +114,7 @@ function InquiryHistory() {
                                 <tr key={inquiry.id}>
                                     <td>{inquiry.event_date}</td>
                                     <td>{inquiry.event_type}</td>
-                                    <td>{inquiry.status}</td>
+                                    <td>{inquiry.booking_status}</td>
                                     <td>{inquiry.additional_notes}</td>
                                 </tr>
                             ))}
