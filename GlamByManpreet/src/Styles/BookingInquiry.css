@@ -3,14 +3,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 .booking-inquiry {
-    max-width: 480px;
+    max-width: 600px;
     margin: 0 auto;
+    margin-top: 10px;
     padding: 24px;
     background-color: #f9e4f7;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border: 1px solid #00050b;
     font-family: 'Bebas Neue', sans-serif;
+    
 }
 
 .form-container {
@@ -22,6 +24,8 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #242323;
     font-family: 'Playfair Display', serif;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .form-group {
@@ -75,7 +79,8 @@ button[type="submit"] {
     background-color: #ffc2f9;
     color: #0e0101;
     padding: 12px 20px;
-    border: none;
+    border: black solid 1px;
+    box-shadow: #504f50;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
