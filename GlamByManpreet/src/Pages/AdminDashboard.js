@@ -30,7 +30,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 const drawerWidth = 240;
 
 function AdminDashboard() {
-  const [selectedItem, setSelectedItem] = useState("Overview");
+  const [selectedItem, setSelectedItem] = useState('Overview'); 
   const [feedData, setFeedData] = useState([]);
   const [inquiries, setInquiries] = useState([]); // State for inquiries
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,34 +50,39 @@ function AdminDashboard() {
   };
 
   useEffect(() => {
+    const fetchFeedData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/feed');
+        setFeedData(response.data);
+      } catch (error) {
+        console.error('Error fetching feed data:', error.response ? error.response.data : error.message);
+      }
+    };
+
     const fetchInquiries = async () => {
       try {
         const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients');
         setInquiries(response.data);
       } catch (error) {
-        console.error("Error fetching inquiries:", error);
+        console.error('Error fetching inquiries:', error);
       }
     };
 
+    fetchFeedData();
     fetchInquiries();
   }, []);
 
   const handleApproveInquiry = async (clientId) => {
     console.log('Approving inquiry with clientId:', clientId);
     try {
-      await axios.post(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`,
-        {
-          clientId,
-          status: "approved",
-        }
-      );
-
+      await axios.post(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`, {
+        clientId,
+        status: 'approved',
+      });
+  
       setInquiries((prevInquiries) =>
         prevInquiries.map((inquiry) =>
-          inquiry.id === clientId
-            ? { ...inquiry, booking_status: "approved" }
-            : inquiry
+          inquiry.id === clientId ? { ...inquiry, booking_status: 'approved' } : inquiry
         )
       );
     } catch (error) {
@@ -200,12 +205,8 @@ function AdminDashboard() {
               {inquiries.map((inquiry) => (
                 <Card key={inquiry.id} sx={{ mb: 2, width: '100%', maxWidth: 600, border: '1px solid #ccc' }}>
                   <CardHeader
-                    avatar={<Avatar sx={{ bgcolor: "primary.main" }}>I</Avatar>}
-                    action={
-                      <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
+                    avatar={<Avatar sx={{ bgcolor: 'primary.main' }}>I</Avatar>}
+                    action={<IconButton aria-label="settings"><MoreVertIcon /></IconButton>}
                     title={inquiry.name}
                     subheader={new Date(inquiry.created_at).toLocaleString()}
                   />
@@ -236,9 +237,9 @@ function AdminDashboard() {
             </Box>
           </div>
         )}
-        {selectedItem === "Bookings" && <Bookings />}
-        {selectedItem === "Clients" && <Clients />}
-        {selectedItem === "Gallery Manager" && <GalleryManager />}
+        {selectedItem === 'Bookings' && <Bookings />}
+        {selectedItem === 'Clients' && <Clients />}
+        {selectedItem === 'Gallery Manager' && <GalleryManager />}
       </Box>
     </Box>
   );

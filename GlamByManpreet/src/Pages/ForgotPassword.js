@@ -6,7 +6,6 @@ and need to reset them. It generally involves sending a password reset link to t
 import React, { useState } from 'react';
 import supabase from '../config/supabaseClient';
 
-
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
@@ -14,7 +13,11 @@ const ForgotPassword = () => {
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
-        const { error } = await supabase.auth.api.resetPasswordForEmail(email);
+    
+        const { error } = await supabase.auth.api.resetPasswordForEmail(email, {
+            redirectTo: 'http://localhost:3000/ResetPassword'
+        });
+    
         if (error) {
             setError(error.message);
         } else {
