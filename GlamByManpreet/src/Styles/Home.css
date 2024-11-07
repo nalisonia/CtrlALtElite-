@@ -1,11 +1,16 @@
+/* Homepage styles */
 .home-container {
-    max-width: none;
+    /* max-width: none;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column; */
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 20px;
     
 }
 
@@ -16,20 +21,25 @@
     border-radius: 5px;
     border-color: rgb(60, 38, 38);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    margin: 0;
+    
+    
   }
   
+
 .picture-container {
     display: flex;
     justify-content: center; /* Aligns children (images) to the left */
     width: 50%; /* Take the full width of its parent */
-    margin-top: .5in; /* Adds space above the picture container */
+    margin-top: 2.5%; /* Adds space above the picture container */
 }
   
 .model-image {
     width: 40%; /* Each image takes up half of the container width */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
-    margin-top: 0.4cm; /* Adds space above the images */
+    margin-top: 0.1cm; /* Adds space above the images */
+    margin-bottom: 0.1cm; /* Adds space below the images */
 }
 
 .card {
@@ -38,14 +48,14 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin: 2.5%;
 }
 
 .some-content{
     width: 60vw;
     border: 1px solid black;
     padding: 10px;
-    margin-top: 5%;
+    margin: 2.5%;
 }
 
 .some-content > p{
@@ -53,17 +63,32 @@
     line-height: 1.6em;
 }
 
-.info-boxes-container{
+
+/* .info-boxes-container{
     width: 75%;
     display: flex;
     justify-content: center;
-}
+} */
+ /* Info boxes container */
+.info-boxes-container {
+    display: flex;
+    justify-content:center;  /* Aligns children (info boxes) to the left */
+    width: 90%;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow for wrapping on smaller screens */
+    margin-top: 2.5%;
+  }
+  
 
 .info-box{
     width: 25%;
     border: 1px solid black;
     margin: 2.5%;
     padding: 10px;
+    text-align: center;
+    background-color: #FDF7F8; /* White background for main container */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), 
+    -10px -10px 20px rgba(256,256,256,0.1);  /* Adds a subtle shadow effect */
 }
 
 
@@ -92,20 +117,25 @@
     }
 
     .some-content{
-        height: auto;
-        width: 80vw;
-        border: 0.5px solid black;
-        border-radius: 1%;
-        padding: 10px;
-        margin-top: 1px;
-        background-color: #FDF7F8;
+        max-width: 800px; /* Limit width for better readability */
+        border: 1px solid #ccc; /* Lighter border */
+        border-radius: 8px; /* Consistent border radius */
+        padding: 15px; /* More padding for spacing */
+        margin: 0; /* Uniform top/bottom margin */
+        background-color: white; /* Soft background */
         box-shadow: 10px 10px 20px rgba(0,0,0,0.2), 
         -10px -10px 20px rgba(256,256,256,0.1);
+
     }
 
     .some-content > h1{
         font-size: 3vh;
         font-family: 'Bebas Neue', sans-serif; 
+        font-weight: 700;
+        text-align: center;
+        margin: 0 auto;
+        padding: 5px;
+        color: #333;
 
     }
 

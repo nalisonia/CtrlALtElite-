@@ -1,0 +1,55 @@
+/* Global.css */
+/* Global styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+   
+    line-height: 1.5;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    color: black;
+    font-size: 28px;
+
+
+    
+}
+
+/* Styling for the "About Me" heading */
+.text-box h2 {
+    display: inline-block; /* Ensures the line is just under the text */
+    border-bottom: 3px solid #ec98e8 ; /* Pink line under the text */
+    padding-bottom: 5px; /* Optional: adds space between the text and the line */
+    width: 100%;
+  }
+
+
+p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Spacing utility classes */
+.spacing-sm {
+    margin-bottom: 10px;
+}
+
+.spacing-md {
+    margin-bottom: 20px;
+}
+
+.spacing-lg {
+    margin-bottom: 30px;
+}
