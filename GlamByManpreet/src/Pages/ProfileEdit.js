@@ -1,40 +1,47 @@
 import React, { useState } from 'react';
+import supabase from '../config/supabaseClient.js';
 import '../Styles/ProfileEdit.css';
 import Snackbar from '@mui/material/Snackbar';
 
 function ProfileEdit() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [notificationPreference, setNotificationPreference] = useState('email');
+  const [notificationPreference, setNotificationPreference] = useState(
+    localStorage.getItem('notificationPreference') || 'email'
+  );
   const [loading, setLoading] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!validateEmail(email)) {
-      alert('Please enter a valid email address');
-      return;
-    }
+    const updates = {};
+    let message = '';
 
-    if (password.length < 6) {
+    if (password && password.length < 6) {
       alert('Password must be at least 6 characters');
       return;
     }
 
+    if (password) {
+      updates.password = password;
+      message += 'Password';
+    }
+
     setLoading(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Replace with actual API call
+      if (password) {
+        const { error } = await supabase.auth.updateUser(updates);
+        if (error) throw error;
+      }
+
+      // Save notification preference locally
+      localStorage.setItem('notificationPreference', notificationPreference);
+
+      setSnackbarMessage(`${message ? `${message} updated` : ''} successfully!`);
       setSnackbarOpen(true);
     } catch (error) {
-      alert('Error updating profile. Please try again.');
+      alert(`Error updating profile: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -45,35 +52,12 @@ function ProfileEdit() {
       <h2 className="profile-edit-title">Profile Edit</h2>
       <form onSubmit={handleSubmit} className="profile-edit-form">
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password (optional):</label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
             className="form-input"
           />
         </div>
@@ -90,7 +74,11 @@ function ProfileEdit() {
             <option value="none">None</option>
           </select>
         </div>
-        <button type="submit" className="edit-profile-button" disabled={loading}>
+        <button 
+          type="submit" 
+          className="edit-profile-button" 
+          disabled={loading}
+        >
           {loading ? 'Saving...' : 'Save Changes'}
         </button>
       </form>
@@ -98,7 +86,7 @@ function ProfileEdit() {
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
-        message="Profile updated successfully!"
+        message={snackbarMessage}
       />
     </div>
   );

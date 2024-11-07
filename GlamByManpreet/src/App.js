@@ -23,6 +23,7 @@ import UserFeed from './Pages/UserFeed.js';
 import ProfileEdit from './Pages/ProfileEdit.js';
 import InquiryHistory from './Pages/InquiryHistory.js';
 import AdminDashboard from './Pages/AdminDashboard.js';
+import ResetPassword from './Pages/ResetPassword.js';
  
 
 //app.js serves as the main entry point and central configuration file for the application. 
@@ -91,6 +92,9 @@ function App() {
                     <Route path="/admin" element={<AdminDashboard/>} />
                     <Route path="*" element={<Navigate to="/" />} />
                     <Route path="/inquiryhistory" element={<InquiryHistory />} />
+                    <Route path="/ResetPassword" element={<ResetPassword />} />
+
+
 
 
         
