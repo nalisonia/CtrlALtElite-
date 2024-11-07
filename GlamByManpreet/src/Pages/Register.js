@@ -183,7 +183,7 @@ const Register = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
               <input type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
               <label htmlFor="agreeTerms" style={{ marginLeft: '8px' }}>
-                I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
+                I agree to the <a href="/terms_of_service">Terms of Service</a> and <a href="/privacy_policy">Privacy Policy</a>.
               </label>
             </Box>
             <Button fullWidth type="submit" variant="contained" color="primary" sx={{ mt: 3 }} disabled={loading}>

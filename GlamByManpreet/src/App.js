@@ -94,10 +94,6 @@ function App() {
                     <Route path="/inquiryhistory" element={<InquiryHistory />} />
                     <Route path="/ResetPassword" element={<ResetPassword />} />
 
-
-
-
-        
                 </Routes>
                 <Footer />
             </div>
