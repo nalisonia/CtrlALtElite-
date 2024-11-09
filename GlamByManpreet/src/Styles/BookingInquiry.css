@@ -1,18 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+/* Booking Inquiry Page */
+
+/* Consistent Heading Styling */
+.booking-inquiry-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5em;
+    color: #323030ea;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff99cc; /* Same pink underline effect as on the Home page */
+    padding-bottom: 10px;
+}
 
 .booking-inquiry {
-    max-width: 600px;
+    max-width: 80%; /* Adjust to fit the home page container style */
     margin: 0 auto;
-    margin-top: 10px;
-    padding: 24px;
+    margin-top: 20px;
+    padding: 30px;
     background-color: #f9e4f7;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #00050b;
+    border-radius: 10px; /* Rounded corners for a soft look */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1), 0px -10px 30px rgba(255, 255, 255, 0.1); /* Soft shadow effect */
     font-family: 'Bebas Neue', sans-serif;
-    
 }
 
 .form-container {
@@ -20,11 +27,11 @@
     flex-direction: column;
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #242323;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Larger shadow for depth */
+    border: 1px solid #00050b; /* Border with soft contrast */
     font-family: 'Playfair Display', serif;
-    max-width: 500px;
+    max-width: 550px; /* Similar width to home page containers */
     margin: 0 auto;
 }
 
@@ -60,11 +67,12 @@ label {
     transition: border-color 0.3s ease;
 }
 
+/* Focused state for inputs */
 .booking-inquiry input:focus, 
 .booking-inquiry select:focus, 
 .booking-inquiry textarea:focus {
     outline: none;
-    border-color: #00050b;
+    border-color: #00050b; /* Same color focus as the home page elements */
 }
 
 /* Textarea specific styling */
@@ -74,24 +82,48 @@ textarea {
     font-size: 1rem;
 }
 
-/* Submit button styling */
-button[type="submit"] {
-    background-color: #ffc2f9;
-    color: #0e0101;
-    padding: 12px 20px;
-    border: black solid 1px;
-    box-shadow: #504f50;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    margin-top: 20px;
+/* Button Styling (Updated for Booking Inquiry page) */
+.button {
+    display: inline-block;
+    padding: 12px 30px; 
+    background-color: #545252; /* Black background */
+    color: white;
+    font-weight: bold; /* Bold font */
+    font-size: 18px;
+    border-radius: 8px;
+    text-decoration: none; /* This removes the underline */
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3), 0px 6px 12px rgba(0, 0, 0, 0.1); /* Deeper 3D shadow */
+    border: none;
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    margin-top: auto;  /* Push button to the bottom */
+    align-self: center;
+    transform: translateY(0); /* Initial position */
 }
 
-button[type="submit"]:hover {
-    background-color: #00050b;
-    color: #fff;
+/* Hover Effect */
+.button:hover {
+    background-color: #ec98e8; /* Pink hover color */
+    color: black; /* Black text on hover */
+    box-shadow: 0px 18px 36px rgba(0, 0, 0, 0.4), 0px 12px 24px rgba(222, 133, 204, 0.5); /* Deeper shadow with larger spread */
+    text-decoration: none; /* Ensure no underline on hover */
+    transform: translateY(-6px); /* Lift the button more on hover */
+}
+
+/* Focus Effect */
+.button:focus {
+    background-color: #E8E8E8; /* Light gray background color on focus */
+    color: #111; /* Darker text color on focus */
+    text-decoration: none; /* Ensure no underline on hover */
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* Deep focus shadow */
+}
+
+/* Active Effect (when button is clicked) */
+.button:active {
+    background-color: #E8E8E8; /* Light gray background color on active */
+    color: #111; /* Darker text color on active */
+    text-decoration: none; /* Ensure no underline on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
+    transform: translateY(4px); /* Button appears pressed */
 }
 
 /* Response time text */
@@ -125,7 +157,7 @@ button[type="submit"]:hover {
         padding: 16px;
     }
 
-    button[type="submit"] {
+    .button {
         width: 100%;
         padding: 12px;
     }

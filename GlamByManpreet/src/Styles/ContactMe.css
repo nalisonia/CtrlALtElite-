@@ -1,3 +1,5 @@
+/* Contact Page Styling */
+
 /* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
@@ -7,85 +9,129 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    color: #333; /* Darker text for readability */
 }
 
 /* Container styling */
 .contactme-container {
     max-width: 75%;
-    margin: 2.5% auto; /* Combined margin-top with margin */
-    padding: 30px; /* Increased padding for better spacing */
-    border: 1px solid #ddd;
+    margin: 3% auto; /* Vertical margin for spacing from top */
+    padding: 30px;
     background-color: rgb(250, 229, 250);
     border-radius: 10px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+    border: 1px solid #ddd;
 }
 
 /* Heading styles */
 h2 {
     font-family: 'Bebas Neue', sans-serif;
-
-    font-size: 2.5em;
+    font-size: 3em; /* Slightly larger font size */
     color: #323030ea;
     text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ff99cc;
+    margin-bottom: 25px; /* More space below the heading */
     padding-bottom: 10px;
+    border-bottom: 2px solid #0e0d0e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Contact details box styling */
 .contact-details {
     background-color: #FDF7F8; /* Peach color */
-    border: 2px solid #ff99cc; /* Darker pink border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 25px; /* Adjusted padding */
-    margin-top: 20px; /* Spacing above the box */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
-    font-weight: 400; /* Normal weight */
+    border: 2px solid #080708; /* Darker pink border */
+    border-radius: 8px;
+    padding: 30px; /* Adjusted padding for better spacing */
+    margin-top: 30px; /* More space above */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.125em;
+    font-weight: 400;
+    line-height: 1.6; /* Improved line spacing for readability */
 }
 
 /* Paragraph and span styles */
 .contact-details p {
-    font-size: 1.125em; /* Use rem/em for better scalability */
-    margin-bottom: 15px; /* Increased bottom margin */
-    font-weight: 400; /* Normal weight */
+    font-size: 1.125em;
+    margin-bottom: 20px; /* Increased margin for better separation */
 }
 
 .contact-details span {
-    font-weight: 400; /* Lighter text */
+    font-weight: 300; /* Lighter weight for span text */
 }
 
 /* Link and hover effects */
 .contact-details a {
     color: #d926a9;
     text-decoration: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease; /* Added text-shadow transition */
-    cursor: pointer; /* Pointer cursor for links */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth hover effect */
+    cursor: pointer;
 }
 
 .contact-details a:hover {
     color: #a6007e;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.2); /* Adding text shadow on hover */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.2); /* Slight shadow for hover effect */
 }
 
-/* Additional link states */
 .contact-details a:focus {
-    outline: none; /* Remove default outline */
-    border-bottom: 2px solid #d926a9; /* Add underline effect on focus */
+    outline: none;
+    border-bottom: 2px solid #d926a9; /* Focus effect */
+}
+
+/* Button styling */
+.contactme-container .button {
+    background-color: #d926a9;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.contactme-container .button:hover {
+    background-color: #a6007e;
+    transform: translateY(-2px);
+}
+
+.contactme-container .button:active {
+    background-color: #8e0073;
+    transform: translateY(0);
 }
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .contactme-container {
-        max-width: 90%; /* More width on smaller screens */
-        padding: 20px; /* Adjust padding */
+        max-width: 90%; /* Use more width on small screens */
+        padding: 20px;
     }
 
     h2 {
-        font-size: 2em; /* Smaller heading on mobile */
+        font-size: 2.2em; /* Slightly smaller font size */
     }
 
     .contact-details p {
         font-size: 1em; /* Adjust paragraph font size */
+    }
+
+    .contactme-container .button {
+        width: 100%; /* Button takes full width on smaller screens */
+        padding: 15px 0; /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .contactme-container {
+        padding: 15px; /* Further reduce padding */
+    }
+
+    h2 {
+        font-size: 1.8em; /* Smaller heading size */
+    }
+
+    .contact-details p {
+        font-size: 0.9em; /* Adjust paragraph font size for mobile */
     }
 }

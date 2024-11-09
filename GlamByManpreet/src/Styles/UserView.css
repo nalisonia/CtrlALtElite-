@@ -1,65 +1,75 @@
+/* UserView.css */
+/* Styling for the user Profile page */
+
+/* General layout for content container */
 .userview-content-container {
-    max-width: none;
+    max-width: 100%;  /* Set max-width to full */
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); /* Subtle shadow effect */
 }
 
-.welcome-text{
-    text-align: center; 
-    font-size: 32px; 
-    margin-bottom: 0px; 
-    font-family: 'Italiana', serif; /* Italiana applied */
+/* Welcome text box styling */
+.welcome-text {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 0;
+    font-family: 'Italiana', serif;
     width: 92%;
     display: inline-block;
     padding: 10px;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); /* Combined shadow effects */
 }
 
-.content-box{
-        width: 30%; 
-        height: 400px;
-        padding: 20px;
-        text-align: center;
-        border: 1px solid black;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(8, 7, 7, 0.1); 
-        background-color: white;
-        margin: 10px; 
-        display: flex;              
-        flex-direction: column;      
-        align-items: center;        
-      }
+/* Content box styling */
+.content-box {
+    width: 30%;
+    height: 400px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(8, 7, 7, 0.1), 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); /* Combined shadow effects */
+    background-color: white;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
 
-/*Put all mobile styling here*/
-@media only screen and (max-width: 600px){
-
-    .userview-container{
+    /* User container layout adjustments for mobile */
+    .userview-container {
         width: 100vw;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); /* Subtle shadow effect */
     }
+
+    /* Adjust content container for mobile */
     .userview-content-container {
         width: 80vw;
         margin-top: 1.5%;
         margin-bottom: 1.5%;
         padding: 10px;
         display: flex;
-        flex-direction: column;  /* Ensure elements inside stack vertically */
+        flex-direction: column; /* Stack elements vertically */
         align-items: center;
     }
-    
-    .content-box{
-        width: 110%; /* Full width on mobile */
+
+    /* Adjust content boxes for mobile */
+    .content-box {
+        width: 100%; /* Full width on mobile */
         margin-bottom: 20px;
     }
 

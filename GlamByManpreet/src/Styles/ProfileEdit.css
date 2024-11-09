@@ -7,6 +7,7 @@
     width: 100%;
     max-width: 500px; /* Limit the width of the form */
     margin: 0 auto; /* Center the form */
+    
 }
 
 .form-group {
@@ -19,6 +20,7 @@
     border: 1px solid #ccc; /* Light border */
     border-radius: 5px; /* Rounded corners */
     font-size: 1rem; /* Font size for inputs */
+    
 }
 
 .form-input:focus {

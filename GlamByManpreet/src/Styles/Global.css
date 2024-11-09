@@ -1,0 +1,130 @@
+/* Global styles */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap'); /* Import both fonts */
+
+/* Box model and reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Default font is Roboto for body text */
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark text for readability */
+    line-height: 1.5;
+    font-size: 16px; /* Base font size */
+    text-rendering: optimizeLegibility; /* Improves text legibility */
+    -webkit-font-smoothing: antialiased; /* Smoother text rendering */
+}
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif; /* Bebas Neue for all headings */
+    font-weight: 700;
+    color: #000; /* Consistent dark color for headings */
+    line-height: 1.2; /* Adjust line height for readability */
+}
+
+/* Specific Style for h2 inside .text-box */
+.text-box h2 {
+    padding-bottom: 5px;  /* Optional: adds space between the text and the underline */
+    width: 100%;
+    margin-bottom: 20px; /* Adds space below the line */
+}
+
+/* Paragraph Styles */
+p {
+    font-family: 'Roboto', sans-serif; /* Consistent with body text */
+    font-size: 18px;
+    color: #555; /* Slightly lighter text for paragraphs */
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Utility Classes for Spacing */
+.spacing-sm {
+    margin-bottom: 10px;
+}
+
+.spacing-md {
+    margin-bottom: 20px;
+}
+
+.spacing-lg {
+    margin-bottom: 30px;
+}
+
+/* Utility Classes for Text Alignment */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Utility Classes for Flexbox Layout */
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+/* Global Link Styling */
+a {
+    text-decoration: none; /* Remove default underline */
+    color: inherit; /* Inherit color from parent */
+}
+
+a:hover,
+a:focus {
+    color: #ffc5fc; /* Hover color for links */
+}
+
+/* Global.css */
+
+/* Base button style */
+button {
+    color: black;
+    background-color: #ffc5fc;
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 1.6vh;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    background-color: #ff99ff;
+    transform: scale(1.05);
+  }
+  
+  /* You can also add additional class-specific styles if necessary */
+  .userview-button {
+    margin-top: auto;
+  }
+  

@@ -1,9 +1,10 @@
+/* NavBar.css */
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Bebas+Neue&display=swap');
 
 body {
     font-family: Arial, sans-serif; 
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; 
     margin: 0;
     padding: 0;
 }
@@ -11,27 +12,42 @@ body {
 /* Reusable Button Styling */
 .button {
     margin: 0.5vh;
-    background-color: #FDF7F8;
+    background-color: #ffc5fc;
     color: #333; /* Darker text color for contrast */
     width: 80%;
     padding: 12px 0;
-    border: none;
-    border-radius: 8px;
+    border: 1px solid #F5B7B1; /* Light border for a defined edge */
+    border-radius: 8px; /* Consistent rounded corners */
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
     text-align: center;
+    text-transform: uppercase; /* Capitalize text for emphasis */
 }
 
+/* Focus state for accessibility */
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 182, 213, 0.5); /* Soft outline for better focus visibility */
+}
+
+/* Hover effect */
 .button:hover {
-    background-color: #ffebf0; /* Lightened background on hover */
+    background-color: #f9e4f7; /* Lightened background on hover */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Active state for buttons */
+.button:active {
+    background-color: #f7c6db; /* Slightly darker background when clicked */
+    transform: translateY(0); /* Reset lift on click */
 }
 
 /* Applying .button to Login and Register buttons */
 .Mobile_Login_Button, .Mobile_Register_Button {
-    composes: button; /* Inherits styles from .button */
+    composes: button; /* Inherit styles from .button */
 }
 
 /* Social Media Icons */
@@ -81,17 +97,28 @@ body {
         display: none; /* Hide social icons on mobile */
     }
 
-    .Nav_Bar_Title {
+    .Nav_Bar_Title { 
         font-size: 2.5rem; /* Reduce font size on mobile */
         line-height: 1.2; /* Reduce line height on mobile */
         padding: 5px 0; /* Reduce padding on mobile */
         margin-left: 10%;
     }
 
-    .Drawer_Nav_Bar_Title {
+    .Drawer_Nav_Bar_Title {  /* Add this class to the nav bar title */
         font-size: 2.5rem;
         color: white;
         font-family: 'Bebas Neue', sans-serif;
         font-weight: 700;
+    }
+
+    /* Adjust button styling for mobile */
+    .button {
+        width: 90%; /* Use more width on mobile for easier tap */
+        padding: 10px 0; /* Adjust padding on mobile */
+        font-size: 0.9rem; /* Slightly smaller font size on mobile */
+    }
+
+    .Mobile_Login_Button, .Mobile_Register_Button {
+        width: 100%; /* Full width for mobile buttons */
     }
 }

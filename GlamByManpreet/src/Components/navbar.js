@@ -23,6 +23,7 @@ import "../Styles/Home.css"; // Import CSS file for styling
 import supabase from "../config/supabaseClient";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 /*
 'xs': Extra small devices (phones) - width less than 600px
 'sm': Small devices (tablets) - width equal to or greater than 600px

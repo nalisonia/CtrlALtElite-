@@ -4,8 +4,6 @@ import makeupIcon from '../assets/images/makeup-icon.png';
 import masterclassIcon from '../assets/images/masterclass-icon.png'; 
 import skincareIcon from '../assets/images/skincare-icon.png'; // Correct path for the skincare icon
 
-
-
 function Services() {
   return (
     <div className='services-container'>
@@ -19,11 +17,10 @@ function Services() {
       </div>
 
       <div className="service-box">
-        
         <img src={masterclassIcon} alt="Master Class Icon" className="service-icon" />
         <h3>MASTER CLASS</h3>
         <p>Bridal and Non-bridal Lessons<br />Hair<br />Makeup</p>
-        <a href="Register" className="button">Learn More</a>
+        <a href="/register" className="button">Learn More</a>
       </div>
     
       {/* Skincare Box */}
@@ -31,7 +28,7 @@ function Services() {
         <img src={skincareIcon} alt="Skin Care Icon" className="service-icon" />
         <h3>SKINCARE</h3>
         <p>Coming soon</p>
-        <a href="Register" className="button">Register and get exclusive insights here!</a>
+        <a href="/register" className="button">Register and get exclusive insights here!</a>
       </div>
     </div>
   );

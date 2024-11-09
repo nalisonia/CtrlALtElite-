@@ -1,43 +1,50 @@
+/* About Page Container */
 .about-container {
     display: flex; /* Use Flexbox to align children side by side */
     align-items: center; /* Vertically center align items */
-    justify-content: center; /* Center items horizontally in the container */
-    gap: 20px; /* Add space between the text and image */
-    padding: 20px; /* Add padding around the container */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Add space between text and image */
+    padding: 20px; /* Padding around the container */
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    background-color: white; /* Set background color to match home page */
+    border-radius: 10px; /* Slight border radius for softer look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow similar to home page */
+    width: 100%; /* Full width */
 }
 
-/* Styling for the text box */
+/* Styling for the Text Box */
 .text-box {
     flex: 1; /* Allow text box to take available space */
-    max-width: 400px; /* Set a maximum width */
+    max-width: 400px; /* Set a max width */
     min-width: 250px; /* Set a minimum width */
-    padding: 20px; /* Add padding inside the text box */
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid black;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-    height: auto; /* Allow height to adjust based on content */
-    text-align: center; /* Center text within the box */
-    display: flex; /* Enable flex for text alignment */
+    padding: 20px; /* Add padding inside the box */
+    background-color: white; /* Soft white background */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    border: 1px solid #ccc; /* Light border similar to home page */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    text-align: center; /* Center align text inside box */
+    display: flex; /* Enable flexbox for content alignment */
     flex-direction: column; /* Stack child elements */
     justify-content: center; /* Center content vertically */
+    margin-bottom: 15px; /* Add bottom margin to separate from other elements */
 }
 
-/* Styling for the image container */
+/* Styling for the Image Container */
 .picture-container {
     flex: 1; /* Allow image container to take available space */
     max-width: 400px; /* Set a maximum width */
     display: flex; /* Use Flexbox to center the image */
     justify-content: center; /* Center the image horizontally */
+    margin-top: 10px; /* Margin for spacing */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for image container */
 }
 
-/* Styling for the image */
+/* Styling for the Image */
 .about-model-image1 {
     width: 100%; /* Image takes full width of its container */
     height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
-    border-radius: 5px; /* Add rounded corners */
+    object-fit: cover; /* Ensure the image covers the area without losing aspect ratio */
+    border-radius: 8px; /* Rounded corners */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
@@ -46,11 +53,12 @@
     .about-container {
         flex-direction: column; /* Stack text and image vertically on small screens */
         align-items: center; /* Center align items */
+        padding: 10px; /* Reduce padding for mobile */
     }
 
     .text-box {
-        width: 90%; /* Ensure text box takes more width on small screens */
-        max-width: 400px; /* Set a max width for mobile */
+        width: 90%; /* Take more width on small screens */
+        max-width: 350px; /* Set max width for mobile */
     }
 
     .picture-container {

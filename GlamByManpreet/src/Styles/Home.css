@@ -1,50 +1,61 @@
+/* Home.css */
+/* Styling for the home page */
 .home-container {
-    max-width: 1200px; /* Set a max-width for better layout control */
+    /* max-width: 1200px; /* Set a max-width for better layout control */
     padding: 0; /* Add some padding */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 1px;
-    background-color: rgb(250, 229, 250);
+    display: flex;  /* Use flexbox for layout */
+    align-items: center; /* Vertically center align items */
+    justify-content: center; /* Center align items horizontally */
+    flex-direction: column; /* Ensure elements inside stack vertically */
+    margin-top: 1px; /* Add top margin */
+    background-color: white(250, 229, 250); /* Soft background */
+    border-radius: 10px; /* Slight border radius for softer look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    /* Add shadow */
+    width: 100%; /* Use full width */
+
 }
 
-.header-text {
-    display: inline-block;
-    padding: 15px;
+.header-text { /* Style for the header text */
+    display: inline-block;  /* Display as inline block */
+    padding: 15px; /* Add some padding */
     background-color: white; /* Slightly off-white for a softer look */
-    border-radius: 8px;
-    border: 1px solid rgb(60, 38, 38);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow */
-    font-size: 1.5em; /* Increase font size for visibility */
+    border-radius: 8px; /* Slight border radius for softer look */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    font-size: 1.8em; /* Increase font size for visibility */
     text-align: center; /* Center align text */
+    width: 100%; /* Use full width */
+    margin: 0; /* Uniform top/bottom margin */
+    margin-bottom: 20px;
 }
 
-.picture-container {
-    display: flex;
+
+.picture-container {  /* Style for the picture container */
+    display: flex; /* Use flexbox for layout */
     justify-content: center; /* Center align images */
     width: 100%; /* Use full width */
     margin: 15px; /* Consistent spacing */
-    gap: 10px; /* Space between images */
+    gap: 0px; /* Space between images */
 }
 
 .model-image { 
-    width: 70%; /* Reduce width for better layout */
+    width: 95%; /* Reduce width for better layout */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Covers the container */
-    border-radius: 10px; /* Slight border radius for softer look */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
+    /* border-radius: 10px; Slight border radius for softer look- rounded corners */
+    margin: 0 auto; /* Center align image */
+
 }
 
-.card {
+.card {  /* Style for the card */
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 5px;
-    transition: box-shadow 0.3s ease;
+    margin: 5px;    
+    background-color: white; /* Soft background */
+    padding: 10px; /* Add some padding */
+    display: flex; /* Use flexbox for layout */
 }
 
 .some-content { 
@@ -54,16 +65,21 @@
     padding: 15px; /* More padding for spacing */
     margin: 0; /* Uniform top/bottom margin */
     background-color: white; /* Soft background */
-    
+    line-height: 1.6; /* Increased line-height for better readability */
+    font-size: 1.2em; /* Increased font size for readability */
+    text-align: center;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);  /* Add some depth */
 }
 
-.some-content > p {
-    font-family: 'Playfair Display', serif;
+/* Top boxParagraph styling */
+.some-content > p { 
+    font-family: 'Playfair Display', serif;  /* Use a serif font for better readability */
     line-height: 1.8em; /* Increased line-height for better readability */
     font-size: 1.1em; /* Increased font size for readability */
     margin-bottom: 0.5em; /* Add some spacing below */
 }
 
+/* 3 info boxes Containter below */
 .info-boxes-container {
     margin-top: 5px;
     width: 90%; /* Adjust width for responsiveness */
@@ -71,9 +87,10 @@
     padding: 5px;
     display: flex;
     justify-content: space-between; /* Space out boxes */
-    flex-wrap: wrap;
+    flex-wrap: wrap;   
 }
 
+/* 3 info boxes below */
 .info-box {
     font-family: 'Playfair Display', serif;
     width: 29%; /* Reduce width for spacing */
@@ -82,7 +99,9 @@
     padding: 10px;
     background-color: #fff; /* White background for boxes */
     border-radius: 5px; /* Consistent border radius */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+
+
 }
 
 /* Mobile styling */
