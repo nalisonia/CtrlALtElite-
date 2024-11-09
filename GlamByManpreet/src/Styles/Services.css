@@ -1,5 +1,4 @@
-/* Services.css */
-
+/* ~~Services.css~~ */
 /* Header Styling */
 .header-text {
   text-align: center;
@@ -31,6 +30,41 @@
 }
 
 /* Service Box Styling */
+
+
+/* Container for Services */
+.services-container {
+  max-width: 75%; 
+  margin: 0 auto; 
+  margin-top: .5%; 
+  padding: 20px; 
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-around; 
+  align-items: stretch;
+  flex-wrap: wrap; 
+  line-height: 1.6;
+}
+
+/* Centered Header Text */
+.header-text {
+  text-align: center; 
+  font-size: 32px; 
+  margin-bottom: 10px; 
+  font-family: 'Italiana', serif; /* Italiana applied */
+  width: 100%;
+  display: inline-block;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+  border-bottom: none; /* Ensures no bottom border */
+  outline: none; /* Ensures no outline */
+}
+
+
+/* Individual Service Boxes */
 .service-box {
   width: 30%; /* Ensure boxes take up 30% of container */
   min-width: 300px;
@@ -44,6 +78,7 @@
   align-items: center;
   padding: 20px;
   text-align: center;
+
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 15px;
@@ -55,12 +90,32 @@
 
 
 /* Ensure Image Size and Consistency */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 15px; /* Softer rounded corners */
+  background-color: white;
+  font-family: 'Italiana', serif;
+  margin: 10px;
+  display: flex;              
+  flex-direction: column;      
+  justify-content: space-between; 
+  align-items: center;        
+  transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+}
+
+.service-box:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15); /* Slightly increased shadow on hover */
+}
+
+/* Image Styling in Service Box */
 .service-box img {
   width: 100px; /* Fixed image size */
   margin-bottom: 20px;
 }
 
 /* Service Box Heading */
+
+/* Title Styling */
 .service-box h3 {
   font-size: 22px;
   margin-bottom: 15px;
@@ -68,7 +123,11 @@
   font-weight: bold;
 }
 
-/* Service Box Paragraph Styling */
+/* Service Box Paragraph Styling
+  font-weight: bold; 
+} */
+
+/* Paragraph Styling */
 .service-box p {
   font-size: 18px;
   margin-bottom: 30px; 
@@ -93,8 +152,29 @@
   transition: background-color 0.3s ease;
   margin-top: auto;
   align-self: center;
+  flex-grow: 1;
 }
 
+/* Button Styling */
+/* Button Styling */
+.button {
+  display: inline-block;
+  padding: 12px 30px; 
+  background-color: #545252; /* Black background */
+  color: white;
+  font-weight: bold; /* Bold font */
+  font-size: 18px;
+  border-radius: 8px;
+  text-decoration: none; /* This removes the underline */
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3), 0px 6px 12px rgba(0, 0, 0, 0.1); /* Deeper 3D shadow */
+  border: none;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  margin-top: auto;  /* Push button to the bottom */
+  align-self: center;
+  transform: translateY(0); /* Initial position */
+}
+
+/* Hover Effect */
 .button:hover {
   background-color: #de85cc;
 }
@@ -107,7 +187,42 @@
   }
 
   .service-box {
-    width: 100%; /* Full width on mobile */
-    margin-bottom: 20px; /* Add space between stacked boxes */
+  width: 100%; /* Full width on mobile */
+  margin-bottom: 20px; /* Add space between stacked boxes */
+  background-color: #ec98e8; /* Pink hover color */
+  color: black; /* Black text on hover */
+  box-shadow: 0px 18px 36px rgba(0, 0, 0, 0.4), 0px 12px 24px rgba(222, 133, 204, 0.5); /* Deeper shadow with larger spread */
+  text-decoration: none; /* Ensure no underline on hover */
+  transform: translateY(-6px); /* Lift the button more on hover */
+}
+
+/* Focus Effect */
+.button:focus {
+  background-color: #E8E8E8; /* Light gray background color on focus */
+  color: #111; /* Darker text color on focus */
+  text-decoration: none; /* Ensure no underline on hover */
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* Deep focus shadow */
+}
+
+/* Active Effect (when button is clicked) */
+.button:active {
+  background-color: #E8E8E8; /* Light gray background color on active */
+  color: #111; /* Darker text color on active */
+  text-decoration: none; /* Ensure no underline on hover */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
+  transform: translateY(4px); /* Button appears pressed */
+}
+
+
+/* Responsive Styling */
+@media only screen and (max-width: 600px) {
+  .services-container {
+  flex-direction: column;
+  max-width: 100%;
+  }
+
+  .service-box {
+  width: 100%;
+  margin-bottom: 20px;
   }
 }

@@ -1,6 +1,6 @@
 /* Contact Me Page Styling */
 
-/* Import fonts */
+/* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
@@ -8,23 +8,23 @@
 /* Heading styles */
 h2 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.2em;
-    /* color: #5a3d5c; Black for heading text */
+    font-size: 3em;
+    color: #323030ea;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding-bottom: 10px;
-    border-bottom: 3px solid black; /* Consistent purple-pink color */
-    /* box-shadow: 0 2px 5px rgba(90, 61, 92, 0.1); */
+    border-bottom: 2px solid #0e0d0e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     line-height: 1.2;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 body {
     font-family: 'Playfair Display', serif;
-    background-color: #faf3f9; /* Light pink background */
+    background-color: #faf3f9;
     margin: 0;
     padding: 0;
-    color: #3e3e3e; /* Consistent dark gray text */
+    color: #333;
 }
 
 /* Container styling */
@@ -32,33 +32,31 @@ body {
     max-width: 75%;
     margin: 3% auto;
     padding: 30px;
-    background: linear-gradient(to right, #f7e5f7, #fdeefb); /* Light gradient with pink and purple tones */
-    border-radius: 12px; /* Slightly rounded corners */
+    background: linear-gradient(to right, #f7e5f7, #fdeefb);
+    border-radius: 12px;
     box-shadow: 8px 8px 16px rgba(62, 62, 62, 0.2), -8px -8px 16px rgba(256, 256, 256, 0.1);
-    border: 1px solid #e0cce4; /* Soft border matching the theme */
+    border: 1px solid #e0cce4;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contactme-container:hover {
     transform: scale(1.02);
-    box-shadow: 12px 12px 20px rgba(62, 62, 62, 0.2), -12px -12px 20px rgba(256, 256, 256, 0.1); /* Enhanced hover shadow */
+    box-shadow: 12px 12px 20px rgba(62, 62, 62, 0.2), -12px -12px 20px rgba(256, 256, 256, 0.1);
 }
-
-
 
 /* Contact details box styling */
 .contact-details {
-    background-color: rgba(255, 255, 255, 0.992); /* Light pink background for details */
-    /* border: 2px solid #a64d79; Consistent purple-pink border */
+    background-color: #FDF7F8;
+    border: 2px solid #080708;
     border-radius: 8px;
     padding: 30px;
-    margin-top: 25px;
-    box-shadow: 0px 4px 8px rgba(62, 62, 62, 0.1);
+    margin-top: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Roboto', sans-serif;
     font-size: 1.125em;
     font-weight: 400;
     line-height: 1.6;
-    color: #3e3e3e; /* Dark gray text color */
+    color: #3e3e3e;
 }
 
 .contact-details p {
@@ -72,26 +70,26 @@ body {
 
 /* Link and hover effects */
 .contact-details a {
-    color: #a64d79; /* Consistent purple-pink for links */
+    color: #a64d79;
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .contact-details a:hover {
-    color: #7a3159; /* Darker shade for hover */
+    color: #7a3159;
     text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px); /* Slight hover lift effect */
+    transform: translateY(-2px);
 }
 
 .contact-details a:focus {
     outline: none;
-    border-bottom: 2px solid #a64d79;
+    border-bottom: 2px solid #d926a9;
 }
 
 /* Button styling */
 .contactme-container .button {
-    background: linear-gradient(135deg, #ec98e8, #7a3159); /* Gradient with purple and dark pink */
+    background: linear-gradient(135deg, #ec98e8, #7a3159);
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -105,12 +103,12 @@ body {
 }
 
 .contactme-container .button:hover {
+    background-color: #a6007e;
     transform: scale(1.05);
-    background-color: #7a3159;
 }
 
 .contactme-container .button:active {
-    background-color: #5a3d5c;
+    background-color: #8e0073;
     transform: translateY(0);
 }
 
@@ -146,5 +144,10 @@ body {
 
     .contact-details p {
         font-size: 0.9em;
+    }
+
+    .contactme-container .button {
+        width: 100%;
+        padding: 15px 0;
     }
 }

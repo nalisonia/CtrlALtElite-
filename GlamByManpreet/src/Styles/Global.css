@@ -1,119 +1,138 @@
 /* global.css */
 
-/* Global Styles (Updated) */
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&family=Playfair+Display&display=swap');
 
-/* Updated button styling */
-/* Button choice #1 -Comment this out to chose the other button ~~~~~~~~~~~~~~~~~~~*/
-/* General button styling for all pages */
+/* Box model reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.5;
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-box h2 {
+    padding-bottom: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Paragraph Styles */
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Utility Classes */
+.spacing-sm { margin-bottom: 10px; }
+.spacing-md { margin-bottom: 20px; }
+.spacing-lg { margin-bottom: 30px; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+
+/* Link Styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover, a:focus {
+    color: #ffc5fc;
+}
+
+/* Button Styles (Merged) */
 button,
 button[type="submit"],
 .service-box .button {
-  width: 100%;
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: 'Playfair Display', serif;
-  color: #0e0101;
-  background-color: #f9e4f7;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-top: 20px;
-  text-align: center;
-  box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
-  text-decoration: none;
-  text-transform: uppercase;
+    color: #0e0101;
+    background-color: #f9e4f7;
+    width: 100%;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+    box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
+    text-transform: uppercase;
 }
 
-/* Hover effect */
 button:hover,
 button[type="submit"]:hover,
 .service-box .button:hover {
-  background-color: #00050b;
-  /* color: #f805cc; */
-  color: black;
-  transform: translateY(-3px);
-  box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
-}
-button[type="submit"]:hover,
-.emailButton:hover,
-.googleButton:hover,
-.service-box .button:hover {
-  background-color: #ec98e8;
-  color: rgb(10, 10, 10);
-  transform: translateY(-3px);
-  font-weight: bold; /* Make text bold on hover */
-  box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
+    background-color: #00050b;
+    color: black;
+    transform: translateY(-3px);
 }
 
-/* Focus effect */
 button:focus,
 button[type="submit"]:focus,
 .service-box .button:focus {
-  outline: none;
-  background-color: #e1d4f4; /* Light gray background color when focused */
-}
-/* End of updated button styling */
-
-
-/* Active effect */
-button:active,
-button[type="submit"]:active,
-.service-box .button:active {
-  transform: translateY(2px);
-  background-color: #d871d3; 
-  
+    outline: none;
+    background-color: #e1d4f4;
 }
 
-
-/* Disabled state */
+/* Disabled State */
 button:disabled,
 button[type="submit"]:disabled,
 .service-box .button:disabled {
-  background-color: #f8bbd0;
-  color: #f48fb1;
-  cursor: not-allowed;
-  box-shadow: none;
+    background-color: #f8bbd0;
+    color: #f48fb1;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
-/* Global Headings for all pages
-/* header */
-/* Header Styling */
-h1 {
-  
-    font-size: 2em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    /* color: #5a3d5c; Black for heading text */
-  }
-
-  h2, h3, h4, h5, h6 {
-    /* color: #5a3d5c; Black for heading text */
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    /* box-shadow: 0 2px 5px rgba(90, 61, 92, 0.1); */
-    line-height: 1.2;
-  
-  }
-
-
-
-/* Responsive adjustments */
+/* Responsive Adjustments */
 @media only screen and (max-width: 600px) {
-  button,
-  button[type="submit"],
-  .service-box .button {
-    font-size: 14px;
-    padding: 10px 18px;
-  }
+    button,
+    button[type="submit"],
+    .service-box .button {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
 }
 
 @media only screen and (max-width: 400px) {
-  button,
-  button[type="submit"],
-  .service-box .button {
-    font-size: 13px;
-    padding: 8px 16px;
-  }
+    button,
+    button[type="submit"],
+    .service-box .button {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
 }

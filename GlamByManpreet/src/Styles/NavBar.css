@@ -39,7 +39,6 @@ body {
     background-color: #f9e4f7; /* Lightened background on hover */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
     transform: translateY(-2px); /* Lift effect on hover */
-  
 }
 
 /* Active state for buttons */

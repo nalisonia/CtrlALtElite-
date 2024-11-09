@@ -15,7 +15,24 @@
 
 }
 
+<<<<<<< HEAD
 
+=======
+.header-text { /* Style for the header text */
+    display: inline-block;  /* Display as inline block */
+    padding: 15px; /* Add some padding */
+    background-color: white; /* Slightly off-white for a softer look */
+    border-radius: 8px; /* Slight border radius for softer look */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    font-size: 1.8em; /* Increase font size for visibility */
+    text-align: center; /* Center align text */
+    width: 100%; /* Use full width */
+    margin: 0; /* Uniform top/bottom margin */
+    margin-bottom: 20px;
+}
+
+
+>>>>>>> 4eb1d3d (180 Styling the buttons and adding special features)
 .picture-container {  /* Style for the picture container */
     display: flex; /* Use flexbox for layout */
     justify-content: center; /* Center align images */
@@ -88,6 +105,11 @@
     background-color: #fff; /* White background for boxes */
     border-radius: 5px; /* Consistent border radius */
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4eb1d3d (180 Styling the buttons and adding special features)
 }
 
 /* Mobile styling */
