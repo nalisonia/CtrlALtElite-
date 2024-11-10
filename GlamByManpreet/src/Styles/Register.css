@@ -1,3 +1,4 @@
+/*
 /* Button Styling */
 button[type="submit"], .googleButton, .emailButton {
   background-color: #ffc2f9; /* Soft pink background */
@@ -48,7 +49,8 @@ button[type="submit"]:disabled, .googleButton:disabled, .emailButton:disabled {
   display: flex; /* Use flex to align items */
   align-items: center; /* Vertically center the logo and text */
   justify-content: center; /* Center text and logo horizontally */
-  background-color: #4285F4; /* Google blue color */
+  /* background-color: #4285F4; Google blue color */
+  background-color: #f0a3d1;
   color: white;
   border-radius: 8px; /* Match other buttons' rounded corners */
   font-family: 'Playfair Display', serif;
@@ -64,7 +66,9 @@ button[type="submit"]:disabled, .googleButton:disabled, .emailButton:disabled {
 
 /* Hover effect for Google button */
 .googleButton:hover {
-  background-color: #3367D6; /* Darker shade for hover effect */
+  background-color: #ec98e8; /* Darker shade for hover effect */
+  color: white;
+
 }
 
 /* Email button custom styles */

@@ -1,11 +1,11 @@
 /* Global Styles (Updated) */
 
-/* Use a more specific class for global button styles */
+/* Updated button styling */
 .global-button {
     margin: 0.5vh;
     background-color: #ffc5fc;
     color: #333; /* Darker text color for contrast */
-
+    width: 80%;
     padding: 12px 0;
     border: 1px solid #F5B7B1; /* Light border for a defined edge */
     border-radius: 8px; /* Consistent rounded corners */
@@ -31,4 +31,93 @@
 .global-button:active {
     background-color: #f7c6db; /* Slightly darker background when clicked */
     transform: translateY(0); /* Reset lift on click */
+}
+
+/* global.css */
+
+/* General button styling for all pages */
+button,
+button[type="submit"],
+.service-box .button {
+  width: 100%;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Playfair Display', serif;
+  color: #0e0101;
+  background-color: #ffc2f9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* Hover effect */
+button:hover,
+button[type="submit"]:hover,
+.service-box .button:hover {
+  background-color: #00050b;
+  color: #f805cc;
+  transform: translateY(-3px);
+  box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
+}
+button[type="submit"]:hover,
+.emailButton:hover,
+.googleButton:hover,
+.service-box .button:hover {
+  background-color: #dcddde;
+  color: rgb(247, 1, 198);
+  transform: translateY(-3px);
+  box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
+}
+
+/* Focus effect */
+button:focus,
+button[type="submit"]:focus,
+.service-box .button:focus {
+  outline: none;
+  background-color: #e1d4f4;
+}
+
+/* Active effect */
+button:active,
+button[type="submit"]:active,
+.service-box .button:active {
+  transform: translateY(2px);
+  background-color: #d4c3e0;
+  
+}
+
+/* Disabled state */
+button:disabled,
+button[type="submit"]:disabled,
+.service-box .button:disabled {
+  background-color: #f8bbd0;
+  color: #f48fb1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 600px) {
+  button,
+  button[type="submit"],
+  .service-box .button {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  button,
+  button[type="submit"],
+  .service-box .button {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
 }

@@ -1,3 +1,4 @@
+/* Register.js */
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, IconButton, InputAdornment, CircularProgress } from '@mui/material';
 import FaceBookIcon from '@mui/icons-material/Facebook';
@@ -137,62 +138,121 @@ const Register = () => {
 
   return (
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
-      <Typography variant="h4" align="center" sx={{ mb: 3 }}>Sign Up</Typography>
-      <Box sx={{ mt: 3 }}>
-        <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>
-          Sign Up with Google
-        </Button>
-        <Button fullWidth variant="contained" color="secondary" startIcon={<EmailIcon />} sx={{ mt: 2 }} onClick={handleEmailSignupClick}>
-          Sign Up with Email
-        </Button>
-
-        {showEmailForm && (
-          <form onSubmit={handleSubmit}>
-            {loading && <CircularProgress sx={{ mb: 2 }} />}
-            <TextField fullWidth name="firstName" label="First Name" variant="outlined" value={formData.firstName} onChange={handleChange} sx={{ mt: 2, mb: 1 }} required />
-            <TextField fullWidth name="lastName" label="Last Name" variant="outlined" value={formData.lastName} onChange={handleChange} sx={{ mt: 1, mb: 1 }} required />
-            <TextField fullWidth name="email" label="Email" type="email" variant="outlined" value={formData.email} onChange={handleChange} sx={{ mt: 1, mb: 1 }} required />
-            <TextField fullWidth name="password" label="Password" type={formData.showPassword ? "text" : "password"} variant="outlined" value={formData.password} onChange={handleChange} 
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowPasswordClick}>
-                      {formData.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }} 
-              sx={{ mt: 1 }} 
-              required 
-            />
-            <TextField fullWidth name="reenterpassword" label="Re-enter Password" type={formData.showReEnterPassword ? "text" : "password"} variant="outlined" value={formData.reenterpassword} onChange={handleChange} 
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowReEnterPasswordClick}>
-                      {formData.showReEnterPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }} 
-              sx={{ mt: 2, mb: 1 }} 
-              required 
-            />
-            {error && <Typography color="error" variant="body2" sx={{ mt: 1 }}>{error}</Typography>}
-            {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>}
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
-              <input type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
-              <label htmlFor="agreeTerms" style={{ marginLeft: '8px' }}>
-                I agree to the <a href="/terms_of_service">Terms of Service</a> and <a href="/privacy_policy">Privacy Policy</a>.
-              </label>
-            </Box>
-            <Button fullWidth type="submit" variant="contained" color="primary" sx={{ mt: 3 }} disabled={loading}>
-              {loading ? 'Signing Up...' : 'Sign Up'}
-            </Button>
-          </form>
-        )}
-      </Box>
+    <Typography variant="h4" align="center" sx={{ mb: 3 }}>Sign Up</Typography>
+    <Box sx={{ mt: 3 }}>
+      {/* Google Sign Up Button with custom styling */}
+      <Button
+        fullWidth
+        variant="contained"
+        className="googleButton"
+        startIcon={<GoogleIcon />}
+        sx={{ mt: 2 }}
+        onClick={handleGoogleSignUpClick}
+      >
+        Sign Up with Google
+      </Button>
+  
+      <Button
+        fullWidth
+        variant="contained"
+        color="secondary"
+        startIcon={<EmailIcon />}
+        sx={{ mt: 2 }}
+        onClick={handleEmailSignupClick}
+      >
+        Sign Up with Email
+      </Button>
+  
+      {showEmailForm && (
+        <form onSubmit={handleSubmit}>
+          {loading && <CircularProgress sx={{ mb: 2 }} />}
+          <TextField
+            fullWidth
+            name="firstName"
+            label="First Name"
+            variant="outlined"
+            value={formData.firstName}
+            onChange={handleChange}
+            sx={{ mt: 2, mb: 1 }}
+            required
+          />
+          <TextField
+            fullWidth
+            name="lastName"
+            label="Last Name"
+            variant="outlined"
+            value={formData.lastName}
+            onChange={handleChange}
+            sx={{ mt: 1, mb: 1 }}
+            required
+          />
+          <TextField
+            fullWidth
+            name="email"
+            label="Email"
+            type="email"
+            variant="outlined"
+            value={formData.email}
+            onChange={handleChange}
+            sx={{ mt: 1, mb: 1 }}
+            required
+          />
+          <TextField
+            fullWidth
+            name="password"
+            label="Password"
+            type={formData.showPassword ? "text" : "password"}
+            variant="outlined"
+            value={formData.password}
+            onChange={handleChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPasswordClick}>
+                    {formData.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            sx={{ mt: 1 }}
+            required
+          />
+          <TextField
+            fullWidth
+            name="reenterpassword"
+            label="Re-enter Password"
+            type={formData.showReEnterPassword ? "text" : "password"}
+            variant="outlined"
+            value={formData.reenterpassword}
+            onChange={handleChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowReEnterPasswordClick}>
+                    {formData.showReEnterPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            sx={{ mt: 2, mb: 1 }}
+            required
+          />
+          {error && <Typography color="error" variant="body2" sx={{ mt: 1 }}>{error}</Typography>}
+          {successMessage && <Typography color="success" variant="body2" sx={{ mt: 1 }}>{successMessage}</Typography>}
+          <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
+            <input type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
+            <label htmlFor="agreeTerms" style={{ marginLeft: '8px' }}>
+              I agree to the <a href="/terms_of_service">Terms of Service</a> and <a href="/privacy_policy">Privacy Policy</a>.
+            </label>
+          </Box>
+          <Button fullWidth type="submit" variant="contained" color="primary" sx={{ mt: 3 }} disabled={loading}>
+            {loading ? 'Signing Up...' : 'Sign Up'}
+          </Button>
+        </form>
+      )}
     </Box>
+  </Box>
+  
   );
 };
 

@@ -1,84 +1,93 @@
 /* Contact Page Styling */
 
-/* Import font */
+/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 body {
-    font-family: 'Playfair Display', serif; /* Use Playfair Display for body */
-    background-color: #f4f4f4;
+    font-family: 'Playfair Display', serif;
+    background-color: #faf3f9; /* Light pink background */
     margin: 0;
     padding: 0;
-    color: #333; /* Darker text for readability */
+    color: #3e3e3e; /* Consistent dark gray text */
 }
 
 /* Container styling */
 .contactme-container {
     max-width: 75%;
-    margin: 3% auto; /* Vertical margin for spacing from top */
+    margin: 3% auto;
     padding: 30px;
-    background-color: rgb(250, 229, 250);
+    background: linear-gradient(to right, #f7e5f7, #fdeefb); /* Light gradient with pink and purple tones */
     border-radius: 10px;
-    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
-    border: 1px solid #ddd;
+    box-shadow: 8px 8px 16px rgba(62, 62, 62, 0.2), -8px -8px 16px rgba(256, 256, 256, 0.1);
+    border: 1px solid #e0cce4; /* Soft border matching the theme */
+    transition: transform 0.3s ease;
+}
+
+.contactme-container:hover {
+    transform: scale(1.02);
 }
 
 /* Heading styles */
 h2 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 3em; /* Slightly larger font size */
-    color: #323030ea;
+    font-size: 3em;
+    color: #5a3d5c; /* Deep purple for heading text */
     text-align: center;
-    margin-bottom: 25px; /* More space below the heading */
+    margin-bottom: 25px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #0e0d0e;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #a64d79; /* Consistent purple-pink color */
+    box-shadow: 0 2px 5px rgba(90, 61, 92, 0.1);
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Contact details box styling */
 .contact-details {
-    background-color: #FDF7F8; /* Peach color */
-    border: 2px solid #080708; /* Darker pink border */
+    background-color: #fbf3f8; /* Light pink background for details */
+    border: 2px solid #a64d79; /* Consistent purple-pink border */
     border-radius: 8px;
-    padding: 30px; /* Adjusted padding for better spacing */
-    margin-top: 30px; /* More space above */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0px 4px 8px rgba(62, 62, 62, 0.1);
+    font-family: 'Roboto', sans-serif;
     font-size: 1.125em;
     font-weight: 400;
-    line-height: 1.6; /* Improved line spacing for readability */
+    line-height: 1.6;
+    color: #3e3e3e; /* Dark gray text color */
 }
 
-/* Paragraph and span styles */
 .contact-details p {
     font-size: 1.125em;
-    margin-bottom: 20px; /* Increased margin for better separation */
+    margin-bottom: 20px;
 }
 
 .contact-details span {
-    font-weight: 300; /* Lighter weight for span text */
+    font-weight: 300;
 }
 
 /* Link and hover effects */
 .contact-details a {
-    color: #d926a9;
+    color: #a64d79; /* Consistent purple-pink for links */
     text-decoration: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth hover effect */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .contact-details a:hover {
-    color: #a6007e;
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.2); /* Slight shadow for hover effect */
+    color: #7a3159; /* Darker shade for hover */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 }
 
 .contact-details a:focus {
     outline: none;
-    border-bottom: 2px solid #d926a9; /* Focus effect */
+    border-bottom: 2px solid #a64d79;
 }
 
 /* Button styling */
 .contactme-container .button {
-    background-color: #d926a9;
+    background: linear-gradient(135deg, #a64d79, #7a3159); /* Gradient with purple and dark pink */
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -92,46 +101,46 @@ h2 {
 }
 
 .contactme-container .button:hover {
-    background-color: #a6007e;
-    transform: translateY(-2px);
+    transform: scale(1.05);
+    background-color: #7a3159;
 }
 
 .contactme-container .button:active {
-    background-color: #8e0073;
+    background-color: #5a3d5c;
     transform: translateY(0);
 }
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .contactme-container {
-        max-width: 90%; /* Use more width on small screens */
+        max-width: 90%;
         padding: 20px;
     }
 
     h2 {
-        font-size: 2.2em; /* Slightly smaller font size */
+        font-size: 2.2em;
     }
 
     .contact-details p {
-        font-size: 1em; /* Adjust paragraph font size */
+        font-size: 1em;
     }
 
     .contactme-container .button {
-        width: 100%; /* Button takes full width on smaller screens */
-        padding: 15px 0; /* Adjust padding */
+        width: 100%;
+        padding: 15px 0;
     }
 }
 
 @media (max-width: 480px) {
     .contactme-container {
-        padding: 15px; /* Further reduce padding */
+        padding: 15px;
     }
 
     h2 {
-        font-size: 1.8em; /* Smaller heading size */
+        font-size: 1.8em;
     }
 
     .contact-details p {
-        font-size: 0.9em; /* Adjust paragraph font size for mobile */
+        font-size: 0.9em;
     }
 }
