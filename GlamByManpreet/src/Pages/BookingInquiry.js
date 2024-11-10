@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import "../Styles/BookingInquiry.css";
 
 // Component for handling booking inquiries
-function BookingInquiry() {
+function BookingInquiry({ onSubmit }) {
+  console.log("onSubmit prop received:", onSubmit); // This will log if `onSubmit` is correctly passed
+
   // State variable to store form data
   const [formData, setFormData] = useState({
-    firstNameAndLastName: "",
-    phoneNumber: "",
-    emailAddress: "",
-    eventDate: "",
-    eventTime: "",
-    eventType: "",
-    eventName: "",
-    clientsHairAndMakeup: 0,
-    clientsHairOnly: 0,
-    clientsMakeupOnly: 0,
-    locationAddress: "",
-    additionalNotes: "",
+
   });
 
   // State variable to store form validation errors
@@ -169,7 +160,9 @@ function BookingInquiry() {
     const capitalizedName = capitalizeName(formData.firstNameAndLastName);
     const lowercaseEmail = formData.emailAddress.toLowerCase();
     const updatedFormData = { ...formData, firstNameAndLastName: capitalizedName, emailAddress: lowercaseEmail };
-  
+    if (onSubmit) {
+      onSubmit(updatedFormData);
+    } else {
     try {
       // Send form data to the backend API endpoint
       const response = await fetch("http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/submit", {
@@ -207,6 +200,7 @@ function BookingInquiry() {
       // Handle network or other errors during submission
       console.error("Error:", error);
       alert("An error occurred while submitting the form.");
+    }
     }
   };
 
@@ -302,7 +296,7 @@ function BookingInquiry() {
         All inquiries will be responded to via text or email.{" "}
       </p>
       <div className="form-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid="booking-inquiry-form">
           <div className="form-group">
             <label htmlFor="firstNameAndLastName">
               First Name and Last Name:<span className="required">*</span>
