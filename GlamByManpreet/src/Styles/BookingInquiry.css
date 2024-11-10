@@ -1,54 +1,47 @@
-/* Booking Inquiry Page */
-
-/* Consistent Heading Styling */
-.booking-inquiry-heading {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5em;
-    color: #323030ea;
-    text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ff99cc; /* Same pink underline effect as on the Home page */
-    padding-bottom: 10px;
-}
+/* BookingInquiry.css */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 .booking-inquiry {
-    max-width: 80%; /* Adjust to fit the home page container style */
+    max-width: 480px;
     margin: 0 auto;
-    margin-top: 20px;
-    padding: 30px;
+    padding: 25px;
     background-color: #f9e4f7;
-    border-radius: 10px; /* Rounded corners for a soft look */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1), 0px -10px 30px rgba(255, 255, 255, 0.1); /* Soft shadow effect */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #00050b;
     font-family: 'Bebas Neue', sans-serif;
+    color: #333; /* Add text color for better readability */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); 
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Larger shadow for depth */
-    border: 1px solid #00050b; /* Border with soft contrast */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #242323;
     font-family: 'Playfair Display', serif;
-    max-width: 550px; /* Similar width to home page containers */
-    margin: 0 auto;
+    margin-bottom: 20px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); 
 }
 
 .form-group {
     margin-bottom: 20px;
     width: 100%;
-    font-family: 'Playfair Display', serif;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
+    font-weight: bold;
+    color: #444; /* Slightly darker text for better readability */
 }
 
-/* Input and Textarea styling */
+/* Input and Textarea Styling */
 .booking-inquiry input[type="text"], 
 .booking-inquiry input[type="number"], 
 .booking-inquiry input[type="tel"], 
@@ -61,104 +54,100 @@ label {
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
+    background-color: #fdfdfd; /* Lighter background for input fields */
     color: #555;
+    font-size: 16px;
     font-family: 'Playfair Display', serif;
     transition: border-color 0.3s ease;
 }
 
-/* Focused state for inputs */
 .booking-inquiry input:focus, 
 .booking-inquiry select:focus, 
 .booking-inquiry textarea:focus {
     outline: none;
-    border-color: #00050b; /* Same color focus as the home page elements */
+    border-color: #00050b;
 }
 
-/* Textarea specific styling */
+/* Textarea Specific Styling */
 textarea {
-    height: 150px;
+    height: 150px; /* Maintain height for consistency */
     resize: vertical;
-    font-size: 1rem;
 }
 
-/* Button Styling (Updated for Booking Inquiry page) */
-.button {
-    display: inline-block;
-    padding: 12px 30px; 
-    background-color: #545252; /* Black background */
-    color: white;
-    font-weight: bold; /* Bold font */
-    font-size: 18px;
-    border-radius: 8px;
-    text-decoration: none; /* This removes the underline */
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3), 0px 6px 12px rgba(0, 0, 0, 0.1); /* Deeper 3D shadow */
+/* Button Styling */
+button[type="submit"] {
+    background-color: #ffc2f9;
+    color: #0e0101;
+    padding: 12px 25px;
     border: none;
-    transition: all 0.3s ease; /* Smooth transition for all properties */
-    margin-top: auto;  /* Push button to the bottom */
-    align-self: center;
-    transform: translateY(0); /* Initial position */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%; /* Full-width button for mobile responsiveness */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); 
 }
 
-/* Hover Effect */
-.button:hover {
-    background-color: #ec98e8; /* Pink hover color */
-    color: black; /* Black text on hover */
-    box-shadow: 0px 18px 36px rgba(0, 0, 0, 0.4), 0px 12px 24px rgba(222, 133, 204, 0.5); /* Deeper shadow with larger spread */
-    text-decoration: none; /* Ensure no underline on hover */
-    transform: translateY(-6px); /* Lift the button more on hover */
+button[type="submit"]:hover {
+    background-color: #00050b;
+    color: #fff;
+    transform: translateY(-3px);
 }
 
-/* Focus Effect */
-.button:focus {
-    background-color: #E8E8E8; /* Light gray background color on focus */
-    color: #111; /* Darker text color on focus */
-    text-decoration: none; /* Ensure no underline on hover */
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* Deep focus shadow */
+/* Focus and Active Button Styles */
+button[type="submit"]:focus {
+    outline: none;
+    background-color: #e1d4f4;
 }
 
-/* Active Effect (when button is clicked) */
-.button:active {
-    background-color: #E8E8E8; /* Light gray background color on active */
-    color: #111; /* Darker text color on active */
-    text-decoration: none; /* Ensure no underline on hover */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
-    transform: translateY(4px); /* Button appears pressed */
+button[type="submit"]:active {
+    transform: translateY(2px);
+    background-color: #d4c3e0;
 }
 
-/* Response time text */
+/* Response Time Styling */
 .response-time {
     text-align: center;
-    color: black;
-    font-size: 1rem;
+    color: #444;
+    font-size: 16px;
     margin-top: 20px;
+    margin-bottom: 20px;
     font-family: 'Playfair Display', serif;
 }
 
-/* Required field asterisk */
+/* Required Field Asterisk */
 .required {
     color: red;
     font-size: 1.2em;
     vertical-align: top;
-    margin-left: 2px;
+    margin-left: 5px;
 }
 
-/* Error message styling */
+/* Error Message Styling */
 .error {
     color: red;
     font-size: 0.9rem;
     margin-top: 5px;
+    display: block;
 }
 
-/* Mobile styling */
+/* Mobile Styling */
 @media only screen and (max-width: 600px) {
     .booking-inquiry {
         max-width: 90%;
-        padding: 16px;
+        padding: 15px;
     }
 
-    .button {
-        width: 100%;
-        padding: 12px;
+    .form-container {
+        padding: 15px;
+    }
+
+    button[type="submit"] {
+        padding: 14px 30px;
+        font-size: 18px;
     }
 }

@@ -1,3 +1,5 @@
+/* Services.js */
+
 import React from 'react';
 import '../Styles/Services.css'; 
 import makeupIcon from '../assets/images/makeup-icon.png'; 
@@ -8,24 +10,26 @@ function Services() {
   return (
     <div className='services-container'>
       <h2 className='header-text'>Services</h2>
-      
+
+      {/* Makeup Service Box */}
       <div className="service-box">
-        <img src={makeupIcon} alt="Makeup Icon" className="service-icon" />
+        <img src={makeupIcon} alt="Makeup Application" className="service-icon" />
         <h3>MAKEUP</h3>
         <p>Heavy<br />Natural<br />Bridal<br />Non-bridal</p>
         <a href="/booking_Inquiry" className="button">Booking Inquiry</a>
       </div>
 
+      {/* Master Class Service Box */}
       <div className="service-box">
-        <img src={masterclassIcon} alt="Master Class Icon" className="service-icon" />
+        <img src={masterclassIcon} alt="Makeup Masterclass" className="service-icon" />
         <h3>MASTER CLASS</h3>
         <p>Bridal and Non-bridal Lessons<br />Hair<br />Makeup</p>
         <a href="/register" className="button">Learn More</a>
       </div>
     
-      {/* Skincare Box */}
+      {/* Skincare Service Box */}
       <div className="service-box">
-        <img src={skincareIcon} alt="Skin Care Icon" className="service-icon" />
+        <img src={skincareIcon} alt="Skincare Services" className="service-icon" />
         <h3>SKINCARE</h3>
         <p>Coming soon</p>
         <a href="/register" className="button">Register and get exclusive insights here!</a>
