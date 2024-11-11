@@ -16,7 +16,6 @@
 }
 
 
-
 .picture-container {  /* Style for the picture container */
     display: flex; /* Use flexbox for layout */
     justify-content: center; /* Center align images */
@@ -47,7 +46,7 @@
 }
 
 .some-content { 
-    max-width: 800px; /* Limit width for better readability */
+    max-width: 999px; /* Limit width for better readability */
     border: 1px solid #ccc; /* Lighter border */
     border-radius: 8px; /* Consistent border radius */
     padding: 15px; /* More padding for spacing */
@@ -70,7 +69,7 @@
 /* 3 info boxes Containter below */
 .info-boxes-container {
     margin-top: 5px;
-    width: 90%; /* Adjust width for responsiveness */
+    width: 95%; /* Adjust width for responsiveness */
     margin: 0 auto;
     padding: 5px;
     display: flex;
@@ -82,6 +81,7 @@
 .info-box {
     font-family: 'Playfair Display', serif;
     width: 29%; /* Reduce width for spacing */
+
     border: 1px solid #ccc; /* Lighter border */
     margin: 1%; /* Small margin */
     padding: 10px;

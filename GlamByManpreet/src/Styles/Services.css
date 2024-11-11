@@ -35,7 +35,8 @@
   width: 30%; /* Ensure boxes take up 30% of container */
   min-width: 300px;
   max-width: 400px;
-  min-height: 450px; /* Increase minimum height to accommodate more content */
+  min-height: 400px; /* Ensure boxes have a minimum height */
+  height: 500px; /* Allow height to adjust based on content */
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -51,6 +52,7 @@
   box-sizing: border-box;
   overflow: hidden;
 }
+
 
 /* Ensure Image Size and Consistency */
 .service-box img {
@@ -69,7 +71,7 @@
 /* Service Box Paragraph Styling */
 .service-box p {
   font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 30px; 
   font-family: 'Italiana', serif;
   flex-grow: 1; /* Ensure the text area expands to take available space */
   display: flex;
@@ -96,7 +98,6 @@
 .button:hover {
   background-color: #de85cc;
 }
-
 
 /* Mobile Styling */
 @media only screen and (max-width: 600px) {
