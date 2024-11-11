@@ -31,7 +31,7 @@ function Feed() {
   // Function to fetch feed items from Supabase
   const fetchFeedItems = async () => {
     try {
-      const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed');
+      const response = await axios.get('https://d8hx0arzv5ybf.cloudfront.net/feed');
       setFeedItems(response.data);
     } catch (error) {
       console.error('Error fetching feed items:', error);
@@ -84,13 +84,13 @@ function Feed() {
   
     try {
       if (isEditing) {
-        await axios.put( `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed/${feedItems[editIndex].id}`, item);
+        await axios.put( `https://d8hx0arzv5ybf.cloudfront.net/feed/${feedItems[editIndex].id}`, item);
         setIsEditing(false);
         setEditIndex(null);
 
       } 
       else {
-        await axios.post('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed/create', item);
+        await axios.post('https://d8hx0arzv5ybf.cloudfront.net/feed/create', item);
       }
       fetchFeedItems(); // Refresh feed
     } catch (error) {
@@ -112,7 +112,7 @@ function Feed() {
 // Function to handle deleting an item
 const handleDelete = async (index) => {
   try {
-    await axios.delete(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/feed/${feedItems[index].id}`);
+    await axios.delete(`https://d8hx0arzv5ybf.cloudfront.net/feed/${feedItems[index].id}`);
     fetchFeedItems();
   } catch (error) {
     console.error('Error deleting feed item:', error);
