@@ -3,7 +3,10 @@ import React from 'react';
 import Modal from 'react-modal';
 import "../Styles/DashBoard.css";
 
-Modal.setAppElement('#root');
+// Conditionally set the app element only if not in a test environment
+if (process.env.NODE_ENV !== 'test') {
+  Modal.setAppElement('#root');
+}
 
 function BookingModal({ isOpen, onRequestClose, booking }) {
   return (
