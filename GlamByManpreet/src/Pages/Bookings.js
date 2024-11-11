@@ -76,7 +76,7 @@ function Bookings() {
     const fetchBookings = async () => {
       try {
         const response = await axios.get(
-          'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings'
+          'https://d8hx0arzv5ybf.cloudfront.net/bookings'
         );
         setBookings(response.data);
       } catch (error) {
