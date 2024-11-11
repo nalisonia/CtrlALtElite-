@@ -28,6 +28,8 @@ function Clients() {
   const [editEmail, setEditEmail] = useState('');
   const [editPhone, setEditPhone] = useState('');
   const [clientIdToDelete, setClientIdToDelete] = useState(null);
+  const [error, setError] = useState('');  
+
 
   // Use theme and media query to detect mobile devices
   const theme = useTheme();
@@ -42,6 +44,7 @@ function Clients() {
         );
         setClients(response.data);
       } catch (error) {
+        setError('Error fetching clients');  
         console.error('Error fetching clients:', error);
       }
     };
@@ -201,6 +204,9 @@ function Clients() {
 
   return (
     <div className="clients-container">
+       {/* Display error message if there's an error */}
+       {error && <Typography color="error">{error}</Typography>} 
+
       <Typography
         variant="h4"
         gutterBottom

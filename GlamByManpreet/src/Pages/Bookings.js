@@ -256,7 +256,7 @@ function Bookings() {
             <IconButton onClick={handleView}>
               <VisibilityIcon />
             </IconButton>
-            <IconButton onClick={handleEdit}>
+            <IconButton aria-label="edit" onClick={handleEdit}>
               <EditIcon />
             </IconButton>
             <IconButton onClick={handleDelete}>

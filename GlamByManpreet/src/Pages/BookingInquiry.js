@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import "../Styles/BookingInquiry.css";
 
 // Component for handling booking inquiries
-function BookingInquiry() {
+function BookingInquiry({ onSubmit }) {
+  console.log("onSubmit prop received:", onSubmit); // This will log if `onSubmit` is correctly passed
+
   // State variable to store form data
   const [formData, setFormData] = useState({
-    firstNameAndLastName: "",
-    phoneNumber: "",
-    emailAddress: "",
-    eventDate: "",
-    eventTime: "",
-    eventType: "",
-    eventName: "",
-    clientsHairAndMakeup: 0,
-    clientsHairOnly: 0,
-    clientsMakeupOnly: 0,
-    locationAddress: "",
-    additionalNotes: "",
+
   });
 
   // State variable to store form validation errors
@@ -169,7 +160,9 @@ function BookingInquiry() {
     const capitalizedName = capitalizeName(formData.firstNameAndLastName);
     const lowercaseEmail = formData.emailAddress.toLowerCase();
     const updatedFormData = { ...formData, firstNameAndLastName: capitalizedName, emailAddress: lowercaseEmail };
-  
+    if (onSubmit) {
+      onSubmit(updatedFormData);
+    } else {
     try {
       // Send form data to the backend API endpoint
       const response = await fetch("http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/submit", {
@@ -208,6 +201,7 @@ function BookingInquiry() {
       console.error("Error:", error);
       alert("An error occurred while submitting the form.");
     }
+    }
   };
 
   // Helper function to capitalize the first letter of each word in a string
@@ -234,21 +228,22 @@ function BookingInquiry() {
     // Calculate maximum date for eventDate (60 days from today)
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 60);
-    const selectedDate = new Date(formData.eventDate);
+    //const selectedDate = new Date(formData.eventDate);
+    const selectedDate = formData.eventDate ? new Date(formData.eventDate) : null;
 
     // Array of client count fields for validation
     const clientFields = ["clientsHairAndMakeup", "clientsHairOnly", "clientsMakeupOnly"];
 
     // Validate First and Last Name (required and format)
-    if (!formData.firstNameAndLastName.trim() || !nameRegex.test(formData.firstNameAndLastName.trim())) {
+    if (!formData.firstNameAndLastName?.trim() || !nameRegex.test(formData.firstNameAndLastName.trim())) {
       errors.firstNameAndLastName = "First and Last Name Required";
     }
     // Validate Phone Number (required and format)
-    if (!formData.phoneNumber.trim() || !phoneRegex.test(formData.phoneNumber)) {
+    if (!formData.phoneNumber?.trim() || !phoneRegex.test(formData.phoneNumber)) {
       errors.phoneNumber = "Valid phone number required (XXX-XXX-XXXX)";
     }
     // Validate Email Address (required and format)
-    if (!formData.emailAddress.trim() || !emailRegex.test(formData.emailAddress.trim())) {
+    if (!formData.emailAddress?.trim() || !emailRegex.test(formData.emailAddress.trim())) {
       errors.emailAddress = "Valid email address required";
     }
     // Validate Event Date (within the next 60 days)
@@ -275,7 +270,7 @@ function BookingInquiry() {
       }
     });
     // Validate Location Address (required)
-    if (!formData.locationAddress.trim()) {
+    if (!formData.locationAddress?.trim()) {
       errors.locationAddress = "Required";
     }
 
@@ -286,7 +281,7 @@ function BookingInquiry() {
 
   return (
     <div className="booking-inquiry">
-      <h2>BOOKING INQUIRY</h2>
+      <h1>BOOKING INQUIRY</h1>
       <p className="response-time">
         Thank you for inquiring with Glam By Manpreet for your hair and makeup
         services!
@@ -302,196 +297,213 @@ function BookingInquiry() {
         All inquiries will be responded to via text or email.{" "}
       </p>
       <div className="form-container">
-      <form onSubmit={handleSubmit}>
-  <div className="form-group">
-    <label htmlFor="firstNameAndLastName">
-      First Name and Last Name: <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      id="firstNameAndLastName"
-      name="firstNameAndLastName"
-      value={formData.firstNameAndLastName}
-      onChange={handleChange}
-    />
-    {formErrors.firstNameAndLastName && (
-      <span className="error">{formErrors.firstNameAndLastName}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="phoneNumber">
-      Phone Number: <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      id="phoneNumber"
-      name="phoneNumber"
-      value={formData.phoneNumber}
-      onChange={handleChange}
-    />
-    {formErrors.phoneNumber && (
-      <span className="error">{formErrors.phoneNumber}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="emailAddress">
-      Email Address: <span className="required">*</span>
-    </label>
-    <input
-      type="email"
-      id="emailAddress"
-      name="emailAddress"
-      value={formData.emailAddress}
-      onChange={handleChange}
-    />
-    {formErrors.emailAddress && (
-      <span className="error">{formErrors.emailAddress}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="eventDate">
-      Event Date: <span className="required">*</span>
-    </label>
-    <input
-      type="date"
-      id="eventDate"
-      name="eventDate"
-      value={formData.eventDate}
-      onChange={handleChange}
-    />
-    {formErrors.eventDate && (
-      <span className="error">{formErrors.eventDate}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="eventTime">
-      Event Time: <span className="required">*</span>
-    </label>
-    <input
-      type="time"
-      id="eventTime"
-      name="eventTime"
-      value={formData.eventTime}
-      onChange={handleChange}
-    />
-    {formErrors.eventTime && (
-      <span className="error">{formErrors.eventTime}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="eventType">
-      Event Type: <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      id="eventType"
-      name="eventType"
-      value={formData.eventType}
-      onChange={handleChange}
-    />
-    {formErrors.eventType && (
-      <span className="error">{formErrors.eventType}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="eventName">
-      Event Name: <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      id="eventName"
-      name="eventName"
-      value={formData.eventName}
-      onChange={handleChange}
-    />
-    {formErrors.eventName && (
-      <span className="error">{formErrors.eventName}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="clientsHairAndMakeup">
-      Clients (Hair & Makeup):
-    </label>
-    <input
-      type="number"
-      id="clientsHairAndMakeup"
-      name="clientsHairAndMakeup"
-      value={formData.clientsHairAndMakeup}
-      onChange={handleChange}
-    />
-    {formErrors.clientsHairAndMakeup && (
-      <span className="error">{formErrors.clientsHairAndMakeup}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="clientsHairOnly">
-      Clients (Hair Only):
-    </label>
-    <input
-      type="number"
-      id="clientsHairOnly"
-      name="clientsHairOnly"
-      value={formData.clientsHairOnly}
-      onChange={handleChange}
-    />
-    {formErrors.clientsHairOnly && (
-      <span className="error">{formErrors.clientsHairOnly}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="clientsMakeupOnly">
-      Clients (Makeup Only):
-    </label>
-    <input
-      type="number"
-      id="clientsMakeupOnly"
-      name="clientsMakeupOnly"
-      value={formData.clientsMakeupOnly}
-      onChange={handleChange}
-    />
-    {formErrors.clientsMakeupOnly && (
-      <span className="error">{formErrors.clientsMakeupOnly}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="locationAddress">
-      Location Address: <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      id="locationAddress"
-      name="locationAddress"
-      value={formData.locationAddress}
-      onChange={handleChange}
-    />
-    {formErrors.locationAddress && (
-      <span className="error">{formErrors.locationAddress}</span>
-    )}
-  </div>
-
-  <div className="form-group">
-    <label htmlFor="additionalNotes">Additional Notes:</label>
-    <textarea
-      id="additionalNotes"
-      name="additionalNotes"
-      value={formData.additionalNotes}
-      onChange={handleChange}
-    />
-  </div>
-
-  <button type="submit">Submit Inquiry</button>
-</form>
-
+        <form onSubmit={handleSubmit} data-testid="booking-inquiry-form">
+          <div className="form-group">
+            <label htmlFor="firstNameAndLastName">
+              First Name and Last Name:<span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="firstNameAndLastName"
+              name="firstNameAndLastName"
+              value={formData.firstNameAndLastName}
+              onChange={handleChange}
+            />
+            {formErrors.firstNameAndLastName && (
+              <span className="error">{formErrors.firstNameAndLastName}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="phoneNumber">
+              Phone Number:<span className="required">*</span>
+            </label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              placeholder="XXX-XXX-XXXX"
+              onChange={handleChange}
+              onBlur={handleChange}
+            />
+            {formErrors.phoneNumber && (
+              <span className="error">{formErrors.phoneNumber}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="emailAddress">
+              Email Address:<span className="required">*</span>
+            </label>
+            <input
+              type="email"
+              id="emailAddress"
+              name="emailAddress"
+              value={formData.emailAddress}
+              placeholder="your@email.com"
+              onChange={handleChange}
+              onBlur={handleChange}
+            />
+            {formErrors.emailAddress && (
+              <span className="error">{formErrors.emailAddress}</span>
+            )}
+          </div>
+          <div className="form-group">
+          <label htmlFor="eventDate">
+            Date of Event (must be within 60 days): <span className="required">*</span>
+            </label>
+            <input
+              type="date"
+              id="eventDate"
+              name="eventDate"
+              value={formData.eventDate}
+              onChange={handleChange}
+              onBlur={handleChange} // Validate on blur as well
+              min={new Date().toISOString().split("T")[0]} // Set min to today
+              max={new Date(new Date().setDate(new Date().getDate() + 60)).toISOString().split("T")[0]} // Set max to 60 days from today
+            />
+            {formErrors.eventDate && (
+            <span className="error">{formErrors.eventDate}</span>
+            )}
+            </div>
+          <div className="form-group">
+            <label htmlFor="eventTime">
+              Ready By Time:<span className="required">*</span>
+            </label>
+            <input
+              type="time"
+              id="eventTime"
+              name="eventTime"
+              value={formData.eventTime}
+              onChange={handleChange}
+            />
+            {formErrors.eventTime && (
+              <span className="error">{formErrors.eventTime}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="eventType">
+              Type of Service:<span className="required">*</span>
+            </label>
+            <select
+              id="eventType"
+              name="eventType"
+              value={formData.eventType}
+              onChange={handleChange}
+            >
+              <option value="">Select a service</option>
+              <option value="Bridal">Bridal</option>
+              <option value="Non-Bridal">Non-Bridal</option>
+            </select>
+            {formErrors.eventType && (
+              <span className="error">{formErrors.eventType}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="eventName">
+              Name of the event(s):<span className="required">*</span>
+            </label>
+            <select
+              id="eventName"
+              name="eventName"
+              value={formData.eventName}
+              onChange={handleChange}
+            >
+              <option value="">Select an event</option>
+              <option value="Wedding Engagement">Wedding Engagement</option>
+              <option value="Rokha">Rokha</option>
+              <option value="Laggo">Laggo</option>
+              <option value="Mehndi">Mehndi</option>
+              <option value="Photoshoot">Photoshoot</option>
+              <option value="Other">Other</option>
+            </select>
+            {formErrors.eventName && (
+              <span className="error">{formErrors.eventName}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="clientsHairAndMakeup">
+              Number of clients requiring both hair and makeup:
+              <span className="required">*</span>
+            </label>
+            <input
+              type="number"
+              id="clientsHairAndMakeup"
+              name="clientsHairAndMakeup"
+              value={formData.clientsHairAndMakeup}
+              onChange={handleChange}
+              onBlur={handleChange}
+              min="0"
+              max="10"
+            />
+            {formErrors.clientsHairAndMakeup && (
+              <span className="error">{formErrors.clientsHairAndMakeup}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="clientsHairOnly">
+              Number of clients requiring only hair:
+              <span className="required">*</span>
+            </label>
+            <input
+              type="number"
+              id="clientsHairOnly"
+              name="clientsHairOnly"
+              value={formData.clientsHairOnly}
+              onChange={handleChange}
+              onBlur={handleChange}
+              min="0"
+              max="10"
+            />
+            {formErrors.clientsHairOnly && (
+              <span className="error">{formErrors.clientsHairOnly}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="clientsMakeupOnly">
+              Number of clients requiring only makeup:
+              <span className="required">*</span>
+            </label>
+            <input
+              type="number"
+              id="clientsMakeupOnly"
+              name="clientsMakeupOnly"
+              value={formData.clientsMakeupOnly}
+              onChange={handleChange}
+              onBlur={handleChange}
+              min="0"
+              max="10"
+            />
+            {formErrors.clientsMakeupOnly && (
+              <span className="error">{formErrors.clientsMakeupOnly}</span>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="locationAddress">
+              Location/Address you’d like me to commute to:
+              <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="locationAddress"
+              name="locationAddress"
+              value={formData.locationAddress}
+              onChange={handleChange}
+            />
+            {formErrors.locationAddress && (
+              <span className="error">{formErrors.locationAddress}</span>
+            )}
+          </div>
+          <label htmlFor="additionalNotes">Additional Notes:</label>
+          <textarea
+            id="additionalNotes"
+            name="additionalNotes"
+            value={formData.additionalNotes}
+            onChange={handleChange}
+            rows="4"
+            placeholder="Please add any additional information Manpreet should know..."
+          />
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );

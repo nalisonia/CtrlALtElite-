@@ -142,7 +142,7 @@ const handleForgotPassword = async () => {
         Log In
       </Typography>
       <Box sx={{ mt: 3 }}>
-      <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign Up with Google</Button>
+      <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign In with Google</Button>
 
         <Button
           fullWidth
@@ -157,7 +157,7 @@ const handleForgotPassword = async () => {
         </Button>
 
         {showEmailForm && (
-          <form onSubmit={handleSubmit}>
+          <form role="form" onSubmit={handleSubmit}>
             {loading && <CircularProgress sx={{ mb: 2 }} />}
             <TextField
               fullWidth
