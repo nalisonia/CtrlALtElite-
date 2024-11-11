@@ -286,7 +286,7 @@ function BookingInquiry() {
 
   return (
     <div className="booking-inquiry">
-      <h1>BOOKING INQUIRY</h1>
+      <h2>BOOKING INQUIRY</h2>
       <p className="response-time">
         Thank you for inquiring with Glam By Manpreet for your hair and makeup
         services!

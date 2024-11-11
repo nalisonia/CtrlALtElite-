@@ -15,18 +15,6 @@
 
 }
 
-.header-text { /* Style for the header text */
-    display: inline-block;  /* Display as inline block */
-    padding: 15px; /* Add some padding */
-    background-color: white; /* Slightly off-white for a softer look */
-    border-radius: 8px; /* Slight border radius for softer look */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-    font-size: 1.8em; /* Increase font size for visibility */
-    text-align: center; /* Center align text */
-    width: 100%; /* Use full width */
-    margin: 0; /* Uniform top/bottom margin */
-    margin-bottom: 20px;
-}
 
 
 .picture-container {  /* Style for the picture container */

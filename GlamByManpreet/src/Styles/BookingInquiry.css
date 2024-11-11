@@ -3,6 +3,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
+/* Header Styling */
+header {
+    background-color: #f9e4f7; /* Light pink background */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 3.2em;
+    /* border: 1px solid #00050b; */
+    font-family: 'Bebas Neue', sans-serif;
+    color: #333; /* Add text color for better readability */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+}
+
+
 .booking-inquiry {
     max-width: 480px;
     margin: 0 auto;
@@ -13,7 +27,8 @@
     /* border: 1px solid #00050b; */
     font-family: 'Bebas Neue', sans-serif;
     color: #333; /* Add text color for better readability */
-     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+
 }
 
 .form-container {
@@ -101,12 +116,12 @@ button[type="submit"]:hover {
 /* Focus and Active Button Styles */
 button[type="submit"]:focus {
     outline: none;
-    background-color: #e1d4f4;
+    background-color: #ffc2f9;  /* Lighter background for focus */
 }
 
 button[type="submit"]:active {
     transform: translateY(2px);
-    background-color: #d4c3e0;
+    background-color: #d4c3e0;  /* Lighter background for active */
 }
 
 /* Response Time Styling */

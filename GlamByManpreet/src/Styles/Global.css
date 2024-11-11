@@ -24,7 +24,6 @@ button[type="submit"],
   box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
   text-decoration: none;
   text-transform: uppercase;
-  
 }
 
 /* Hover effect */
@@ -53,7 +52,7 @@ button:focus,
 button[type="submit"]:focus,
 .service-box .button:focus {
   outline: none;
-  background-color: #e1d4f4;
+  background-color: #e1d4f4; /* Light gray background color when focused */
 }
 /* End of updated button styling */
 
@@ -63,10 +62,9 @@ button:active,
 button[type="submit"]:active,
 .service-box .button:active {
   transform: translateY(2px);
-  background-color: #d871d3;
+  background-color: #d871d3; 
   
 }
-
 
 
 /* Disabled state */
@@ -78,6 +76,28 @@ button[type="submit"]:disabled,
   cursor: not-allowed;
   box-shadow: none;
 }
+
+/* Global Headings for all pages
+/* header */
+/* Header Styling */
+h1 {
+  
+    font-size: 2em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    /* color: #5a3d5c; Black for heading text */
+  }
+
+  h2, h3, h4, h5, h6 {
+    /* color: #5a3d5c; Black for heading text */
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    /* box-shadow: 0 2px 5px rgba(90, 61, 92, 0.1); */
+    line-height: 1.2;
+  
+  }
+
+
 
 /* Responsive adjustments */
 @media only screen and (max-width: 600px) {

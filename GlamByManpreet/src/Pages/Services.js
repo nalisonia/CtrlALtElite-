@@ -9,7 +9,8 @@ import skincareIcon from '../assets/images/skincare-icon.png'; // Correct path f
 function Services() {
   return (
     <div className='services-container'>
-      <h2 className='header-text'>Services</h2>
+      {/* Change the heading tag from h3 to h2 */}
+      <h1 className='header-text'>Services</h1>
 
       {/* Makeup Service Box */}
       <div className="service-box">
