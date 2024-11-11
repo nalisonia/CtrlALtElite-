@@ -88,7 +88,7 @@ function Bookings() {
     const fetchClients = async () => {
       try {
         const response = await axios.get(
-          'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients'
+          'https://d8hx0arzv5ybf.cloudfront.net/clients'
         );
         setClients(response.data);
       } catch (error) {
@@ -174,7 +174,7 @@ function Bookings() {
     try {
       // Send a PUT request to the server to update the booking with the edited values
       await axios.put(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings/${selectedBooking.id}`,
+        `https://d8hx0arzv5ybf.cloudfront.net/bookings/${selectedBooking.id}`,
         {
           clientId: editClientId,
           eventDate: editEventDate,
@@ -221,7 +221,7 @@ function Bookings() {
     try {
       // Send a DELETE request to the server to delete the booking with the given ID
       await axios.delete(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/bookings/${bookingIdToDelete}`
+        `https://d8hx0arzv5ybf.cloudfront.net/bookings/${bookingIdToDelete}`
       );
       // Update the bookings state after successful delete
       setBookings((prevBookings) =>

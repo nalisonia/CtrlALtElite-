@@ -40,7 +40,7 @@ function Clients() {
     const fetchClients = async () => {
       try {
         const response = await axios.get(
-          'http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients'
+          'https://d8hx0arzv5ybf.cloudfront.net/clients'
         );
         setClients(response.data);
       } catch (error) {
@@ -82,7 +82,7 @@ function Clients() {
   const handleSaveEdit = async () => {
     try {
       await axios.put(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${selectedClient.id}`,
+        `https://d8hx0arzv5ybf.cloudfront.net/clients/${selectedClient.id}`,
         {
           name: editName,
           email: editEmail,
@@ -105,7 +105,7 @@ function Clients() {
   const handleConfirmDelete = async () => {
     try {
       await axios.delete(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/${clientIdToDelete}`
+        `https://d8hx0arzv5ybf.cloudfront.net/clients/${clientIdToDelete}`
       );
       setClients((prevClients) =>
         prevClients.filter((client) => client.id !== clientIdToDelete)
@@ -120,7 +120,7 @@ function Clients() {
   const handleApprove = async (clientId) => {
     try {
       await axios.put(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/approve/${clientId}`
+        `https://d8hx0arzv5ybf.cloudfront.net/clients/approve/${clientId}`
       );
       setClients((prevClients) =>
         prevClients.map((client) =>
@@ -135,7 +135,7 @@ function Clients() {
   const handleDecline = async (clientId) => {
     try {
       await axios.put(
-        `http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients/decline/${clientId}`
+        `https://d8hx0arzv5ybf.cloudfront.net/clients/decline/${clientId}`
       );
       setClients((prevClients) =>
         prevClients.map((client) =>

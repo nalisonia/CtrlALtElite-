@@ -165,7 +165,7 @@ function BookingInquiry({ onSubmit }) {
     } else {
     try {
       // Send form data to the backend API endpoint
-      const response = await fetch("http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/submit", {
+      const response = await fetch("https://d8hx0arzv5ybf.cloudfront.net/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

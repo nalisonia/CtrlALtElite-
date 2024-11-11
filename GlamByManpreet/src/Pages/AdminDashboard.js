@@ -61,7 +61,7 @@ function AdminDashboard() {
 
     const fetchInquiries = async () => {
       try {
-        const response = await axios.get('http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/clients');
+        const response = await axios.get('https://d8hx0arzv5ybf.cloudfront.net/clients');
         setInquiries(response.data);
       } catch (error) {
         console.error('Error fetching inquiries:', error);
@@ -75,7 +75,7 @@ function AdminDashboard() {
   const handleApproveInquiry = async (clientId) => {
     console.log('Approving inquiry with clientId:', clientId);
     try {
-      await axios.post(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`, {
+      await axios.post(`https://d8hx0arzv5ybf.cloudfront.net/inquiry-status`, {
         clientId,
         status: 'approved',
       });
@@ -93,7 +93,7 @@ function AdminDashboard() {
   const handleDeclineInquiry = async (clientId) => {
     console.log('Declining inquiry with clientId:', clientId);
     try {
-      await axios.post(`http://glambymanpreet-env.eba-dnhqtbpj.us-east-2.elasticbeanstalk.com/inquiry-status`, {
+      await axios.post(`https://d8hx0arzv5ybf.cloudfront.net/inquiry-status`, {
         clientId,
         status: 'declined',
       });
