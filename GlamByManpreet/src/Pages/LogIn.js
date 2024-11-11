@@ -157,7 +157,7 @@ const handleForgotPassword = async () => {
         </Button>
 
         {showEmailForm && (
-          <form onSubmit={handleSubmit}>
+          <form role="form" onSubmit={handleSubmit}>
             {loading && <CircularProgress sx={{ mb: 2 }} />}
             <TextField
               fullWidth
