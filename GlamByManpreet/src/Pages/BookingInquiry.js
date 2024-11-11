@@ -228,21 +228,22 @@ function BookingInquiry({ onSubmit }) {
     // Calculate maximum date for eventDate (60 days from today)
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 60);
-    const selectedDate = new Date(formData.eventDate);
+    //const selectedDate = new Date(formData.eventDate);
+    const selectedDate = formData.eventDate ? new Date(formData.eventDate) : null;
 
     // Array of client count fields for validation
     const clientFields = ["clientsHairAndMakeup", "clientsHairOnly", "clientsMakeupOnly"];
 
     // Validate First and Last Name (required and format)
-    if (!formData.firstNameAndLastName.trim() || !nameRegex.test(formData.firstNameAndLastName.trim())) {
+    if (!formData.firstNameAndLastName?.trim() || !nameRegex.test(formData.firstNameAndLastName.trim())) {
       errors.firstNameAndLastName = "First and Last Name Required";
     }
     // Validate Phone Number (required and format)
-    if (!formData.phoneNumber.trim() || !phoneRegex.test(formData.phoneNumber)) {
+    if (!formData.phoneNumber?.trim() || !phoneRegex.test(formData.phoneNumber)) {
       errors.phoneNumber = "Valid phone number required (XXX-XXX-XXXX)";
     }
     // Validate Email Address (required and format)
-    if (!formData.emailAddress.trim() || !emailRegex.test(formData.emailAddress.trim())) {
+    if (!formData.emailAddress?.trim() || !emailRegex.test(formData.emailAddress.trim())) {
       errors.emailAddress = "Valid email address required";
     }
     // Validate Event Date (within the next 60 days)
@@ -269,7 +270,7 @@ function BookingInquiry({ onSubmit }) {
       }
     });
     // Validate Location Address (required)
-    if (!formData.locationAddress.trim()) {
+    if (!formData.locationAddress?.trim()) {
       errors.locationAddress = "Required";
     }
 
