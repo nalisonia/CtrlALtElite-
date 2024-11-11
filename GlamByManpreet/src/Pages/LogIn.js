@@ -35,7 +35,7 @@ function LogIn() {
   const handleGoogleSignUpClick = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: 'http://localhost:3000/userview' }
+      options: { redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/userview' }
     });
     
     if (error) {

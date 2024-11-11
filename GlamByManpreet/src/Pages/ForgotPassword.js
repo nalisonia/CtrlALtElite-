@@ -15,7 +15,7 @@ const ForgotPassword = () => {
         e.preventDefault();
     
         const { error } = await supabase.auth.api.resetPasswordForEmail(email, {
-            redirectTo: 'http://localhost:3000/ResetPassword'
+            redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/ResetPassword'
         });
     
         if (error) {
