@@ -1,40 +1,9 @@
+/* global.css */
+
 /* Global Styles (Updated) */
 
 /* Updated button styling */
-.global-button {
-    margin: 0.5vh;
-    background-color: #ffc5fc;
-    color: #333; /* Darker text color for contrast */
-    width: 80%;
-    padding: 12px 0;
-    border: 1px solid #F5B7B1; /* Light border for a defined edge */
-    border-radius: 8px; /* Consistent rounded corners */
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    text-align: center;
-    text-transform: uppercase; /* Capitalize text for emphasis */
-}
-
-.global-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 182, 213, 0.5); /* Soft outline for better focus visibility */
-}
-
-.global-button:hover {
-    background-color: #f9e4f7; /* Lightened background on hover */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
-}
-
-.global-button:active {
-    background-color: #f7c6db; /* Slightly darker background when clicked */
-    transform: translateY(0); /* Reset lift on click */
-}
-
-/* global.css */
-
+/* Button choice #1 -Comment this out to chose the other button ~~~~~~~~~~~~~~~~~~~*/
 /* General button styling for all pages */
 button,
 button[type="submit"],
@@ -45,7 +14,7 @@ button[type="submit"],
   font-weight: 400;
   font-family: 'Playfair Display', serif;
   color: #0e0101;
-  background-color: #ffc2f9;
+  background-color: #f9e4f7;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -55,6 +24,7 @@ button[type="submit"],
   box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
   text-decoration: none;
   text-transform: uppercase;
+  
 }
 
 /* Hover effect */
@@ -62,7 +32,8 @@ button:hover,
 button[type="submit"]:hover,
 .service-box .button:hover {
   background-color: #00050b;
-  color: #f805cc;
+  /* color: #f805cc; */
+  color: black;
   transform: translateY(-3px);
   box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
 }
@@ -70,9 +41,10 @@ button[type="submit"]:hover,
 .emailButton:hover,
 .googleButton:hover,
 .service-box .button:hover {
-  background-color: #dcddde;
-  color: rgb(247, 1, 198);
+  background-color: #ec98e8;
+  color: rgb(10, 10, 10);
   transform: translateY(-3px);
+  font-weight: bold; /* Make text bold on hover */
   box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
 }
 
@@ -83,15 +55,19 @@ button[type="submit"]:focus,
   outline: none;
   background-color: #e1d4f4;
 }
+/* End of updated button styling */
+
 
 /* Active effect */
 button:active,
 button[type="submit"]:active,
 .service-box .button:active {
   transform: translateY(2px);
-  background-color: #d4c3e0;
+  background-color: #d871d3;
   
 }
+
+
 
 /* Disabled state */
 button:disabled,

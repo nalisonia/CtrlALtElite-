@@ -27,6 +27,7 @@
     flex-direction: column; /* Stack child elements */
     justify-content: center; /* Center content vertically */
     margin-bottom: 15px; /* Add bottom margin to separate from other elements */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1); 
 }
 
 /* Styling for the Image Container */
@@ -36,7 +37,10 @@
     display: flex; /* Use Flexbox to center the image */
     justify-content: center; /* Center the image horizontally */
     margin-top: 10px; /* Margin for spacing */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for image container */
+
+
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1); 
+
 }
 
 /* Styling for the Image */

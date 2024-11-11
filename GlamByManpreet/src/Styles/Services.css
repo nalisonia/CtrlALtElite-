@@ -1,5 +1,4 @@
 /* Services.css */
-
 /* Container for Services */
 .services-container {
   max-width: 90%; /* Set a maximum width of 90% for larger screens */
@@ -87,8 +86,6 @@ text-size-adjust: 100%;
   text-align: center; /* Center the text inside the button */
   text-decoration: none; /* Remove underline */
   text-transform: uppercase; /* Capitalize text for emphasis */
-
-  
 }
 
 /* Hover effect */

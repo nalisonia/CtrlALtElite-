@@ -7,12 +7,13 @@
     max-width: 480px;
     margin: 0 auto;
     padding: 25px;
-    background-color: #f9e4f7;
+    background-color: #f9e4f7; /* Light pink background */
     border-radius: 8px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border: 1px solid #00050b;
+    /* border: 1px solid #00050b; */
     font-family: 'Bebas Neue', sans-serif;
     color: #333; /* Add text color for better readability */
+     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
 }
 
 .form-container {
@@ -22,7 +23,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid #242323;
+    /* border: 1px solid #242323; */
     font-family: 'Playfair Display', serif;
     margin-bottom: 20px;
     width: 100%;
