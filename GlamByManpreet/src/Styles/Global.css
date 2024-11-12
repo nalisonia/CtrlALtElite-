@@ -5,8 +5,8 @@
 
 /* Box model reset */
 *,
-*::before,
-*::after {
+*::before, 
+*::after { 
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -39,7 +39,7 @@ h1 {
 .text-box h2 {
     padding-bottom: 5px;
     width: 100%;
-    margin-bottom: 20px;
+  
 }
 
 /* Paragraph Styles */
@@ -66,12 +66,46 @@ p {
 
 /* Link Styles */
 a {
-    text-decoration: none;
+    text-decoration: none; 
     color: inherit;
 }
 
 a:hover, a:focus {
-    color: #ffc5fc;
+    color: #ec98e8; /* hover pink on Main Heading logo "GLAM by manpreet" */
+}
+
+/* Button choice #1 - Comment this out to choose the other button ~~~~~~~~~~~~~~~~~~~ */
+.global-button {
+    margin: 0.5vh;
+    background-color: #ffc5fc;
+    color: #333;
+    width: 80%;
+    padding: 12px 0;
+    border: 1px solid #F5B7B1;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.global-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 182, 213, 0.5);
+}
+
+.global-button:hover {
+    background-color: #f9e4f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    font-weight: bold;
+}
+
+.global-button:active {
+    background-color: #f7c6db;
+    transform: translateY(0);
 }
 
 /* Button Styles (Merged) */
@@ -91,14 +125,17 @@ button[type="submit"],
     margin-top: 20px;
     box-shadow: 10px 10px 20px rgba(68, 68, 68, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
     text-transform: uppercase;
+   
 }
 
 button:hover,
 button[type="submit"]:hover,
 .service-box .button:hover {
     background-color: #00050b;
-    color: black;
+    color: #ec98e8;
     transform: translateY(-3px);
+    font-color: black;
+    font-weight: bold;
 }
 
 button:focus,

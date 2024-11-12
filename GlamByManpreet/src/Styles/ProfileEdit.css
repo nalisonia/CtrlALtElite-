@@ -29,7 +29,7 @@
 /* Edit Profile Button */
 .edit-profile-button,
 .service-box .button {
-    width: 100%;
+    /* width: 100%;
     padding: 12px 20px;
     font-size: 16px;
     font-weight: 400;
@@ -44,7 +44,7 @@
     margin: 10px 0;
     text-align: center;
     text-decoration: none;
-    text-transform: uppercase;
+    text-transform: uppercase; */
 }
 
 /* Hover effect */

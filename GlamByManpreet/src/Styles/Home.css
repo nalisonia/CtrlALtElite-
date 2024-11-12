@@ -12,12 +12,8 @@
     border-radius: 10px; /* Slight border radius for softer look */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    /* Add shadow */
     width: 100%; /* Use full width */
-
 }
 
-<<<<<<< HEAD
-
-=======
 .header-text { /* Style for the header text */
     display: inline-block;  /* Display as inline block */
     padding: 15px; /* Add some padding */
@@ -32,7 +28,6 @@
 }
 
 
->>>>>>> 4eb1d3d (180 Styling the buttons and adding special features)
 .picture-container {  /* Style for the picture container */
     display: flex; /* Use flexbox for layout */
     justify-content: center; /* Center align images */
@@ -47,7 +42,6 @@
     object-fit: cover; /* Covers the container */
     /* border-radius: 10px; Slight border radius for softer look- rounded corners */
     margin: 0 auto; /* Center align image */
-
 }
 
 .card {  /* Style for the card */
@@ -98,18 +92,12 @@
 .info-box {
     font-family: 'Playfair Display', serif;
     width: 29%; /* Reduce width for spacing */
-
     border: 1px solid #ccc; /* Lighter border */
     margin: 1%; /* Small margin */
     padding: 10px;
     background-color: #fff; /* White background for boxes */
     border-radius: 5px; /* Consistent border radius */
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4eb1d3d (180 Styling the buttons and adding special features)
 }
 
 /* Mobile styling */

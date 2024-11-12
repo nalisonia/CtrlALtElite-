@@ -35,11 +35,14 @@
 .picture-container {
     flex: 1; /* Allow image container to take available space */
     max-width: 400px; /* Set a maximum width */
+
     display: flex; /* Use Flexbox to center the image */
     justify-content: center; /* Center the image horizontally */
     margin-top: 10px; /* Margin for spacing */
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1); 
-    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); Light shadow for image container */
+    
+
+  
 }
 
 /* Styling for the Image */

@@ -1,4 +1,5 @@
 /* Services.js */
+
 import React from 'react';
 import '../Styles/Services.css'; 
 import makeupIcon from '../assets/images/makeup-icon.png'; 
@@ -22,7 +23,7 @@ function Services() {
       {/* Master Class Service Box */}
       <div className="service-box">
 
-        // <img src={masterclassIcon} alt="Makeup Masterclass" className="service-icon" />
+       
 
         <img src={masterclassIcon} alt="Master Class Icon" className="service-icon" />
 
