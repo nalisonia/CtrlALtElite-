@@ -1,75 +1,153 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+/* Contact Me Page Styling */
+
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+/* Heading styles */
+h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3em;
+    color: #323030ea;
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #0e0d0e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+body {
+    font-family: 'Playfair Display', serif;
+    background-color: #faf3f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container styling */
 .contactme-container {
     max-width: 75%;
-    margin: auto;
-    padding: 20px;
-    margin-top: 2.5%;
-    border: 1px solid black;
-    background-color: #fff;  /* White background for main container */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+    margin: 3% auto;
+    padding: 30px;
+    background: linear-gradient(to right, #f7e5f7, #fdeefb);
+    border-radius: 12px;
+    box-shadow: 8px 8px 16px rgba(62, 62, 62, 0.2), -8px -8px 16px rgba(256, 256, 256, 0.1);
+    border: 1px solid #e0cce4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-h2 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid black;
-    padding-bottom: 10px;
+.contactme-container:hover {
+    transform: scale(1.02);
+    box-shadow: 12px 12px 20px rgba(62, 62, 62, 0.2), -12px -12px 20px rgba(256, 256, 256, 0.1);
 }
 
+/* Contact details box styling */
 .contact-details {
-    background-color: #ffccff;  /* Light pink background */
-    border: 2px solid #ff99cc;  /* Slightly darker pink border */
-    border-radius: 8px;         /* Rounded corners */
-    padding: 20px;              /* Padding inside the box */
-    margin-top: 20px;           /* Spacing above the box */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+    background-color: #FDF7F8;
+    border: 2px solid #080708;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125em;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #3e3e3e;
 }
 
 .contact-details p {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 1.125em;
+    margin-bottom: 20px;
 }
-
-.contact-details a {
-    text-decoration: none;
-}
-
-/* a:visited {
-    color: inherit;
-} */
 
 .contact-details span {
-    font-weight: bold;
+    font-weight: 300;
 }
 
-.disclaimer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #777;
+/* Link and hover effects */
+.contact-details a {
+    color: #a64d79;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-details a:hover {
+    color: #7a3159;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.contact-details a:focus {
+    outline: none;
+    border-bottom: 2px solid #d926a9;
+}
+
+/* Button styling */
+.contactme-container .button {
+    background: linear-gradient(135deg, #ec98e8, #7a3159);
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     text-align: center;
+    display: inline-block;
+    margin-top: 20px;
 }
 
-/* Mobile responsive styling */
-@media only screen and (max-width: 600px) {
+.contactme-container .button:hover {
+    background-color: #a6007e;
+    transform: scale(1.05);
+}
+
+.contactme-container .button:active {
+    background-color: #8e0073;
+    transform: translateY(0);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
     .contactme-container {
-        max-width: 480px;
-        margin: 0 auto;
+        max-width: 90%;
         padding: 20px;
-        border: 0px; 
     }
 
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0px;
+    h2 {
+        font-size: 2.2em;
+    }
+
+    .contact-details p {
+        font-size: 1em;
+    }
+
+    .contactme-container .button {
+        width: 100%;
+        padding: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .contactme-container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .contact-details p {
+        font-size: 0.9em;
+    }
+
+    .contactme-container .button {
+        width: 100%;
+        padding: 15px 0;
     }
 }

@@ -35,7 +35,12 @@ function LogIn() {
   const handleGoogleSignUpClick = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: 'https://ctrl-a-lt-elite-glg4-nalisonias-projects.vercel.app/userview' }
+
+      options: { 
+        redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/userview' 
+      }
+      // options: { redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/userview' }
+
     });
     
     if (error) {

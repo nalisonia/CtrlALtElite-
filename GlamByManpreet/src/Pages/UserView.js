@@ -20,7 +20,27 @@ function UserView() {
                         <ListItem><ListItemText primary="Change your password" /></ListItem>
                         <ListItem><ListItemText primary="Control your notification preferences" /></ListItem>
                     </List>
-                    <Button sx={{ color: "black", backgroundColor: "#ffc5fc", margin: "1.6vh", width: "70%", border: "1px solid black", marginTop: 'auto' }} component={Link} to="/profileedit">Edit Profile</Button>
+                    <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#ffc5fc",
+                            margin: "1.6vh",
+                            width: "70%",
+                            border: "1px solid black",
+                            borderRadius: "8px",  // Smooth rounded corners
+                            padding: "10px 20px",  // Better padding for clickable area
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s", // Smooth transition for hover effect
+                            "&:hover": {
+                                backgroundColor: "#ff99ff", // Lighter shade on hover
+                                transform: "scale(1.05)", // Slight scale effect for hover
+                            },
+                        }}
+                        component={Link} 
+                        to="/profileedit"
+                    >
+                        Edit Profile
+                    </Button>
                 </div>
 
                 <div className="content-box">
@@ -30,7 +50,27 @@ function UserView() {
                         <ListItem><ListItemText primary="See the current status of your past inquiries." /></ListItem>
                         <ListItem><ListItemText primary="Access detailed information, including dates and responses" /></ListItem>
                     </List>
-                    <Button sx={{ color: "black", backgroundColor: "#ffc5fc", margin: "1.6vh", width: "70%", border: "1px solid black", marginTop: 'auto' }} component={Link} to="/inquiryhistory">Review Past Inquiries</Button>
+                    <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#ffc5fc",
+                            margin: "1.6vh",
+                            width: "70%",
+                            border: "1px solid black",
+                            borderRadius: "8px",
+                            padding: "10px 20px",
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s",
+                            "&:hover": {
+                                backgroundColor: "#ff99ff",
+                                transform: "scale(1.05)",
+                            },
+                        }}
+                        component={Link} 
+                        to="/inquiryhistory"
+                    >
+                        Review Past Inquiries
+                    </Button>
                 </div>
 
                 <div className="content-box">
@@ -40,12 +80,31 @@ function UserView() {
                         <ListItem><ListItemText primary="View a feed of pictures with product updates" /></ListItem>
                         <ListItem><ListItemText primary="New product endorsements featured regularly" /></ListItem>
                     </List>
-                    <Button sx={{ color: "black", backgroundColor: "#ffc5fc", margin: "1.6vh", width: "70%", border: "1px solid black", marginTop: 'auto' }} component={Link} to="/userfeed">Get Exclusive Updates</Button>
+                    <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#ffc5fc",
+                            margin: "1.6vh",
+                            width: "70%",
+                            border: "1px solid black",
+                            borderRadius: "8px",
+                            padding: "10px 20px",
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s",
+                            "&:hover": {
+                                backgroundColor: "#ff99ff",
+                                transform: "scale(1.05)",
+                            },
+                        }}
+                        component={Link} 
+                        to="/userfeed"
+                    >
+                        Get Exclusive Updates
+                    </Button>
                 </div>
             </div>
         </div>
     );
-    
 }
 
 export default UserView;

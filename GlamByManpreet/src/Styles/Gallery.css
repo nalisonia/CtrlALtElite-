@@ -21,6 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);  /* Adds a subtle shadow effect */
   }
   
   .Gallery-card img {

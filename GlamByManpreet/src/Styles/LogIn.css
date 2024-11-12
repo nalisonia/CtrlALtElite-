@@ -8,7 +8,6 @@
     flex-direction: column;
     align-items: center;
     border: 1px solid black;
-    
 }
 
 .LogIn-title {
@@ -74,14 +73,10 @@
     width: 100%;
 }
 
-
-
-
 /*Put all mobile styling here*/
 @media only screen and (max-width: 600px){
     .LogIn-container{
         width: 95%;
-        
         
     }
    .LogIn-title, .LogIn-form{

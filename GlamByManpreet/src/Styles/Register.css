@@ -1,61 +1,101 @@
-/* Added a higher specificity selector on the parent elements due to conflict with BookingInquiry.css */
-.register .textField:focus,
-.register input[type="number"]:focus,
-.register input[type="tel"]:focus,
-.register input[type="email"]:focus,
-.register input[type="date"]:focus,
-.register input[type="time"]:focus,
-.register select:focus,
-.register textarea:focus {
-  outline: none;
-  border-color: transparent; 
+/*
+/* Button Styling */
+button[type="submit"], .googleButton, .emailButton {
+  background-color: #ffc2f9; /* Soft pink background */
+  color: #0e0101; /* Dark text for contrast */
+  padding: 12px 30px; /* More padding for a balanced look */
+  border: 2px solid transparent; /* Add a transparent border for a smooth hover effect */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Playfair Display', serif;
+  transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+  margin-top: 20px;
+  text-align: center;
+  width: 100%; /* Full-width for mobile screens */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  outline: none; /* Remove default outline */
 }
 
-.register input[type="text"],
-.register input[type="number"],
-.register input[type="tel"],
-.register input[type="email"],
-.register input[type="date"],
-.register input[type="time"],
-.register select,
-.register textarea {
-  border: none;
-  border-radius: 0;
-  margin-bottom: 18px;
+button[type="submit"]:hover, .googleButton:hover, .emailButton:hover {
+  background-color: #00050b; /* Dark background on hover */
+  color: #fff; /* White text on hover */
+  border-color: #00050b; /* Matching border color */
+  transform: translateY(-3px); /* Lift effect for interactivity */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow for emphasis */
 }
 
-.signUpButton {
-  border-radius: 0;
+button[type="submit"]:active, .googleButton:active, .emailButton:active {
+  transform: translateY(2px); /* Slight downward movement when clicked */
+  background-color: #d4c3e0; /* Lighter background when clicked */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Lighter shadow on active */
 }
 
-/* Instagram button styling */
-.instagramButton {
-  background-color: #e4405f; /* Instagram brand color */
-  color: white; 
-  border-radius: 0; 
+button[type="submit"]:focus, .googleButton:focus, .emailButton:focus {
+  outline: 2px solid #ffc2f9; /* Visible outline for focus state */
+  outline-offset: 4px; /* Slightly offset outline for clarity */
+  background-color: #f0a3d1; /* Lighter background when focused */
 }
 
-.instagramButton:hover {
-  background-color: #c32f4a; /* Darker shade for hover effect */
+button[type="submit"]:disabled, .googleButton:disabled, .emailButton:disabled {
+  background-color: #e1d4f4; /* Disabled button with lighter color */
+  color: #a1a1a1; /* Grayed out text */
+  cursor: not-allowed; /* Disable pointer cursor */
+  box-shadow: none; /* Remove shadow when disabled */
 }
 
-/* Google button styling */
+/* Google button custom styles */
 .googleButton {
-  background-color: #4285F4; /* Google blue color */
+  display: flex; /* Use flex to align items */
+  align-items: center; /* Vertically center the logo and text */
+  justify-content: center; /* Center text and logo horizontally */
+  /* background-color: #4285F4; Google blue color */
+  background-color: #f0a3d1;
   color: white;
-  border-radius: 0; 
+  border-radius: 8px; /* Match other buttons' rounded corners */
+  font-family: 'Playfair Display', serif;
+  padding: 12px 30px; /* Consistent padding with other buttons */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
+.googleButton img {
+  margin-right: 8px; /* Space between logo and text */
+  width: 20px; /* Set size of the logo */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Hover effect for Google button */
 .googleButton:hover {
-  background-color: #3367D6; /* Darker shade for hover effect */
+  background-color: #ec98e8; /* Darker shade for hover effect */
+  color: white;
+
 }
 
+/* Email button custom styles */
 .emailButton {
-    background-color: #007bff; /* Example blue color - customize as needed */
-    color: white;
-    border-radius: 0; 
+  background-color: #007bff; /* Example blue color - customize as needed */
+  color: white;
+  border-radius: 8px; /* Rounded edges */
+  font-family: 'Playfair Display', serif;
+  padding: 12px 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.emailButton:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Ensure consistency across buttons */
+.emailButton, .googleButton {
+  width: 100%; /* Ensure full width on mobile */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  border: none; /* Remove default borders */
+}
+
+/* Mobile-Friendly Button Styling */
+@media only screen and (max-width: 600px) {
+  button[type="submit"], .googleButton, .emailButton {
+      padding: 14px 30px; /* Larger padding for touch devices */
+      font-size: 18px; /* Bigger text for better readability */
   }
-  
-  .emailButton:hover {
-    background-color: #0056b3; /* Darker shade for hover effect */
-  }
+}

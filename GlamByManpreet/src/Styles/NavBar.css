@@ -1,111 +1,126 @@
-.Mobile_Login_Button {
-  /* Margin around the button */
-  margin: .5vh;
+/* NavBar.css */
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Bebas+Neue&display=swap');
 
-  /* Background color of the button */
-  background-color: #FDF7F8;
-
-  /* Text color of the button */
-  color: rgb(0, 0, 0);
-
-  width: 80%;
-
+body {
+    font-family: Arial, sans-serif; 
+    background-color: #f4f4f4; 
+    margin: 0;
+    padding: 0;
 }
 
-
-.Mobile_Register_Button {
-  /* Margin around the button */
-  margin: .5vh;
-
-  /* Background color of the button */
-  background-color: #FDF7F8;
-
-  /* Text color of the button */
-  color: black;
-
-  width: 80%;
+/* Reusable Button Styling */
+/* The .button class provides the basic button styles */
+.button {
+    margin: 0.5vh;
+    background-color: #ffc5fc;
+    color: #333; /* Darker text color for contrast */
+    width: 80%;
+    padding: 12px 0;
+    border: 1px solid #F5B7B1; /* Light border for a defined edge */
+    border-radius: 8px; /* Consistent rounded corners */
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    text-transform: uppercase; /* Capitalize text for emphasis */
 }
 
+/* Focus state for accessibility */
+/* Ensures a clear outline is shown when the button is focused */
+.button:focus {
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 0 3px rgba(255, 182, 213, 0.5); /* Soft outline for better focus visibility */
+}
 
-.Social_Media_Icons{
+/* Hover effect */
+.button:hover {
+    background-color: #f9e4f7; /* Lightened background on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Active state for buttons */
+.button:active {
+    background-color: #f7c6db; /* Slightly darker background when clicked */
+    transform: translateY(0); /* Reset lift on click */
+}
+
+/* Applying .button to Login and Register buttons */
+.Mobile_Login_Button, .Mobile_Register_Button {
+    composes: button; /* Inherit styles from .button */
+}
+
+/* Social Media Icons */
+.Social_Media_Icons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 10px;
-
+    margin: 10px;
 }
 
-
-#TikTokIcon, #InstagramIcon{
+.Social_Media_Icons img {
     width: 30px;
     height: auto;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
 }
 
-.Nav_Bar_Title {
-  /* Align items in a column */
-  flex-direction: column;
-
-  /* Align items in the center horizontally */
-  align-items: center;
-
-  /* Push content to the center by setting left and right margins to auto */
-  margin-right: auto;
-
-  /* Specify the font family */
-   font-family: 'Bebas Neue', sans-serif; 
-  
-   /* 
-   Another Font option, not sure which ones is better
-   font-family: 'Daxline', sans-serif;
-   */
-   margin-left: 40px;
-
-  /* Set the font size to 30 pixels */
-  font-size: 60px;
-
-  /* Make the font slightly thicker */
-  font-weight: 750;
-
-  text-decoration: none;
-  color: black;
-  padding-left: 2px;
-  padding-top: 0px;
-  line-height: 0.1;
-  text-shadow: 1px 1px 8px rgb(253, 239, 255);
-
+.Social_Media_Icons img:hover {
+    transform: scale(1.15); /* Slightly enlarge on hover */
 }
 
-.Nav_Bar_Title > span{
-  font-size: 0.35em;
-  padding-left: 2.5%;
-  
+/* Nav Bar Title */
+.Nav_Bar_Title { 
+    display: flex; /* Change display to flex */
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    text-shadow: 1px 1px 8px rgb(253, 239, 255);
+    margin-left: 40px;
+    padding-left: 2px;
+    line-height: 1.1; /* Decrease to reduce spacing between lines */
+    text-align: center; /* Center-align the text */
 }
 
+.Nav_Bar_Title span {   
+    font-size: 0.35em; /* Smaller font size */
+    padding-left: 2.5%; /* Reduce padding */
+}
 
-/*Put all mobile styling here*/
-@media only screen and (max-width: 600px){
-    .Social_Media_Icons{
-        display: none;
+/* Responsive Styling */
+@media only screen and (max-width: 600px) {
+    .Social_Media_Icons {
+        display: none; /* Hide social icons on mobile */
     }
 
-    .Nav_Bar_Title{
-
-        font-size: 40px;
-        line-height: 0.5;
-        padding-bottom: 10px;
-        padding-top: 3px;        
-        margin-left: 20%;
-    }
-    
-    .Drawer_Nav_Bar_Title{
-      font-size: 40px;
-      text-decoration: none;
-      text-transform: none;
-      color:white;
-      font-family: 'Bebas Neue', sans-serif;
-      font-weight: 700;
+    .Nav_Bar_Title { 
+        font-size: 2.5rem; /* Reduce font size on mobile */
+        line-height: 1.2; /* Reduce line height on mobile */
+        padding: 5px 0; /* Reduce padding on mobile */
+        margin-left: 10%;
     }
 
+    .Drawer_Nav_Bar_Title {  /* Add this class to the nav bar title */
+        font-size: 2.5rem;
+        color: white;
+        font-family: 'Bebas Neue', sans-serif;
+        font-weight: 700;
+    }
+
+    /* Adjust button styling for mobile */
+    .button {
+        width: 90%; /* Use more width on mobile for easier tap */
+        padding: 10px 0; /* Adjust padding on mobile */
+        font-size: 0.9rem; /* Slightly smaller font size on mobile */
+    }
+
+    .Mobile_Login_Button, .Mobile_Register_Button {
+        width: 100%; /* Full width for mobile buttons */
+    }
 }
-  

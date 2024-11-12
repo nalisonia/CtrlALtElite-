@@ -14,10 +14,10 @@ function AboutMe() {
            transform faces but also empower aspiring artists through education.
            Join me on this beauty journey, where every brushstroke tells a story
            of elegance and empowerment.
-            -Manpreet Chahal.</p> 
+           -Manpreet Chahal.</p> 
       </div>
       <div className='picture-container'>
-        <img src={pic1} alt="pic1" className="model-image1" />
+        <img src={pic1} alt="pic1" className="about-model-image1" />
       </div>
     </div>
   );

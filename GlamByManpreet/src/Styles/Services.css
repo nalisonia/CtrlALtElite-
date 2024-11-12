@@ -1,88 +1,128 @@
-.services-container {
-  max-width: 75%; 
-  margin: 0 auto; 
-  margin-top: .5%; 
-  padding: 20px; 
-  display: flex;
-  flex-direction: row; 
-  justify-content: space-around; 
-  align-items: stretch; /* Stretch all service-boxes to the same height */
-  flex-wrap: wrap; 
-  line-height: 1.6;
-}
+/* Services.css */
 
+/* General Styling for Headers */
 .header-text {
-  text-align: center; 
-  font-size: 32px; 
-  margin-bottom: 0px; 
-  font-family: 'Italiana', serif; /* Italiana applied */
-  width: 100%;
-}
-
-.service-box {
-  width: 30%; 
-  padding: 20px;
   text-align: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(8, 7, 7, 0.1); 
+  font-size: 3em;
+  margin: 0;
+  padding: 15px;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #333;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(255, 255, 255, 0.1);
+  border: 1px solid #ddd;
+}
+
+/* Container for Service Boxes */
+.services-container {
+  max-width: 75%;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+/* Individual Service Box Styling */
+.service-box {
+  width: 30%;
+  min-width: 300px;
+  max-width: 400px;
+  min-height: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   background-color: white;
-  font-family: 'Italiana', serif; /* Italiana applied */
-  margin: 10px; 
-  display: flex;              
-  flex-direction: column;      
-  justify-content: space-between; 
-  align-items: center;        
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
+.service-box:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px); /* Adds a subtle lift effect */
+}
+
+/* Image Styling in Service Box */
 .service-box img {
-  width: 100px; 
-  margin-bottom: 20px; 
+  width: 100px;
+  margin-bottom: 20px;
 }
 
+/* Title Styling */
 .service-box h3 {
   font-size: 22px;
   margin-bottom: 15px;
-  font-family: 'Italiana', serif; /* Italiana applied */
-  font-weight: bold; 
+  font-family: 'Italiana', serif;
+  font-weight: bold;
 }
 
+/* Paragraph Styling */
 .service-box p {
   font-size: 18px;
-  margin-bottom: 30px; 
-  font-family: 'Italiana', serif; /* Italiana applied */
-  flex-grow: 1; /* Make the content grow to push the button down */
+  margin-bottom: 30px;
+  font-family: 'Italiana', serif;
+  flex-grow: 1;
 }
 
+/* Button Styling */
 .button {
   display: inline-block;
-  padding: 15px 30px; 
-  background-color: #000000; 
+  padding: 12px 30px;
+  background-color: #545252;
   color: white;
-  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 8px;
   text-decoration: none;
-  font-size: 18px; 
-  font-family: 'Italiana', serif; /* Italiana applied */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3), 0px 6px 12px rgba(0, 0, 0, 0.1);
   border: none;
-  transition: background-color 0.3s ease; 
-  margin-top: auto; /* Push the button to the bottom */
-  align-self: center; /* Ensure the button is centered horizontally */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
+  align-self: center;
 }
 
 .button:hover {
-  background-color: #de85cc; 
+  background-color: #de85cc;
 }
 
-/* Mobile styling */
+.button:focus {
+  background-color: #e8e8e8;
+  color: #111;
+  outline: none;
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.button:active {
+  background-color: #e8e8e8;
+  color: #111;
+  transform: translateY(4px);
+}
+
+/* Responsive Styling for Mobile */
 @media only screen and (max-width: 600px) {
   .services-container {
-    flex-direction: column; 
-    max-width: 100%; /* Full width for mobile */
+    flex-direction: column;
+    max-width: 100%;
   }
 
   .service-box {
-    width: 100%; /* Full width on mobile */
+    width: 100%;
     margin-bottom: 20px;
+  }
+
+  .header-text {
+    font-size: 2.5em;
+    padding: 10px;
   }
 }

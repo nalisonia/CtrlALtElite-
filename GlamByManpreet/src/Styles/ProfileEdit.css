@@ -1,6 +1,6 @@
 /* ProfileEdit.css */
 
-/* Additional styles for form and inputs */
+/* Form styling for profile editing */
 .profile-edit-form {
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
 }
 
 .form-group {
-    margin-bottom: 20px; /* Space between form groups */
+    margin-bottom: 20px;
 }
 
 .form-input {
@@ -22,6 +22,78 @@
 }
 
 .form-input:focus {
-    border-color: #007bff; /* Highlight border on focus */
-    outline: none; /* Remove default outline */
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Edit Profile Button */
+.edit-profile-button,
+.service-box .button {
+    /* width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f7d4f5;
+    border: 2px solid #E8E8E8;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    margin: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase; */
+}
+
+/* Hover effect */
+.edit-profile-button:hover,
+.service-box .button:hover {
+    background-color: #fab2f5;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Focus effect */
+.edit-profile-button:focus,
+.service-box .button:focus {
+    background-color: #E8E8E8;
+    color: #111;
+    outline: none;
+    box-shadow: 0px 0px 0px 2px #E8E8E8;
+}
+
+/* Active effect */
+.edit-profile-button:active,
+.service-box .button:active {
+    background-color: #e451dd;
+    box-shadow: none;
+    transform: translateY(1px); /* Slight push down */
+}
+
+/* Disabled state */
+.edit-profile-button:disabled,
+.service-box .button:disabled {
+    background-color: #f8bbd0;
+    color: #f48fb1;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Responsive adjustments for smaller screens */
+@media only screen and (max-width: 600px) {
+    .edit-profile-button,
+    .service-box .button {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .edit-profile-button,
+    .service-box .button {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
 }

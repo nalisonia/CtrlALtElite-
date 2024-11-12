@@ -1,19 +1,57 @@
 
+/* AboutMe.css */
+
 .about-container {
     display: flex; /* Use Flexbox to align children side by side */
     align-items: center; /* Vertically center align items */
-    gap: 20px; /* Add space between the text and image */
-    padding: 20px; /* Add padding around the container */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Add space between text and image */
+    padding: 20px; /* Padding around the container */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    background-color: white; /* Set background color to match home page */
+    border-radius: 10px; /* Slight border radius for softer look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow similar to home page */
+    width: 100%; /* Full width */
 }
-/* Styling for the text box */
+
+/* Styling for the Text Box */
 .text-box {
     flex: 1; /* Allow text box to take available space */
-    padding: 20px; /* Add padding inside the text box */
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid black;
+    max-width: 400px; /* Set a max width */
+    min-width: 250px; /* Set a minimum width */
+    padding: 20px; /* Add padding inside the box */
+    background-color: white; /* Soft white background */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    border: 1px solid #ccc; /* Light border similar to home page */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    text-align: center; /* Center align text inside box */
+    display: flex; /* Enable flexbox for content alignment */
+    flex-direction: column; /* Stack child elements */
+    justify-content: center; /* Center content vertically */
+    margin-bottom: 15px; /* Add bottom margin to separate from other elements */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1); 
+}
+
+/* Styling for the Image Container */
+.picture-container {
+    flex: 1; /* Allow image container to take available space */
+    max-width: 400px; /* Set a maximum width */
+    display: flex; /* Use Flexbox to center the image */
+    justify-content: center; /* Center the image horizontally */
+    margin-top: 10px; /* Margin for spacing */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1); 
+  
+}
+
+/* Styling for the Image */
+.about-model-image1 {
+    width: 100%; /* Image takes full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the area without losing aspect ratio */
+    border-radius: 8px; /* Rounded corners */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
+
 /* Styling for the image */
 .model-image {
     width: 73%; /* Adjust the image width as needed */
@@ -25,16 +63,31 @@
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensures the image covers its area without losing aspect ratio */
 }
+
 /* Media queries for responsive design */
 @media only screen and (max-width: 600px) {
     .about-container {
         flex-direction: column; /* Stack text and image vertically on small screens */
         align-items: center; /* Center align items */
+
     }
     .model-image {
         width: 80%; /* Adjust image width for small screens */
+
+        padding: 10px; /* Reduce padding for mobile */
+
     }
     .text-box {
-        width: 100%; /* Ensure text box takes full width on small screens */
+        width: 90%; /* Take more width on small screens */
+        max-width: 350px; /* Set max width for mobile */
+    }
+
+    .picture-container {
+        width: 90%; /* Adjust width for mobile */
+        max-width: 300px; /* Set a max width for mobile */
+    }
+
+    .about-model-image1 {
+        width: 100%; /* Ensure image takes full width on small screens */
     }
 }
