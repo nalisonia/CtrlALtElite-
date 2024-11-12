@@ -112,7 +112,7 @@ function AdminDashboard() {
     <div>
       <Toolbar />
       <List sx={{ mt: 14 }}>
-        {['Overview', 'Bookings', 'Clients', 'Store', 'Feed', 'Gallery Manager'].map((text, index) => (
+        {['Overview', 'Bookings', 'Clients','Feed', 'Gallery Manager'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton selected={selectedItem === text} onClick={() => handleListItemClick(text)}>
               <ListItemIcon>
