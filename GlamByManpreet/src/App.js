@@ -24,9 +24,7 @@ import ProfileEdit from './Pages/ProfileEdit.js';
 import InquiryHistory from './Pages/InquiryHistory.js';
 import AdminDashboard from './Pages/AdminDashboard.js';
 import ResetPassword from './Pages/ResetPassword.js';
-import ProtectedRoute from './Pages/ProtectedRoute'; // Import ProtectedRoute
  
-
 
 //app.js serves as the main entry point and central configuration file for the application. 
 //It is where you define the overall structure of our application, including routing, layout, and any global state management.
@@ -46,46 +44,28 @@ import ProtectedRoute from './Pages/ProtectedRoute'; // Import ProtectedRoute
 
 function App() {
     const [session, setSession] = useState(null);
-    const [isAdmin, setIsAdmin] = useState(false);
-
 
     useEffect(() => {
-        const fetchSessionAndCheckAdmin = async () => {
-          const { data: { session } } = await supabase.auth.getSession();
-          setSession(session);
-    
-          if (session) {
-            // Check if user is an admin
-            const { data: adminData } = await supabase
-              .from("admin")
-              .select("email")
-              .eq("email", session.user.email);
-    
-            setIsAdmin(adminData && adminData.length > 0);
-          } else {
-            setIsAdmin(false);
-          }
-        };
-    
-        fetchSessionAndCheckAdmin();
-    
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-          setSession(session);
-          if (session) {
-            supabase
-              .from("admin")
-              .select("email")
-              .eq("email", session.user.email)
-              .then(({ data: adminData }) => setIsAdmin(adminData && adminData.length > 0));
-          } else {
-            setIsAdmin(false);
-          }
+        // Get the current session
+        // Get the current session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session);
+            console.log(session);
         });
-    
+
+        // Subscribe to auth state changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session);
+        });
+
+        // Cleanup subscription on unmount
         return () => {
-          subscription.unsubscribe();
+            if (subscription) {
+                subscription.unsubscribe();
+            }
         };
-      }, []);
+
+    }, []);
 
     return (
         <Router> 
@@ -106,36 +86,13 @@ function App() {
                     <Route path="/cookie_policy" element={<CookiePolicy />} />
                     <Route path="/do_not_sell" element={<DoNotSell />} />
                     <Route path="/dashboard" element={<DashBoard />} />
+                    <Route path="/userview" element={<UserView/>} />
                     <Route path="/userfeed" element={<UserFeed/>} />
                     <Route path="/profileedit" element={<ProfileEdit/>} />
-]                    <Route path="*" element={<Navigate to="/" />} />
+                    <Route path="/admin" element={<AdminDashboard/>} />
+                    <Route path="*" element={<Navigate to="/" />} />
                     <Route path="/inquiryhistory" element={<InquiryHistory />} />
                     <Route path="/ResetPassword" element={<ResetPassword />} />
-
-                     {/* Protected Routes */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute
-                element={AdminDashboard}
-                session={session}
-                isAllowed={session && isAdmin}
-                redirectTo="/login"
-              />
-            }
-          />
-
-          <Route
-            path="/userview"
-            element={
-              <ProtectedRoute
-                element={UserView}
-                session={session}
-                isAllowed={session && !isAdmin} // Allow only if not admin
-                redirectTo="/login"
-              />
-            }
-          />
 
                 </Routes>
                 <Footer />
