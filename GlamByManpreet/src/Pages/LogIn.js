@@ -37,7 +37,7 @@ function LogIn() {
       provider: 'google',
 
       options: { 
-        redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/userview' 
+        redirectTo: 'https://ctrl-a-lt-elite-glg4-nalisonias-projects.vercel.app/userview' 
       }
       // options: { redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/userview' }
 

@@ -48,33 +48,55 @@ function DrawerAppBar(props) {
   const { window } = props;
   const navigate = useNavigate();
   const [session, setSession] = useState(null); // Initialize session state
+  const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
+
 
   useEffect(() => {
-    const fetchSession = async () => {
+    const fetchSessionAndCheckAdmin = async () => {
+      // Fetch the current session
       const { data } = await supabase.auth.getSession();
-      setSession(data.session); // Set session state with the fetched session
+      setSession(data.session);
+
+      // If there's a session, check if the user is an admin
+      if (data.session) {
+        const { user } = data.session;
+        const { data: adminData } = await supabase
+          .from('admin')
+          .select('email')
+          .eq('email', user.email);
+
+        setIsAdmin(adminData && adminData.length > 0); // Set isAdmin based on the admin check
+      }
     };
 
-    fetchSession(); // Call the fetchSession function to get the current session
+    fetchSessionAndCheckAdmin();
 
     // Subscribe to auth state changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_, session) => {
-      setSession(session); // Update session when auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setSession(session);
+      if (session) {
+        supabase
+          .from('admin')
+          .select('email')
+          .eq('email', session.user.email)
+          .then(({ data: adminData }) => setIsAdmin(adminData && adminData.length > 0));
+      } else {
+        setIsAdmin(false); // Reset if no session
+      }
     });
 
     return () => {
       subscription.unsubscribe(); // Clean up subscription on unmount
     };
-  }, []); // The empty dependency array means this effect runs once on mount
+  }, []);
+
+  // Conditionally add "PROFILE" or "ADMIN" based on admin status
+  const navItems = session ? [...baseNavItems, isAdmin ? "ADMIN" : "PROFILE"] : baseNavItems;
 
   const handleSignIn = () => {
     navigate("/LogIn");
   };
 
-  //when a user is logged in the tab PROFILE is added to navItems
-  const navItems = session ? [...baseNavItems, "PROFILE"] : baseNavItems;
 
   //uses supabase to sign out
   async function handleSignOut() {
@@ -129,6 +151,8 @@ function DrawerAppBar(props) {
                   ? "/"
                   : item === "PROFILE"
                   ? "/userview"
+                  : item === "ADMIN"
+                  ? "/admin"
                   : `/${item.toLowerCase().replace(/\s+/g, "_")}`
               }
                 style={{ textDecoration: "none", color: "black" }}
@@ -382,6 +406,8 @@ function DrawerAppBar(props) {
                   ? "/"
                   : item === "PROFILE"
                   ? "/userview"
+                  : item === "ADMIN"
+                  ? "/admin"
                   : `/${item.toLowerCase().replace(/\s+/g, "_")}`
               } // Replace spaces with underscore to match the routes in app.js
               sx={{
