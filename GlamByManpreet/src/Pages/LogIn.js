@@ -135,10 +135,16 @@ function LogIn() {
           startIcon={<GoogleIcon />}
           sx={{
             mt: 2,
-            backgroundColor: '#ffc2f9', // Custom pink color for Google sign-in
+            backgroundColor: '#ffc2f9', // Pink background
             color: '#fff',
             '&:hover': {
-              backgroundColor: '#ffc2f9', // Darker shade for hover
+              backgroundColor: '#ffc2f9', // Keep pink on hover
+            },
+            '&:focus': {
+              backgroundColor: '#ffc2f9', // Keep pink on focus
+            },
+            '&:active': {
+              backgroundColor: '#ffc2f9', // Keep pink on active
             },
           }}
           onClick={handleGoogleSignUpClick}
@@ -152,10 +158,16 @@ function LogIn() {
           startIcon={<EmailIcon />}
           sx={{
             mt: 2,
-            backgroundColor: '#ffc2f9', // Custom color for Email login button
+            backgroundColor: '#ffc2f9', // Pink background
             color: '#fff',
             '&:hover': {
-              backgroundColor: '#ffc2f9', // Darker shade for hover
+              backgroundColor: '#ffc2f9', // Keep pink on hover
+            },
+            '&:focus': {
+              backgroundColor: '#ffc2f9', // Keep pink on focus
+            },
+            '&:active': {
+              backgroundColor: '#ffc2f9', // Keep pink on active
             },
           }}
           onClick={handleEmailLogInClick}

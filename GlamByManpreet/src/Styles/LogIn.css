@@ -1,84 +1,87 @@
-/* Import Google Fonts */
+/* Import Cormorant Garamond font */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
 
-/* Title Styling */
+/* LogIn container styling */
+.LogIn-container {
+    width: 75%;
+    margin: auto;
+    margin-top: 2.5%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(15, 9, 9);
+}
+
+/* Title styling */
 .LogIn-title {
-  font-family: 'Cormorant Garamond', serif;
-  text-align: center;
-  color: #00050b;
-  margin-bottom: 20px;
-  font-size: 36px;
+    font-family: 'Cormorant Garamond', serif; /* Apply Cormorant Garamond font */
+    font-size: 2.5em; /* Adjust size as desired */
+    color: #333; /* Dark color for the title text */
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 90%;
 }
 
-/* Form Field Styling */
-.input-field {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+/* Form container styling */
+.LogIn-form {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
-/* Button Styling */
-button {
-  background-color: #ffc2f9 !important; /* Enforce pink background */
-  color: #fff !important; /* White text */
-  border: none;
-  border-radius: 8px;
-  padding: 12px 30px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none; /* Remove any text decorations */
+.LogIn-form input {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 50%;
+
+
 }
 
-/* Prevent Purple Across All States */
-button:hover,
-button:focus,
-button:active,
-button:visited {
-  background-color: #ffc2f9 !important; /* Stay pink */
-  color: #fff !important; /* Stay white */
-  outline: none; /* Remove focus outline */
-}
 
-/* Disabled Button State */
-button:disabled {
-  background-color: #f0a3d1 !important; /* Lighter pink for disabled state */
-  color: #a1a1a1; /* Gray text */
-  cursor: not-allowed;
-}
 
-/* Additional styling for "Forgot Password" link */
 .forgot-password {
-  font-size: 0.9em;
-  margin-top: 10px;
-  text-align: right;
+    margin-top: 10px;
+
+
 }
 
-.forgot-password a {
-  color: #007bff; /* Blue link color */
-  text-decoration: none;
+.remember-me {
+    margin-top: 10px;
+
 }
 
-.forgot-password a:hover {
-  text-decoration: underline;
+/* Buttons container */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-/* Mobile Styling */
+/* Mobile styling */
 @media only screen and (max-width: 600px) {
-  .LogIn-container {
-    width: 95%;
-    padding: 15px;
-  }
+    .LogIn-container {
+        width: 95%;
+    }
+    .LogIn-title, .LogIn-form {
+        width: 90%;
+    }
+    .LogIn-form button {
+        width: 50%;
+        
+    }
+    .LogIn-form input {
+        width: 80%;
+    }
 
-  .LogIn-title {
-    font-size: 28px;
-  }
-
-  button {
-    padding: 14px 20px;
-    font-size: 14px;
-  }
 }
-

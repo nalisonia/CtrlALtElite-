@@ -296,7 +296,7 @@ function DrawerAppBar(props) {
             <Link to="/" className="Nav_Bar_Title">
               GLAM 
               <br />
-              <span style={{ display: "block", marginTop: "-15px", marginLeft: "-12px", fontWeight: "100"  }}>
+              <span style={{ display: "block", marginTop: "-15px", marginLeft: "-12px", fontSize: "2.5rem", fontWeight: "100"  }}>
                 by manpreet</span>
             </Link>
           </Typography>
@@ -325,6 +325,14 @@ function DrawerAppBar(props) {
                       backgroundColor: "#ec98e8",
                       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
                     },
+                    "&:focus": {
+                      outline: "none",
+                      backgroundColor: "#ec98e8",
+                    },
+                    "&:visited": {
+                      color: "black",
+                      backgroundColor: "#FDF7F8",
+                    },
                   }}
                   onClick={handleSignOut} // Call handleSignOut directly
                 >
@@ -343,6 +351,14 @@ function DrawerAppBar(props) {
                       border: "2px solid #E8E8E8",
                       backgroundColor: "#ec98e8",
                       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                    },
+                    "&:focus": {
+                      outline: "none",
+                      backgroundColor: "#ec98e8",
+                    },
+                    "&:visited": {
+                      color: "black",
+                      backgroundColor: "#FDF7F8",
                     },
                   }}
                   onClick={handleSignIn}
