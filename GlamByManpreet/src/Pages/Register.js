@@ -63,7 +63,11 @@ function Register() {
 
   return (
     <Box className="register" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
-      <Typography variant="h4" align="center" sx={{ mb: 3 }}>
+      <Typography 
+        variant="h4" 
+        align="center" 
+        sx={{ mb: 3, fontFamily: "'Cormorant Garamond', serif" }}
+      >
         Register
       </Typography>
       <Box sx={{ mt: 3 }}>
@@ -73,10 +77,16 @@ function Register() {
           startIcon={<GoogleIcon />}
           sx={{
             mt: 2,
-            backgroundColor: '#ffc2f9', // Custom pink color for Google sign-up
+            backgroundColor: '#ffc2f9', // Pink background
             color: '#fff',
             '&:hover': {
-              backgroundColor: '#ffc2f9', // Darker shade for hover
+              backgroundColor: '#ffc2f9', // Keep pink on hover
+            },
+            '&:focus': {
+              backgroundColor: '#ffc2f9', // Keep pink on focus
+            },
+            '&:active': {
+              backgroundColor: '#ffc2f9', // Keep pink on active
             },
           }}
           onClick={handleGoogleSignUpClick}
@@ -90,10 +100,16 @@ function Register() {
           startIcon={<EmailIcon />}
           sx={{
             mt: 2,
-            backgroundColor: '#ffc2f9', // Custom color for Email sign-up button
+            backgroundColor: '#ffc2f9', // Pink background
             color: '#fff',
             '&:hover': {
-              backgroundColor: '#ffc2f9', // Darker shade of orange for hover
+              backgroundColor: '#ffc2f9', // Keep pink on hover
+            },
+            '&:focus': {
+              backgroundColor: '#ffc2f9', // Keep pink on focus
+            },
+            '&:active': {
+              backgroundColor: '#ffc2f9', // Keep pink on active
             },
           }}
           onClick={handleEmailSignUpClick}
@@ -130,7 +146,24 @@ function Register() {
             />
             {error && <p className="error-message">{error}</p>}
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-              <Button variant="contained" color="primary" type="submit" disabled={loading}>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                type="submit" 
+                disabled={loading}
+                sx={{
+                  backgroundColor: '#ffc2f9', // Pink background
+                  '&:hover': {
+                    backgroundColor: '#ffc2f9', // Keep pink on hover
+                  },
+                  '&:focus': {
+                    backgroundColor: '#ffc2f9', // Keep pink on focus
+                  },
+                  '&:active': {
+                    backgroundColor: '#ffc2f9', // Keep pink on active
+                  },
+                }}
+              >
                 {loading ? 'Signing Up...' : 'Sign Up'}
               </Button>
             </Box>
@@ -146,3 +179,4 @@ function Register() {
 }
 
 export default Register;
+
