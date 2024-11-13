@@ -1,13 +1,13 @@
 /* Contact Me Page Styling */
 
-/* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
 
 /* Heading styles */
 h2 {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 3em;
     color: #323030ea;
     text-align: center;
@@ -27,7 +27,6 @@ body {
     color: #333;
 }
 
-/* Container styling */
 .contactme-container {
     max-width: 75%;
     margin: 3% auto;
@@ -39,12 +38,25 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.contactme-container h2 {
+    font-family: 'Cormorant Garamond', serif;
+    /* other styles */
+}
+
+
 .contactme-container:hover {
     transform: scale(1.02);
     box-shadow: 12px 12px 20px rgba(62, 62, 62, 0.2), -12px -12px 20px rgba(256, 256, 256, 0.1);
 }
 
-/* Contact details box styling */
+.intro-text {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125em;
+    color: #3e3e3e;
+    margin-bottom: 20px;
+}
+
 .contact-details {
     background-color: #FDF7F8;
     border: 2px solid #080708;
@@ -54,7 +66,6 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Roboto', sans-serif;
     font-size: 1.125em;
-    font-weight: 400;
     line-height: 1.6;
     color: #3e3e3e;
 }
@@ -64,55 +75,31 @@ body {
     margin-bottom: 20px;
 }
 
-.contact-details span {
-    font-weight: 300;
-}
-
-/* Link and hover effects */
-.contact-details a {
+.email-link, .instagram-link {
     color: #a64d79;
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
     cursor: pointer;
 }
 
-.contact-details a:hover {
+.email-link:hover, .instagram-link:hover {
     color: #7a3159;
     text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
-.contact-details a:focus {
+.email-link:focus, .instagram-link:focus {
     outline: none;
     border-bottom: 2px solid #d926a9;
 }
 
-/* Button styling */
-.contactme-container .button {
-    background: linear-gradient(135deg, #ec98e8, #7a3159);
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.125em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-align: center;
-    display: inline-block;
+.disclaimer {
     margin-top: 20px;
+    font-style: italic;
+    color: #7a3159;
+    text-align: center;
 }
 
-.contactme-container .button:hover {
-    background-color: #a6007e;
-    transform: scale(1.05);
-}
-
-.contactme-container .button:active {
-    background-color: #8e0073;
-    transform: translateY(0);
-}
-
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .contactme-container {
         max-width: 90%;
@@ -125,11 +112,6 @@ body {
 
     .contact-details p {
         font-size: 1em;
-    }
-
-    .contactme-container .button {
-        width: 100%;
-        padding: 15px 0;
     }
 }
 
@@ -144,10 +126,5 @@ body {
 
     .contact-details p {
         font-size: 0.9em;
-    }
-
-    .contactme-container .button {
-        width: 100%;
-        padding: 15px 0;
     }
 }

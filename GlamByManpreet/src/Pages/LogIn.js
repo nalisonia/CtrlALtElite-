@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import '../Styles/LogIn.css';
 import axios from '../config/axiosConfig';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, TextField, Typography, IconButton, InputAdornment, Modal, CircularProgress } from '@mui/material'; // Updated imports
+import { Box, Button, TextField, Typography, IconButton, InputAdornment, Modal, CircularProgress } from '@mui/material';
 import FaceBookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
-import Visibility from '@mui/icons-material/Visibility'; // Updated import
-import VisibilityOff from '@mui/icons-material/VisibilityOff'; // Updated import
-import supabase from '../config/supabaseClient.js'
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import supabase from '../config/supabaseClient.js';
 
 function LogIn() {
   const [formData, setFormData] = useState({
@@ -31,35 +31,16 @@ function LogIn() {
     }));
   };
 
-  //user supabase to log in with google
   const handleGoogleSignUpClick = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-
       options: { 
         redirectTo: 'https://ctrl-a-lt-elite-glg4-nalisonias-projects.vercel.app/userview' 
       }
-      // options: { redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/userview' }
-
     });
     
     if (error) {
       console.error('Error during sign-in:', error);
-    }
-};
-
-  //user supabase to log in with google
-  const handleFacebookSignUpClick = async () => {
-    setLoading(true)
-    try {
-      const {error} = await supabase.auth.signInWithOAuth({
-        provider: 'facebook',
-      });
-      if (error) throw error;
-      navigate('/userview');
-    } catch (error) {
-      console.error('Facebook sign-in error:', error);
-      setLoading(false);
     }
   };
 
@@ -78,84 +59,105 @@ function LogIn() {
     event.preventDefault();
   };
 
-  //log in with email
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     
     try {
-        // Authenticate user
-        const { user, error } = await supabase.auth.signInWithPassword({
-            email: formData.email,
-            password: formData.password,
-        });
+      const { user, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
   
-        if (error) throw error; // Handle error if sign-in fails
+      if (error) throw error;
+
+      const { data: adminData, error: adminError } = await supabase
+        .from('admin')
+        .select('email')
+        .eq('email', formData.email);
   
-        // Check if formData.email is in the admin table
-        const { data: adminData, error: adminError } = await supabase
-            .from('admin')
-            .select('email')
-            .eq('email', formData.email);
-            console.log('Admin Data:', adminData); // Debug log for admin data
-            console.log('Form Data Email:', formData.email); // Debug log for formData.email
-  
-        if (adminError) {
-            console.error('Error checking admin status:', adminError.message);
-            setError('Unable to verify admin status.');
-        } else if (adminData && adminData.length > 0) {
-            // Redirect to admin page if the email is found in the admin table
-            navigate('/admin');
-        } else {
-            // Redirect to user view page if email is not found in admin table
-            navigate('/userview');
-        }
+      if (adminError) {
+        console.error('Error checking admin status:', adminError.message);
+        setError('Unable to verify admin status.');
+      } else if (adminData && adminData.length > 0) {
+        navigate('/admin');
+      } else {
+        navigate('/userview');
+      }
     } catch (error) {
-        console.error('Login failed:', error); // Log the complete error object
-        setError('Login failed. Please check your credentials.'); // Generic error message
+      console.error('Login failed:', error);
+      setError('Login failed. Please check your credentials.');
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
-
-const handleForgotPassword = async () => {
-  setError(''); 
-  if (!forgotEmail) {
-    setError('Please enter your email address.');
-    return;
-  }
-  try {
-    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail);
-    if (error) {
-      setError('Error sending reset link. Please try again.');
-      console.error('Error sending reset link:', error.message);
-    } else {
-      alert('Password reset link sent! Check your email.');
-      setIsModalOpen(false);
-      setForgotEmail('');
+  const handleForgotPassword = async () => {
+    setError(''); 
+    if (!forgotEmail) {
+      setError('Please enter your email address.');
+      return;
     }
-  } catch (error) {
-    console.error('Unexpected error:', error.message);
-    setError('Unexpected error. Please try again.');
-  }
-};
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail);
+      if (error) {
+        setError('Error sending reset link. Please try again.');
+        console.error('Error sending reset link:', error.message);
+      } else {
+        alert('Password reset link sent! Check your email.');
+        setIsModalOpen(false);
+        setForgotEmail('');
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error.message);
+      setError('Unexpected error. Please try again.');
+    }
+  };
+
   return (
     <Box className="login" sx={{ p: 4, maxWidth: 400, margin: 'auto' }}>
-      <Typography variant="h4" align="center" sx={{ mb: 3 }}>
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{
+          mb: 3,
+          fontFamily: 'Cormorant Garamond, serif', // Apply Cormorant Garamond font
+          color: '#333', // Optional: Darker color for the title text
+        }}
+      >
         Log In
       </Typography>
       <Box sx={{ mt: 3 }}>
-      <Button fullWidth variant="contained" color="primary" startIcon={<GoogleIcon />} sx={{ mt: 2 }} onClick={handleGoogleSignUpClick}>Sign In with Google</Button>
+        <Button
+          fullWidth
+          variant="contained"
+          startIcon={<GoogleIcon />}
+          sx={{
+            mt: 2,
+            backgroundColor: '#ffc2f9', // Custom pink color for Google sign-in
+            color: '#fff',
+            '&:hover': {
+              backgroundColor: '#ffc2f9', // Darker shade for hover
+            },
+          }}
+          onClick={handleGoogleSignUpClick}
+        >
+          Sign In with Google
+        </Button>
 
         <Button
           fullWidth
           variant="contained"
-          color="secondary"
           startIcon={<EmailIcon />}
-          className="emailButton"
-          sx={{ mt: 2 }}
+          sx={{
+            mt: 2,
+            backgroundColor: '#ffc2f9', // Custom color for Email login button
+            color: '#fff',
+            '&:hover': {
+              backgroundColor: '#ffc2f9', // Darker shade for hover
+            },
+          }}
           onClick={handleEmailLogInClick}
         >
           Log In with Email
@@ -200,10 +202,10 @@ const handleForgotPassword = async () => {
               sx={{ mt: 1 }}
               required
             />
-            {error && <p className="error-message">{error}</p>} {/* Display error messages */}
+            {error && <p className="error-message">{error}</p>}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
               <Button variant="contained" color="primary" type="submit" disabled={loading}>
-              {loading ? 'Signing In...' : 'Sign In'}
+                {loading ? 'Signing In...' : 'Sign In'}
               </Button>
               <Button variant="text" onClick={() => setIsModalOpen(true)}>
                 Forgot Password
@@ -217,7 +219,6 @@ const handleForgotPassword = async () => {
         )}
       </Box>
 
-      {/* Modal for Forgot Password */}
       <Modal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -247,6 +248,7 @@ const handleForgotPassword = async () => {
       </Modal>
     </Box>
   );
-};
+}
 
 export default LogIn;
+
