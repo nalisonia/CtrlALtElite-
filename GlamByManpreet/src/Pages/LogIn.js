@@ -35,7 +35,7 @@ function LogIn() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { 
-        redirectTo: 'https://ctrl-a-lt-elite-glg4-nalisonias-projects.vercel.app/userview' 
+        redirectTo: 'https://glambymanpreet.net/userview' 
       }
     });
     

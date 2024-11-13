@@ -16,9 +16,7 @@ const ForgotPassword = () => {
     
         const { error } = await supabase.auth.api.resetPasswordForEmail(email, {
 
-            redirectTo: 'https://ctrl-a-lt-elite-glg4-nalisonias-projects.vercel.app/ResetPassword'
-
-            // redirectTo: 'https://ctrl-a-lt-elite-glg4.vercel.app/ResetPassword'
+            redirectTo: 'https://glambymanpreet.net/ResetPassword'
 
         });
     

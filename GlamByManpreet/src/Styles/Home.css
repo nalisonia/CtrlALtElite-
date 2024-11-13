@@ -100,31 +100,70 @@
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
 }
 
-/* Mobile styling */
-@media only screen and (max-width: 600px) {
-    .picture-container {
-        flex-direction: column; /* Stack images */
-        margin-top: 10px;
-        width: 100%; /* Use full width */
+/*Put all mobile styling here*/
+@media only screen and (max-width: 600px){
+    .picture-container{
+        margin-top: 5px;
+        width: 100vw;
+        justify-content: center;
+        gap: 0;
+
     }
 
-    .model-image {
-        width: 90%; /* More manageable size on mobile */
-        margin: 0 auto 1rem; /* Center with margin below */
+    .home-container{
+        width: 90vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-left: 10%;
     }
 
-    .some-content {
-        width: 95vw; /* Use more width on mobile */
-        margin-top: 10px;
+    .model-image{
+        width: 100%;
+        margin-top: 0.5em;
     }
 
-    .info-boxes-container {
-        flex-direction: column; /* Stack boxes */
-        align-items: center; /* Center align */
+    .some-content{
+        height: auto;
+        width: 80vw;
+        border: 0.5px solid black;
+        border-radius: 1%;
+        padding: 10px;
+        margin-top: 1px;
+        background-color: #FDF7F8;
+        box-shadow: 10px 10px 20px rgba(0,0,0,0.2), 
+        -10px -10px 20px rgba(256,256,256,0.1);
     }
 
-    .info-box {
-        width: 90vw; /* Use full width */
-        margin: 10px 0; /* Uniform spacing */
+    .some-content > h1{
+        font-size: 3vh;
+        font-family: 'Bebas Neue', sans-serif; 
+
     }
+
+    .some-content > p{
+        margin: 20px auto;
+        padding: 5px;
+        text-align: left;
+    }
+
+    .model-image{
+        width: 50%;
+    }
+
+    .info-boxes-container{
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1.5%;
+    }
+
+    .info-box{
+        width: 80vw;
+        margin-top: 1.5%;
+        margin-bottom: 1.5%;
+        padding: 10px;
+        background-color: #FDF7F8;
+    }
+
 }
