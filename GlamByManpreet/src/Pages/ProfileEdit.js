@@ -51,7 +51,7 @@ function ProfileEdit() {
 
   return (
     <div className="profile-edit-container">
-      <h2 className="profile-edit-title">Profile Edit</h2>
+      <h2 className="profile-edit-title" style={{ fontFamily: "'Cormorant Garamond', serif" }}>Profile Edit</h2>
       <form onSubmit={handleSubmit} className="profile-edit-form">
         <div className="form-group">
           <label htmlFor="password">Password (optional):</label>

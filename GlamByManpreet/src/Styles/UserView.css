@@ -1,6 +1,6 @@
 /* UserView.css */
 /* Styling for the user Profile page */
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
 /* General layout for content container */
 .userview-content-container {
     max-width: 100%;  /* Set max-width to full */
@@ -13,18 +13,38 @@
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); /* Subtle shadow effect */
 }
 
+.userview-container {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  /* Apply to specific text elements if needed */
+  .welcome-text, .content-box h4, .content-box p {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .userview-container {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  .welcome-text,
+  .content-box h4,
+  .content-box p,
+  .content-box li {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
 /* Welcome text box styling */
 .welcome-text {
     text-align: center;
-    font-size: 32px;
+    font-size: 50px;
     margin-bottom: 0;
-    font-family: 'Italiana', serif;
     width: 92%;
     display: inline-block;
     padding: 10px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1); /* Combined shadow effects */
+    font-family: 'Cormorant Garamond', serif;
 }
 
 /* Content box styling */
@@ -65,12 +85,14 @@
         display: flex;
         flex-direction: column; /* Stack elements vertically */
         align-items: center;
+        
     }
 
     /* Adjust content boxes for mobile */
     .content-box {
         width: 100%; /* Full width on mobile */
         margin-bottom: 20px;
+        
     }
 
 }

@@ -10,10 +10,14 @@ header {
     padding: 20px;
     text-align: center;
     font-size: 3.2em;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     color: #333;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(256, 256, 256, 0.1);
 }
+.text-box h2,
+.text-box p {
+  font-family: 'Cormorant Garamond', serif;
+} 
 
 /* Booking Inquiry Container */
 .booking-inquiry {
@@ -23,12 +27,14 @@ header {
     background-color: #f9e4f7;
     border-radius: 10px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1), 0px -10px 30px rgba(255, 255, 255, 0.1);
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.0em;
 }
 
 /* Heading Styling */
 .booking-inquiry-heading {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 2.5em;
     color: #323030ea;
     text-align: center;

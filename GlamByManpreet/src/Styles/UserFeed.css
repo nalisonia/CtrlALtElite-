@@ -1,0 +1,17 @@
+/* UserFeed.css */
+.feed-container h2 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  .MuiTypography-root {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  .MuiCardHeader-title, .MuiCardHeader-subheader {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  .MuiCardContent .MuiTypography-body2 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  

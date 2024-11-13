@@ -287,12 +287,17 @@ function DrawerAppBar(props) {
               display: { xs: "flex", sm: "block" },
               justifyContent: "center",
               paddingTop: "15px",
+              marginLeft: "40px",
+              textAlign: "center",
+              fontWeight: "200" ,
             }}
           >
             {/*To center title*/}
             <Link to="/" className="Nav_Bar_Title">
-              GLAM <br></br>
-              <span>by manpreet</span>
+              GLAM 
+              <br />
+              <span style={{ display: "block", marginTop: "-15px", marginLeft: "-12px", fontSize: "2.5rem", fontWeight: "100"  }}>
+                by manpreet</span>
             </Link>
           </Typography>
           {/* Buttons to login and register for the desktop version*/}

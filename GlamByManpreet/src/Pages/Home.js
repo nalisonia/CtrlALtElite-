@@ -43,18 +43,18 @@ const HomePage = () =>{
         )}
       </div>
             <div className='some-content'>
-                <h1>Welcome to GLAM by Manpreet, Sacramento's Premier Destination for Modern South Asian Glamour</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pretium, nisi ut volutpat mollis, 
-                    leo risus interdum arcu, eget facilisis quam felis id mauris. Ut convallis libero in urna ultrices accumsan. 
-                    Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
-                    et magnis dis parturient montes, nascetur ridiculus mus. In rutrum ac purus sit amet tempus.</p>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                Welcome to GLAM by Manpreet</h1>
+                <p>Born and raised in Sacramento. I'm a professional makeup artist leaving my fingerprints on the beauty world at every turn. From working with celebrities like Diljit Dosanjh to making every bride feel beautiful and special on their wedding days, I do everything..</p>
             </div>
             <div className='info-boxes-container'>
                 <div className='info-box'>
                     <h2>Services</h2>
-                    <p>eget facilisis quam felis id mauris. Ut convallis libero in urna ultrices accumsan. 
-                    Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
-                    et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <p>Makeup:  Wedding Engagement, Rokha, Jaggo, Mehendi, Photoshoot, Other</p>
+                    <p>Master Class: Bridal/Non-Bridal Lessons, Hair, Makeup</p>
+                    <p>Skincare: Coming Soon</p>
+                    <p></p>
+
                 </div>
                 <div className='info-box'> 
                     <h2>Inquire Now!</h2>
@@ -65,9 +65,9 @@ const HomePage = () =>{
                 </div>
                 <div className='info-box'>
                     <h2>Testimonials</h2>
-                    <p>eget facilisis quam felis id mauris. Ut convallis libero in urna ultrices accumsan. 
-                    Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus 
-                    et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <p>"thank you! your talent is unmatched🤍🤍"</p>
+                    <p>"you crushed this wow😍🔥"</p>
+                    <p>"killed it with this🔥🔥🔥"</p>
                 </div>
             </div>
         </div>    

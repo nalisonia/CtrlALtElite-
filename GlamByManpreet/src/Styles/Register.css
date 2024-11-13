@@ -1,4 +1,6 @@
-/*
+/**/
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
 /* Button Styling */
 button[type="submit"], .googleButton, .emailButton {
   background-color: #ffc2f9; /* Soft pink background */
@@ -53,7 +55,7 @@ button[type="submit"]:disabled, .googleButton:disabled, .emailButton:disabled {
   background-color: #f0a3d1;
   color: white;
   border-radius: 8px; /* Match other buttons' rounded corners */
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   padding: 12px 30px; /* Consistent padding with other buttons */
   transition: all 0.3s ease-in-out; /* Smooth transition */
 }

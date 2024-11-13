@@ -81,7 +81,7 @@ function InquiryHistory() {
 
     return (
         <div className="inquiry-history">
-            <h2>Your Inquiry History</h2>
+        <h2 style={{ fontFamily: "'Cormorant Garamond', serif" }}>Your Inquiry History</h2>
             
             <form onSubmit={handleSearchSubmit} className="search-form">
                 <label>

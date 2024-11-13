@@ -281,8 +281,8 @@ function BookingInquiry({ onSubmit }) {
   };
 
   return (
-    <div className="booking-inquiry">
-      <h1>BOOKING INQUIRY</h1>
+    <div className="booking-inquiry" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+      <h1></h1>
       <p className="response-time">
         Thank you for inquiring with Glam By Manpreet for your hair and makeup
         services!
@@ -412,7 +412,7 @@ function BookingInquiry({ onSubmit }) {
               <option value="">Select an event</option>
               <option value="Wedding Engagement">Wedding Engagement</option>
               <option value="Rokha">Rokha</option>
-              <option value="Laggo">Laggo</option>
+              <option value="Jaggo">Jaggo</option>
               <option value="Mehndi">Mehndi</option>
               <option value="Photoshoot">Photoshoot</option>
               <option value="Other">Other</option>

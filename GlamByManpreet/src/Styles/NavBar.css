@@ -2,6 +2,7 @@
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Bebas+Neue&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');  
 body {
     font-family: Arial, sans-serif; 
     background-color: #f4f4f4; 
@@ -76,9 +77,9 @@ body {
     display: flex; /* Change display to flex */
     flex-direction: column;
     align-items: center;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 5rem;
-    font-weight: bold;
+    font-weight: lighter;
     color: #333;
     text-decoration: none;
     text-shadow: 1px 1px 8px rgb(253, 239, 255);

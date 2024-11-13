@@ -33,7 +33,7 @@ function UserFeed() {
 
   return (
     <div className="feed-container">
-      <h2>Activity Feed</h2>
+      <h2 style={{ fontFamily: "'Cormorant Garamond', serif" }}>Activity Feed</h2>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}> 
         {feedData.length > 0 ? (
           feedData.map((item) => (
@@ -59,7 +59,7 @@ function UserFeed() {
             </Card>
           ))
         ) : (
-          <Typography>No feed items found.</Typography>
+          <Typography sx={{ fontFamily: "'Cormorant Garamond', serif" }}>No feed items found.</Typography>
         )}
       </Box>
     </div>

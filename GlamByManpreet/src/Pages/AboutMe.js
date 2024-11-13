@@ -4,9 +4,9 @@ import '../Styles/AboutMe.css'; // Import CSS file for styling
 
 function AboutMe() {
   return (
-    <div className='about-container'>
+    <div className='about-container' style={{ fontFamily: "'Cormorant Garamond', serif" }}>
       <div className='text-box'>
-        <h2>About Me</h2>
+        <h2>About Me</h2> 
         <p>Welcome to my world of beauty in the heart of Sacramento!
            As a makeup artist specializing in Modern South Asian Glam,
            I'm dedicated to crafting breathtaking bridal hair and makeup

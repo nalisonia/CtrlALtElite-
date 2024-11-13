@@ -1,8 +1,7 @@
 /* global.css */
 
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&family=Playfair+Display&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');  
 /* Box model reset */
 *,
 *::before, 
@@ -14,7 +13,7 @@
 
 /* Body Styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.5;
@@ -44,7 +43,7 @@ h1 {
 
 /* Paragraph Styles */
 p {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
     color: #555;
     line-height: 1.6;
@@ -71,7 +70,7 @@ a {
 }
 
 a:hover, a:focus {
-    color: #ec98e8; /* hover pink on Main Heading logo "GLAM by manpreet" */
+    color: black; /* hover pink on Main Heading logo "GLAM by manpreet" */
 }
 
 /* Button choice #1 - Comment this out to choose the other button ~~~~~~~~~~~~~~~~~~~ */
@@ -117,7 +116,7 @@ button[type="submit"],
     width: 100%;
     padding: 12px 25px;
     font-size: 16px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     border: none;
     border-radius: 8px;
     cursor: pointer;

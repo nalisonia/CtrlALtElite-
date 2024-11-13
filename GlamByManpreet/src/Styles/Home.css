@@ -1,5 +1,6 @@
 /* Home.css */
 /* Styling for the home page */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
 .home-container {
     /* max-width: 1200px; /* Set a max-width for better layout control */
     padding: 0; /* Add some padding */
@@ -12,6 +13,13 @@
     border-radius: 10px; /* Slight border radius for softer look */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    /* Add shadow */
     width: 100%; /* Use full width */
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.home-container h1,
+.home-container h2,
+.home-container p {
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .header-text { /* Style for the header text */
@@ -25,6 +33,7 @@
     width: 100%; /* Use full width */
     margin: 0; /* Uniform top/bottom margin */
     margin-bottom: 20px;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 
@@ -54,6 +63,7 @@
     background-color: white; /* Soft background */
     padding: 10px; /* Add some padding */
     display: flex; /* Use flexbox for layout */
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .some-content { 
@@ -67,11 +77,12 @@
     font-size: 1.2em; /* Increased font size for readability */
     text-align: center;
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);  /* Add some depth */
+    font-family: 'Cormorant Garamond', serif;
 }
 
 /* Top boxParagraph styling */
 .some-content > p { 
-    font-family: 'Playfair Display', serif;  /* Use a serif font for better readability */
+    font-family: 'Cormorant Garamond', serif; /* Use a serif font for better readability */
     line-height: 1.8em; /* Increased line-height for better readability */
     font-size: 1.1em; /* Increased font size for readability */
     margin-bottom: 0.5em; /* Add some spacing below */
@@ -85,7 +96,8 @@
     padding: 5px;
     display: flex;
     justify-content: space-between; /* Space out boxes */
-    flex-wrap: wrap;   
+    flex-wrap: wrap;  
+    font-family: 'Cormorant Garamond', serif; 
 }
 
 /* 3 info boxes below */
@@ -98,6 +110,7 @@
     background-color: #fff; /* White background for boxes */
     border-radius: 5px; /* Consistent border radius */
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2), -10px -10px 20px rgba(256,256,256,0.1);
+    font-family: 'Cormorant Garamond', serif;
 }
 
 /*Put all mobile styling here*/

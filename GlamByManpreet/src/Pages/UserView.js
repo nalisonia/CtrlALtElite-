@@ -14,7 +14,7 @@ function UserView() {
             <div className="userview-content-container">
                 <div className="content-box">
                     <AccountCircleIcon sx={{ fontSize: 80, color: '#ffc5fc' }} />
-                    <Typography variant="h4" sx={{ fontFamily: "Italiana, serif", fontWeight: "bold" }}>Account Settings</Typography>
+                    <Typography variant="h4" sx={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: "bold" }}>Account Settings</Typography>
                     <List>
                         <ListItem><ListItemText primary="Update your personal details" /></ListItem>
                         <ListItem><ListItemText primary="Change your password" /></ListItem>
@@ -45,7 +45,7 @@ function UserView() {
 
                 <div className="content-box">
                     <HistoryIcon sx={{ fontSize: 80, color: '#ffc5fc' }} />
-                    <Typography variant="h4" sx={{ fontFamily: "Italiana, serif", fontWeight: "bold" }}>Inquiry History</Typography>
+                    <Typography variant="h4" sx={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: "bold" }}>Inquiry History</Typography>
                     <List>
                         <ListItem><ListItemText primary="See the current status of your past inquiries." /></ListItem>
                         <ListItem><ListItemText primary="Access detailed information, including dates and responses" /></ListItem>
@@ -75,7 +75,7 @@ function UserView() {
 
                 <div className="content-box">
                     <NewReleasesIcon sx={{ fontSize: 80, color: '#ffc5fc' }} />
-                    <Typography variant="h4" sx={{ fontFamily: "Italiana, serif", fontWeight: "bold" }}>Exclusive Updates</Typography>
+                    <Typography variant="h4" sx={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: "bold" }}>Exclusive Updates</Typography>
                     <List>
                         <ListItem><ListItemText primary="View a feed of pictures with product updates" /></ListItem>
                         <ListItem><ListItemText primary="New product endorsements featured regularly" /></ListItem>
