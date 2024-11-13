@@ -54,7 +54,7 @@ function BookingInquiry({ onSubmit }) {
     const errors = { ...formErrors };
     // Regular expressions for validation
     const nameRegex = /^[a-zA-Z]{2,} [a-zA-Z]{2,}$/; // At least two letters for each name part
-    const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/; // Basic phone number format
+    //const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/; // Basic phone number format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format
 
 
@@ -282,7 +282,7 @@ function BookingInquiry({ onSubmit }) {
 
   return (
     <div className="booking-inquiry" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-      <h1></h1>
+      
       <p className="response-time">
         Thank you for inquiring with Glam By Manpreet for your hair and makeup
         services!

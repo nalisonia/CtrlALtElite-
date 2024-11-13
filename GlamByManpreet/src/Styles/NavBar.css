@@ -2,7 +2,7 @@
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Bebas+Neue&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');  
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
 body {
     font-family: Arial, sans-serif; 
     background-color: #f4f4f4; 
@@ -49,9 +49,9 @@ body {
 }
 
 /* Applying .button to Login and Register buttons */
-.Mobile_Login_Button, .Mobile_Register_Button {
-    composes: button; /* Inherit styles from .button */
-}
+/* .Mobile_Login_Button, .Mobile_Register_Button {
+    composes: button; /* Inherit styles from .button 
+} */
 
 /* Social Media Icons */
 .Social_Media_Icons {
@@ -100,7 +100,7 @@ body {
         font-size: 2.5rem; /* Reduce font size on mobile */
         line-height: 1.2; /* Reduce line height on mobile */
         padding: 5px 0; /* Reduce padding on mobile */
-        margin-left: 10%;
+        margin-right: 40%;
     }
 
     .Drawer_Nav_Bar_Title {  /* Add this class to the nav bar title */
@@ -111,11 +111,11 @@ body {
     }
 
     /* Adjust button styling for mobile */
-    .button {
-        width: 90%; /* Use more width on mobile for easier tap */
-        padding: 10px 0; /* Adjust padding on mobile */
-        font-size: 0.9rem; /* Slightly smaller font size on mobile */
-    }
+    /* .button {
+        width: 90%; /* Use more width on mobile for easier tap *
+        padding: 10px 0; /* Adjust padding on mobile *
+        font-size: 0.9rem; /* Slightly smaller font size on mobile *
+    } */
 
     .Mobile_Login_Button, .Mobile_Register_Button {
         width: 100%; /* Full width for mobile buttons */

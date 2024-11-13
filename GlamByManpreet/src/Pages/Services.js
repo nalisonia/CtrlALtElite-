@@ -2,9 +2,11 @@
 
 import React from 'react';
 import '../Styles/Services.css'; 
+import  { Button } from "@mui/material";
 import makeupIcon from '../assets/images/makeup-icon.png'; 
 import masterclassIcon from '../assets/images/masterclass-icon.png'; 
 import skincareIcon from '../assets/images/skincare-icon.png'; // Correct path for the skincare icon
+import { Link } from "react-router-dom";
 
 function Services() {
   return (
@@ -16,8 +18,28 @@ function Services() {
       <div className="service-box">
         <img src={makeupIcon} alt="Makeup Application" className="service-icon" />
         <h3>MAKEUP</h3>
-        <p>Heavy<br />Natural<br />Bridal<br />Non-bridal</p>
-        <a href="/booking_Inquiry" className="button">Booking Inquiry</a>
+        <p>Natural<br />Bridal<br />Non-bridal</p>
+        <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#ffc5fc",
+                            margin: "1.6vh",
+                            width: "70%",
+                            border: "1px solid black",
+                            borderRadius: "8px",  // Smooth rounded corners
+                            padding: "10px 20px",  // Better padding for clickable area
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s", // Smooth transition for hover effect
+                            "&:hover": {
+                                backgroundColor: "#ff99ff", // Lighter shade on hover
+                                transform: "scale(1.05)", // Slight scale effect for hover
+                            },
+                        }}
+                        component={Link} 
+                        to="/booking_Inquiry"
+                    >
+                        Booking Inquiry
+          </Button>
       </div>
 
       {/* Master Class Service Box */}
@@ -29,7 +51,27 @@ function Services() {
 
         <h3>MASTER CLASS</h3>
         <p>Bridal and Non-bridal Lessons<br />Hair<br />Makeup</p>
-        <a href="/register" className="button">Learn More</a>
+        <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#ffc5fc",
+                            margin: "1.6vh",
+                            width: "70%",
+                            border: "1px solid black",
+                            borderRadius: "8px",  // Smooth rounded corners
+                            padding: "10px 20px",  // Better padding for clickable area
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s", // Smooth transition for hover effect
+                            "&:hover": {
+                                backgroundColor: "#ff99ff", // Lighter shade on hover
+                                transform: "scale(1.05)", // Slight scale effect for hover
+                            },
+                        }}
+                        component={Link} 
+                        to="/register"
+                    >
+                        Learn More
+          </Button>
       </div>
     
       {/* Skincare Service Box */}
@@ -37,7 +79,27 @@ function Services() {
         <img src={skincareIcon} alt="Skincare Services" className="service-icon" />
         <h3>SKINCARE</h3>
         <p>Coming soon</p>
-        <a href="/register" className="button">Register and get exclusive insights here!</a>
+        <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#ffc5fc",
+                            margin: "1.6vh",
+                            width: "70%",
+                            border: "1px solid black",
+                            borderRadius: "8px",  // Smooth rounded corners
+                            padding: "10px 20px",  // Better padding for clickable area
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s", // Smooth transition for hover effect
+                            "&:hover": {
+                                backgroundColor: "#ff99ff", // Lighter shade on hover
+                                transform: "scale(1.05)", // Slight scale effect for hover
+                            },
+                        }}
+                        component={Link} 
+                        to="/register"
+                    >
+                        Register and get exclusive insights here!
+          </Button>
       </div>
     </div>
   );

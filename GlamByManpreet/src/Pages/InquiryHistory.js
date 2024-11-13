@@ -4,7 +4,7 @@ import '../Styles/InquiryHistory.css';
 
 function InquiryHistory() {
     const [inquiries, setInquiries] = useState([]);
-    const [userEmail, setUserEmail] = useState(null);
+    const setUserEmail = useState(null);
     const [searchInput, setSearchInput] = useState('');
     const [searchMode, setSearchMode] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -22,7 +22,7 @@ function InquiryHistory() {
             }
         };
         fetchUser();
-    }, []);
+    }, [setUserEmail]);
 
     // Function to fetch inquiries based on email or phone number
     const fetchInquiries = async (identifier) => {

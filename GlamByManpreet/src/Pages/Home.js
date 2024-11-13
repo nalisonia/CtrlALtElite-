@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 const HomePage = () =>{
 
     const [isMobile, setIsMobile] = useState(false);
+    const [showSwiper, setShowSwiper] = useState(true);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 600);
@@ -21,26 +22,33 @@ const HomePage = () =>{
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    setShowSwiper(false);
+    const timer = setTimeout(() => setShowSwiper(true), 50); // Adjust delay if necessary
+    return () => clearTimeout(timer);
+}, [isMobile]);
+
     return (
         <div className="home-container">            
             <div className='picture-container'>
-        {isMobile ? (
-          <Swiper spaceBetween={1} slidesPerView={1} loop={false}>
-            {[model1, model2, model3, model4
-            ].map((imageSrc, index) => (
-              <SwiperSlide key={index}>
-                <img src={imageSrc} alt={`model${index + 1}`} className="model-image" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          <>
-            <img src={model1} alt="model1" className="model-image" />
-            <img src={model2} alt="model2" className="model-image" />
-            <img src={model3} alt="model3" className="model-image" />
-            <img src={model4} alt="model4" className="model-image" />
-          </>
-        )}
+            {showSwiper && (
+                    isMobile ? (
+                        <Swiper key="mobile" spaceBetween={1} slidesPerView={1} loop={false}>
+                            {[model1, model2, model3, model4].map((imageSrc, index) => (
+                                <SwiperSlide key={index}>
+                                    <img src={imageSrc} alt={`model${index + 1}`} className="model-image" />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    ) : (
+                        <div key="desktop" className="desktop-images">
+                            <img src={model1} alt="model1" className="model-image" />
+                            <img src={model2} alt="model2" className="model-image" />
+                            <img src={model3} alt="model3" className="model-image" />
+                            <img src={model4} alt="model4" className="model-image" />
+                        </div>
+                    )
+                )}
       </div>
             <div className='some-content'>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
@@ -58,9 +66,27 @@ const HomePage = () =>{
                 </div>
                 <div className='info-box'> 
                     <h2>Inquire Now!</h2>
-                    <Button 
-                    sx={{color:'black', backgroundColor:'#FDF7F8', margin:'0.5vh', width:'100px', border:'1px solid black'}} 
-                    component={Link} to="/Booking_Inquiry">Inquire</Button>
+                    <Button
+                        sx={{
+                            color: "black",
+                            backgroundColor: "#FDF7F8",
+                            margin: "1.6vh",
+                            width: "25%",
+                            border: "1px solid black",
+                            borderRadius: "8px",  // Smooth rounded corners
+                            padding: "10px 20px",  // Better padding for clickable area
+                            marginTop: 'auto',
+                            transition: "background-color 0.3s, transform 0.2s", // Smooth transition for hover effect
+                            "&:hover": {
+                                backgroundColor: "#ff99ff", // Lighter shade on hover
+                                transform: "scale(1.05)", // Slight scale effect for hover
+                            },
+                        }}
+                        component={Link} 
+                        to="/booking_Inquiry"
+                    >
+                        Inquire
+          </Button>
                      
                 </div>
                 <div className='info-box'>

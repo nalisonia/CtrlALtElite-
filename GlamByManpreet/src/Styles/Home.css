@@ -35,6 +35,11 @@
     margin-bottom: 20px;
     font-family: 'Cormorant Garamond', serif;
 }
+.desktop-images {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust spacing between images */
+}
 
 
 .picture-container {  /* Style for the picture container */
@@ -122,6 +127,9 @@
         gap: 0;
 
     }
+    .desktop-images {
+        display: block;
+    }
 
     .home-container{
         width: 90vw;
@@ -166,7 +174,8 @@
     }
 
     .info-boxes-container{
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
         align-items: center;
         margin-top: 1.5%;
     }
