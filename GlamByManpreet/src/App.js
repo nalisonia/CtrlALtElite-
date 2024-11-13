@@ -68,36 +68,37 @@ function App() {
     }, []);
 
     return (
-        <Router> 
-            <div className="App">
-                <NavBar session={session}/>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/about_me" element={<AboutMe />} /> 
-                    <Route path="/services" element={<Services />} /> 
-                    <Route path="/booking_inquiry" element={<BookingInquiry />} /> 
-                    <Route path="/contact_me" element={<ContactMe />} /> 
-                    <Route path="/gallery" element={<Gallery />} /> 
-                    <Route path="/login" element={<LogIn />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/terms_of_service" element={<TermsOfService />} />
-                    <Route path="/privacy_policy" element={<PrivacyPolicy />} />
-                    <Route path="/copy_right_policy" element={<CopyRightPolicy />} />
-                    <Route path="/cookie_policy" element={<CookiePolicy />} />
-                    <Route path="/do_not_sell" element={<DoNotSell />} />
-                    <Route path="/dashboard" element={<DashBoard />} />
-                    <Route path="/userview" element={<UserView/>} />
-                    <Route path="/userfeed" element={<UserFeed/>} />
-                    <Route path="/profileedit" element={<ProfileEdit/>} />
-                    <Route path="/admin" element={<AdminDashboard/>} />
-                    <Route path="*" element={<Navigate to="/" />} />
-                    <Route path="/inquiryhistory" element={<InquiryHistory />} />
-                    <Route path="/ResetPassword" element={<ResetPassword />} />
-
-                </Routes>
-                <Footer />
-            </div>
-        </Router>
+        <div className="App-container">
+            <Router> 
+                <div className="content-wrap">
+                    <NavBar session={session}/>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/about_me" element={<AboutMe />} /> 
+                        <Route path="/services" element={<Services />} /> 
+                        <Route path="/booking_inquiry" element={<BookingInquiry />} /> 
+                        <Route path="/contact_me" element={<ContactMe />} /> 
+                        <Route path="/gallery" element={<Gallery />} /> 
+                        <Route path="/login" element={<LogIn />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/terms_of_service" element={<TermsOfService />} />
+                        <Route path="/privacy_policy" element={<PrivacyPolicy />} />
+                        <Route path="/copy_right_policy" element={<CopyRightPolicy />} />
+                        <Route path="/cookie_policy" element={<CookiePolicy />} />
+                        <Route path="/do_not_sell" element={<DoNotSell />} />
+                        <Route path="/dashboard" element={<DashBoard />} />
+                        <Route path="/userview" element={<UserView/>} />
+                        <Route path="/userfeed" element={<UserFeed/>} />
+                        <Route path="/profileedit" element={<ProfileEdit/>} />
+                        <Route path="/admin" element={<AdminDashboard/>} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                        <Route path="/inquiryhistory" element={<InquiryHistory />} />
+                        <Route path="/ResetPassword" element={<ResetPassword />} />
+                    </Routes>
+                    </div>
+            </Router>
+            <Footer />
+        </div>
     );
 }
 

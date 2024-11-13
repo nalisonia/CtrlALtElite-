@@ -39,3 +39,58 @@
   color: #323030ea;
   margin-bottom: 15px;
 }
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensures the modal is on top of everything */
+}
+
+/* Modal content */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 40%;
+  max-height: 70%;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Close modal button */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #ff0000; /* Red color for hover effect */
+}
+
+/* Enlarged image in the modal */
+.enlarged-image {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  object-fit: contain; /* Ensures the image scales without distortion */
+}
+
+/* Ensure modal content doesn't close when clicking inside the modal area */
+.modal-content {
+  cursor: default;
+}

@@ -1,7 +1,7 @@
 /* global.css */
 
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');  
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
 /* Box model reset */
 *,
 *::before, 
@@ -108,7 +108,6 @@ a:hover, a:focus {
 }
 
 /* Button Styles (Merged) */
-button,
 button[type="submit"],
 .service-box .button {
     color: #0e0101;
