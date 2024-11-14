@@ -4,7 +4,7 @@ import '../Styles/TermsOfService.css'; // Import CSS file for styling
 function TermsOfService() {
   return (
     <div className='contactme-container'>
-      <h2>Terms of service</h2>
+      <h2>Terms of Service</h2>
       <p><b>1.</b> Manpreet's business in Sacramento focuses on modern South Asian glam,
          particularly excelling in bridal hair and makeup. She not only provides
          services for weddings and special events but also functions as an

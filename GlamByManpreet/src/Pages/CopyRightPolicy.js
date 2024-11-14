@@ -4,7 +4,7 @@ import '../Styles/TermsOfService.css'; // Import CSS file for styling
 function CopyRightPolicy() {
   return (
     <div className='contactme-container'>
-      <h2>Copy Right Policy</h2>
+      <h2>Copyright Policy</h2>
       <p><b>1.</b> This site and its property is protected under law. Manpreet's site, services, media, name, etc may
       not be used without permission from Manpreet.</p>
       <p><b>2.</b> The site is under ownership of Manpreet and her property is protected under law.</p>
