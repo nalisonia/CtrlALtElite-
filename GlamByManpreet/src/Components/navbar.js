@@ -296,7 +296,7 @@ function DrawerAppBar(props) {
             <Link to="/" className="Nav_Bar_Title">
               GLAM 
               <br />
-              <span style={{ display: "block", marginTop: "-15px", marginLeft: "-12px", fontSize: "2.5rem", fontWeight: "100"  }}>
+              <span style={{ display: "block", marginTop: "-15px", marginLeft: "-12px", fontSize: { xs: '1.5rem', sm: '2.5rem' }, fontWeight: "100"  }}>
                 by manpreet</span>
             </Link>
           </Typography>
