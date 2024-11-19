@@ -35,7 +35,7 @@ function TermsOfService() {
 
          <p><b>6.</b> Please check the Privacy Policy for any questions on data collection.</p>
 
-         <p><b>7.</b> This app was created by team "CtrlAltElite" as part of their senior project for Computer Science.
+         <p><b>7.</b> This app was created by team "CtrlAltElite" as part of their senior project for their Computer Science degree in 2024.
          Please keep in mind that development was done as a learning process and some features on the site may not work
          as they should. Report any bugs to Manpreet, find her contact information under the contact tab.</p>
 
