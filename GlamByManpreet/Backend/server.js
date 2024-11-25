@@ -1,5 +1,5 @@
-//server.js
 // server.js
+
 // Load environment variables
 require('dotenv').config({ path: '../.env' });
 const supabaseURL = "https://pnqnsatdkmhfxnumybf.supabase.co/"
@@ -625,6 +625,7 @@ app.post('/login', async (req, res) => {
 //     return res.status(201).json({ message: 'Registration successful' });
 //   }
 // });
+
 // Registration route
 app.post('/register', async (req, res) => {
   const { email, password, firstName } = req.body;
@@ -671,7 +672,6 @@ const isRole = (role) => (req, res, next) => {
     next();
   });
 };
-
 
 
 // Middleware to check if user is a manager
