@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 //import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
@@ -25,10 +26,8 @@ import InquiryHistory from './Pages/InquiryHistory.js';
 import AdminDashboard from './Pages/AdminDashboard.js';
 import ResetPassword from './Pages/ResetPassword.js';
  
-
 //app.js serves as the main entry point and central configuration file for the application. 
 //It is where you define the overall structure of our application, including routing, layout, and any global state management.
-
 //we can make routes to Link us to the page we want to go to in our website. First we import the page we want to link to.
 //Example we can import AboutMe by giving the path where its located './Pages/AboutMe.js'; and giving it a name such as AboutMe
 //then we can put it inisdes the routes tag and give it a route. <Route path="/About_Me" element={<AboutMe />} /> 
@@ -36,15 +35,12 @@ import ResetPassword from './Pages/ResetPassword.js';
 //example in the nav bar we made clicking the title take us to the home page by clicking it. We used the link tag and we want to go to the 
 //home page which corresponds to "/" as see in the first Route
 //<Link to="/" style={{ textDecoration: 'none', color: 'black'}}>GLAM<br></br>By Manpreet</Link>
-
 //NavBar and the footer are rendered at the top level of the app componentn so they will always be rendered.
 //We Import navbar and header as so from './Components/navbar.js'; then give it a name such as NavBar
 //then we place the navbar tag above routes and footer below routes. If we were to delete those tags
 //we would notice that the website would not have the nav bar or header
-
 function App() {
     const [session, setSession] = useState(null);
-
     useEffect(() => {
         // Get the current session
         // Get the current session
@@ -52,21 +48,18 @@ function App() {
             setSession(session);
             console.log(session);
         });
-
         // Subscribe to auth state changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
         });
-
         // Cleanup subscription on unmount
         return () => {
             if (subscription) {
                 subscription.unsubscribe();
             }
         };
-
     }, []);
-
+    const isAdmin = session?.user?.role === 'admin'; // Replace this with the actual role check from Supabase
     return (
         <div className="App-container">
             <Router> 
@@ -90,7 +83,12 @@ function App() {
                         <Route path="/userview" element={<UserView/>} />
                         <Route path="/userfeed" element={<UserFeed/>} />
                         <Route path="/profileedit" element={<ProfileEdit/>} />
-                        <Route path="/admin" element={<AdminDashboard/>} />
+                        {/* <Route path="/admin" element={<AdminDashboard/>} /> */}
+                        {/* Protect the Admin route */}
+                        <Route 
+                            path="/admin" 
+                            element={isAdmin ? <AdminDashboard /> : <Navigate to="/login" />} 
+                        />
                         <Route path="*" element={<Navigate to="/" />} />
                         <Route path="/inquiryhistory" element={<InquiryHistory />} />
                         <Route path="/ResetPassword" element={<ResetPassword />} />
@@ -101,5 +99,4 @@ function App() {
         </div>
     );
 }
-
 export default App;

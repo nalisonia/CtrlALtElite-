@@ -1,7 +1,9 @@
 /* global.css */
 
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 /* Box model reset */
 *,
 *::before, 
@@ -22,7 +24,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Heading Styles */
+/* Heading Styles
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 700;
@@ -33,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 2em;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .text-box h2 {
     padding-bottom: 5px;
@@ -129,10 +131,10 @@ button[type="submit"],
 button:hover,
 button[type="submit"]:hover,
 .service-box .button:hover {
-    background-color: #00050b;
-    color: #ec98e8;
+    background-color: #f471ed;
+
     transform: translateY(-3px);
-    font-color: black;
+
     font-weight: bold;
 }
 
@@ -140,7 +142,7 @@ button:focus,
 button[type="submit"]:focus,
 .service-box .button:focus {
     outline: none;
-    background-color: #e1d4f4;
+    background-color: #f2c2f0;
 }
 
 /* Disabled State */

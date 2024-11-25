@@ -9,7 +9,7 @@ function ContactMe() {
     const clientInstaLinkInText =  "@glambymanpreet"
     return (
         <div className="contactme-container">
-            <h2>CONTACT ME</h2>
+            <h2>Contact Me</h2>
             <p className="intro-text">Hello! I'd love to hear from you—get in touch with me.</p>
             <div className="contact-details">
                 <p>Email: 

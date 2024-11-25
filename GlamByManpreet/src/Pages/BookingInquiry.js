@@ -282,7 +282,8 @@ function BookingInquiry({ onSubmit }) {
 
   return (
     <div className="booking-inquiry" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-      
+          
+           <h2>Booking Inquiry</h2> 
       <p className="response-time">
         Thank you for inquiring with Glam By Manpreet for your hair and makeup
         services!
