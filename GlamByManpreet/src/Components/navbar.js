@@ -92,7 +92,14 @@ function DrawerAppBar(props) {
   }, []);
 
   // Conditionally add "PROFILE" or "ADMIN" based on admin status
-  const navItems = session ? [...baseNavItems, isAdmin ? "ADMIN" : "PROFILE"] : baseNavItems;
+  const navItems = session
+  ? [
+      ...baseNavItems,
+      isAdmin === true ? "ADMIN" : "PROFILE", // Explicitly check for true
+    ]
+  : baseNavItems;
+
+  console.log(navItems);
 
   const handleSignIn = () => {
     navigate("/LogIn");
