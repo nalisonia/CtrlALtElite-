@@ -85,10 +85,7 @@ function App() {
                         <Route path="/profileedit" element={<ProfileEdit/>} />
                         {/* <Route path="/admin" element={<AdminDashboard/>} /> */}
                         {/* Protect the Admin route */}
-                        <Route 
-                            path="/admin" 
-                            element={isAdmin ? <AdminDashboard /> : <Navigate to="/login" />} 
-                        />
+                        <Route path="/admin" element={<AdminDashboard/>} />
                         <Route path="*" element={<Navigate to="/" />} />
                         <Route path="/inquiryhistory" element={<InquiryHistory />} />
                         <Route path="/ResetPassword" element={<ResetPassword />} />
