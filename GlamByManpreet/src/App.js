@@ -39,19 +39,29 @@ import ResetPassword from './Pages/ResetPassword.js';
 //We Import navbar and header as so from './Components/navbar.js'; then give it a name such as NavBar
 //then we place the navbar tag above routes and footer below routes. If we were to delete those tags
 //we would notice that the website would not have the nav bar or header
+import { useEffect, useState } from 'react';
+import { supabase } from './supabaseClient'; // Make sure to import your supabase client setup
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 function App() {
     const [session, setSession] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
 
     useEffect(() => {
         // Get the current session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
-            console.log(session);
+            checkIfAdmin(session?.user?.id); // Check if the user is an admin after session is fetched
         });
-        
+
         // Subscribe to auth state changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
+            if (session?.user?.id) {
+                checkIfAdmin(session.user.id); // Check if the user is an admin when auth state changes
+            } else {
+                setIsAdmin(false); // If no session, set isAdmin to false
+            }
         });
 
         // Cleanup subscription on unmount
@@ -62,7 +72,29 @@ function App() {
         };
     }, []);
 
-    const isAdmin = session?.user?.role === 'admin'; // Replace this with the actual role check from Supabase
+    const checkIfAdmin = async (userId) => {
+        if (userId) {
+            try {
+                // Query the admin table to check if the user exists
+                const { data, error } = await supabase
+                    .from('admin') // Replace 'admin' with your actual admin table name
+                    .select('*')
+                    .eq('user_id', userId); // Assuming 'user_id' is the foreign key in the admin table
+
+                if (error) {
+                    console.error('Error checking admin:', error);
+                    setIsAdmin(false);
+                } else {
+                    setIsAdmin(data.length > 0); // If user exists in admin table, set isAdmin to true
+                }
+            } catch (err) {
+                console.error('Error during checkIfAdmin:', err);
+                setIsAdmin(false);
+            }
+        } else {
+            setIsAdmin(false); // If no userId, set isAdmin to false
+        }
+    };
 
     return (
         <div className="App-container">
@@ -106,4 +138,3 @@ function App() {
 }
 
 export default App;
-
