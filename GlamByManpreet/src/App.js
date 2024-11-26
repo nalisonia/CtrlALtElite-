@@ -41,17 +41,19 @@ import ResetPassword from './Pages/ResetPassword.js';
 //we would notice that the website would not have the nav bar or header
 function App() {
     const [session, setSession] = useState(null);
+
     useEffect(() => {
-        // Get the current session
         // Get the current session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             console.log(session);
         });
+        
         // Subscribe to auth state changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
         });
+
         // Cleanup subscription on unmount
         return () => {
             if (subscription) {
@@ -59,19 +61,21 @@ function App() {
             }
         };
     }, []);
+
     const isAdmin = session?.user?.role === 'admin'; // Replace this with the actual role check from Supabase
+
     return (
         <div className="App-container">
-            <Router> 
+            <Router>
                 <div className="content-wrap">
-                    <NavBar session={session}/>
+                    <NavBar session={session} />
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/about_me" element={<AboutMe />} /> 
-                        <Route path="/services" element={<Services />} /> 
-                        <Route path="/booking_inquiry" element={<BookingInquiry />} /> 
-                        <Route path="/contact_me" element={<ContactMe />} /> 
-                        <Route path="/gallery" element={<Gallery />} /> 
+                        <Route path="/about_me" element={<AboutMe />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/booking_inquiry" element={<BookingInquiry />} />
+                        <Route path="/contact_me" element={<ContactMe />} />
+                        <Route path="/gallery" element={<Gallery />} />
                         <Route path="/login" element={<LogIn />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/terms_of_service" element={<TermsOfService />} />
@@ -80,20 +84,26 @@ function App() {
                         <Route path="/cookie_policy" element={<CookiePolicy />} />
                         <Route path="/do_not_sell" element={<DoNotSell />} />
                         <Route path="/dashboard" element={<DashBoard />} />
-                        <Route path="/userview" element={<UserView/>} />
-                        <Route path="/userfeed" element={<UserFeed/>} />
-                        <Route path="/profileedit" element={<ProfileEdit/>} />
-                        {/* <Route path="/admin" element={<AdminDashboard/>} /> */}
-                        {/* Protect the Admin route */}
-                        <Route path="/admin" element={<AdminDashboard/>} />
+                        <Route path="/userview" element={<UserView />} />
+                        <Route path="/userfeed" element={<UserFeed />} />
+                        <Route path="/profileedit" element={<ProfileEdit />} />
+                        
+                        {/* Conditionally render the Admin route */}
+                        <Route 
+                            path="/admin" 
+                            element={isAdmin ? <AdminDashboard /> : <Navigate to="/" />} 
+                        />
+
                         <Route path="*" element={<Navigate to="/" />} />
                         <Route path="/inquiryhistory" element={<InquiryHistory />} />
                         <Route path="/ResetPassword" element={<ResetPassword />} />
                     </Routes>
-                    </div>
+                </div>
             </Router>
             <Footer />
         </div>
     );
 }
+
 export default App;
+
