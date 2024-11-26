@@ -63,10 +63,9 @@ function DrawerAppBar(props) {
         const { data: adminData } = await supabase
           .from('admin')
           .select('email')
-          .eq('email', user.email); 
+          .eq('email', user.email);
 
         setIsAdmin(adminData && adminData.length > 0); // Set isAdmin based on the admin check
-      
       }
     };
 
@@ -80,7 +79,7 @@ function DrawerAppBar(props) {
           .from('admin')
           .select('email')
           .eq('email', session.user.email)
-          .then(({ data: adminData }) => setIsAdmin(adminData && adminData.length > 0)); 
+          .then(({ data: adminData }) => setIsAdmin(adminData && adminData.length > 0));
       } else {
         setIsAdmin(false); // Reset if no session
       }
@@ -92,9 +91,7 @@ function DrawerAppBar(props) {
   }, []);
 
   // Conditionally add "PROFILE" or "ADMIN" based on admin status
-  const navItems = session ? [...baseNavItems, isAdmin === true ? "ADMIN" : "PROFILE",] : baseNavItems;
-
-  console.log(navItems);
+  const navItems = session ? [...baseNavItems, isAdmin ? "ADMIN" : "PROFILE"] : baseNavItems;
 
   const handleSignIn = () => {
     navigate("/LogIn");
@@ -140,6 +137,7 @@ function DrawerAppBar(props) {
         
         {/*Itterates over the array which holds the names of the pages*/}
         {navItems.map((item) => (
+          
           //creates the list of About Me, Services, Booking Inquiry ...etc
           <ListItem key={item} disablePadding>
             {/*styling for each button inside the list*/}
@@ -151,16 +149,14 @@ function DrawerAppBar(props) {
               to={
                 item === "HOME"
                   ? "/"
-                  : item === "ADMIN"
-                  ? "/admin"
                   : item === "PROFILE"
                   ? "/userview"
+                  : item === "ADMIN"
+                  ? "/admin"
                   : `/${item.toLowerCase().replace(/\s+/g, "_")}`
               }
                 style={{ textDecoration: "none", color: "black" }}
               >
-
-                
                 <ListItemText primary={item} />
               </Link>
             </ListItemButton>
