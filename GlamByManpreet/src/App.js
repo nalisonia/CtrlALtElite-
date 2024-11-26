@@ -77,7 +77,7 @@ function App() {
                 const { data, error } = await supabase
                     .from('admin') // Replace 'admin' with your actual admin table name
                     .select('*')
-                    .eq('id', parseInt(userId, 10)) // Ensure userId is cast to bigint (parseInt)
+                    .eq('id', userId) // Ensure userId is cast to bigint (parseInt)
                     .single(); // Use .single() if you expect only one result
     
                 if (error) {
