@@ -98,7 +98,6 @@ npm install
 - Nicolas Gugliemo: ngugliemo@csus.edu  
 - Saboor Malik: saboormalik@csus.edu  
 - Abdullah Mohammed: abdullahmohammed@csus.edu  
-- Ruben Ortega: rubenortega@csus.edu  
 
 ### Testing
 --TO-DO--
