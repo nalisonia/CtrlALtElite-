@@ -79,7 +79,7 @@ function App() {
                 const { data, error } = await supabase
                     .from('admin') // Replace 'admin' with your actual admin table name
                     .select('*')
-                    .eq('user_id', userId); // Assuming 'user_id' is the foreign key in the admin table
+                    .eq('user_id', id); // Assuming 'user_id' is the foreign key in the admin table
 
                 if (error) {
                     console.error('Error checking admin:', error);
