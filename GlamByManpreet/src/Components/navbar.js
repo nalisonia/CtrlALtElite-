@@ -63,10 +63,10 @@ function DrawerAppBar(props) {
         const { data: adminData } = await supabase
           .from('admin')
           .select('email')
-          .eq('email', user.email);
+          .eq('email', session.user.email); // Changed
 
         setIsAdmin(adminData && adminData.length > 0); // Set isAdmin based on the admin check
-        console.log("Is user admin: ",isAdmin);
+        console.log("Is user admin: ",isAdmin); //Does not work
       }
     };
 
@@ -81,7 +81,7 @@ function DrawerAppBar(props) {
           .select('email')
           .eq('email', session.user.email)
           .then(({ data: adminData }) => setIsAdmin(adminData && adminData.length > 0));
-          console.log("User is admin");
+          console.log("User is admin"); // Works 
       } else {
         setIsAdmin(false); // Reset if no session
         console.log("User is not admin");
