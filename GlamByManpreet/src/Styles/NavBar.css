@@ -14,7 +14,7 @@ body {
 /* The .button class provides the basic button styles */
 .button {
     margin: 0.5vh;
-    background-color: #ffc5fc;
+    background-color: #ffc2f9;
     color: #333; /* Darker text color for contrast */
     width: 80%;
     padding: 12px 0;
@@ -37,14 +37,14 @@ body {
 
 /* Hover effect */
 .button:hover {
-    background-color: #f9e4f7; /* Lightened background on hover */
+    background-color: #ffc2f9; /* Lightened background on hover */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
     transform: translateY(-2px); /* Lift effect on hover */
 }
 
 /* Active state for buttons */
 .button:active {
-    background-color: #f7c6db; /* Slightly darker background when clicked */
+    background-color: #ffc2f9; /* Slightly darker background when clicked */
     transform: translateY(0); /* Reset lift on click */
 }
 

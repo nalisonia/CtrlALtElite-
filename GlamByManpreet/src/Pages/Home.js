@@ -53,7 +53,9 @@ const HomePage = () =>{
             <div className='some-content'>
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                 Welcome to GLAM by Manpreet</h1>
-                <p>Born and raised in Sacramento. I'm a professional makeup artist leaving my fingerprints on the beauty world at every turn. From working with celebrities like Diljit Dosanjh to making every bride feel beautiful and special on their wedding days, I do everything..</p>
+                <p>Born and raised in Sacramento. I'm a professional makeup artist leaving my fingerprints on the beauty world at every turn. From working with celebrities like Diljit Dosanjh to making every bride feel beautiful and special on their wedding days, I do everything.
+
+                </p>
             </div>
             <div className='info-boxes-container'>
                 <div className='info-box'>
@@ -66,6 +68,7 @@ const HomePage = () =>{
                 </div>
                 <div className='info-box'> 
                     <h2>Inquire Now!</h2>
+                    <p>I only accept booking inquiries through the website. All inquireis will be reviewed, and I will wither approve or decline them.</p>
                     <Button
                         sx={{
                             color: "black",

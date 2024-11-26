@@ -36,6 +36,6 @@ button:hover, button:focus, button:active {
 }
 
 button:disabled {
-  background-color: #f0a3d1 !important;
+  background-color: #ffc2f9 !important;
   color: #a1a1a1;
 }
