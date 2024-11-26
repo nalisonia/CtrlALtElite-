@@ -66,6 +66,7 @@ function DrawerAppBar(props) {
           .eq('email', user.email);
 
         setIsAdmin(adminData && adminData.length > 0); // Set isAdmin based on the admin check
+        console.log("Is user admin: ",isAdmin);
       }
     };
 
@@ -80,10 +81,10 @@ function DrawerAppBar(props) {
           .select('email')
           .eq('email', session.user.email)
           .then(({ data: adminData }) => setIsAdmin(adminData && adminData.length > 0));
-          console.log.print("User is admin");
+          console.log("User is admin");
       } else {
         setIsAdmin(false); // Reset if no session
-        console.log.print("User is not admin");
+        console.log("User is not admin");
       }
     });
 
