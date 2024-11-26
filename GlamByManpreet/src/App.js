@@ -73,17 +73,18 @@ function App() {
     const checkIfAdmin = async (userId) => {
         if (userId) {
             try {
-                // Query the admin table to check if the user exists
+                // Cast userId to bigint for comparison with the admin table's id column
                 const { data, error } = await supabase
                     .from('admin') // Replace 'admin' with your actual admin table name
                     .select('*')
-                    .eq('id', userId); // Assuming 'user_id' is the foreign key in the admin table
-
+                    .eq('id', parseInt(userId, 10)) // Ensure userId is cast to bigint (parseInt)
+                    .single(); // Use .single() if you expect only one result
+    
                 if (error) {
                     console.error('Error checking admin:', error);
                     setIsAdmin(false);
                 } else {
-                    setIsAdmin(data.length > 0); // If user exists in admin table, set isAdmin to true
+                    setIsAdmin(data !== null); // If data is returned, the user is an admin
                 }
             } catch (err) {
                 console.error('Error during checkIfAdmin:', err);
