@@ -49,14 +49,16 @@ function App() {
         // Get the current session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
-            checkIfAdmin(session?.user?.id); // Check if the user is an admin after session is fetched
+            if (session?.user?.email) {
+                checkIfAdmin(session.user.email); // Check if the user is an admin based on email after session is fetched
+            }
         });
 
         // Subscribe to auth state changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
-            if (session?.user?.id) {
-                checkIfAdmin(session.user.id); // Check if the user is an admin when auth state changes
+            if (session?.user?.email) {
+                checkIfAdmin(session.user.email); // Check if the user is an admin when auth state changes based on email
             } else {
                 setIsAdmin(false); // If no session, set isAdmin to false
             }
@@ -70,30 +72,32 @@ function App() {
         };
     }, []);
 
-    const checkIfAdmin = async (userId) => {
-        if (userId) {
+    const checkIfAdmin = async (userEmail) => {
+        if (userEmail) {
             try {
-                // Cast userId to bigint for comparison with the admin table's id column
+                // Query the admin table by email
                 const { data, error } = await supabase
                     .from('admin') // Replace 'admin' with your actual admin table name
                     .select('*')
-                    .eq('id', userId) // Ensure userId is cast to bigint (parseInt)
+                    .eq('email', userEmail) // Assuming your admin table has an 'email' column
                     .single(); // Use .single() if you expect only one result
     
                 if (error) {
                     console.error('Error checking admin:', error);
                     setIsAdmin(false);
                 } else {
-                    setIsAdmin(data !== null); // If data is returned, the user is an admin
+                    // If data exists, the user is an admin
+                    setIsAdmin(data ? true : false);
                 }
             } catch (err) {
                 console.error('Error during checkIfAdmin:', err);
                 setIsAdmin(false);
             }
         } else {
-            setIsAdmin(false); // If no userId, set isAdmin to false
+            setIsAdmin(false); // If no user email, set isAdmin to false
         }
     };
+    
 
     return (
         <div className="App-container">
