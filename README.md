@@ -101,7 +101,8 @@ npm install
 - Ruben Ortega: rubenortega@csus.edu  
 
 ### Testing
-
-### Development
-
+--TO-DO--
+"Testing Section with links or descriptions of how to test"
 ### Deployment
+--TO-DO--
+"Instructions to include how download, setup to run/deploy"
