@@ -17,13 +17,13 @@ const isAuthenticated = (req, res, next) => {
     if (req.session && req.session.userId) {
       // 1. Retrieve the user's role from the database based on their ID
       // (You'll need to adjust the query and table/column names based on your database schema)
-      pool.query('SELECT role FROM accounts WHERE id = $1', [req.session.userId], (err, result) => {
+      pool.query('SELECT * FROM admin WHERE id = $1', [req.session.userId], (err, result) => {
         if (err) {
           console.error('Error checking user role:', err);
           return res.status(500).send('Error checking user role');
         }
   
-        if (result.rows.length > 0 && result.rows[0].role === 'admin') {
+        if (result.rows.length > 0) {
           // 2. If the user has the 'admin' role, proceed to the next middleware or route handler
           next();
         } else {

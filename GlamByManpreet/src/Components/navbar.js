@@ -92,12 +92,7 @@ function DrawerAppBar(props) {
   }, []);
 
   // Conditionally add "PROFILE" or "ADMIN" based on admin status
-  const navItems = session
-  ? [
-      ...baseNavItems,
-      isAdmin === true ? "ADMIN" : "PROFILE", // Explicitly check for true
-    ]
-  : baseNavItems;
+  const navItems = session ? [...baseNavItems, isAdmin === true ? "ADMIN" : "PROFILE",] : baseNavItems;
 
   console.log(navItems);
 
@@ -164,6 +159,8 @@ function DrawerAppBar(props) {
               }
                 style={{ textDecoration: "none", color: "black" }}
               >
+
+                
                 <ListItemText primary={item} />
               </Link>
             </ListItemButton>
