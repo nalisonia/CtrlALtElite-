@@ -39,9 +39,7 @@ import ResetPassword from './Pages/ResetPassword.js';
 //We Import navbar and header as so from './Components/navbar.js'; then give it a name such as NavBar
 //then we place the navbar tag above routes and footer below routes. If we were to delete those tags
 //we would notice that the website would not have the nav bar or header
-import { useEffect, useState } from 'react';
-import { supabase } from './supabaseClient'; // Make sure to import your supabase client setup
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 
 function App() {
     const [session, setSession] = useState(null);
@@ -79,7 +77,7 @@ function App() {
                 const { data, error } = await supabase
                     .from('admin') // Replace 'admin' with your actual admin table name
                     .select('*')
-                    .eq('user_id', id); // Assuming 'user_id' is the foreign key in the admin table
+                    .eq('id', userId); // Assuming 'user_id' is the foreign key in the admin table
 
                 if (error) {
                     console.error('Error checking admin:', error);
