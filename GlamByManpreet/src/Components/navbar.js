@@ -136,7 +136,7 @@ function DrawerAppBar(props) {
       <List>
         
         {/*Itterates over the array which holds the names of the pages*/}
-        {(session ? [...baseNavItems, isAdmin ? "ADMIN" : "PROFILE"] : baseNavItems).map((item) => (
+        {navItems.map((item) => (
           //creates the list of About Me, Services, Booking Inquiry ...etc
           <ListItem key={item} disablePadding>
             {/*styling for each button inside the list*/}
@@ -160,8 +160,7 @@ function DrawerAppBar(props) {
               </Link>
             </ListItemButton>
           </ListItem>
-        )
-        )}
+        ))}
       </List>
       
 
