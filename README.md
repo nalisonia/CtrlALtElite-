@@ -99,8 +99,6 @@ npm install
 - Abdullah Mohammed: abdullahmohammed@csus.edu  
 
 ### Testing
---TO-DO--
-"Testing Section with links or descriptions of how to test"
 
 Test Environment Setup
 
@@ -129,8 +127,6 @@ Jest: v24.9.0
 
   > npm test Feed.test.js
 
-
-	
 
 ### Deployment
 --TO-DO--
