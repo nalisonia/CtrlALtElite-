@@ -95,14 +95,39 @@ npm install
 - Diya Soneji: diyasoneji@csus.edu 
 - Lori Yaniro: lyaniro@csus.edu 
 - Curtis Berry: curtisberry@csus.edu  
-- Nicolas Gugliemo: ngugliemo@csus.edu  
-- Saboor Malik: saboormalik@csus.edu  
+- Nicolas Gugliemo: ngugliemo@csus.edu   
 - Abdullah Mohammed: abdullahmohammed@csus.edu  
-- Ruben Ortega: rubenortega@csus.edu  
 
 ### Testing
---TO-DO--
-"Testing Section with links or descriptions of how to test"
+
+Test Environment Setup
+
+System Requirements: 
+React:  v18.2.0
+Node: v18.16.1
+NPM: v9.5.1
+Jest: v24.9.0
+
+1. Codebase and Test Script Setup:
+
+- Begin by cloning the project from GitHub by running the following command:
+
+  > git clone https://github.com/nalisonia/CtrlALtElite-.git
+
+- Ensure that the necessary dependencies are installed by running:
+
+  > npm install
+
+2. Running Jest Tests
+- Once everything is installed, begin running the tests by entering the following command: 
+
+  > npm test 
+
+- Alternatively, you can run a single test suite by entering the test file name after the above command, for example: 
+
+  > npm test Feed.test.js
+
+
 ### Deployment
 --TO-DO--
 "Instructions to include how download, setup to run/deploy"
